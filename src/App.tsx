@@ -1,24 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AdminDashboard from './Pages/Dashboard/AdminDashboard';
+import OpenTicket from "./Pages/Ticket/OpenTicket";
+import TicketProgress from "./Pages/Ticket/TicketProgress";
+import ClosedTicket from "./Pages/Ticket/ClosedTicket";
+import Customers from "./Pages/Customers/Customers";
+import Settings from "./Pages/Settings/Settings";
+import TicketReport from "./Pages/Report/TicketReport";
+
+
+
+
+
+
+
 
 function App() {
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Routes>
+          {/* Dashboard  */}
+          <Route path="/admindashboard" element={<AdminDashboard />} />
+          {/* Ticket  */}
+          <Route path="/openticket" element={<OpenTicket />} />
+          <Route path="/ticketprogress" element={<TicketProgress />} />
+          <Route path="/closedticket" element={<ClosedTicket />} />
+          {/* Customers */}
+          <Route path="/customers" element={<Customers />} />
+          {/* Settings */}
+          <Route path="/settings" element={<Settings />} />
+          {/* Report */}
+          <Route path="/report" element={<TicketReport />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

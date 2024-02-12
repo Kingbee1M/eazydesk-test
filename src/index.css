@@ -1,13 +1,332 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+ 
+ 
+ *,
+*::before,
+*::after {
+  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box !important;
+  list-style: none !important;
+  list-style-type: none !important;
+  text-decoration: none !important;
+  outline: none !important;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+:root {
+  --gradient-yellow: #EBDDCA;
+  --accent-purple-light:#F4ECFB;
+  --accent-purple:#883DCF;
+  --accent-orange-light:#FFF0EA;
+  --accent-orange:#F86624;
+  --accent-green-light:#E9FAF7;
+  --accent-green:#22CAAD;
+  --accent-red-light:#FEECEE;
+  --accent-red:#EB3D4D;
+  --accent-blue-light:#EAF8FF; 
+  --accent-blue: #4F80E1; 
+  --text: #1D1F2C;
+  --small-text: #667085;
+  --gray-light: #8F8F8F;
+  --small-static: #EFEFEF;
+  --black: #000;  
+ --yellow: #FFD71D;
+  --white:#ffffff;
+  --border:rgba(0, 0, 0, 0.1);
+  --form-border:#E2E2E2;
+ --side-bar-text: rgba(0, 0, 0, 0.7);
+  --background:#F6F8FF;
+  /* --background:linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), #F5F6F8; 
+  --box-shadow: 0 0 4px rgba(0, 0, 0, .05), 0 0 16px rgba(0, 0, 0, .05), 0 0 32px rgba(0, 0, 0, .05), 0 0 64px rgba(0, 0, 0, .05); */
 }
+ 
+ html, body {
+  /* height: 100% !important; */
+  width: 100%;
+}
+
+body { 
+  background:  var(--background);
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.3;
+  padding-left: 0px !important;
+}
+
+img, 
+svg {
+  /* display: block !important; */
+  max-width: 100% !important;
+}
+
+input, 
+button, 
+textarea, 
+select {
+  font: inherit !important;
+  box-sizing: border-box !important;
+}
+@media (max-width: 1200px) {
+input, 
+button, 
+textarea, 
+select {
+  font: small !important; 
+}
+}
+ 
+a {
+  text-decoration: none !important;
+  outline: none !important;
+}
+ 
+  
+#page-wrapper {
+  display: grid !important;
+  position: relative;
+  height: 100dvh !important;
+  grid-template-columns: max-content 1fr !important;
+  grid-template-rows: 60px 1fr !important;
+  grid-template-areas:
+    "sidenav header"
+    "sidenav main" 
+     "sidenav footer";    
+}
+
+main {
+  grid-area: main !important;
+  padding: 1rem 5rem !important;
+  overflow-y: scroll!important; 
+}
+table {
+  background-color: #fff;
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #EDEDED !important;
+}
+ 
+ 
+table th,
+table td {
+  text-align: left;
+  padding: .75rem 1rem;
+  font-size: 15px;
+}
+table th {
+  background-color: #EDEDED;
+  color:  #64676a;
+  font-weight: 500;
+  white-space: nowrap !important;
+  font-weight: bold;
+}
+tbody tr {
+  border-top: 1px solid #f0f0f0;
+}
+/* tbody tr td {
+  color: #707683 !important;
+} */
+
+
+@media (max-width: 1200px) {
+  main {
+  grid-area: main !important;
+  padding: 2rem 1rem !important;
+  overflow-y: scroll!important;
+  }
+  
+#page-wrapper {
+    display: grid !important;
+    position: absolute;
+      height: 100dvh !important;  
+    grid-template-columns: max-content 1fr !important;
+    grid-template-rows: 100%;
+    grid-template-areas:
+        "sidenav header"
+        "sidenav main"
+        "sidenav footer";
+    width: 100%; 
+} 
+ }  
+
+  
+ /* --- Other CSS Files --- */
+@import url(./App.css);   
+@import url(./css/Header.css);   
+@import url(./css/SideNav.css);  
+@import url(./css/BottomNavigation.css);  
+@import url(./css/Badge.css);  
+/* @import url(./css/Login.css);   
+@import url(./css/Setting.css);   
+@import url(./css/AdminDashboard.css);   
+@import url(./assets/bootstrap.css);   
+@import url(./css/Insight.css);   
+@import url(./css/Boards.css);   
+@import url(./css/Teams.css);   
+@import url(./css/Form.css);   
+@import url(./css/Modal.css);   
+@import url(./css/table.css);   
+@import url(./css/Register.css);   
+@import url(./css/LandingPage.css);   
+@import url(./css/PageNotFound.css);   
+@import url(./css/BottomNavigation.css);   
+@import url(./css/Spinner.css);   
+@import url(./css/Support.css);   
+@import url(./css/Delete.css);    */
+
+ 
+.cp-text1 {
+    color: hsla(210, 100%, 65%, 0.944);
+     text-shadow: 0 1px hsla(0,0%,100%,.1); 
+   position: absolute;
+    bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+}
+
+  .logo-buttom-padding{
+    padding-left: 2px;
+    width: 140px;
+    height: 20px;
+  }
+
+ 
+@media screen and (max-width: 768px) {
+  .cp-text1 {
+   display: flex;
+   flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: small;
+ 
+  }
+
+  .logo-buttom-padding{
+    padding-top: 1rem;
+       width: 150px;
+    height: 40px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .cp-text1 {
+   display: none; 
+ 
+  }
+
+  .logo-buttom-padding{
+    padding-top: 1rem;
+       width: 150px;
+    height: 40px;
+  }
+}
+
+.loading-center-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ height: 80vh;
+   /* Media query for smaller screens */
+  @media (max-width: 600px) {
+    height: 60vh;  
+  }
+}
+
+
+.entries-perpage-container{
+  color: #5c5c5c;
+  display: flex;
+  align-items: center;
+  /* white-space: nowrap !important; */
+}
+
+.entries-perpage-container select { 
+  color: #5c5c5c !important;
+  margin-left: 5px !important;
+  margin-right: 5px !important;
+  background-color: #fff !important;
+  padding: 5px !important;
+  border-radius: 3px !important;
+  outline: none !important;
+  border: 0 !important;
+  border: 1px solid #cfcfcf !important;
+  transition: all 0.3s ease-out !important;
+  -webkit-transition: all 0.3s ease-out !important;
+  white-space: nowrap !important;
+ 
+}
+.entries-perpage {
+  color: #5c5c5c; 
+  display: flex;
+  align-items: center;
+  width: 15% !important; 
+}
+  .entries-perpage select { 
+ color: #5c5c5c !important; 
+  background-color: #fff !important;
+  padding: 5px !important;
+  border-radius: 3px !important;
+  outline: none !important;
+  border: 0 !important;
+  border: 1px solid #cfcfcf !important;
+  transition: all 0.3s ease-out !important;
+  -webkit-transition: all 0.3s ease-out !important; 
+}  
+/* .entries-perpage select:focus {
+  border: 1px solid #e2522e;
+  box-sizing: 0 0 3px #000;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+} */
+
+@media only screen and (max-width: 1220px) { 
+
+.entries-perpage {
+  color: #5c5c5c; 
+  white-space: nowrap !important; 
+  justify-content: center;
+}
+
+}
+
+/* --- Start Pagination --- */
+
+.pagination-container {
+  list-style: none;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap !important;
+}
+.pagination-container a {
+  color: #707683;
+  padding: 0.25rem 0.5rem;
+  user-select: none;
+  border: 1px solid #fff;
+  border-radius: 3px;
+
+}
+.pagination-container a:hover {
+  color: var(--accent-blue) !important;
+  border: 1px solid var(--accent-blue);
+}
+.pagination-active a,
+.pagination-active a:hover {
+  background-color: var(--accent-blue);
+  color: #fff !important;
+  border: 1px solid var(--accent-blue);
+}
+#table-footer a.previous-btn,
+#table-footer a.next-btn {
+  color: var(--accent-blue);
+  border: 1px solid var(--accent-blue);
+}
+.pagination-disabled a,
+.pagination-disabled a:hover {
+  color: #b4b4b4 !important;
+  cursor: not-allowed;
+  border: 1px solid #b4b4b4 !important;
+}
+/* --- End Pagination --- */

@@ -1,0 +1,291 @@
+ 
+  input{ 
+  width: 100%;
+  outline: none;
+  margin-top: 3px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 16px; 
+  transition: all 0.3s ease; 
+}
+
+
+/* Additional styling for focus state */
+input:focus {
+  outline: none;
+  border-color: var(--accent-blue);  
+  box-shadow: 0 0 5px var(--accent-blue-light);  
+}
+
+
+input :hover{ 
+  border: 1px solid var(--accent-blue-light) !important; 
+}
+  /* input :focus{ 
+  border: 1px solid var(--accent-blue) !important; 
+} */
+/* button */
+button {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  /* margin: 5px; */
+   border: 1px solid #000;    
+  border: none;
+  border-radius: 5px;
+  font-size: small !important;
+  background-color: #000 ;
+  color: #fff;
+  outline: none; 
+  cursor: pointer;
+  font-weight: bold !important;
+  white-space: nowrap; 
+}
+button:hover { 
+    background-color: #000000c3 ;
+}
+button:active { 
+    border: 1px solid var(--accent-purple);
+     padding: 9px 20px;
+}
+
+#custom-btn-two{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--accent-purple);
+    background-color: #EEE9FD; 
+    border-radius: 0px;
+    font-size: smaller;
+    white-space: nowrap;
+    padding: 0px 10px;
+    height: 30px; 
+		font-weight: bold;
+		border:1px solid  #EEE9FD;
+}
+
+#register-select{
+padding: 10px;
+border-radius: 5px;
+margin-top: 3px;
+}
+
+
+
+#custom-btn-two:hover{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--accent-purple);
+    background-color: #EEE9FD; 
+     border-radius: 0px;
+    font-size: smaller;
+    white-space: nowrap;
+    padding: 0px 10px;
+    height: 30px; 
+		font-weight: bold;
+		border:1px solid  var(--accent-blue-light);
+}
+#custom-btn-two-active{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--accent-purple);
+    background-color: #EEE9FD; 
+    border-radius: 0px;
+    font-size: smaller;
+    white-space: nowrap;
+    padding: 0px 10px;
+    height: 30px; 
+		font-weight: bold;
+		border:1px solid  var(--accent-purple);
+    box-shadow: 0 0 5px  var(--accent-blue-light);  
+}
+
+#custom-btn{
+  height: 2.5rem;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold !important;
+}
+
+#custom-btn:hover{
+  padding: 10px  ;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold !important;
+}
+
+ 
+ Select{
+  width: 100%;
+  outline: none;
+  margin-top: 3px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 16px; 
+  transition: all 0.3s ease; 
+}
+Select:focus {
+  outline: none;
+  border-color: var(--accent-blue);  
+  box-shadow: 0 0 5px var(--accent-blue-light);  
+}
+
+Select :hover{ 
+  border: 1px solid var(--accent-blue-light) !important; 
+}
+ textarea{
+  width: 100%;
+  outline: none;
+  margin-top: 3px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 16px; 
+  transition: all 0.3s ease; 
+}
+textarea:focus {
+  outline: none;
+  border-color: var(--accent-blue);  
+  box-shadow: 0 0 5px var(--accent-blue-light);  
+}
+
+textarea :hover{ 
+  border: 1px solid var(--accent-blue-light) !important; 
+}
+
+.css-t3ipsp-control {
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    cursor: default;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    min-height: 38px;
+    outline: 0!important;
+    position: relative;
+    -webkit-transition: all 100ms;
+    transition: all 100ms;
+    background-color: hsl(0, 0%, 100%);
+    border-color: var(--accent-purple)!important;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 0 0 1px #7047eb7e;
+    box-sizing: border-box;
+}
+
+/* Targeting the control (container) */
+.react-select__control {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Targeting the focused state of the control */
+.react-select__control--is-focused {
+  box-shadow: 0 0 0 1px #000;
+}
+
+/* Targeting the individual option */
+.react-select__option {
+  background-color: white; /* Default background color */
+  color: #333; /* Default text color */
+}
+
+/* Targeting the focused state of the option */
+.react-select__option--is-focused {
+  background-color: #000;
+  color: white;
+}
+
+/* Targeting the dropdown menu */
+.react-select__menu {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* #custom-btn:active{
+  padding: 10px  ;
+  width: 100%;
+  text-align: center;
+   display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold !important;
+    border: 1px solid var(--accent-purple);
+} */
+
+/* Adjust icon margin for spacing */
+button svg {
+  margin-right: 5px !important;
+}
+
+/* Additional styling for focus state */
+/* button:focus {
+  border-color: #007bff;  
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);  
+} */
+
+
+.flex-date-input{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.de-active {
+    background-color: rgba(255,0,0,.159)!important;
+    border: 1px solid red!important;
+    border-radius: 3px!important;
+    color: red!important;
+    padding: 0.15rem 1rem!important;
+}
+
+.table-link-active {
+    background-color: #29cc962c!important;
+    border: 1px solid #29cc97!important;
+    border-radius: 3px!important;
+    color: #29cc97!important;
+    padding: 0.15rem 1rem!important;
+}
+
+.container_reg form .user__details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+ 
+}
+
+.container_reg form .user__details .input__box {
+    margin-bottom: 20px;
+    width: calc(50% - 20px);
+}
+
+.close-span-icon{ 
+     padding: 2px; 
+     border-radius: 5px;
+}
+.close-span-icon:hover{
+	border:1px solid  var(--accent-purple);
+  box-shadow: 0 0 5px  var(--accent-blue-light);  
+}

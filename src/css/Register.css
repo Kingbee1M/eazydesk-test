@@ -1,0 +1,79 @@
+.main-table-footer {
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 12px;
+  text-align: right;
+  /* padding: 22px 0; */
+}
+
+.main-table-footer span {
+  vertical-align: middle;
+}
+
+.main-table-footer span .material-icons {
+  font-size: 24px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.main-table-footer span.rows-selection {
+  padding-right: 32px;
+}
+
+.main-table-footer span.rows-selection .rows-selection-label {
+  padding-right: 38px;
+}
+
+.main-table-footer span.rows-amount {
+  padding-right: 32px;
+}
+
+.main-table-footer span.table-pagination {
+  padding-right: 14px;
+}
+
+.main-table-footer span.table-pagination .material-icons:first-child {
+  padding-right: 24px;
+}
+
+.table-link-active  {
+  /* //  text-align: center; */
+    color: #29CC97 !important;
+    background-color: #29cc962c !important;
+    padding: 0.15rem 1rem !important;
+    border-radius: 3px !important;
+    border: 1px solid #29CC97 !important; 
+}
+
+
+ 
+#tfoot-ReactPaginate {
+    display: flex;
+    flex-wrap: wrap!important;
+    justify-content: space-between!important;
+    margin-top: 0.8rem;
+    /* padding: 0.8rem 0.4rem; */
+}
+
+.pageEntries {
+    color: var(--accent-blue);
+    font-weight: 700;
+}
+
+.table-loader { 
+  color: #cacaca !important;
+  text-align: center !important;
+  padding-top: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
+}
+.table-loader p {
+  color: #7a7a7a;
+}
+
+
+@media (max-width: 768px) {
+  .pageEntries {
+    display: none;
+  }
+}
+
+ 
