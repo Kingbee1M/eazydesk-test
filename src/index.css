@@ -27,8 +27,8 @@
   --accent-green:#22CAAD;
   --accent-red-light:#FEECEE;
   --accent-red:#EB3D4D;
-  --accent-blue-light:#EAF8FF; 
-  --accent-blue: #4F80E1; 
+  --accent-blue-light:#E5ECFB; 
+  --accent-blue: #0240BC; 
   --text: #1D1F2C;
   --small-text: #667085;
   --gray-light: #8F8F8F;
@@ -101,12 +101,13 @@ main {
   padding: 2rem 2rem !important;
   overflow-y: scroll!important; 
 }
+
 table {
-  background-color: #fff;
+  background-color: var(--white);
   width: 100%;
   border-collapse: collapse;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border: 1px solid #EDEDED !important;
+    border: 1px solid var(--border) !important;
 }
  
  
@@ -141,14 +142,14 @@ tbody tr {
 #page-wrapper {
     display: grid !important;
     position: absolute;
-      height: 100dvh !important;  
+    height: 100dvh !important;  
+    width: 100%; 
     grid-template-columns: max-content 1fr !important;
     grid-template-rows: 100%;
     grid-template-areas:
         "sidenav header"
         "sidenav main"
         "sidenav footer";
-    width: 100%; 
 } 
  }  
 
@@ -160,6 +161,8 @@ tbody tr {
 @import url(./css/BottomNavigation.css);  
 @import url(./css/Badge.css);  
 @import url(./css/Login.css); 
+@import url(./css/Settings.css); 
+@import url(./css/Form.css);   
 /*    
 @import url(./css/Setting.css);   
 @import url(./css/AdminDashboard.css);   
@@ -167,7 +170,6 @@ tbody tr {
 @import url(./css/Insight.css);   
 @import url(./css/Boards.css);   
 @import url(./css/Teams.css);   
-@import url(./css/Form.css);   
 @import url(./css/Modal.css);   
 @import url(./css/table.css);   
 @import url(./css/Register.css);   
@@ -180,8 +182,8 @@ tbody tr {
 
  
 .cp-text1 {
-    color: hsla(210, 100%, 65%, 0.944);
-     text-shadow: 0 1px hsla(0,0%,100%,.1); 
+    color: var(--accent-blue);
+   text-shadow: 0 1px hsla(0,0%,100%,.1); 
    position: absolute;
     bottom: 2rem;
     display: flex;
@@ -212,15 +214,15 @@ tbody tr {
     height: 40px;
   }
 }
+
 @media screen and (max-width: 400px) {
   .cp-text1 {
-   display: none; 
- 
+   display: none;  
   }
 
   .logo-buttom-padding{
     padding-top: 1rem;
-       width: 150px;
+    width: 150px;
     height: 40px;
   }
 }
@@ -229,7 +231,7 @@ tbody tr {
   display: flex;
   justify-content: center;
   align-items: center;
- height: 80vh;
+  height: 80vh;
    /* Media query for smaller screens */
   @media (max-width: 600px) {
     height: 60vh;  
@@ -248,7 +250,7 @@ tbody tr {
   color: #5c5c5c !important;
   margin-left: 5px !important;
   margin-right: 5px !important;
-  background-color: #fff !important;
+  background-color: var(--white) !important;
   padding: 5px !important;
   border-radius: 3px !important;
   outline: none !important;
@@ -267,7 +269,7 @@ tbody tr {
 }
   .entries-perpage select { 
  color: #5c5c5c !important; 
-  background-color: #fff !important;
+  background-color: var(--white) !important;
   padding: 5px !important;
   border-radius: 3px !important;
   outline: none !important;
@@ -276,12 +278,12 @@ tbody tr {
   transition: all 0.3s ease-out !important;
   -webkit-transition: all 0.3s ease-out !important; 
 }  
-/* .entries-perpage select:focus {
-  border: 1px solid #e2522e;
-  box-sizing: 0 0 3px #000;
+.entries-perpage select:focus {
+  border: 1px solid var(--accent-blue);
+  box-sizing: 0 0 3px var(--black);
   transition: all 0.3s ease-out;
   -webkit-transition: all 0.3s ease-out;
-} */
+}
 
 @media only screen and (max-width: 1220px) { 
 
@@ -305,7 +307,7 @@ tbody tr {
   color: #707683;
   padding: 0.25rem 0.5rem;
   user-select: none;
-  border: 1px solid #fff;
+  border: 1px solid var(--white);
   border-radius: 3px;
 
 }
@@ -316,7 +318,7 @@ tbody tr {
 .pagination-active a,
 .pagination-active a:hover {
   background-color: var(--accent-blue);
-  color: #fff !important;
+  color: var(--white) !important;
   border: 1px solid var(--accent-blue);
 }
 #table-footer a.previous-btn,

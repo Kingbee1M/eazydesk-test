@@ -4,13 +4,21 @@
   outline: none;
   margin-top: 3px;
   border-radius: 5px;
-  border: 1px solid #ccc;
+border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 10px;
   font-size: 16px; 
   transition: all 0.3s ease; 
+  border-radius: 8px;
+  background: #FFFFFF;
+  font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+color: rgba(0, 0, 0, 0.5);
+padding: 16px 20px;
 }
 
-
+ 
 /* Additional styling for focus state */
 input:focus {
   outline: none;
@@ -26,27 +34,54 @@ input :hover{
   border: 1px solid var(--accent-blue) !important; 
 } */
 /* button */
-button {
-  display: flex;
-  align-items: center;
-  padding: 10px 20px;
-  /* margin: 5px; */
-   border: 1px solid #000;    
-  border: none;
-  border-radius: 5px;
-  font-size: small !important;
-  background-color: #000 ;
-  color: #fff;
-  outline: none; 
-  cursor: pointer;
-  font-weight: bold !important;
-  white-space: nowrap; 
+.btn{
+background-color: var(--accent-blue);
+border: 2px solid var(--accent-blue) !important;  
+color: var(--white) !important; 
+border-radius: 7.70833px !important;  
+font-style: normal !important;
+font-weight: 500 !important;
+font-size: 12px !important;
+line-height: 17px !important; 
+display: flex;
+align-items: center;
+text-align: center; 
+white-space: nowrap; 
+border: none ;
+outline: none ;
+padding: 9px   20px;
 }
-button:hover { 
-    background-color: #000000c3 ;
+
+ .btn_outline{
+border: 2px solid var(--accent-blue) !important;  
+background-color: var(--accent-blue-light) !important;
+color: var(--accent-blue) !important; 
+border-radius: 7.70833px !important;  
+font-style: normal !important;
+font-weight: 500 !important;
+font-size: 12px !important;
+line-height: 17px !important; 
+display: flex;
+align-items: center;
+text-align: center; 
+white-space: nowrap; 
+border: none ;
+outline: none ;
+padding: 9px   20px;
+}
+
+.btn:hover { 
+border: 2px solid var(--accent-blue) ;  
+background-color: var(--accent-blue-light);
+color: var(--accent-blue) !important; 
+}
+  .btn_outline:hover { 
+border: 2px solid var(--accent-blue) !important;  
+background-color: var(--accent-blue) !important;
+color: var(--white) !important; 
 }
 button:active { 
-    border: 1px solid var(--accent-purple);
+    border: 2px solid var(--accent-blue);
      padding: 9px 20px;
 }
 
@@ -69,6 +104,14 @@ button:active {
 padding: 10px;
 border-radius: 5px;
 margin-top: 3px;
+   border-radius: 8px;
+  background: #FFFFFF;
+  font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+color: rgba(0, 0, 0, 0.5);
+padding: 16px 20px;
 }
 
 
@@ -129,10 +172,18 @@ margin-top: 3px;
   outline: none;
   margin-top: 3px;
   border-radius: 5px;
-  border: 1px solid #ccc;
+border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 10px;
   font-size: 16px; 
   transition: all 0.3s ease; 
+    border-radius: 8px;
+  background: #FFFFFF;
+  font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+color: rgba(0, 0, 0, 0.5);
+padding: 16px 20px;
 }
 Select:focus {
   outline: none;
@@ -272,8 +323,12 @@ button svg {
 .container_reg form .user__details {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
- 
+    justify-content: space-between;  
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 22px;  
+color: var(--black); 
 }
 
 .container_reg form .user__details .input__box {
@@ -289,3 +344,4 @@ button svg {
 	border:1px solid  var(--accent-purple);
   box-shadow: 0 0 5px  var(--accent-blue-light);  
 }
+

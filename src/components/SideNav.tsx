@@ -1,6 +1,5 @@
 import { MdOutlineDashboard } from "react-icons/md";
 import { NavLink } from "react-router-dom";
-import { IoIosArrowDown } from "react-icons/io";
 import { BsFileEarmarkCheck } from "react-icons/bs";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { PiCalendarCheckDuotone } from "react-icons/pi";
@@ -122,19 +121,6 @@ const SideNav = () => {
         </NavLink>
       </nav>
       <nav>
-        <NavLink to="/settings" className={({ isActive }) =>
-          [
-            "nav-link",
-            isActive ? "active" : null,
-          ]
-            .filter(Boolean)
-            .join(" ")
-        }>
-          <MdOutlineSettings size={22} />
-          <span>Settings</span>
-        </NavLink>
-      </nav>
-      <nav>
         <NavLink to="/report" className={({ isActive }) =>
           [
             "nav-link",
@@ -145,6 +131,19 @@ const SideNav = () => {
         }>
           <BsFileText size={22} />
           <span>Report</span>
+        </NavLink>
+      </nav>
+      <nav>
+        <NavLink to="/settings" className={({ isActive }) =>
+          [
+            "nav-link",
+            isActive ? "active" : null,
+          ]
+            .filter(Boolean)
+            .join(" ")
+        }>
+          <MdOutlineSettings size={22} />
+          <span>Settings</span>
         </NavLink>
       </nav>
       <nav>
