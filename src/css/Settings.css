@@ -167,3 +167,55 @@ color: var(--side-bar-text);
   overflow-y: auto;
   margin-top: 2rem;
 }
+
+/* input style */
+.settings_main_credit_card{
+  margin-top: 50px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.settings_credit_card_btn{
+	margin-top: 20px;
+}
+
+.settings_main_invoice{
+  margin-top: 50px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.settings_main_invoice_btn{
+	margin-top: 20px;
+}
+
+.settings_main_tax_information{
+	margin-top: 50px;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.settings_main_tax_information_btn{
+	margin-top: 20px;
+}
+
+.settings_main_linked_shopify_stores{
+	margin-top: 50px;
+	font-weight: bold;
+	font-size: 26px;
+}
+
+.settings_main_link{
+	margin-top: 50px;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.settings_main_link_shop_btn{
+	margin-top: 40px;
+}
+
+.settings_main_link{
+	font-weight: 'bold';
+	margin-top: '20px';
+}
