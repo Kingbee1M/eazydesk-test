@@ -89,10 +89,9 @@
 }
 
 .FaPlus-name{
-  width: 40px;
-  height: 40px;
-  background-color:#EBDDCA;
-  padding: 10px;
+  width: 43px;
+  height: 43px;
+  background-color:var(--accent-green-light); 
   border-radius: 50px;
   display: flex;
   justify-content: center;
@@ -383,6 +382,7 @@ border-radius: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 52px;
 }
 
 .profiledropdown_container{
@@ -391,7 +391,7 @@ border-radius: 10px;
   gap: 22px;
 }
 
-.profiledropdown_container h5{  
+.profiledropdown_container_h5{  
 font-style: normal;
 font-weight: 600;
 font-size: 12px;
@@ -399,11 +399,21 @@ line-height: 18px;
 text-align: right;
 color: var(--black);  
 }
-.profiledropdown_container p{   
+.profiledropdown_container_p{   
 font-style: normal;
 font-weight: 400;
 font-size: 9px;
 line-height: 14px; 
 text-align: right; 
 color: var(--gray-light); 
+}
+
+.FaPlus-icon-container_sup h6{  
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 21px;  
+color: var(--black);
+
+
 }

@@ -6,6 +6,7 @@ import ClosedTicket from "./Pages/Ticket/ClosedTicket";
 import Customers from "./Pages/Customers/Customers";
 import Settings from "./Pages/Settings/Settings";
 import TicketReport from "./Pages/Report/TicketReport";
+import Login from "./Pages/Login/Login";
 
 
 
@@ -22,6 +23,8 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
+          {/* Dashboard  */}
+          <Route path="/login" element={<Login />} />
           {/* Dashboard  */}
           <Route path="/admindashboard" element={<AdminDashboard />} />
           {/* Ticket  */}

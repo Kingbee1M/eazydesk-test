@@ -4,9 +4,8 @@ import { BsBell } from "react-icons/bs";
 import { IoCalendarOutline } from "react-icons/io5";
 import ProfileDropDown from './ProfileDropDown';
 import SearchInput from './SearchInput';
-import Badge from './Badge/BadgeIcon';
-import BadgeIcon from './Badge/BadgeIcon';
-
+import Badge from './Badge/Badge';
+import pro_img from '../assets/img/pro_img.svg'
 
 
 
@@ -41,17 +40,14 @@ const Header = () => {
         </div>
 
         <div className='faplus-bell_container'>
-          {/* <span className='FaPlus-bell' onMouseEnter={() => setNotification(true)} onMouseLeave={() => setNotification(false)}>
-            <BsBell size={18} />
-          </span> */}
-          <BadgeIcon />
+          <Badge />
           <div className='profiledropdown_container'>
             <div>
-              <h5>Mark Collins</h5>
-              <p>Business man</p>
+              <h5 className='profiledropdown_container_h5'>Mark Collins</h5>
+              <p className='profiledropdown_container_p'>Business man</p>
             </div>
             <span className='FaPlus-name' onMouseEnter={() => setProfile(true)} onMouseLeave={() => setProfile(false)}>
-
+              <img src={pro_img} alt='logo' crossOrigin="anonymous" className="profile_img" />
               {profile && <ProfileDropDown />}
             </span>
           </div>

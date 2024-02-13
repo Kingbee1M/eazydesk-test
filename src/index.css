@@ -89,7 +89,7 @@ a {
   position: relative;
   height: 100dvh !important;
   grid-template-columns: max-content 1fr !important;
-  grid-template-rows: 60px 1fr !important;
+  grid-template-rows: 80px 1fr !important;
   grid-template-areas:
     "sidenav header"
     "sidenav main" 
@@ -98,7 +98,7 @@ a {
 
 main {
   grid-area: main !important;
-  padding: 1rem 5rem !important;
+  padding: 2rem 2rem !important;
   overflow-y: scroll!important; 
 }
 table {
@@ -159,7 +159,8 @@ tbody tr {
 @import url(./css/SideNav.css);  
 @import url(./css/BottomNavigation.css);  
 @import url(./css/Badge.css);  
-/* @import url(./css/Login.css);   
+@import url(./css/Login.css); 
+/*    
 @import url(./css/Setting.css);   
 @import url(./css/AdminDashboard.css);   
 @import url(./assets/bootstrap.css);   

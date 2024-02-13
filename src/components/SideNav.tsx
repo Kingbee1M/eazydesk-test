@@ -11,6 +11,7 @@ import { FiLogOut } from "react-icons/fi";
 import { IoMdOpen } from "react-icons/io";
 import { FiChevronDown } from 'react-icons/fi';
 import { useEffect, useState } from "react";
+import logo from '../assets/img/Clip path group.svg'
 
 
 const SideNav = () => {
@@ -35,8 +36,8 @@ const SideNav = () => {
   return (
     <div id="side-nav">
       <div className="logo-area">
-        {/* <img src={logo} alt='logo' crossOrigin="anonymous" className="logo-area-img" /> */}
-        <h2>Supertask</h2>
+        <img src={logo} alt='logo' crossOrigin="anonymous" className="logo-area-img" />
+        <h2>Eazy Desk</h2>
       </div>
       <nav>
         <NavLink to="/admindashboard" className={({ isActive }) =>

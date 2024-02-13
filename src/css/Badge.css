@@ -12,7 +12,7 @@
   align-items: center;
   width: 20px;
   height: 20px;
-  background-color: red;
+  background-color: var(--accent-blue);
   color: var(--white);
   border-radius: 50%;
   font-size: 12px;
