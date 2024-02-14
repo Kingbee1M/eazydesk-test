@@ -5,7 +5,7 @@ import { FaBell } from 'react-icons/fa';
 const Badge = () => {
 
 	return (
-		<div className="badge">
+		<div className="badge_bell">
 			<FaBell size={25} />
 			<span className="badge-count">5</span>
 		</div>

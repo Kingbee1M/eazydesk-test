@@ -136,8 +136,7 @@ gap: 15px;
 .settings_profile_title{
  width: 64px;
  height: 64px;
-	border-radius: 50px;
-	background-color: antiquewhite;
+	border-radius: 50px; 
 }
 
 .settings_profile_title_text h6{  
@@ -168,6 +167,7 @@ color: var(--side-bar-text);
   margin-top: 2rem;
 }
 
+ 
 /* input style */
 .settings_main_credit_card{
   margin-top: 50px;
@@ -219,3 +219,4 @@ color: var(--side-bar-text);
 	font-weight: 'bold';
 	margin-top: '20px';
 }
+ 

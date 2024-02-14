@@ -162,11 +162,11 @@ tbody tr {
 @import url(./css/Badge.css);  
 @import url(./css/Login.css); 
 @import url(./css/Settings.css); 
-@import url(./css/Form.css);   
-/*    
-@import url(./css/Setting.css);   
-@import url(./css/AdminDashboard.css);   
-@import url(./assets/bootstrap.css);   
+@import url(./css/Form.css); 
+@import url(./assets/bootstrap.css); 
+@import url(./css/AdminDashboard.css); 
+/*      
+ 
 @import url(./css/Insight.css);   
 @import url(./css/Boards.css);   
 @import url(./css/Teams.css);   

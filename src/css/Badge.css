@@ -1,4 +1,4 @@
-.badge {
+.badge_bell {
   position: relative;
   display: inline-block;
 }
@@ -17,4 +17,19 @@
   border-radius: 50%;
   font-size: 12px;
   font-weight: bold;
+}
+
+
+.three-in-one{
+  width: 100% !important;
+	height: 250px;
+    margin-top: 1rem;
+}
+
+.Doughnutcontainer{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100% !important;
+	height: 220px; 
 }
