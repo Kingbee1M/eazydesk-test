@@ -136,8 +136,7 @@ gap: 15px;
 .settings_profile_title{
  width: 64px;
  height: 64px;
-	border-radius: 50px;
-	background-color: antiquewhite;
+	border-radius: 50px; 
 }
 
 .settings_profile_title_text h6{  
@@ -167,3 +166,4 @@ color: var(--side-bar-text);
   overflow-y: auto;
   margin-top: 2rem;
 }
+

@@ -1,0 +1,245 @@
+.dashboard_container_grid{
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 22px;
+}
+
+.total_card{
+	width: 100%;
+height: 135.78px;
+background-color: var(--white); 
+padding: 18px;
+border-radius: 11px;
+border: 0.5px solid var(--border);
+}
+
+.total_card_flex{
+	display: flex;
+	justify-content: space-between;
+}
+
+ .total_card_flex h6{ 
+font-style: normal;
+font-weight: 500;
+font-size: 14.695px;
+line-height: 22px; 
+letter-spacing: 0.005em;
+color: #777980;
+}
+
+.total_card_flex_icon1{
+display: flex; 
+justify-content: center;
+align-items: center;
+padding: 7.34752px;
+width: 33.06px;
+height: 33.06px;
+border-radius: 7.34752px;
+background: var( --accent-purple-light);
+color: var(--accent-purple);
+}
+.total_card_flex_icon2{
+display: flex; 
+justify-content: center;
+align-items: center;
+padding: 7.34752px;
+width: 33.06px;
+height: 33.06px;
+border-radius: 7.34752px;
+background: var( --accent-orange-light);
+color: var(--accent-orange);
+}
+.total_card_flex_icon3{
+display: flex; 
+justify-content: center;
+align-items: center;
+padding: 7.34752px;
+width: 33.06px;
+height: 33.06px;
+border-radius: 7.34752px;
+background: var( --accent-green-light);
+color: var(--accent-green);
+}
+.total_card_flex_icon4{
+display: flex; 
+justify-content: center;
+align-items: center;
+padding: 7.34752px;
+width: 33.06px;
+height: 33.06px;
+border-radius: 7.34752px;
+background: var( --accent-red-light);
+color: var(--accent-red);
+}
+
+.total_card_flex_icon_h1{ 
+font-style: normal;
+font-weight: 600;
+font-size: 29.3901px;
+line-height: 35px;
+letter-spacing: 0.01em;
+color: var(--black);
+}
+
+.total_card_flex_icon_source{
+display: flex;  
+align-items: center;
+gap: 10px;
+margin-top: 1rem;
+}
+
+.total_card_flex_icon_source h3{ 
+font-style: normal;
+font-weight: 500;
+font-size: 12.8582px;
+line-height: 18px; 
+letter-spacing: 0.005em; 
+color: #858D9D; 
+}
+
+.total_card_ArrowUpSFill{
+display: flex;
+align-items: center;
+gap: 5px; 
+font-style: normal;
+font-weight: 700;
+font-size: 12.8582px;
+line-height: 140%; 
+letter-spacing: 0.005em; 
+color: var(--accent-green); 
+
+}
+
+ 
+ .dash_statistics_container{
+	display: flex;
+	justify-content: space-between;
+	margin-top: 28px;
+	gap: 22px;
+}
+
+.dash_statistics_sub1{
+	width: 30%;
+	height: 341.53px;
+	background-color: var(--white);
+	border-radius: 8px;
+	border: 0.5px solid var(--border);
+}
+.dash_statistics_sub2{
+	width: 70%;
+	height: 341.53px;
+	background-color: var(--white);
+	border-radius: 8px;
+	border: 0.5px solid var(--border);
+	padding: 20px;
+}
+
+.dash_statistics_sub2_text{
+		display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.sta_color_container_main{
+			display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap:15px
+}
+
+.dash_statistics_sub2_text h3{ 
+font-style: normal;
+font-weight: 600;
+font-size: 18.3619px;
+line-height: 28px; 
+letter-spacing: 0.01em; 
+color: var(--black) 
+}
+.dash_statistics_sub2_text p{  
+font-style: normal;
+font-weight: 400;
+font-size: 12.8534px;
+line-height: 18px; 
+letter-spacing: 0.005em; 
+color: #777980;
+}
+
+.sta_color_container small{
+	display: flex;
+	align-items: center; 
+font-style: normal;
+font-weight: 500;
+font-size: 11.0172px;
+line-height: 17px; 
+letter-spacing: 0.005em; 
+color: #667085;
+  
+}
+
+.sta_color_container{
+	display: flex;
+	align-items: center;
+}
+
+.dash_statistics_sub1{
+	padding: 20px;
+}
+
+
+.dash_statistics_sub1 h3{ 
+font-style: normal;
+font-weight: 600;
+font-size: 18.3619px;
+line-height: 28px; 
+letter-spacing: 0.01em; 
+color: var(--black) 
+}
+.dash_statistics_sub1 p{  
+font-style: normal;
+font-weight: 400;
+font-size: 12.8534px;
+line-height: 18px; 
+letter-spacing: 0.005em; 
+color: #777980;
+}
+
+
+
+ 
+ 
+@media screen and (max-width: 1080px) {
+  .dashboard_container_grid {
+    grid-template-columns: repeat(2, 1fr); /* Adjust for medium screens */
+    gap: 16px; /* Adjust gap for medium screens */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dashboard_container_grid {
+    grid-template-columns: 1fr; /* Adjust for small screens */
+    gap: 12px; /* Adjust gap for small screens */
+  }
+}
+
+
+ 
+
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+
+ 

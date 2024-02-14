@@ -21,20 +21,19 @@ ChartJS.register(
   Legend
 );
 
-const DoughnutChat = ({ TaskStatus }: any) => {
+const DoughnutChat = () => {
 
 
 
   const doughnutData = {
-    labels: ['New', "In Progress", "Completed", "Outdate"],
     datasets: [
       {
         label: 'Task',
-        data: [TaskStatus?.NEW, TaskStatus?.IN_PROGRESS, TaskStatus?.COMPLETED, TaskStatus?.OUTDATED],
+        data: [34, 16, 10, 40],
         backgroundColor: [
-          '#6f47eb',
-          '#b161ff',
-          '#d2c3ff',
+          '#990000',
+          '#cc3333cd',
+          '#ff66667a',
           '#ededed'
         ],
         cutout: 70,
@@ -46,20 +45,6 @@ const DoughnutChat = ({ TaskStatus }: any) => {
     width: 400, // Set your desired width
     height: 400, // Set your desired height
     cutoutPercentage: 70,
-    plugins: {
-      legend: {
-        display: false, // Hide the legend
-      },
-      tooltip: {
-        enabled: true, // Enable tooltips
-        callbacks: {
-          label: (context: any) => {
-            // Customize the label displayed when hovering over a section
-            return `${context.label}: ${context.formattedValue}`;
-          },
-        },
-      },
-    },
   };
   return (
 

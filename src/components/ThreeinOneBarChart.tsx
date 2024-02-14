@@ -1,96 +1,59 @@
-import React from 'react'
+import {
+	Chart as ChartJS,
+	CategoryScale,
+	LinearScale,
+	BarElement,
+	ArcElement,
+	Title,
+	Tooltip,
+	Legend,
+} from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import AssignTask from './Modals/AssignTask';
-
-const ThreeinOneBarChart = ({ datas }: any) => {
 
 
-	const Tasks = !datas ? [] : datas?.filter((task: { taskStatus: string; }) => task?.taskStatus === 'NEW');
-
-	// Group completed tasks by the day of the months
-	const assignTasks = Tasks?.reduce((grouped: any, task: any) => {
-		const completedDate = new Date(task?.updatedAt);
-		const dayOfMonth = completedDate?.getDate();
-
-		if (!grouped[dayOfMonth]) {
-			grouped[dayOfMonth] = [];
-		}
-
-		grouped[dayOfMonth].push(task);
-
-		return grouped;
-	}, {});
-
-	const inprogressTasks = !datas ? [] : datas?.filter((task: { taskStatus: string; }) => task?.taskStatus === 'IN_PROGRESS');
-
-	// Inprogress completed tasks by the day of the months
-	const InprogressdTasks = inprogressTasks?.reduce((grouped: any, task: any) => {
-		const completedDate = new Date(task?.updatedAt);
-		const dayOfMonth = completedDate?.getDate();
-
-		if (!grouped[dayOfMonth]) {
-			grouped[dayOfMonth] = [];
-		}
-
-		grouped[dayOfMonth].push(task);
-
-		return grouped;
-	}, {});
+ChartJS.register(
+	CategoryScale,
+	LinearScale,
+	BarElement,
+	ArcElement,
+	Title,
+	Tooltip,
+	Legend
+);
 
 
 
-	const overdueTasks = datas?.filter((task: { status: string; }) => task?.status === 'OUTDATED');
 
-
-	// Group completed tasks by the day of the months
-	const OverdueTasks = overdueTasks?.reduce((grouped: any, task: any) => {
-		const completedDate = new Date(task?.updatedAt);
-		const dayOfMonth = completedDate?.getDate();
-
-		if (!grouped[dayOfMonth]) {
-			grouped[dayOfMonth] = [];
-		}
-		grouped[dayOfMonth].push(task);
-
-		return grouped;
-	}, {});
-
-
-	const today = new Date();
-	const currentDay = today.getDate();
-	const lastFiveDays = Array?.from({ length: 5 }, (_, index) => currentDay - index).reverse();
+const ThreeinOneBarChart = () => {
 	const data = {
-		labels: lastFiveDays,
+		labels: ['Isn', 'Mtn', 'Uba', 'Fair Money', 'Access'],
 		datasets: [
 			{
 				label: 'Completed',
-				backgroundColor: '#6f47eb',
-				borderColor: '#6f47eb',
+				backgroundColor: '#0240BC',
+				borderColor: '#0240BC',
 				borderWidth: 1,
 				barThickness: 20,
-				data: lastFiveDays?.map(day => assignTasks[day]?.length || 0),
+				data: [12, 19, 3, 5, 2],
 			},
 			{
 				label: 'Inprogress',
-				backgroundColor: '#b161ff',
-				borderColor: '#b161ff',
+				backgroundColor: '#0240bc90',
+				borderColor: '#0240bc90',
 				borderWidth: 1,
 				barThickness: 20,
-				data: lastFiveDays?.map(day => InprogressdTasks[day]?.length || 0),
+				data: [10, 15, 7, 8, 6],
 			},
 			{
-				label: 'Overdue',
-				backgroundColor: '#d2c3ff',
-				borderColor: '#d2c3ff',
+				label: 'New',
+				backgroundColor: '#E5ECFB',
+				borderColor: '#E5ECFB',
 				borderWidth: 1,
 				barThickness: 20,
-				data: lastFiveDays?.map(day => overdueTasks[day]?.length || 0),
+				data: [5, 8, 12, 9, 10],
 			},
 		],
 	};
-
-
-
 
 	const options = {
 		plugins: {
@@ -117,4 +80,4 @@ const ThreeinOneBarChart = ({ datas }: any) => {
 	);
 }
 
-export default ThreeinOneBarChart
+export default ThreeinOneBarChart;
