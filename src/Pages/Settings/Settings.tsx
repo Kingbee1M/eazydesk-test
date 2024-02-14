@@ -4,6 +4,8 @@ import Header from '../../components/Header'
 import BottomNavigation from '../../components/BottomNavigation';
 import SettingsIcon from './SettingsIcon';
 import GeneralInformation from './SettingsGeneral/GeneralInformation';
+import BillingandTax from './SettingsGeneral/BillingandTax';
+import LinkedShops from './SettingsGeneral/LinkedShops';
 
 const Settings = () => {
 	const [activeIndex, setActiveIndex] = useState<any>(0);
@@ -34,6 +36,9 @@ const Settings = () => {
 
 					{/* General Information */}
 					{activeIndex === 0 && <GeneralInformation />}
+					{activeIndex === 2 && <BillingandTax />}
+					{activeIndex === 4 && <LinkedShops />}
+				
 
 				</div>
 			</main>

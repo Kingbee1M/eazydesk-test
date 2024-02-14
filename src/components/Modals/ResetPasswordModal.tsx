@@ -1,12 +1,11 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState } from "react"; 
 import { ToastContainer, toast } from "react-toastify";
 import { SVGLoader } from "../SVGLoader";
 
 
 
 const ResetPasswordModal = ({ id }: any) => {
-	const dispatch = useDispatch();
+	 
 
 
 	//  Update Current Password State
