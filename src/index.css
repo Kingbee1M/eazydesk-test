@@ -29,6 +29,7 @@
   --accent-red:#EB3D4D;
   --accent-blue-light:#E5ECFB; 
   --accent-blue: #0240BC; 
+  --accent-blue-soft: #0240bcc9; 
   --text: #1D1F2C;
   --small-text: #667085;
   --gray-light: #8F8F8F;
@@ -36,10 +37,11 @@
   --black: #000;  
  --yellow: #FFD71D;
   --white:#ffffff;
-  --border:rgba(0, 0, 0, 0.1);
+  --border:#cdd1d3;
   --form-border:#E2E2E2;
  --side-bar-text: rgba(0, 0, 0, 0.7);
   --background:#F6F8FF;
+   --box-shadow:  rgba(0, 0, 0, 0.1);
   /* --background:linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), #F5F6F8; 
   --box-shadow: 0 0 4px rgba(0, 0, 0, .05), 0 0 16px rgba(0, 0, 0, .05), 0 0 32px rgba(0, 0, 0, .05), 0 0 64px rgba(0, 0, 0, .05); */
 }
@@ -54,6 +56,7 @@ body {
   font-family: 'Poppins', sans-serif;
   line-height: 1.3;
   padding-left: 0px !important;
+  font-size: 14px;
 }
 
 img, 
@@ -165,17 +168,17 @@ tbody tr {
 @import url(./css/Form.css); 
 @import url(./assets/bootstrap.css); 
 @import url(./css/AdminDashboard.css); 
+@import url(./css/Register.css);  
+@import url(./css/Modal.css);   
+@import url(./css/table.css);   
 /*      
  
 @import url(./css/Insight.css);   
 @import url(./css/Boards.css);   
-@import url(./css/Teams.css);   
-@import url(./css/Modal.css);   
-@import url(./css/table.css);   
-@import url(./css/Register.css);   
+@import url(./css/Teams.css);     
+ 
 @import url(./css/LandingPage.css);   
-@import url(./css/PageNotFound.css);   
-@import url(./css/BottomNavigation.css);   
+@import url(./css/PageNotFound.css);     
 @import url(./css/Spinner.css);   
 @import url(./css/Support.css);   
 @import url(./css/Delete.css);    */

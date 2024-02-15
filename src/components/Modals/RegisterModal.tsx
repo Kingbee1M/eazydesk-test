@@ -162,17 +162,17 @@ const RegisterModal = ({ showTask, setShowTask }: any) => {
 														</div>
 														<div className="input__box">
 															<span className="details">Supervisor</span>
-															{/* 
+
 															<select name="country" id="register-select"
 																value={values.supervisorId}
 																onChange={handleChange("supervisorId")}>
 																<option value="">Select a supervisor</option>
-																{supervisor?.map((option: any, index: any) => (
+																{[].map((option: any, index: any) => (
 																	<option key={index} value={option.id}>
 																		{`${option.firstName} ${option.LastName}`}
 																	</option>
 																))}
-															</select> */}
+															</select>
 														</div>
 													</div>
 													<div className="Register-button-container">

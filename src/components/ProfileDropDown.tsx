@@ -17,7 +17,7 @@ const ProfileDropDown = () => {
 
 	return (
 		<div className='notification-profile'>
-			<div className='notification-card' onClick={() => navigate("/setting")}>
+			<div className='notification-card' onClick={() => navigate("/settings")}>
 				<div className='notification-icon-profile'>
 
 				</div>

@@ -1,7 +1,7 @@
 .modal-close{
 	display: flex;
 	justify-content: space-between;
-	border-bottom: 1px solid #cdd1d3 ;
+	border-bottom: 1px solid var(--border) ;
 	padding-bottom: 1rem;
 	margin-bottom: 2rem;
 }
@@ -21,7 +21,7 @@
     justify-content: center!important;
 }
 .custom-btn {
-    background: #C4B4F7!important;
+    background: var(--accent-blue-light)!important;
 }
 
 /* form select {
@@ -69,9 +69,11 @@ form .user__details-long .input__box {
     border: none;
     transition: .4s;
 }
+
 .flex-btn {
     float: right;
 }
+
 .user-isActive {
     padding-right: 1rem;
 }
@@ -85,7 +87,7 @@ form .user__details-long .input__box {
     border: none;
 }
 .toggle-switch .slider:before {
-    background-color: #fff;
+    background-color: var(--white);
     bottom: 4px;
     content: "";
     height: 26px;

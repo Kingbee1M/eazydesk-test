@@ -7,6 +7,7 @@ import Customers from "./Pages/Customers/Customers";
 import Settings from "./Pages/Settings/Settings";
 import TicketReport from "./Pages/Report/TicketReport";
 import Login from "./Pages/Login/Login";
+import Register from "./Pages/ Register/ Register";
 
 
 
@@ -37,6 +38,8 @@ function App() {
           <Route path="/settings" element={<Settings />} />
           {/* Report */}
           <Route path="/report" element={<TicketReport />} />
+          {/* Register */}
+          <Route path="/register" element={<Register />} />
         </Routes>
       </BrowserRouter>
     </div>

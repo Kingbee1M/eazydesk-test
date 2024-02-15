@@ -1,43 +1,34 @@
-    import React from 'react'
-    
-    const LinkedShops = () => {
-      return (
-           <div className='settings_main_after'>
-    <div className='settings_main_after_sup'>
-        <h3>Linked Shops</h3>
-        <p>Lorem ipsum dolor sit amet consectetur</p>
-     </div>
-     <h4 className='settings_main_linked_shopify_stores'>Linked Shopify Stores</h4>
-     <p>Lorem ipsum dolor sit amet consectetur</p>
+import React from 'react'
 
-     <h5 className='settings_main_link'>Link</h5>
+const LinkedShops = () => {
+   return (
+      <div className='settings_main_after'>
+         <div className='settings_main_after_sup'>
+            <h3>Linked Shops</h3>
+            <p>Lorem ipsum dolor sit amet consectetur</p>
+         </div>
+         <div className="container_linked_shopify">
+            <div className='settings_main_linked_shopify_container'>
+               <h4 className='settings_main_linked_shopify_stores'>Linked Shopify Stores</h4>
+               <p>Lorem ipsum dolor sit amet consectetur</p>
+               <div className="input__box">
+                  <h5 className='settings_main_link'>Link</h5>
+                  <input type="text" placeholder="xyz.myshopify.com" className='settings_main_link_input' />
+               </div>
+               <button className='btn'>Link Shop</button>
+            </div>
+            <div className='settings_main_linked_shopify_container'>
+               <h4 className='settings_main_linked_shopify_stores'>Linked Shopify Stores</h4>
+               <p>Lorem ipsum dolor sit amet consectetur</p>
+               <div className="input__box">
+                  <h5 className='settings_main_link'>Link</h5>
+                  <input type="text" placeholder="xyz.myshopify.com" className='settings_main_link_input' />
+               </div>
+               <button className='btn'>Link Shop</button>
+            </div>
+         </div>
+      </div>
+   )
+}
 
-     <div className="container_reg  settings_container_form"></div>
-
-     <div className="input__box"></div>
-        <input type="text" placeholder="xyz.myshopify.com" />
-
-     <div className='settings_main_link_shop_btn'>
-                    <button className='btn'>Link Shop</button>        
-     </div>
-   
-     <h6 className='settings_main_linked_shopify_stores'>Linked ebay Stores</h6>
-     <p>Lorem ipsum dolor sit amet consectetur</p>
-    
-     <p className='settings_main_link'><strong>Link</strong></p>
-
-     <div className="input__box"></div>
-        <input type="text" placeholder="xyz.myebay.com" />
-
-     <div className='settings_main_link_shop_btn'>
-                    <button className='btn'>Link Shop</button>  
-     </div>
-     
-    </div>
-
-
-    
-      )
-    }
-    
-    export default LinkedShops
+export default LinkedShops

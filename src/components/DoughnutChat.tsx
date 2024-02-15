@@ -31,10 +31,10 @@ const DoughnutChat = () => {
         label: 'Task',
         data: [34, 16, 10, 40],
         backgroundColor: [
-          '#990000',
-          '#cc3333cd',
-          '#ff66667a',
-          '#ededed'
+          '#0240BC',
+          '#0240bc90',
+          '#EB3D4D',
+          '#E5ECFB'
         ],
         cutout: 70,
       },

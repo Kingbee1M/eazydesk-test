@@ -10,6 +10,7 @@ import { FiLogOut } from "react-icons/fi";
 import { IoMdOpen } from "react-icons/io";
 import { FiChevronDown } from 'react-icons/fi';
 import { useEffect, useState } from "react";
+import { LuUsers } from "react-icons/lu";
 import logo from '../assets/img/Clip path group.svg'
 
 
@@ -38,7 +39,7 @@ const SideNav = () => {
         <img src={logo} alt='logo' crossOrigin="anonymous" className="logo-area-img" />
         <h2>Eazy Desk</h2>
       </div>
-      <nav>
+      <nav  >
         <NavLink to="/admindashboard" className={({ isActive }) =>
           [
             "nav-link",
@@ -48,7 +49,7 @@ const SideNav = () => {
             .join(" ")
         }>
           <MdOutlineDashboard size={25} />
-          <span>Home</span>
+          <span>Dashboard</span>
         </NavLink>
       </nav>
 
@@ -118,6 +119,19 @@ const SideNav = () => {
         }>
           <LuTag size={22} />
           <span>Customers</span>
+        </NavLink>
+      </nav>
+      <nav>
+        <NavLink to="/register" className={({ isActive }) =>
+          [
+            "nav-link",
+            isActive ? "active" : null,
+          ]
+            .filter(Boolean)
+            .join(" ")
+        }>
+          <LuUsers size={22} />
+          <span>Register</span>
         </NavLink>
       </nav>
       <nav>
