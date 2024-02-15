@@ -7,6 +7,7 @@ import GeneralInformation from './SettingsGeneral/GeneralInformation';
 import BillingandTax from './SettingsGeneral/BillingandTax';
 import LinkedShops from './SettingsGeneral/LinkedShops';
 import Plans from './SettingsGeneral/Plans';
+import Security from './SettingsGeneral/Security';
 
 const Settings = () => {
 	const [activeIndex, setActiveIndex] = useState<any>(0);
@@ -40,6 +41,7 @@ const Settings = () => {
 					{activeIndex === 2 && <BillingandTax />}
 					{activeIndex === 3 && <Plans />}
 					{activeIndex === 4 && <LinkedShops />}
+					{activeIndex === 1 && <Security />}      
 
 
 				</div>

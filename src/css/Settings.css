@@ -542,4 +542,43 @@ align-items: center;
 color: #FFFFFF;  
 }
 
- 
+.settings_main_password_management{
+  margin-bottom: 30px;
+  line-height: 22px;
+  font-size: 20px;
+  text-decoration: underline !important;
+}
+
+.settings_main_login_verification{
+  margin-top: 50px;
+  font-size: 16px;
+}
+
+.settings_main_email_setup{
+	margin-top: 50px;
+	font-size: 16px;
+}
+
+.settings_main_sms_setup{
+	margin-top: 50px;
+	font-size: 16px;
+} 
+
+.settings_main_password_security{
+  margin-top: 30px;
+  line-height: 22px;
+  font-size: 20px;
+  text-decoration: underline !important;
+}
+
+.settings_main_password_change{
+  margin-top: 50px;
+  font-size: 16px;
+}
+
+.button {
+	background-color: #3381F6;
+	border: none;
+	color: white;
+	font-size: 16px;
+  }
