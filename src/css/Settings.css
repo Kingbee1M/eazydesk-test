@@ -29,7 +29,7 @@ margin-top: 15px;
 .settings_container_main{
 	width: 100%;
 	background-color: var(--white);
-	height: 73vh;
+	/* height: 73vh; */
 	border-radius: 12px;
 	margin-top: 26px;
 	display: flex; 
@@ -163,10 +163,8 @@ text-align: center;
 color: var(--side-bar-text); 
 }
 
- .settings_container_form{
-  overflow-y: scroll;
-  margin-top: 2rem;
-		height: 23rem;
+ .settings_container_form{ 
+  margin-top: 2rem; 
 }
 
  
@@ -248,10 +246,10 @@ width: 80%;
 margin-bottom: 35px;
 }
 
-.container_linked_shopify{
+/* .container_linked_shopify{
 	height: 32rem;
 overflow: auto;
-}
+} */
 
  .plans_toggle_container {
   background: #f5f5f5;

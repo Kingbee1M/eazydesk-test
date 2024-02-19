@@ -2,10 +2,10 @@ import React from 'react';
 import { FaBell } from 'react-icons/fa';
 
 
-const Badge = () => {
+const Badge = ({ setIsDrawerOpen, isDrawerOpen }: any) => {
 
 	return (
-		<div className="badge_bell">
+		<div className="badge_bell" onClick={() => setIsDrawerOpen(!isDrawerOpen)}>
 			<FaBell size={25} />
 			<span className="badge-count">5</span>
 		</div>
@@ -13,6 +13,3 @@ const Badge = () => {
 }
 
 export default Badge;
-{/* <span className='FaPlus-bell' onMouseEnter={() => setNotification(true)} onMouseLeave={() => setNotification(false)}>
-            <BsBell size={18} />
-          </span> */}

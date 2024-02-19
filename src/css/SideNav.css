@@ -1,6 +1,6 @@
  
 #side-nav {
-  width: 280px;
+  width: 310px;
   --lft-padding: 2rem !important;
   position: relative !important;
   grid-area: sidenav !important;

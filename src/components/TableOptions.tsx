@@ -5,9 +5,6 @@ import { VscCloudDownload } from "react-icons/vsc";
 
 
 
-
-
-
 // EntriesPerPage
 const EntriesPerPage = ({ data, entriesPerPage, setEntriesPerPage }: any) => (
   <div className="entries-perpage">
@@ -71,18 +68,23 @@ const EmployeeStatus = ({
 // TableFetch
 const TableFetch = ({ colSpan }: any) => (
   <tr>
-    <td colSpan={colSpan} className="table-loader">
-      <VscCloudDownload size={75} />
-      <p className="mt-3">Fetching request...</p>
+    <td colSpan={colSpan} id="table-loader">
+      <div className="center-content">
+        <VscCloudDownload size={75} />
+        <p id="mt-3">Fetching request...</p>
+      </div>
     </td>
   </tr>
 );
+
 // NoRecordFound
 const NoRecordFound = ({ colSpan }: any) => (
   <tr>
-    <td colSpan={colSpan} className="table-loader">
-      <MdOutlineErrorOutline size={75} />
-      <p className="mt-3">No record found</p>
+    <td colSpan={colSpan} id="table-loader">
+      <div className="center-content">
+        <MdOutlineErrorOutline size={75} />
+        <p id="mt-3">No record found</p>
+      </div>
     </td>
   </tr>
 );
@@ -201,7 +203,7 @@ function TooltipPositioned2(words: any) {
   );
 }
 // @ts-ignore  
-const userInfo = JSON.parse(localStorage.getItem("taskmaneger"));
+// const userInfo = JSON.parse(localStorage.getItem("taskmaneger"));
 
 
 const customStyles = {
@@ -281,10 +283,10 @@ export {
   getWeeklyData,
   TooltipPositioned,
   TooltipPositioned2,
-  userInfo,
+  // userInfo,
   LoginSpiner,
   customId,
   customStyles,
   getPriorityStyle,
-  getInputColorClass
+  getInputColorClass,
 };

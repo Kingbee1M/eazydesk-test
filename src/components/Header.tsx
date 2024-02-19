@@ -1,57 +1,58 @@
 import { useEffect, useState } from 'react';
-import { FaPlus } from "react-icons/fa6";
-import { BsBell } from "react-icons/bs";
 import { IoCalendarOutline } from "react-icons/io5";
-import ProfileDropDown from './ProfileDropDown';
 import SearchInput from './SearchInput';
 import Badge from './Badge/Badge';
 import pro_img from '../assets/img/pro_img.svg'
+import { pageTitles } from './StateData';
+import NetworkConnetion from './NetworkConnetion';
+import { useNavigate } from 'react-router-dom';
+import Notification from './Notification/Notification';
+import HeaderDate from './HeaderDate';
 
 
 
 const Header = () => {
-  const [notification, setNotification] = useState(false)
+  const navigate = useNavigate();
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  const [profile, setProfile] = useState(false)
-
-
-
-
-
-  const [title, setTitle] = useState("Super | Task Manager");
-  document.title = title;
 
   useEffect(() => {
-    // This will run when the page first loads and whenever the title changes
-    if (window.location.pathname === "/home") {
-      setTitle("eazyDesk | Dashboard");
-    } else if (window.location.pathname === "/admindashboard") {
-      setTitle("eazyDesk | Dashboard");
-    }
-  }, [title]);
+    const path = window.location.pathname;
+    const title = pageTitles[path] ? `Eazy Desk | ${pageTitles[path]}` : "Eazy Desk | Page";
+    document.title = title;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
 
   return (
     <div id="header">
       <SearchInput />
+      <NetworkConnetion />
+
       <div className='FaPlus-icon-container' >
         <div className='FaPlus-icon-container_sup'>
           <IoCalendarOutline size={16} />
-          <h6>Monday, 4th September</h6>
+          <HeaderDate />
         </div>
-
         <div className='faplus-bell_container'>
-          <Badge />
+          <Badge setIsDrawerOpen={setIsDrawerOpen} isDrawerOpen={isDrawerOpen} />
           <div className='profiledropdown_container'>
             <div>
               <h5 className='profiledropdown_container_h5'>Mark Collins</h5>
               <p className='profiledropdown_container_p'>Business man</p>
             </div>
-            <span className='FaPlus-name' onMouseEnter={() => setProfile(true)} onMouseLeave={() => setProfile(false)}>
+            <span className='FaPlus-name' onClick={() => navigate("/settings")}>
+              <img src={pro_img} alt='logo' crossOrigin="anonymous" className="profile_img" />
+            </span>
+            {/* <span className='FaPlus-name' onMouseEnter={() => setProfile(true)} onMouseLeave={() => setProfile(false)}>
               <img src={pro_img} alt='logo' crossOrigin="anonymous" className="profile_img" />
               {profile && <ProfileDropDown />}
-            </span>
+            </span> */}
           </div>
-
+          <Notification isOpen={isDrawerOpen} onClose={setIsDrawerOpen} setIsDrawerOpen={setIsDrawerOpen} />
         </div>
       </div>
     </div>
