@@ -1,0 +1,127 @@
+.team-card-container{
+	display: flex; 
+	justify-content: space-between;
+	width: 30%;
+	border: 1px solid #cdd1d3 !important;
+	border-radius: 10px;
+	padding: 1rem; 
+	/* margin-bottom: 1rem;  */
+ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+ /* flex: 1 1 calc(33.33% - 20px);  */
+	background-color: var(--white);
+}
+.team-card-container:hover{
+	display: flex; 
+	justify-content: space-between;
+	width: 30%;
+	border: 1px solid var(--accent-blue)!important;
+	border-radius: 10px;
+	padding: 1rem; 
+	/* margin-bottom: 1rem;  */
+ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+ /* flex: 1 1 calc(33.33% - 20px);  */
+}
+
+.team-card-container-sup{
+	display: flex;
+ align-items: center;
+ gap: 10px;
+}
+
+.team-card-container-sup-image{
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
+	background-color: #ededed;
+		color: #c5c5c5;
+	display: flex;
+	justify-content: center;
+	align-items: center; 
+}
+
+.team-card-container-sup-image:hover{
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
+	background-color: #ededed;
+		color: #c5c5c5;
+	display: flex;
+	justify-content: center;
+	align-items: center; 
+	border: 1px solid var(--accent-blue);
+}
+
+.team-card-container-sup-ptext{
+	display: flex;
+	align-items: center;
+ gap: 3px;
+	color: #9c9ea0;
+	font-size: 14px;
+}
+.team-card-main-container{
+	display: flex; 
+	flex-wrap: wrap;
+	gap: 20px;
+
+}
+
+@media (max-width: 1200px) {
+  .team-card-container {
+    flex: 1 1 calc(50% - 20px); /* Show 2 cards in a medium screen */
+  }
+}
+
+@media (max-width: 768px) {
+  .team-card-container {
+    flex: 1 1 100%; /* Show 1 card in a small screen */
+  }
+}
+
+.team-card-options {
+  position: relative;
+  display: inline-block;
+
+}
+
+.team-card-dropdown {
+  position: absolute;
+  top: 20%;
+  right: 0;
+  background-color: var(--white);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  z-index: 1;
+		width:180px;
+		border-radius: 10px;
+		border: 2px solid #E2E2E2;
+}
+
+.team-card-option {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 8px;
+		border: 1px solid var(--white); 
+}
+
+.team-card-option:hover { 
+		background-color: var(--accent-blue);
+				border-radius: 5px;
+				color: var(--white);
+}
+.team-card-option:active {
+		border: 1px solid var(--accent-blue);
+			border-radius: 5px;
+}
+
+
+.team-card-option span {
+  margin-left: 8px;
+}
+
+.Home_Empty_State-container{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+}

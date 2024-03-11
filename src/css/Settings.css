@@ -29,7 +29,7 @@ margin-top: 15px;
 .settings_container_main{
 	width: 100%;
 	background-color: var(--white);
-	height: 73vh;
+	/* height: 73vh; */
 	border-radius: 12px;
 	margin-top: 26px;
 	display: flex; 
@@ -48,13 +48,13 @@ margin-top: 15px;
 	gap: 16px;
 	font-style: normal;
 font-weight: 500;
-font-size: 17px;
+/* font-size: 17px; */
 line-height: 22px;
 color: var(--black); 
 padding: 16px 22px;
 width: 270px;
 height: 46px; 
-margin-bottom: 40px;
+margin-bottom: 10px;
 border-left: 2px solid var(--white);
 
 }
@@ -64,13 +64,13 @@ border-left: 2px solid var(--white);
 	gap: 16px;
 	font-style: normal;
 font-weight: 500;
-font-size: 17px;
+/* font-size: 17px; */
 line-height: 22px;
 color: var(--black); 
 padding: 16px 22px;
 width: 270px;
 height: 46px; 
-margin-bottom: 40px;
+margin-bottom: 10px;
 border-left: 2px solid var(--accent-blue);
 }
 .settings_main_for_text_active{
@@ -79,7 +79,7 @@ border-left: 2px solid var(--accent-blue);
 	gap: 16px;
 	font-style: normal;
 font-weight: 500;
-font-size: 17px;
+/* font-size: 17px; */
 line-height: 22px;
 color: var(--accent-blue);
 background-color: var(--accent-blue-light);
@@ -87,7 +87,7 @@ padding: 16px 22px;
 width: 270px;
 height: 46px;
 border-radius: 5px;
-margin-bottom: 40px;
+margin-bottom: 10px;
 }
 
 .settings_main_after{
@@ -163,10 +163,8 @@ text-align: center;
 color: var(--side-bar-text); 
 }
 
- .settings_container_form{
-  overflow-y: scroll;
-  margin-top: 2rem;
-		height: 23rem;
+ .settings_container_form{ 
+  margin-top: 2rem; 
 }
 
  
@@ -248,10 +246,10 @@ width: 80%;
 margin-bottom: 35px;
 }
 
-.container_linked_shopify{
+/* .container_linked_shopify{
 	height: 32rem;
 overflow: auto;
-}
+} */
 
  .plans_toggle_container {
   background: #f5f5f5;
@@ -347,12 +345,11 @@ font-weight: 500;
 font-size: 10px;
 line-height: 12px; 
 align-items: center; 
-color: #FFFFFF; 
+color: var(--white); 
 }
 
-.plans_save{ 
-
-background: #3381F6; 
+.plans_save{  
+background: var(--accent-blue); 
 border-radius: 24px;  
 font-style: normal;
 font-weight: 500;
@@ -360,15 +357,10 @@ font-size: 10px;
 line-height: 12px; 
 display: flex;
 align-items: center; 
-color:var(--white);
- 
-/* identical to box height, or 120% */
+color:var(--white); 
 display: flex;
-align-items: center;
-
-color: #FFFFFF;
-
-
+align-items: center; 
+color: var(--white); 
 }
 
 .pricing_card_container{
@@ -384,6 +376,7 @@ height: 400px;
 padding: 20PX;
 box-shadow: 0px 6.56px 13.12px rgba(0, 0, 0, 0.05), 0px 1.09333px 2.18667px rgba(0, 0, 0, 0.05), 0px 0px 0px 0.546667px rgba(0, 0, 0, 0.07);
 border-radius: 6.56px;
+background-color: var(--white);
 }
 
 .start_deploying{
@@ -455,8 +448,7 @@ line-height: 11px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	gap: 20px;
-	position: relative;
+	gap: 20px; 
 }
 
 .pricing_card_pro{
@@ -510,8 +502,7 @@ font-style: normal;
 font-weight: 500;
 font-size: 10px;
 line-height: 11px; 
-color: var(--black); 
- 
+color: var(--black);  
 }
 
 .pricing_card_title_main{
@@ -576,9 +567,9 @@ color: #FFFFFF;
   font-size: 16px;
 }
 
-.button {
+/* .button {
 	background-color: #3381F6;
 	border: none;
-	color: white;
+	color: var(--white);
 	font-size: 16px;
-  }
+  } */

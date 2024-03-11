@@ -1,0 +1,166 @@
+ .table-container{
+ overflow: auto !important;
+ margin-top: 1.5rem !important;
+}
+
+#reports .nav-tabs {
+  background-color: var(--white) !important;
+  list-style: none !important;
+  width: fit-content !important;
+  display: flex !important; 
+  margin-top: 1.25rem !important;
+}
+
+/* Media query for screen sizes less than 768px */
+@media screen and (max-width: 767px) {
+    #reports .nav-tabs {
+        flex-wrap: wrap;
+        width: 100% !important;
+    }
+    #reports .nav-tabs li {
+        flex: 0 0 50%; /* Adjust the width as needed */
+        text-align: center; /* Center-align individual tabs */
+        font-size: small;
+       
+    }
+}
+
+ 
+#reports .nav-tabs li {
+  padding: .5rem 1rem !important;
+  color: #272525 !important;
+  cursor: pointer !important;
+  border: 1px solid #d8d8d8 !important;
+}
+ 
+
+#reports .nav-tabs li.active {
+  color: var(--accent-blue) !important;
+  border: 1px solid var(--accent-blue) !important;
+  /* white-space: nowrap; */
+}
+
+#reports .search-area {
+  background-color: var(--white) !important;
+  padding: 1.5rem 1.5rem !important;
+  margin-top: 1rem !important;
+  box-shadow: 0 0 4px rgba(0, 0, 0, .05) !important;
+  border: 1px solid #d8d8d8 !important;  
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+#reports table .table-link {
+  background-color: rgba(16, 156, 241, .1);
+  color: var(--accent-blue);
+  padding: .25rem 1rem;
+  border-radius: 3px;
+  border: 2px solid var(--accent-blue);
+}
+
+ 
+
+@media (max-width: 780px) {
+#reports .search-area {
+  background-color: var(--white)!important;
+  padding: 1.5rem 1.5rem !important;
+  margin-top: 1rem !important;
+  box-shadow: 0 0 4px rgba(0, 0, 0, .05) !important;
+  border: 1px solid #d8d8d8 !important; 
+      overflow-y: scroll;
+       font-size: small;
+}
+
+.download-btn {
+ display: flex; 
+ justify-content: center;
+ font-size: small;
+}
+
+}
+ .fade .modal-backdrop .show {
+padding-left: 0px !important;
+ }
+
+/* Default styles for screen sizes greater than or equal to 768px */
+#reports .search-area form {
+  display: flex !important;
+  justify-content: space-between !important;
+  gap: 1.25rem !important;
+}
+
+#reports .search-area form .form-grp{
+  width: 60%;
+}
+
+/* Media query for screen sizes less than 768px */
+@media screen and (max-width: 767px) {
+  #reports .search-area form {
+    flex-direction: column;
+    align-items: center;
+     row-gap: 1.25rem !important;
+  }
+}
+
+
+#reports .search-area .form-grp {
+  display: flex !important;
+  flex-direction: column !important;
+  row-gap: .25rem !important;
+  width: 100% !important;
+}
+
+#reports .search-area form label {
+  color: #8a8a8a !important;
+}
+
+#reports .search-area form input,
+#reports .search-area form select {
+  color: #888888 !important;
+  border: none !important;
+  outline: 1px solid #d8d8d8 !important; 
+  height: 2.65rem !important;
+  border-radius: 2px !important;
+}
+
+#reports .search-area .search-btn {
+  position: relative;
+}
+
+.search-btn button { 
+  white-space: nowrap;
+}
+
+
+
+.hidden{
+  display: none;
+}
+.title_details{
+  margin: 10px 0px 20px 0;
+}
+ .csv_drag_drop {
+  border: 3px solid var(--accent-blue);
+  border-style: dashed;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 200px;
+   margin: 30px 0;
+
+ }
+
+ .user__details_uploadfile {
+   text-align: center;
+ }
+
+  #fileInput{
+    border: 1px solid #888888;
+    text-align: center;
+    border-radius: 5px;
+    padding: 20px;
+
+  }
+
+   

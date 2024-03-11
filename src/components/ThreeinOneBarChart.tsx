@@ -24,7 +24,7 @@ ChartJS.register(
 
 
 
-const ThreeinOneBarChart = () => {
+const ThreeinOneBarChart = ({ threeinone }: any) => {
 	const data = {
 		labels: ['Isn', 'Mtn', 'Uba', 'Fair Money', 'Access'],
 		datasets: [
@@ -74,10 +74,14 @@ const ThreeinOneBarChart = () => {
 	};
 
 	return (
-		<div className='three-in-one'>
-			<Bar data={data} options={options} height={"100%"} width={"100%"} />
+		<div className={threeinone}>
+			<Bar data={data} options={options} />
 		</div>
 	);
 }
 
 export default ThreeinOneBarChart;
+
+
+
+

@@ -79,10 +79,17 @@ border: 2px solid var(--accent-blue) !important;
 background-color: var(--accent-blue) !important;
 color: var(--white) !important; 
 }
-button:active { 
+button { 
+   text-align: center; 
+white-space: nowrap; 
+border: none ;
+outline: none ;
+border-radius: 5px
+}
+/* button:active { 
     border: 2px solid var(--accent-blue);
      padding: 9px 20px;
-}
+} */
 
 #custom-btn-two{
     display: flex;
@@ -278,8 +285,8 @@ textarea :hover{
 
 .dashboard-first-card-h{
 	margin-bottom: 5px;
-	/* font-size: 14px;
-	color: var(--small-text); */
+  font-size: 18px;
+	color: var(--small-text);  
 }
 .dashboard-first-card-p{
 	margin-bottom: 5px;
@@ -300,9 +307,9 @@ textarea :hover{
 } */
 
 /* Adjust icon margin for spacing */
-button svg {
+/* button svg {
   margin-right: 5px !important;
-}
+} */
 
 /* Additional styling for focus state */
 /* button:focus {
@@ -403,3 +410,43 @@ color: var(--black);
 }
 
 
+.image_gallery{
+  padding: 20px 30px;
+  margin-top: 20px;
+ 
+}
+
+.ang-dash-notfound{
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  align-self: center !important;
+  height: 100% !important ;
+}
+
+
+
+form#ticket-form {
+  gap: 0.95rem;
+}
+form#ticket-form,
+form#ticket-form .form-grp {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+form#ticket-form .form-grp_row {
+  display: flex;
+  gap: 1.25rem;
+}
+ 
+form#ticket-form .form-grp_btn {
+  display: flex;
+  justify-content: flex-end;
+}
+ 
+ .editor {
+  
+  /* height: 180px; */
+  margin-bottom: 2rem;
+}
