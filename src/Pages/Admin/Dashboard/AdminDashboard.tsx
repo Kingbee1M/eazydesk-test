@@ -104,20 +104,20 @@ const AdminDashboard = () => {
 							</div>
 							<div className='sta_color_container_main'>
 								<div className='sta_color_container'>
-									<GoDotFill color='#883DCF' />
+									<GoDotFill color='#E5ECFB' />
 									<small>New</small>
 								</div>
 								<div className='sta_color_container'>
-									<GoDotFill color='#F2994A' />
+									<GoDotFill color='#0240bc90' />
 									<small>Inprogress</small>
 								</div>
 								<div className='sta_color_container'>
-									<GoDotFill color='#22CAAD' />
+									<GoDotFill color='#0240BC' />
 									<small>Completed</small>
 								</div>
 							</div>
 						</div>
-						<ThreeinOneBarChart />
+						<ThreeinOneBarChart threeinone={"threeinone"} />
 					</div>
 				</div>
 				{/* My Teams Performance */}

@@ -24,7 +24,7 @@ const ClosedTicket = () => {
 			<main>
 				<div className='dashboard-first-card-boards  mt-2'>
 					<div>
-						<h5 className='dashboard-first-card-h'>Open Ticket</h5>
+						<h5 className='dashboard-first-card-h'>Closed Ticket</h5>
 					</div>
 				</div>
 				<SearchConponent

@@ -8,6 +8,8 @@ import LinePerformanceChart from "../../components/LinePerformanceChart";
 import { PiDotsSixVerticalBold } from "react-icons/pi";
 import LeadsThreeinOneBarChart from "../../components/Charts/LeadsThreeinOneBarChart";
 import { GoDotFill } from "react-icons/go";
+import DoughnutChat from "../../components/DoughnutChat";
+import ThreeinOneBarChart from "../../components/ThreeinOneBarChart";
 
 
 const LeadsDashboard = () => {
@@ -132,7 +134,7 @@ const LeadsDashboard = () => {
 					entriesPerPage={entriesPerPage}
 				/> */}
 				{/* My Teams Performance */}
-				<div className='dashboard-bottom-item-container2'>
+				{/* <div className='dashboard-bottom-item-container2'>
 					<div className='dashboard-first-card2  '>
 						<div>
 							<h5 className='dashboard-first-card-h'>Tickets</h5>
@@ -158,8 +160,41 @@ const LeadsDashboard = () => {
 
 						<LeadsThreeinOneBarChart />
 					</div>
+				</div> */}
+				<div className='dash_statistics_container'>
+					<div className='dash_statistics_sub1'>
+						<div>
+							<h3>Ticket</h3>
+							{/* <p>Summary</p> */}
+						</div>
+						<div>
+							<DoughnutChat />
+						</div>
+					</div>
+					<div className='dash_statistics_sub2'>
+						<div className='dash_statistics_sub2_text'>
+							<div>
+								<h3>Statistics</h3>
+								{/* <p>Revenue and Sales</p> */}
+							</div>
+							<div className='sta_color_container_main'>
+								<div className='sta_color_container'>
+									<GoDotFill color='#883DCF' />
+									<small>New</small>
+								</div>
+								<div className='sta_color_container'>
+									<GoDotFill color='#F2994A' />
+									<small>Inprogress</small>
+								</div>
+								<div className='sta_color_container'>
+									<GoDotFill color='#22CAAD' />
+									<small>Completed</small>
+								</div>
+							</div>
+						</div>
+						<ThreeinOneBarChart />
+					</div>
 				</div>
-
 			</main>
 		</div>
 	);

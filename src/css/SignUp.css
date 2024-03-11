@@ -1,0 +1,234 @@
+ 
+	.addemployeecontainer_main{
+		width: 100%;
+		display: flex;
+		justify-content: center;
+	}
+
+    .row-item {
+    display: grid ;
+   grid-template-columns: repeat(2, 1fr);
+   gap: 40px;
+   margin-bottom: 1rem; 
+  }
+
+  .input__label{
+    font-weight: 500;
+  }
+	
+	@media only screen and (max-width: 768px) {
+  .Stepper {
+    position: relative;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin: auto;
+    margin-top: 1rem;
+    white-space: nowrap;
+    overflow-y: scroll !important;
+  }
+  .row-item {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+}
+@media only screen and (max-width: 1080px) {
+  .Stepper {
+    position: relative;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin: auto;
+    margin-top: 1rem;
+    white-space: nowrap;
+    overflow-y: scroll !important;
+  }
+  .row-item {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+  .all-inputs-container {
+    padding: 1rem 1rem;
+    height: 100%;
+  }
+}
+
+
+.Stepper {
+  position: relative;
+  display: table;
+  width: 50%; 
+  table-layout: fixed;
+  border-collapse: collapse;
+  margin: auto;
+  margin-top: 1rem;
+  white-space: nowrap;
+  overflow-y: scroll !important;
+}
+
+.Stepper__step {
+  position: relative;
+  display: table-cell;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.Stepper__indicator {
+  position: relative;
+  display: block;
+  z-index: 2;
+}
+
+.Stepper__label {
+  position: relative;
+  display: block;
+  margin: 0.5rem 0;
+  color: #333333;
+  z-index: 2;
+}
+
+.Stepper__info {
+  position: relative;
+  display: inline-block;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 1px solid rgb(26, 26, 26);
+  background-color: var(--white);
+  border-radius: 50%;
+  font-size: 1.25rem;
+  line-height: 2.5rem;
+  text-align: center;
+  color: var(--white);
+  z-index: 2;
+}
+
+.Stepper__info__active {
+  position: relative;
+  display: inline-block;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 1px solid var(--accent-blue);
+  background-color: var(--accent-blue);
+  border-radius: 50%;
+  font-size: 1.25rem;
+  line-height: 2.5rem;
+  text-align: center;
+  color: var(--white);
+  z-index: 2;
+}
+
+.Stepper__panel {
+  display: none;
+}
+
+.Stepper .Stepper__step:after {
+  content: " ";
+  position: absolute;
+  left: 50%;
+  top: 1.2rem;
+  width: 100%;
+  height: 0.125rem;
+  background-color: rgb(26, 26, 26);
+  z-index: 1;
+}
+
+.Stepper .Stepper__step:last-child:after {
+  display: none;
+}
+
+
+.addemployeecontainer {
+  width: 50%;
+		margin-top: 100px;
+		border-radius: 5px;
+		height: 560px;
+  min-height: 100%;
+  background-color: var(--white);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.025), 0 0 16px rgba(0, 0, 0, 0.025),
+    0 0 32px rgba(0, 0, 0, 0.025), 0 0 64px rgba(0, 0, 0, 0.025);
+}
+
+
+
+.addemployee-sup {
+  display: flex;
+  padding: 1rem;
+}
+.addemployee-space {
+  width: 1rem;
+}
+/* .back-to-employee-button2 {
+  border: 2px solid var(--white) !important;
+  padding: 4px 2rem !important;
+  color: var(--accent-blue) !important;
+  font-weight: bold !important;
+  background-color: var(--accent-blue-light) !important;
+} */
+
+.addemployee-sup {
+  display: flex;
+  padding: 1rem;
+}
+
+.addemployeecontainer-sup {
+  /* background-color: var(--accent-blue); */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 5rem; 
+		border-radius: 5px 5px 0px 0px;
+}
+
+ 
+.addemployeecontainer-title {
+  color: var(--white);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.addemployee-sup {
+  display: flex;
+  padding: 1rem;
+}
+
+.back-to-employee-button {
+  border: 2px solid var(--white);
+  padding: 4px 2rem ;
+ color: var(--accent-blue) ;
+  font-weight: bold !important;
+  margin-right: 1rem ;
+   background-color: var(--accent-blue-light) ;
+}
+
+.back-to-employee-button2 {
+  border: 2px solid var(--white) ;
+  padding: 4px 2rem ;
+  color: var(--accent-blue) ;
+  font-weight: bold  !important;
+  background-color: var(--accent-blue-light) ;
+}
+
+.back-to-employee-container { 
+  display: flex; 
+		align-items: center;
+}
+
+.d-none {
+  display: none !important;
+}
+
+.testbox{
+  padding: 20px 50px;
+}
+
+.all-inputs-container_sup{
+  height: 350px;
+}
+
+.contained-push-btn{
+  display: flex;
+  justify-content: flex-end;
+}

@@ -1,3 +1,7 @@
+.threeinone{
+	height: 230px;
+}
+
 .dashboard_container_grid{
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
@@ -106,8 +110,7 @@ font-weight: 700;
 font-size: 12.8582px;
 line-height: 140%; 
 letter-spacing: 0.005em; 
-color: var(--accent-green); 
-
+color: var(--accent-green);  
 }
 
  
@@ -120,18 +123,36 @@ color: var(--accent-green);
 
 .dash_statistics_sub1{
 	width: 30%;
-	height: 341.53px;
+	height: 300px;
 	background-color: var(--white);
 	border-radius: 8px;
 	border: 0.5px solid var(--border);
 }
 .dash_statistics_sub2{
 	width: 70%;
-	height: 341.53px;
+	height: 300px;
 	background-color: var(--white);
 	border-radius: 8px;
 	border: 0.5px solid var(--border);
 	padding: 20px;
+
+}
+
+.statistics_sub2_table_container{
+	overflow-y: scroll;
+		height: 100%;
+	max-height: 400px;
+		margin-top: 20px;
+}
+
+.dash_statistics_sub_it{
+	width: 70%;
+	height: 100%; 
+	background-color: var(--white);
+	border-radius: 8px;
+	border: 0.5px solid var(--border);
+	padding: 20px;
+
 }
 
 .dash_statistics_sub2_text{

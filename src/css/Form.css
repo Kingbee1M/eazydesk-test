@@ -423,3 +423,30 @@ color: var(--black);
   align-self: center !important;
   height: 100% !important ;
 }
+
+
+
+form#ticket-form {
+  gap: 0.95rem;
+}
+form#ticket-form,
+form#ticket-form .form-grp {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+form#ticket-form .form-grp_row {
+  display: flex;
+  gap: 1.25rem;
+}
+ 
+form#ticket-form .form-grp_btn {
+  display: flex;
+  justify-content: flex-end;
+}
+ 
+ .editor {
+  
+  /* height: 180px; */
+  margin-bottom: 2rem;
+}

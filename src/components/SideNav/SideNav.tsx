@@ -1,7 +1,7 @@
 import { MdOutlineDashboard, MdOutlineMiscellaneousServices } from "react-icons/md";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { BsFileEarmarkCheck } from "react-icons/bs";
-import { AiOutlineCloseCircle, AiOutlinePieChart } from "react-icons/ai";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import { PiCalendarCheckDuotone } from "react-icons/pi";
 import { MdOutlineSettings } from "react-icons/md";
 import { BsFileText } from "react-icons/bs";
@@ -11,14 +11,13 @@ import { IoMdOpen } from "react-icons/io";
 import { FiChevronDown } from 'react-icons/fi';
 import { useEffect, useState } from "react";
 import { LuUsers } from "react-icons/lu";
-import logo from '../../assets/img/Clip path group.svg'
+import logo from '../../assets/img/logo.svg'
 import { RiAlarmWarningLine } from "react-icons/ri";
-import { FaExchangeAlt } from "react-icons/fa";
 import { TbExchange } from "react-icons/tb";
 
 
 const SideNav = () => {
-
+  const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(
     localStorage.getItem('dropdownOpen') === 'true'
   );
@@ -36,6 +35,12 @@ const SideNav = () => {
     }
   }, [dropdownOpen]);
 
+  const handleLogout = () => {
+    localStorage.removeItem('email');
+    localStorage.removeItem('password');
+    navigate("/");
+  };
+
   return (
     <div id="side-nav">
       <div className="logo-area">
@@ -51,7 +56,7 @@ const SideNav = () => {
             .filter(Boolean)
             .join(" ")
         }>
-          <MdOutlineDashboard size={25} />
+          <MdOutlineDashboard size={15} />
           <span>Dashboard</span>
         </NavLink>
       </nav>
@@ -60,7 +65,7 @@ const SideNav = () => {
         <div className="nav-link" onClick={toggleDropdown}>
           <div className="nav_dropdown_container">
             <div className="nav_dropdown_container_sub">
-              <BsFileEarmarkCheck size={21} />
+              <BsFileEarmarkCheck size={15} />
               <span>All Tickets</span>
             </div>
             <FiChevronDown
@@ -78,7 +83,7 @@ const SideNav = () => {
                 .join(" ")
             }>
               <div className="nav_dropdown_sub">
-                <IoMdOpen size={21} />
+                <IoMdOpen size={15} />
                 <span>Open Tickets </span>
               </div>
               <div className="side_number">5</div>
@@ -90,7 +95,7 @@ const SideNav = () => {
                 .join(" ")
             }>
               <div className="nav_dropdown_sub">
-                <AiOutlineCloseCircle size={21} />
+                <AiOutlineCloseCircle size={15} />
                 <span>Closed Tickets</span>
               </div>
               <div className="side_number_one" >10</div>
@@ -102,7 +107,7 @@ const SideNav = () => {
                 .join(" ")
             }>
               <div className="nav_dropdown_sub">
-                <PiCalendarCheckDuotone size={22} />
+                <PiCalendarCheckDuotone size={15} />
                 <span>Inprogress</span>
               </div>
               <div className="side_number_two">4</div>
@@ -113,10 +118,10 @@ const SideNav = () => {
                 .join(" ")
             }>
               <div className="nav_dropdown_sub">
-                <RiAlarmWarningLine size={22} />
+                <RiAlarmWarningLine size={15} />
                 <span>Incident Request</span>
               </div>
-              <div className="side_number_two">4</div>
+              <div className="side_number_three">34</div>
             </NavLink>
             <NavLink to="/servicerequest" className={({ isActive }) =>
               ["nav-link_sup", isActive ? "active_sup" : null,]
@@ -124,10 +129,10 @@ const SideNav = () => {
                 .join(" ")
             }>
               <div className="nav_dropdown_sub">
-                <MdOutlineMiscellaneousServices size={22} />
+                <MdOutlineMiscellaneousServices size={15} />
                 <span>Service request</span>
               </div>
-              <div className="side_number_two">4</div>
+              <div className="side_number_five">4</div>
             </NavLink>
             <NavLink to="/changerequest" className={({ isActive }) =>
               ["nav-link_sup", isActive ? "active_sup" : null,]
@@ -135,7 +140,7 @@ const SideNav = () => {
                 .join(" ")
             }>
               <div className="nav_dropdown_sub">
-                <TbExchange size={22} />
+                <TbExchange size={15} />
                 <span>Change request</span>
               </div>
               <div className="side_number_two">4</div>
@@ -153,7 +158,7 @@ const SideNav = () => {
             .filter(Boolean)
             .join(" ")
         }>
-          <LuTag size={22} />
+          <LuTag size={15} />
           <span>Vendors</span>
         </NavLink>
       </nav>
@@ -166,7 +171,7 @@ const SideNav = () => {
             .filter(Boolean)
             .join(" ")
         }>
-          <LuUsers size={22} />
+          <LuUsers size={15} />
           <span>Register</span>
         </NavLink>
       </nav>
@@ -179,7 +184,7 @@ const SideNav = () => {
             .filter(Boolean)
             .join(" ")
         }>
-          <BsFileText size={22} />
+          <BsFileText size={15} />
           <span>Report</span>
         </NavLink>
       </nav>
@@ -192,13 +197,13 @@ const SideNav = () => {
             .filter(Boolean)
             .join(" ")
         }>
-          <MdOutlineSettings size={22} />
+          <MdOutlineSettings size={15} />
           <span>Settings</span>
         </NavLink>
       </nav>
       <nav>
-        <div className="nav-link">
-          <FiLogOut size={22} />
+        <div className="nav-link" onClick={handleLogout}>
+          <FiLogOut size={15} />
           <span>Log out</span>
         </div>
       </nav>

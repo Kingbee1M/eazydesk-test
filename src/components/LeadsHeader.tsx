@@ -5,7 +5,7 @@ import { FiUser } from "react-icons/fi";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import Logo from "../assets/img/Clip path group.svg";
+import Logo from "../assets/img/logo.svg";
 import NetworkConnetion from "./NetworkConnetion";
 
 

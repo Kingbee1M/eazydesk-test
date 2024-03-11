@@ -1,24 +1,20 @@
 import { MdOutlineDashboard, MdOutlineMiscellaneousServices } from "react-icons/md";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { BsFileEarmarkCheck } from "react-icons/bs";
-import { AiOutlineCloseCircle, AiOutlinePieChart } from "react-icons/ai";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import { PiCalendarCheckDuotone } from "react-icons/pi";
 import { MdOutlineSettings } from "react-icons/md";
-import { BsFileText } from "react-icons/bs";
-import { LuTag } from "react-icons/lu";
 import { FiLogOut } from "react-icons/fi";
 import { IoMdOpen } from "react-icons/io";
 import { FiChevronDown } from 'react-icons/fi';
 import { useEffect, useState } from "react";
-import { LuUsers } from "react-icons/lu";
-import logo from '../../assets/img/Clip path group.svg'
+import logo from '../../assets/img/logo.svg'
 import { RiAlarmWarningLine } from "react-icons/ri";
-import { FaExchangeAlt } from "react-icons/fa";
 import { TbExchange } from "react-icons/tb";
 
 
 const SupervisorSideNav = () => {
-
+	const navigate = useNavigate();
 	const [dropdownOpen, setDropdownOpen] = useState(
 		localStorage.getItem('dropdownOpen') === 'true'
 	);
@@ -35,6 +31,12 @@ const SupervisorSideNav = () => {
 			setDropdownOpen(storedState);
 		}
 	}, [dropdownOpen]);
+
+	const handleLogout = () => {
+		localStorage.removeItem('email');
+		localStorage.removeItem('password');
+		navigate("/");
+	};
 
 	return (
 		<div id="side-nav">
@@ -116,7 +118,7 @@ const SupervisorSideNav = () => {
 								<RiAlarmWarningLine size={22} />
 								<span>Incident Request</span>
 							</div>
-							<div className="side_number_two">4</div>
+							<div className="side_number_three">4</div>
 						</NavLink>
 						<NavLink to="/itservicerequest" className={({ isActive }) =>
 							["nav-link_sup", isActive ? "active_sup" : null,]
@@ -127,7 +129,7 @@ const SupervisorSideNav = () => {
 								<MdOutlineMiscellaneousServices size={22} />
 								<span>Service request</span>
 							</div>
-							<div className="side_number_two">4</div>
+							<div className="side_number_four">4</div>
 						</NavLink>
 						<NavLink to="/itchangerequest" className={({ isActive }) =>
 							["nav-link_sup", isActive ? "active_sup" : null,]
@@ -138,7 +140,7 @@ const SupervisorSideNav = () => {
 								<TbExchange size={22} />
 								<span>Change request</span>
 							</div>
-							<div className="side_number_two">4</div>
+							<div className="side_number_five">4</div>
 						</NavLink>
 					</div>
 				)}
@@ -159,7 +161,7 @@ const SupervisorSideNav = () => {
 				</NavLink>
 			</nav>
 			<nav>
-				<div className="nav-link">
+				<div className="nav-link" onClick={handleLogout}>
 					<FiLogOut size={22} />
 					<span>Log out</span>
 				</div>

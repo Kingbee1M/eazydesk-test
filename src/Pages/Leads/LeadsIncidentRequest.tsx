@@ -11,20 +11,20 @@ import SearchConponent from '../../components/SearchConponent';
 import TicketTableComponent from '../../components/Table/TicketTableComponent';
 import { data } from '../../components/StateData';
 import { EntriesPerPage } from '../../components/TableOptions';
+import IncidentRequestModal from '../../components/TicketModals/IncidentRequestModal';
 
 
 const LeadsIncidentRequest = () => {
 	const [startDates, setStartDates] = useState([]);
 	const [endDates, setEndDates] = useState([]);
-	const [show, setShow] = useState(false);
+
 	const [searchItem, setSearchItem] = useState("");
 	const [datas, setDatas] = useState([]);
 	const [entriesPerPage, setEntriesPerPage] = useState(() => {
 		return "6";
 	});
 
-	const handleClose = () => setShow(false)
-	const handleShow = () => setShow(true)
+
 	// --- End Modal 
 	const [result, setResult] = useState("")
 
@@ -53,55 +53,30 @@ const LeadsIncidentRequest = () => {
 					</div>
 				</div>
 			</div>
-			<main>
-				<div className="container-items">
-					<h5 className='dashboard-first-card-h'>Incident Request</h5>
-
-
-					<div className="entries-perpage">
-						{data && (
-							<EntriesPerPage
-								data={data}
-								entriesPerPage={entriesPerPage}
-								setEntriesPerPage={setEntriesPerPage}
-							/>
-
-
-						)}
+			<main  >
+				<div className='request-container'>
+					<div className="container-items">
+						<h5 className='dashboard-first-card-h'>Incident Request</h5>
+						<div className="entries-perpage">
+							{data && (
+								<EntriesPerPage
+									data={data}
+									entriesPerPage={entriesPerPage}
+									setEntriesPerPage={setEntriesPerPage}
+								/>
+							)}
+						</div>
+						<IncidentRequestModal headerTitle={"Raise a Ticket - Incident Request"} />
 					</div>
-					<button onClick={handleShow} className='btn'>
-						Raise Incident
-					</button>
-				</div>
-
-
-				<div  >
-					<TicketTableComponent
-						pageheader={"Incident Request"}
-						Request={"Incident Request"}
-						TYPE={"INCIDENT"}
-						data={data} />
+					<div  >
+						<TicketTableComponent
+							pageheader={"Incident Request"}
+							Request={"Incident Request"}
+							TYPE={"INCIDENT"}
+							data={data} />
+					</div>
 				</div>
 			</main>
-
-			<Modal
-				size="lg"
-				show={show}
-				onHide={handleClose}
-				backdrop="static"
-				keyboard={false}>
-				<Modal.Header closeButton>
-					<Modal.Title>Raise a Ticket - Incident Request
-
-					</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					{/* <TicketForm
-						type="INCIDENT"
-						handleCloseModal={handleClose}
-					/> */}
-				</Modal.Body>
-			</Modal>
 
 		</div>
 	)

@@ -10,10 +10,11 @@ import { SVGLoader } from '../SVGLoader';
 import Select from 'react-select'
 
 
-const AssignTask = ({ show, setShow }: any) => {
+const AssignTask = () => {
 
 	const navigate = useNavigate();
 	const handleClose = () => setShow(false);
+	const [show, setShow] = useState(false);
 	const [selectedOption1, setSelectedOption1] = useState(null);
 	const [selectedOption2, setSelectedOption2] = useState(null);
 	const [selectedOption3, setSelectedOption3] = useState(null);
@@ -71,9 +72,10 @@ const AssignTask = ({ show, setShow }: any) => {
 
 	return (
 		<>
-			<ToastContainer position="top-right" />
+			<button className="assign-btn" onClick={() => setShow(true)} >Assign</button>
+
 			<Modal show={show} onHide={handleClose} centered>
-				<ModalHeader setShow={setShow} headerTitle={"Assign Task"} />
+				<ModalHeader setShow={setShow} headerTitle={"Assign Ticket to"} />
 				<Modal.Body>
 					<form onSubmit={handleSubmit}>
 						<div className='mb-4'>
@@ -86,26 +88,8 @@ const AssignTask = ({ show, setShow }: any) => {
 								isLoading={false}
 								styles={customStyles} />
 						</div>
-						<div className='mb-4'>
-							<label className='label-side'>Select Task</label>
-							<Select name="Select Task" id="register-select"
-								value={selectedOption2}
-								onChange={handleSelectedChange2}
-								options={allTask}
-								isDisabled={false}
-								isLoading={false}
-								styles={customStyles} />
-						</div>
-						<div className='mb-4'>
-							<label className='label-side'>Select Team</label>
-							<Select name="Select Team" id="register-select"
-								value={selectedOption3}
-								onChange={handleSelectedChange3}
-								options={allTeam}
-								isDisabled={false}
-								isLoading={false}
-								styles={customStyles} />
-						</div>
+
+
 						<button
 							type="submit"
 							id='custom-btn'

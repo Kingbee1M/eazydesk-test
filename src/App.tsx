@@ -25,11 +25,10 @@ import LeadsDashboard from "./Pages/Leads/LeadsDashboard";
 import LeadsIncidentRequest from "./Pages/Leads/LeadsIncidentRequest";
 import LeadsServiceRequest from "./Pages/Leads/LeadsServiceRequest";
 import LeadsChangeRequest from "./Pages/Leads/LeadsChangeRequest";
-
-
-
-
-
+import Chat from "./components/Chat/Chat";
+import SignUp from "./Pages/Admin/Login/SignUp";
+import Pricing from "./Pages/Admin/Login/Pricing";
+import Help from "./Pages/Admin/Login/Help";
 
 
 
@@ -38,48 +37,50 @@ function App() {
 
 
   return (
-    <div >
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/admindashboard" element={<AdminDashboard />} />
-          <Route path="/openticket" element={<OpenTicket />} />
-          <Route path="/ticketprogress" element={<TicketProgress />} />
-          <Route path="/closedticket" element={<ClosedTicket />} />
-          <Route path="/incidentrequest" element={<IncidentRequest />} />
-          <Route path="/servicerequest" element={<ServiceRequest />} />
-          <Route path="/changerequest" element={<ChangeRequest />} />
-          <Route path="/vendors" element={<Vendors />} />
-          <Route path="/vendorsmembers" element={<VendorsMembers />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/report" element={<TicketReport />} />
-          <Route path="/register" element={<Register />} />
-          {/* IT Screens */}
-          <Route path="/itdashboard" element={<ITDashboard />} />
-          <Route path="/itopenticket" element={<ITOpenTicket />} />
-          <Route path="/itticketprogress" element={<ITTicketProgress />} />
-          <Route path="/itclosedticket" element={<ITClosedTicket />} />
-          <Route path="/itincidentrequest" element={<ITIncidentRequest />} />
-          <Route path="/itservicerequest" element={<ITServiceRequest />} />
-          <Route path="/itchangerequest" element={<ITChangeRequest />} />
-          <Route path="/itsettings" element={<ITSettings />} />
-          {/* IT Screens */}
-          <Route path="/supervisordashboard" element={<SupervisorDashboard />} />
-          <Route path="/itopenticket" element={<ITOpenTicket />} />
-          <Route path="/itticketprogress" element={<ITTicketProgress />} />
-          <Route path="/itclosedticket" element={<ITClosedTicket />} />
-          <Route path="/itincidentrequest" element={<ITIncidentRequest />} />
-          <Route path="/itservicerequest" element={<ITServiceRequest />} />
-          <Route path="/itchangerequest" element={<ITChangeRequest />} />
-          <Route path="/itsettings" element={<ITSettings />} />
-          {/* Leads Screen */}
-          <Route path="/leadsdashboard" element={<LeadsDashboard />} />
-          <Route path="/incident-request" element={<LeadsIncidentRequest />} />
-          <Route path="/service-request" element={<LeadsServiceRequest />} />
-          <Route path="/change-request" element={<LeadsChangeRequest />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/help" element={<Help />} />
+        <Route path="/admindashboard" element={<AdminDashboard />} />
+        <Route path="/openticket" element={<OpenTicket />} />
+        <Route path="/ticketprogress" element={<TicketProgress />} />
+        <Route path="/closedticket" element={<ClosedTicket />} />
+        <Route path="/incidentrequest" element={<IncidentRequest />} />
+        <Route path="/servicerequest" element={<ServiceRequest />} />
+        <Route path="/changerequest" element={<ChangeRequest />} />
+        <Route path="/vendors" element={<Vendors />} />
+        <Route path="/vendorsmembers" element={<VendorsMembers />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/report" element={<TicketReport />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/ticket-progress/:id" element={<Chat />} />
+        {/* IT Screens */}
+        <Route path="/itdashboard" element={<ITDashboard />} />
+        <Route path="/itopenticket" element={<ITOpenTicket />} />
+        <Route path="/itticketprogress" element={<ITTicketProgress />} />
+        <Route path="/itclosedticket" element={<ITClosedTicket />} />
+        <Route path="/itincidentrequest" element={<ITIncidentRequest />} />
+        <Route path="/itservicerequest" element={<ITServiceRequest />} />
+        <Route path="/itchangerequest" element={<ITChangeRequest />} />
+        <Route path="/itsettings" element={<ITSettings />} />
+        {/* IT Screens */}
+        <Route path="/supervisordashboard" element={<SupervisorDashboard />} />
+        <Route path="/itopenticket" element={<ITOpenTicket />} />
+        <Route path="/itticketprogress" element={<ITTicketProgress />} />
+        <Route path="/itclosedticket" element={<ITClosedTicket />} />
+        <Route path="/itincidentrequest" element={<ITIncidentRequest />} />
+        <Route path="/itservicerequest" element={<ITServiceRequest />} />
+        <Route path="/itchangerequest" element={<ITChangeRequest />} />
+        <Route path="/itsettings" element={<ITSettings />} />
+        {/* Leads Screen */}
+        <Route path="/leadsdashboard" element={<LeadsDashboard />} />
+        <Route path="/incident-request" element={<LeadsIncidentRequest />} />
+        <Route path="/service-request" element={<LeadsServiceRequest />} />
+        <Route path="/change-request" element={<LeadsChangeRequest />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

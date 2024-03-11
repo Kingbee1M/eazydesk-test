@@ -1,5 +1,5 @@
 
-import logo from '../assets/img/outcess-logo.png';
+import logo from '../assets/img/outcess-icon-haf.png';
 
 const Copyright = ({ className }: any) => {
 	const today = new Date();

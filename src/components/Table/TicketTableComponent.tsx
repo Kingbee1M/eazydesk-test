@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-// import Assigned from "./Assigned";
 import { VscCloudDownload } from "react-icons/vsc";
 import { MdOutlineErrorOutline } from "react-icons/md";
 import { FcHighPriority, FcDoughnutChart, FcServices } from "react-icons/fc";
 import { OverlayTrigger, Image, Tooltip, Button } from "react-bootstrap";
-
 import { Link } from "react-router-dom";
 import { baseUrl } from "../../shared/baseUrl";
 import Pagination from "../Pagination";
 import ViewTicketDetailsModal from "../Modals/ViewTicketDetailsModal";
 import { NoRecordFound, TableFetch } from "../TableOptions";
 import { data } from "../StateData";
+import AssignTask from "../Modals/AssignTask";
 
 const TicketTableComponent = ({
   pageheader,
@@ -22,7 +21,8 @@ const TicketTableComponent = ({
   setShowTable,
   showTable,
   switchs,
-  data
+  data,
+  Requester
 }: any) => {
   const [datas, setDatas] = useState([]);
   const [find, setFind] = useState<any>();
@@ -32,7 +32,7 @@ const TicketTableComponent = ({
 
   // ---Entries Per Page --- //
   const [entriesPerPage, setEntriesPerPage] = useState(() => {
-    return "10";
+    return "7";
   });
 
 
@@ -70,9 +70,6 @@ const TicketTableComponent = ({
 
 
   const [displayData, setDisplayData] = useState([]);
-
-
-
   return (
     <div id="table-container">
       <div className="table-responsive-vertical ">
@@ -87,7 +84,8 @@ const TicketTableComponent = ({
                 <th>Issue Category</th>
                 <th>Issue Description</th>
                 <th>Affected Users</th>
-                <th>Requester</th>
+                {Requester && <th>Requester</th>}
+
                 <th>Time Stamp</th>
                 <th>Assign To</th>
                 <th>
@@ -146,7 +144,7 @@ const TicketTableComponent = ({
                     <td data-title="affected users">
                       {user?.affectedUsers === null ? 0 : user?.affectedUsers}
                     </td>
-                    <td data-title="Requester">
+                    {Requester && <td data-title="Requester">
                       <OverlayTrigger
                         placement="bottom"
                         overlay={
@@ -182,37 +180,39 @@ const TicketTableComponent = ({
                           </Button>
                         )}
                       </OverlayTrigger>
-                    </td>
+                    </td>}
+
                     <td data-title="createdAt">
                       {moment(user?.createdAt)?.format("DD-MMM-YY H:mm:ss")}
                     </td>
 
                     <td data-title="Assign To">
                       {user?.finalStatus === "Closed" ? (
-                        <button className="ticket-Closed">Closed</button>
-                      ) : (
+                        // <button className="ticket-Closed">Closed</button>
                         ""
-                        // <Assigned
-                        //   TicketID={user?._id}
-                        //   TYPE={TYPE}
-                        //   // assignToName={assignToName}
-                        //   assignerName={userInfo?.firstname}
-                        //   ticketId={user?.ticketId}
-                        //   ticketType={user.ticketType}
-                        //   issueCategory={user?.issueCategory}
-                        //   affectedUsers={user?.affectedUsers}
-                        //   ticketStatus={user?.finalStatus}
-                        //   timeStamp={moment(user?.createdAt)?.format("DD-MMM-YY H:mm:ss")}
-                        //   severity={user?.severity}
-                        //   createdByFirstname={user?.createdBy?.firstname}
-                        //   data={user}
-                        // />
+                      ) : (
+
+                        < AssignTask
+                        // TicketID={user?._id}
+                        // TYPE={TYPE}
+                        // assignToName={assignToName}
+                        // assignerName={userInfo?.firstname}
+                        // ticketId={user?.ticketId}
+                        // ticketType={user.ticketType}
+                        // issueCategory={user?.issueCategory}
+                        // affectedUsers={user?.affectedUsers}
+                        // ticketStatus={user?.finalStatus}
+                        // timeStamp={moment(user?.createdAt)?.format("DD-MMM-YY H:mm:ss")}
+                        // severity={user?.severity}
+                        // createdByFirstname={user?.createdBy?.firstname}
+                        // data={user}
+                        />
                       )}
                     </td>
                     <td>
                       {user?.finalStatus === "Assigned" && (
                         <Link
-                          to={`/chatprogressview/${user?._id}`}
+                          to={`/ticket-progress/${user?._id}`}
                           className="admin-btn-progresss">
                           IN-PROGRESS
                         </Link>
@@ -228,21 +228,21 @@ const TicketTableComponent = ({
                       )}
                       {user?.finalStatus === "Reopen" && (
                         <Link
-                          to={`/chatprogressview/${user?._id}`}
+                          to={`/ticket-progress/${user?._id}`}
                           className="admin-btn-reopen">
                           Reopened
                         </Link>
                       )}
                       {user?.finalStatus === "Completed" && (
                         <Link
-                          to={`/chatprogressview/${user?._id}`}
+                          to={`/ticket-progress/${user?._id}`}
                           className="admin-btn-resolved">
                           Resolved
                         </Link>
                       )}
                       {user?.finalStatus === "Closed" && (
                         <Link
-                          to={`/chatprogressview/${user?._id}`}
+                          to={`/ticket-progress/${user?._id}`}
                           className="admin-btn-closed">
                           Closed
                         </Link>

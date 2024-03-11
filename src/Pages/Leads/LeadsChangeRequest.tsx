@@ -8,14 +8,13 @@ import LeadsHeader from "../../components/LeadsHeader";
 import { EntriesPerPage } from "../../components/TableOptions";
 import { data } from "../../components/StateData";
 import TicketTableComponent from "../../components/Table/TicketTableComponent";
+import ChangeRequestModal from "../../components/TicketModals/ChangeRequestModal";
 
 
 
 const LeadsChangeRequest = () => {
 	const navigate = useNavigate();
-	const [show, setShow] = useState(false);
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
+
 	const [result, setResult] = useState("");
 	const [entriesPerPage, setEntriesPerPage] = useState(() => {
 		return "5";
@@ -45,54 +44,36 @@ const LeadsChangeRequest = () => {
 				</div>
 			</div>
 			<main  >
-				<div className="container-items">
-					<h5 className='dashboard-first-card-h'>Incident Request</h5>
+				<div className='request-container'>
+					<div className="container-items">
+						<h5 className='dashboard-first-card-h'>Incident Request</h5>
 
 
-					<div className="entries-perpage">
-						{data && (
-							<EntriesPerPage
-								data={data}
-								entriesPerPage={entriesPerPage}
-								setEntriesPerPage={setEntriesPerPage}
-							/>
+						<div className="entries-perpage">
+							{data && (
+								<EntriesPerPage
+									data={data}
+									entriesPerPage={entriesPerPage}
+									setEntriesPerPage={setEntriesPerPage}
+								/>
 
 
-						)}
+							)}
+						</div>
+						<ChangeRequestModal headerTitle={"Raise a Ticket - Change Reques"} />
+
 					</div>
-					<button onClick={handleShow} className='btn'>
-						Change
-					</button>
-				</div>
-
-				{/* <Table
-					ticketType="SERVICE"
-					result={result}
-					setData={setData}
-					entriesPerPage={entriesPerPage}
-				/> */}
-				<div  >
-					<TicketTableComponent
-						pageheader={"Incident Request"}
-						Request={"Incident Request"}
-						TYPE={"CHANGE"}
-						data={data} />
+					<div  >
+						<TicketTableComponent
+							pageheader={"Incident Request"}
+							Request={"Incident Request"}
+							TYPE={"CHANGE"}
+							data={data} />
+					</div>
 				</div>
 			</main>
 
-			<Modal
-				size="lg"
-				show={show}
-				onHide={handleClose}
-				backdrop="static"
-				keyboard={false}>
-				<Modal.Header closeButton>
-					<Modal.Title>Raise a Ticket - Change Request</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					{/* <TicketForm type={"CHANGE"} handleCloseModal={handleClose} /> */}
-				</Modal.Body>
-			</Modal>
+
 		</div>
 	);
 };
