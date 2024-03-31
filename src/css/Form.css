@@ -450,3 +450,9 @@ form#ticket-form .form-grp_btn {
   /* height: 180px; */
   margin-bottom: 2rem;
 }
+
+.formik-errors{
+	font-size: 0.6rem !important;
+	color: red !important;
+	font-style: italic;
+}

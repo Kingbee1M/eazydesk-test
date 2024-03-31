@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import LoginHeader from '../../../components/LoginHeader'
-import Carousels from '../../../components/Carousels'
-import AddEmployeeTitle from '../../../components/employeeInputs/AddEmployeeTitle';
-import AddEmployeeNav from '../../../components/employeeInputs/AddEmployeeNav';
-import Essentials from '../../../components/employeeInputs/Essentials';
-import Information from '../../../components/employeeInputs/Information';
+import LoginHeader from '../../components/LoginHeader'
+import Carousels from '../../components/Carousels'
+import AddEmployeeTitle from '../../components/employeeInputs/AddEmployeeTitle';
+import AddEmployeeNav from '../../components/employeeInputs/AddEmployeeNav';
+import Essentials from '../../components/employeeInputs/Essentials';
+import Information from '../../components/employeeInputs/Information';
 
 const SignUp = () => {
 	const [finish, setFinish] = useState<boolean>(false);
@@ -110,75 +110,11 @@ const SignUp = () => {
 			<div className="login-container">
 				<LoginHeader />
 				<div className='addemployeecontainer_main'>
-					<div className="addemployeecontainer">
-
-						{active === 6 ? (
-							""
-						) : (
+					<div className="addemployeecontainer"> 
+						
 							<AddEmployeeNav active={active} setActive={setActive} />
-						)}
-						<div className="all-inputs-container">
-							<div className='all-inputs-container_sup'>
-								<Essentials
-									active={active}
-									employee={employee}
-									setEmployee={setEmployee}
-									setActive={setActive}
-									bindSubmitForm={bindSubmitForm}
-								/>
-								<Information
-									active={active}
-									employee={employee}
-									setEmployee={setEmployee}
-									setActive={setActive}
-									bindSubmitForm={bindSubmitForm}
-								/>
-							</div>
-							<AddEmployeeTitle
-								incrementCountCancel={incrementCountCancel}
-								incrementCount={incrementCount}
-								decrementCount={decrementCount}
-								setActive={setActive}
-								active={active}
-								click={handleSubmitMyForm}
-								setFinish={setFinish}
-								finish={finish}
-							/>
-
-
-							{/* {active === 6 || active === 5 ? " " :
-								<div className="contained-push-btn">
-									<div className="addemployee-sup">
-
-										<button
-											id={"push-btn-decrementCount"}
-
-											className="back-to-employee-button"
-											onClick={decrementCount}
-										>
-											BACK
-										</button>
-
-										<div>
-											{finish ? (
-												<button
-													className="back-to-employee-button2"
-													onClick={incrementCount} >
-													FINISH
-												</button>
-											) : (
-												// @ts-ignore 
-												<button className="back-to-employee-button2" onClick={handleSubmitMyForm}
-													type="submit" >
-													CONTINUE
-												</button>
-											)}
-										</div>
-									</div>
-								</div>
-							} */}
-
-						</div>
+				 
+						
 					</div>
 				</div>
 
@@ -188,3 +124,10 @@ const SignUp = () => {
 }
 
 export default SignUp
+
+	// < div className = "all-inputs-container" >
+	// 	<div className='all-inputs-container_sup'>
+
+	// 	</div>
+						  
+	// 					</ >
