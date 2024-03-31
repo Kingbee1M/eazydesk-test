@@ -1,7 +1,7 @@
 import React from 'react'
-import Carousels from '../../../components/Carousels'
+import Carousels from '../../components/Carousels'
 import { ToastContainer } from 'react-toastify'
-import LoginHeader from '../../../components/LoginHeader'
+import LoginHeader from '../../components/LoginHeader'
 
 const Help = () => {
 	return (

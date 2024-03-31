@@ -1,7 +1,7 @@
-import Carousels from '../../../components/Carousels'
+import Carousels from '../../components/Carousels'
 import { ToastContainer } from 'react-toastify'
-import LoginHeader from '../../../components/LoginHeader'
-import PricingCardsContainer from '../../../components/PricingCardsContainer'
+import LoginHeader from '../../components/LoginHeader'
+import PricingCardsContainer from '../../components/PricingCardsContainer'
 
 const Pricing = () => {
 	return (

@@ -47,8 +47,7 @@ margin-top: 15px;
 	align-items: center;
 	gap: 16px;
 	font-style: normal;
-font-weight: 500;
-/* font-size: 17px; */
+font-weight: 500; 
 line-height: 22px;
 color: var(--black); 
 padding: 16px 22px;
@@ -63,8 +62,7 @@ border-left: 2px solid var(--white);
 	align-items: center;
 	gap: 16px;
 	font-style: normal;
-font-weight: 500;
-/* font-size: 17px; */
+font-weight: 500; 
 line-height: 22px;
 color: var(--black); 
 padding: 16px 22px;
@@ -131,7 +129,7 @@ color: var(--black);
 
 .settings_profile_title_container{
 	display:flex ; 
-align-items:end;
+align-items:flex-end;
 gap: 15px;
 }
 .settings_profile_title{
