@@ -5,7 +5,7 @@ import TicketProgress from "./Pages/Admin/Ticket/TicketProgress";
 import ClosedTicket from "./Pages/Admin/Ticket/ClosedTicket";
 import Settings from "./Pages/Admin/Settings/Settings";
 import TicketReport from "./Pages/Admin/Report/TicketReport";
-import Login from "./Pages/Admin/Login/Login";
+import Login from "./Pages/Login/Login";
 import Register from "./Pages/Admin/ Register/ Register";
 import Vendors from "./Pages/Admin/Vendors/Vendors";
 import VendorsMembers from "./Pages/Admin/Vendors/VendorsMembers";
@@ -26,9 +26,9 @@ import LeadsIncidentRequest from "./Pages/Leads/LeadsIncidentRequest";
 import LeadsServiceRequest from "./Pages/Leads/LeadsServiceRequest";
 import LeadsChangeRequest from "./Pages/Leads/LeadsChangeRequest";
 import Chat from "./components/Chat/Chat";
-import SignUp from "./Pages/Admin/Login/SignUp";
-import Pricing from "./Pages/Admin/Login/Pricing";
-import Help from "./Pages/Admin/Login/Help";
+import SignUp from "./Pages/Login/SignUp";
+import Pricing from "./Pages/Login/Pricing";
+import Help from "./Pages/Login/Help";
 
 
 

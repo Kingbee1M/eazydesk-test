@@ -1,0 +1,133 @@
+import React, { useEffect, useState } from "react";
+import { Spinner } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import LoginHeader from "../../components/LoginHeader";
+import Copyright from "../../components/Copyright";
+import Carousels from "../../components/Carousels";
+import { useAppDispatch, useAppSelector } from "../../store/useStore";
+import { login, reset } from "../../features/Auth/authSlice";
+import * as yup from 'yup'
+import { Formik } from 'formik';
+
+const Login = () => {
+	const dispatch = useAppDispatch()
+	const navigate = useNavigate();
+	const [showPassword, setShowPassword] = useState<any>(false);
+
+	const { data, isError, message, isLoading, isSuccess } = useAppSelector(
+		(state: { auth: any; }) => state.auth)
+
+
+	const onSubmitFormlogin = (values: any) => {
+		const value = { ...values };
+		// @ts-ignore
+		dispatch(login(value))
+	}
+	// useEffect(() => {
+	// 	// @ts-ignore  
+	// 	if (userInfo) {
+	// 		navigate('/dashboard')
+	// 	}
+	// }, [userInfo, dispatch, navigate])
+
+
+	console.log('isError', isError)
+	console.log('isSuccess', isSuccess)
+
+	useEffect(() => {
+		if (isError) {
+			toast.error(message);
+		} else if (isSuccess) {
+			toast.success(message);
+		}
+
+		dispatch(reset())
+	}, [isError, message, dispatch, isSuccess])
+
+
+
+	const loginValidationSchema = yup.object().shape({
+		email: yup
+			.string()
+			.email("Please enter valid email")
+			.required('Email Address is Required'),
+		password: yup.string().min(6, ({ min }) => `Password must be at least ${min} characters`)
+			.required('Password is required'),
+	})
+
+	console.log('data', data)
+
+
+	return (
+		<div id="login-wrapper">
+			<Carousels />
+			<div className="login-container">
+				<ToastContainer position="top-right" />
+
+				<div className="login-content-layout">
+					{/* Login Header */}
+					<LoginHeader />
+					<div className="login-content-grid">
+						<div className="logo-section">
+							<div className="copyright_login_container">
+								<div className="login-form-container">
+									<p >Sign in</p>
+									{<Formik
+										validationSchema={loginValidationSchema}
+										initialValues={{
+											email: '',
+											password: ''
+										}}
+										onSubmit={onSubmitFormlogin} >
+										{({ handleChange, handleSubmit, errors, values,
+										}) => (
+											<form className="form" onSubmit={handleSubmit} >
+												<div className="form-ctrl">
+													<label>Agent ID</label>
+													<input
+														type="text"
+														placeholder="Enter your Agent ID"
+														value={values.email}
+														onChange={handleChange('email')}
+													/>
+													{errors.email && <p className="formik-errors">{errors.email}</p>}
+												</div>
+												<div className="form-ctrl">
+													<label>Password</label>
+													<input
+														type={showPassword ? "text" : "password"}
+														placeholder="Enter your password"
+														value={values.password}
+														onChange={handleChange('password')}
+													/>
+
+													<span id="i-FaEye" onClick={() => setShowPassword(!showPassword)}>
+														{showPassword ? <FaEye /> : <FaEyeSlash />}
+													</span>
+													{errors.password && <p className="formik-errors" id="password">{errors.password}</p>}
+												</div>
+												<button
+													type="submit"
+													disabled={isLoading}
+												>
+													{isLoading ? <Spinner size="sm" /> : "Sign-in"}
+												</button>
+											</form>
+										)}
+									</Formik>}
+								</div>
+								<Copyright />
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+};
+
+export default Login;

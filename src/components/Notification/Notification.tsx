@@ -45,9 +45,6 @@ const Notification = ({ isOpen, onClose }: any) => {
 				<ModalHeaderIcon setShow={onClose} icon={<AiOutlineNotification size={30} />} title={"Notification"} subtitle={"Update & Change your profile "} />
 				<div>
 					<div className="side-wrapper">
-
-
-
 					</div>
 				</div>
 			</div>

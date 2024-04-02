@@ -12,13 +12,15 @@ export interface Privilege {
 export function getUserPrivileges(): {
   isSuperAdmin: boolean;
   isSupervisor: boolean;
-  isEmployee: boolean;  
+  isAdmin: boolean;  
+  isTeamLead: boolean;  
+  isITSupport: boolean;  
 
 } {
 
    
   	// @ts-ignore  
-	 const userString = JSON.parse(localStorage.getItem("taskmaneger"));
+	 const userString = JSON.parse(localStorage.getItem("service_desk"));
   const userInfo = userString ? userString : null;
   const privileges = userInfo?.user || [];
 
@@ -27,16 +29,20 @@ export function getUserPrivileges(): {
 
  
   const isSuperAdmin = privileges?.role === "SUPER_ADMIN";
+  const isAdmin = privileges?.role === "ADMIN";
   const isSupervisor = privileges?.role === "SUPERVISOR";
-  const isEmployee = privileges?.role === "EMPLOYEE";
+  const isTeamLead = privileges?.role === "TEAM_LEAD";
+  const isITSupport = privileges?.role === "IT_SUPPORT";
 
   
   
 
   return { 
       isSuperAdmin,
-     isSupervisor,  
-    isEmployee,  
+     isAdmin,  
+    isSupervisor,  
+    isTeamLead,
+    isITSupport
   };
 }
 
