@@ -1,23 +1,20 @@
 import axios from "axios";
 import createHttpService from "../../helpers/HttpService";
-import { baseUrl } from "../../shared/baseUrl";
-import setCookie from "../../hooks/cookies/setCookies";
+import { baseUrl } from "../../shared/baseUrl";  
 
  
-  
-
  
-// Login user 
-const login = async (value: any) => { 
-  
-  const { data } = await axios.post(baseUrl + '/api/v2/auth/login-user', value) 
-  console.log('data',data)
-  if (data) { 
-    try {   
-      	// @ts-ignore
-      removeCookie('service_userID')
-      setCookie('service_userID',JSON.stringify(data?.data?.id))
-      localStorage.setItem('service_desk', JSON.stringify(data?.data)); 
+ 
+ 
+ // Login user 
+ const login = async (value: any) => { 
+   const { data } = await axios.post(baseUrl + '/api/v2/auth/login-user', value) 
+   if (data) { 
+     try {   
+ 
+      	// @ts-ignore 
+        localStorage.setItem('service_desk', JSON.stringify(data?.data?.user));  
+  axios.defaults.headers.common['Authorization'] = `Bearer ${data?.token}`;  
     localStorage.setItem("loginToast", JSON.stringify(data?.message)); 
   } catch (e) {
      console.log(`isLoggedIn in error ${e}`)
@@ -39,7 +36,7 @@ const login = async (value: any) => {
   // logout  
 const logout = async () => { 
    const HttpService = createHttpService();
-  const { data } = await HttpService.get( '/api/v1/auth/signout')  
+  const { data } = await HttpService.get( '/api/v2/auth/signout')  
    return data
 };
 
@@ -87,6 +84,9 @@ const supervisorUser = async (id:any) => {
 };
 
   
+  export const logoutUserAction = () => ( ) => {
+  localStorage.removeItem("service_desk");     
+};
 
 
 
@@ -98,7 +98,9 @@ const authService = {
   resetPassword,
   updateProfile,
   currentUser,
-  supervisorUser
+  supervisorUser,
+  logoutUserAction
 }
 
 export default authService
+ 

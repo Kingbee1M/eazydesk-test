@@ -15,36 +15,39 @@ const Login = () => {
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate();
 	const [showPassword, setShowPassword] = useState<any>(false);
+	const [email, setEmail] = useState<any>(false);
 
-	const { data, isError, message, isLoading, isSuccess } = useAppSelector(
+	const { user, isError, message, isLoading, isSuccess } = useAppSelector(
 		(state: { auth: any; }) => state.auth)
+
+
 
 
 	const onSubmitFormlogin = (values: any) => {
 		const value = { ...values };
+		setEmail(values.email)
 		// @ts-ignore
 		dispatch(login(value))
 	}
-	// useEffect(() => {
-	// 	// @ts-ignore  
-	// 	if (userInfo) {
-	// 		navigate('/dashboard')
-	// 	}
-	// }, [userInfo, dispatch, navigate])
+	useEffect(() => {
+		if (user) {
+			navigate('/dashboard')
+		}
+	}, [user, dispatch, navigate])
 
 
-	console.log('isError', isError)
-	console.log('isSuccess', isSuccess)
+
 
 	useEffect(() => {
-		if (isError) {
+		if (isError && message === "Account not verified!🙁 Verification link has been resent to your mail") {
+			navigate(`/successpage/${email}`)
+		} else if (isError) {
 			toast.error(message);
 		} else if (isSuccess) {
 			toast.success(message);
 		}
-
 		dispatch(reset())
-	}, [isError, message, dispatch, isSuccess])
+	}, [isError, message, dispatch, isSuccess, navigate, email])
 
 
 
@@ -57,7 +60,7 @@ const Login = () => {
 			.required('Password is required'),
 	})
 
-	console.log('data', data)
+
 
 
 	return (
@@ -65,7 +68,6 @@ const Login = () => {
 			<Carousels />
 			<div className="login-container">
 				<ToastContainer position="top-right" />
-
 				<div className="login-content-layout">
 					{/* Login Header */}
 					<LoginHeader />
@@ -121,7 +123,6 @@ const Login = () => {
 								<Copyright />
 							</div>
 						</div>
-
 
 					</div>
 				</div>
