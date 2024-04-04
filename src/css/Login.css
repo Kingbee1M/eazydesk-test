@@ -415,3 +415,13 @@ width: 20rem;
   }
 
 	}
+
+  .forgot_password_container{
+    display: flex; 
+    justify-content: center; 
+    font-size: 18px;
+    margin-top: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--accent-blue);
+  }

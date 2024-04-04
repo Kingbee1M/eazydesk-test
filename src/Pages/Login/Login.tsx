@@ -116,6 +116,9 @@ const Login = () => {
 												>
 													{isLoading ? <Spinner size="sm" /> : "Sign-in"}
 												</button>
+												<div className="forgot_password_container" onClick={() => navigate("/forgotpassword")}>
+													<h6>Forgot password?</h6>
+												</div>
 											</form>
 										)}
 									</Formik>}
