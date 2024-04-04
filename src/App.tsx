@@ -29,6 +29,10 @@ import Chat from "./components/Chat/Chat";
 import SignUp from "./Pages/Login/SignUp";
 import Pricing from "./Pages/Login/Pricing";
 import Help from "./Pages/Login/Help";
+import SuccessPage from "./components/SuccessPage/SuccessPage";
+import VerifyEmail from "./Pages/Login/VerifyEmail";
+import DashboardHUB from "./Pages/DashboardHub/DashboardHub";
+import ForgotPassword from "./Pages/Login/ForgotPassword";
 
 
 
@@ -43,6 +47,8 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/help" element={<Help />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/dashboard" element={<DashboardHUB />} />
         <Route path="/admindashboard" element={<AdminDashboard />} />
         <Route path="/openticket" element={<OpenTicket />} />
         <Route path="/ticketprogress" element={<TicketProgress />} />
@@ -79,6 +85,8 @@ function App() {
         <Route path="/incident-request" element={<LeadsIncidentRequest />} />
         <Route path="/service-request" element={<LeadsServiceRequest />} />
         <Route path="/change-request" element={<LeadsChangeRequest />} />
+        <Route path="/successpage/:email" element={<SuccessPage />} />
+        <Route path="/verifyemail/:id/:token" element={<VerifyEmail />} />
       </Routes>
     </BrowserRouter>
   );

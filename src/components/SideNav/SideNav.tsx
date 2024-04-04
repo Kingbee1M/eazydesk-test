@@ -1,12 +1,11 @@
 import { MdOutlineDashboard, MdOutlineMiscellaneousServices } from "react-icons/md";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { BsFileEarmarkCheck } from "react-icons/bs";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { PiCalendarCheckDuotone } from "react-icons/pi";
 import { MdOutlineSettings } from "react-icons/md";
 import { BsFileText } from "react-icons/bs";
 import { LuTag } from "react-icons/lu";
-import { FiLogOut } from "react-icons/fi";
 import { IoMdOpen } from "react-icons/io";
 import { FiChevronDown } from 'react-icons/fi';
 import { useEffect, useState } from "react";
@@ -17,7 +16,6 @@ import { TbExchange } from "react-icons/tb";
 
 
 const SideNav = () => {
-  const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(
     localStorage.getItem('dropdownOpen') === 'true'
   );
@@ -35,11 +33,6 @@ const SideNav = () => {
     }
   }, [dropdownOpen]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('email');
-    localStorage.removeItem('password');
-    navigate("/");
-  };
 
   return (
     <div id="side-nav">
@@ -201,12 +194,7 @@ const SideNav = () => {
           <span>Settings</span>
         </NavLink>
       </nav>
-      <nav>
-        <div className="nav-link" onClick={handleLogout}>
-          <FiLogOut size={15} />
-          <span>Log out</span>
-        </div>
-      </nav>
+
     </div>
   )
 }

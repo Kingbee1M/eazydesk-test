@@ -1,21 +1,17 @@
 import axios from "axios";  
-import { config } from "../hooks/config";
 import { baseUrl } from "../shared/baseUrl";
-import { fireAlert2 } from "../components/Alert";
+import { fireAlert } from "../components/Alert";
  
  
 
 
-interface HeadersConfig {
-  [key: string]: string; // This allows any string key to be used to access values
-}
-
+ 
  
 const createHttpService = () => {  
   const get = async (url: string) => { 
     const endpoint = baseUrl + url;
     try {
-      const data = await axios.get(endpoint, config);
+      const data = await axios.get(endpoint);
       return data;
     } catch (e) {
       handleError(e);
@@ -26,7 +22,7 @@ const createHttpService = () => {
   const search = async (url: string, params: any) => {
     const endpoint = baseUrl + url + objectToQueryString(params);
     try {
-      const data = await axios.get(endpoint, config);
+      const data = await axios.get(endpoint);
       return data;
     } catch (e) {
       handleError(e);
@@ -37,7 +33,7 @@ const createHttpService = () => {
   const deleteRequest = async (url: string) => {
     const endpoint = baseUrl + url;
     try {
-      const data = await axios.delete(endpoint, config);
+      const data = await axios.delete(endpoint);
       return data;
     } catch (e) {
       handleError(e);
@@ -48,7 +44,7 @@ const createHttpService = () => {
   const post = async (url: string, data: any) => {
     const endpoint = baseUrl + url;
     try {
-      const responseData = await axios.post(endpoint, data, config);
+      const responseData = await axios.post(endpoint, data);
       return responseData;
     } catch (e) {
       handleError(e);
@@ -59,7 +55,7 @@ const createHttpService = () => {
   const put = async (url: string, data: any) => {
     const endpoint = baseUrl + url;
     try {
-      const responseData = await axios.put(endpoint, data, config);
+      const responseData = await axios.put(endpoint, data);
       return responseData;
     } catch (e) {
       handleError(e);
@@ -70,7 +66,7 @@ const createHttpService = () => {
   const patch = async (url: string, data = {}) => {
     const endpoint = baseUrl + url;
     try {
-      const responseData = await axios.patch(endpoint, data, config);
+      const responseData = await axios.patch(endpoint, data);
       return responseData;
     } catch (e) {
       handleError(e);
@@ -81,10 +77,7 @@ const createHttpService = () => {
  
 
 const uploadFile = (url: string, data: Record<string, any>, files: Record<string, any>, fileName: string = '') => {
-  const headers: HeadersConfig = {
-    ...config.headers, // Preserve existing headers
-    "content-type": "multipart/form-data",
-  };
+  
 
   const formData = new FormData();
   for (let key in files) {
@@ -101,7 +94,7 @@ const uploadFile = (url: string, data: Record<string, any>, files: Record<string
 
   return new Promise((resolve, reject) => {
     axios
-      .post(endpoint, formData, { headers }) // Pass headers using the 'headers' property
+      .post(endpoint, formData) // Pass headers using the 'headers' property
       .then((data) => {
         resolve(data);
       })
@@ -114,9 +107,7 @@ const uploadFile = (url: string, data: Record<string, any>, files: Record<string
 
   const handleError = (e: any) => {  
     if (e.response.status === 401 && e.response.statusText === "Unauthorized") {
-      fireAlert2("Session Expired", "Please log in again", "error", "/", "");
-      // window.location.replace("/login");
-      // dataService.clearData();
+      fireAlert("Session Expired", "Please log in again", "error", "/"); 
     }  
   };
 
@@ -131,12 +122,9 @@ const uploadFile = (url: string, data: Record<string, any>, files: Record<string
   return query;
  };
     
- const setToken = (newToken: string | null) => {
-  config.headers.Authorization = newToken ? `Bearer ${newToken}` : '';
-};
+
 
     return { 
-    setToken,
     get,
     search,
     deleteRequest,

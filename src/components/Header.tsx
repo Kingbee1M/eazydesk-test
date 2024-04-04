@@ -5,15 +5,17 @@ import Badge from './Badge/Badge';
 import pro_img from '../assets/img/pro_img.svg'
 import { pageTitles } from './StateData';
 import NetworkConnetion from './NetworkConnetion';
-import { useNavigate } from 'react-router-dom';
 import Notification from './Notification/Notification';
 import HeaderDate from './HeaderDate';
-
+import ProfileDropDown from './ProfileDropDown';
 
 
 const Header = () => {
-  const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [profile, setProfile] = useState(false)
+  // @ts-ignore  
+  const userInfo = JSON.parse(localStorage.getItem("service_desk"));
+
 
 
   useEffect(() => {
@@ -23,9 +25,12 @@ const Header = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const toggleDrawer = () => {
-    setIsDrawerOpen(!isDrawerOpen);
-  };
+
+
+
+
+
+
 
   return (
     <div id="header">
@@ -41,16 +46,16 @@ const Header = () => {
           <Badge setIsDrawerOpen={setIsDrawerOpen} isDrawerOpen={isDrawerOpen} />
           <div className='profiledropdown_container'>
             <div>
-              <h5 className='profiledropdown_container_h5'>Mark Collins</h5>
-              <p className='profiledropdown_container_p'>Business man</p>
+              <h5 className='profiledropdown_container_h5'>	{userInfo?.firstname}</h5>
+              <p className='profiledropdown_container_p'>{userInfo?.role}</p>
             </div>
-            <span className='FaPlus-name' onClick={() => navigate("/settings")}>
+            {/* <span className='FaPlus-name' onClick={() => navigate("/settings")}>
               <img src={pro_img} alt='logo' crossOrigin="anonymous" className="profile_img" />
-            </span>
-            {/* <span className='FaPlus-name' onMouseEnter={() => setProfile(true)} onMouseLeave={() => setProfile(false)}>
+            </span> */}
+            <span className='FaPlus-name' onMouseEnter={() => setProfile(true)} onMouseLeave={() => setProfile(false)}>
               <img src={pro_img} alt='logo' crossOrigin="anonymous" className="profile_img" />
               {profile && <ProfileDropDown />}
-            </span> */}
+            </span>
           </div>
           <Notification isOpen={isDrawerOpen} onClose={setIsDrawerOpen} setIsDrawerOpen={setIsDrawerOpen} />
         </div>

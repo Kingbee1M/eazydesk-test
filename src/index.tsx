@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import 'react-quill/dist/quill.snow.css';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+import { UserProvider } from './hooks/UserContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -14,9 +15,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <UserProvider>
+        <App />
+      </UserProvider>
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode >
 );
 
 // If you want to start measuring performance in your app, pass a function

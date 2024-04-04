@@ -403,6 +403,8 @@ transition: opacity 150ms linear;
 @import url(./css/SignUp.css);  
 @import url(./css/Inputs.css);  
 @import url(./css/Pricing.css);  
+@import url(./css/SuccessPage.css);  
+@import url(./css/VerifyLoader.css);  
 
  
 

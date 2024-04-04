@@ -26,7 +26,7 @@ const LoginHeader = () => {
 			<div className="login-text-container">
 				<span onClick={() => navigate("/pricing")}>Pricing</span>
 				{/* <a className='login-text-contain_dropdown'> */}
-				<span onClick={toggleDropdown} className="dropdown-toggles">
+				{/* <span onClick={toggleDropdown} className="dropdown-toggles">
 					Features
 					{isOpen ? <FaChevronUp size={13} /> : <FaChevronDown size={13} />}
 				</span>
@@ -36,7 +36,7 @@ const LoginHeader = () => {
 							<li key={index}>{item}</li>
 						))}
 					</ul>
-				)}
+				)} */}
 				{/* </a> */}
 
 				<span onClick={() => window.open("https://outcess.com", "_blank")}>Company</span>
