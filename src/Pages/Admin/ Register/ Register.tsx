@@ -66,18 +66,17 @@ const Register = ({ switchs }: any) => {
 	}, [entriesPerPage]);
 
 	const [displayData, setDisplayData] = useState([]);
-	const [startDates, setStartDates] = useState([]);
-	const [endDates, setEndDates] = useState([]);
+
 
 	useEffect(() => {
 		const result = dataAll?.filter((item: any) =>
-			item?.email?.toLowerCase()?.includes(searchItem)
+			item?.firstname?.toLowerCase()?.includes(searchItem)
 		);
 		setRealData(result);
 	}, [dataAll, searchItem]);
 
 
-	console.log('displayData', displayData)
+
 
 
 

@@ -32,6 +32,7 @@ import Help from "./Pages/Login/Help";
 import SuccessPage from "./components/SuccessPage/SuccessPage";
 import VerifyEmail from "./Pages/Login/VerifyEmail";
 import DashboardHUB from "./Pages/DashboardHub/DashboardHub";
+import ForgotPassword from "./Pages/Login/ForgotPassword";
 
 
 
@@ -46,6 +47,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/help" element={<Help />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/dashboard" element={<DashboardHUB />} />
         <Route path="/admindashboard" element={<AdminDashboard />} />
         <Route path="/openticket" element={<OpenTicket />} />
