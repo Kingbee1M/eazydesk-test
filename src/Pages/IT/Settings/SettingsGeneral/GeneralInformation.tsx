@@ -71,13 +71,6 @@ const GeneralInformation = () => {
 								required />
 						</div>
 						<div className="input__box">
-							<span className="details">Fax</span>
-							<input type="fax" placeholder="012-345-6789"
-								value={input.fax}
-								onChange={(e) => handleChange("fax", e.target.value)}
-								required />
-						</div>
-						<div className="input__box">
 							<span className="details">Address</span>
 							<input type="address" placeholder="012-345-6789"
 								value={input.address}
@@ -85,42 +78,8 @@ const GeneralInformation = () => {
 								required />
 						</div>
 
-						<div className="input__box">
-							<span className="details">Location</span>
-							{/* <select name="country" id="register-select"
-																onChange={handleChange("location")} placeholder="Location">
-																{states.map((state, i) => (
-																	<option value={state} key={i}>{state}</option>
-																))}
-															</select> */}
-							<select
-								name="country"
-								id="register-select"
-								onChange={(e) => handleChange("firstName", e.target.value)}
-								value={""}
-							>
-								<option value="" disabled hidden>State</option>
-								{states.map((state, i) => (
-									<option value={state} key={i}>{state}</option>
-								))}
-							</select>
-
-						</div>
-
-						<div className="input__box">
-							<span className="details">Address</span>
-							<input type="text" placeholder="Address"
-								onChange={(e) => handleChange("firstName", e.target.value)}
-								required />
-						</div>
 
 
-						<div className="input__box">
-							<span className="details">Location</span>
-							<input type="State" placeholder="123.eg"
-								value={input.State}
-								onChange={(e) => handleChange("State", e.target.value)} required />
-						</div>
 					</div>
 				</form>
 			</div>

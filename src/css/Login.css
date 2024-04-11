@@ -45,10 +45,10 @@ padding: 10px;
 } */
 
 
-.login-text-container {
+/* .login-text-container {
   position: relative;
   display: inline-block; /* Ensures the dropdown expands based on content */
-}
+/* }   */
 
 .dropdown-toggles {
   cursor: pointer;
@@ -95,6 +95,7 @@ padding: 10px;
   align-items: center;
   background-color: var(--white);
   border-radius: 5px;
+
 }
 .login-text-container span{ 
   color: var(--black);
@@ -374,8 +375,8 @@ width: 20rem;
     bottom: 2rem;
     display: flex; 
     align-items: center; 
-				margin-left: 130px; 
-				margin-top: 20px;
+		margin-left: 130px; 
+		margin-top: 20px;
 }
 .cp-text1 footer{ 
 	font-size: 8px;
@@ -386,11 +387,78 @@ width: 20rem;
     height: 20px;
   }
 
-		  .logo-buttom-padding{
+		.logo-buttom-padding{
     padding-left: 2px;
     width: 30px;
     height: 20px;
   }
+  
+
+  .forgot_password_container{
+    display: flex; 
+    justify-content: center; 
+    font-size: 18px;
+    margin-top: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--accent-blue);
+  }
+
+  .mobile_login_text_container{
+    width: 40px;
+    height: 40px;
+    background-color: var(--white);
+    border-radius: 50%;
+      display: flex; 
+    justify-content: center; 
+    align-items: center;
+    position: relative;
+   display: none !important;
+  }
+  .mobile_login_text_container svg{
+  font-size: 25px;
+  }
+
+  .mobile-card-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 20px;
+  background-color: var(--white);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  z-index: 1;
+		width:180px;
+		border-radius: 10px;
+		border: 2px solid #E2E2E2;
+}
+
+
+.mobile-card-option {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 12px 8px;
+		border: 1px solid var(--white); 
+}
+.mobile-card-option-border { 
+	 border-bottom: 0.5px solid #eee;
+}
+
+.mobile-card-option:hover { 
+		background-color: var(--accent-blue);
+				border-radius: 5px;
+				color: var(--white);
+}
+.mobile-card-option:active {
+		border: 1px solid var(--accent-blue);
+		border-radius: 5px;
+}
+ 
+.mobile-card-option span {
+  margin-left: 8px;
+  font-weight: 600;
+}
+   
 
 		@media screen and (max-width: 768px) {
   .cp-text1 {
@@ -404,24 +472,29 @@ width: 20rem;
 
   .logo-buttom-padding{
     padding-top: 1rem;
-       width: 50px;
+    width: 50px;
     height: 40px;
+  }
+
+  .login-text-container{
+    display: none;
+  }
+  .mobile_login_text_container{
+        display: block !important;
+         width: 40px;
+    height: 40px;
+    background-color: var(--white);
+    border-radius: 50%;
+      display: flex !important; 
+    justify-content: center !important; 
+    align-items: center !important; 
+    position: relative;
   }
 }
 @media screen and (max-width: 400px) {
   .cp-text1 {
    display: none; 
- 
   }
-
 	}
 
-  .forgot_password_container{
-    display: flex; 
-    justify-content: center; 
-    font-size: 18px;
-    margin-top: 10px;
-    font-weight: 600;
-    cursor: pointer;
-    color: var(--accent-blue);
-  }
+  

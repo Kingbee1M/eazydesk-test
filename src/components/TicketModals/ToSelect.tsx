@@ -1,17 +1,28 @@
-import React from "react";
+import React from 'react'
 import Select from "react-select";
-import { colourOptions } from "./example";
+const ToSelect = ({ user, isLoading, handleOnChange, input }: any) => {
 
 
-const ToSelect = () => (
-	<Select
-		defaultValue={[colourOptions[2], colourOptions[3]]}
-		isMulti
-		name="colors"
-		options={colourOptions}
-		className="basic-multi-select"
-		classNamePrefix="select"
-	/>
-);
+	const email = user?.map((item: any) => ({
+		value: item.email,
+		label: `${item.firstname}  ${item.lastname}`,
+	})) || [];
 
-export default ToSelect;
+	return (
+		<Select
+			isDisabled={isLoading}
+			isLoading={isLoading}
+			isMulti
+			name="colors"
+			options={email}
+			className="basic-multi-select"
+			classNamePrefix="select"
+			value={input.emails}
+			onChange={(e: any) => handleOnChange("emails", e)}
+		/>
+	)
+}
+
+
+export default ToSelect
+

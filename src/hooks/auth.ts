@@ -22,10 +22,10 @@ export function getUserPrivileges(): {
   	// @ts-ignore  
 	 const userString = JSON.parse(localStorage.getItem("service_desk"));
   const userInfo = userString ? userString : null;
-  const privileges = userInfo?.user || [];
+  const privileges = userInfo || [];
 
   
-  
+
 
  
   const isSuperAdmin = privileges?.role === "SUPER_ADMIN";

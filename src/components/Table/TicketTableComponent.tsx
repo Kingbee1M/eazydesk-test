@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { baseUrl } from "../../shared/baseUrl";
 import Pagination from "../Pagination";
 import ViewTicketDetailsModal from "../Modals/ViewTicketDetailsModal";
-import { NoRecordFound, TableFetch } from "../TableOptions";
+import { NoRecordFound, TableFetch } from "../Options";
 import { data } from "../StateData";
 import AssignTask from "../Modals/AssignTask";
 

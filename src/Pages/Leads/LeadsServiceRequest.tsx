@@ -5,7 +5,7 @@ import { Modal } from 'react-bootstrap';
 // import TicketForm from '../components/TicketForm';
 import { useNavigate } from "react-router-dom";
 import LeadsHeader from '../../components/LeadsHeader';
-import { EntriesPerPage } from '../../components/TableOptions';
+import { EntriesPerPage } from '../../components/Options';
 import TicketTableComponent from '../../components/Table/TicketTableComponent';
 import { data } from '../../components/StateData';
 import ServiceRequestModal from '../../components/TicketModals/ServiceRequestModal';

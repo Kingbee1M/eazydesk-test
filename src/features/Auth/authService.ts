@@ -1,26 +1,30 @@
 import axios from "axios";
 import createHttpService from "../../helpers/HttpService";
 import { baseUrl } from "../../shared/baseUrl";  
+import DataService from "./dataService";
+ 
+ 
+const dataService = DataService();
+ 
 
  
- 
- 
- 
- // Login user 
+//  Login user 
  const login = async (value: any) => { 
    const { data } = await axios.post(baseUrl + '/api/v2/auth/login-user', value) 
    if (data) { 
      try {    
-      	// @ts-ignore 
-        localStorage.setItem('service_desk', JSON.stringify(data?.data?.user));  
-  axios.defaults.headers.common['Authorization'] = `Bearer ${data?.data?.token}`;  
-    localStorage.setItem("loginToast", JSON.stringify(data?.message)); 
+       dataService?.setToken(data?.data?.token)  
+       localStorage.setItem('service_desk', JSON.stringify(data?.data?.user));  
+       localStorage.setItem("loginToast", JSON.stringify(data?.message)); 
+        
   } catch (e) {
      console.log(`isLoggedIn in error ${e}`)
   }
   }
   return data
 }
+
+ 
  
   // logout  
 const logout = async () => { 
@@ -45,10 +49,11 @@ const forgetPassword = async (email: any) => {
    return data
 };
 
-  // Forget Password
-const resetPassword = async (email: any) => { 
- const HttpService = createHttpService(); 
-  const { data } = await HttpService.post( `/api/v2/auth/reset-password`,{  "email": email })  
+  // Reset Password
+const resetPassword = async (value: any) => { 
+  const HttpService = createHttpService(); 
+  const { input, id}= value; 
+  const { data } = await HttpService.post( `/api/v2/auth/reset-password/${id}`,input)  
    return data
 };
 

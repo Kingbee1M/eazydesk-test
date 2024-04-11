@@ -9,7 +9,7 @@ import {
 	Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import { months } from '../TableOptions';
+import { months } from '../Options';
 
 
 ChartJS.register(

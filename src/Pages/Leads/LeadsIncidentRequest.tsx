@@ -10,7 +10,7 @@ import LeadsHeader from '../../components/LeadsHeader';
 import SearchConponent from '../../components/SearchConponent';
 import TicketTableComponent from '../../components/Table/TicketTableComponent';
 import { data } from '../../components/StateData';
-import { EntriesPerPage } from '../../components/TableOptions';
+import { EntriesPerPage } from '../../components/Options';
 import IncidentRequestModal from '../../components/TicketModals/IncidentRequestModal';
 
 

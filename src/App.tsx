@@ -7,8 +7,8 @@ import Settings from "./Pages/Admin/Settings/Settings";
 import TicketReport from "./Pages/Admin/Report/TicketReport";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Admin/ Register/ Register";
-import Vendors from "./Pages/Admin/Vendors/Vendors";
-import VendorsMembers from "./Pages/Admin/Vendors/VendorsMembers";
+import Company from "./Pages/Admin/Company/Company";
+import CompanyMembers from "./Pages/Admin/Company/CompanysMembers";
 import IncidentRequest from "./Pages/Admin/Ticket/IncidentRequest";
 import ServiceRequest from "./Pages/Admin/Ticket/ServiceRequest";
 import ChangeRequest from "./Pages/Admin/Ticket/ChangeRequest";
@@ -33,7 +33,7 @@ import SuccessPage from "./components/SuccessPage/SuccessPage";
 import VerifyEmail from "./Pages/Login/VerifyEmail";
 import DashboardHUB from "./Pages/DashboardHub/DashboardHub";
 import ForgotPassword from "./Pages/Login/ForgotPassword";
-
+import ResetPassword from "./Pages/Login/ResetPassword";
 
 
 function App() {
@@ -48,6 +48,7 @@ function App() {
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/help" element={<Help />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/passwordreset/:id" element={<ResetPassword />} />
         <Route path="/dashboard" element={<DashboardHUB />} />
         <Route path="/admindashboard" element={<AdminDashboard />} />
         <Route path="/openticket" element={<OpenTicket />} />
@@ -56,8 +57,8 @@ function App() {
         <Route path="/incidentrequest" element={<IncidentRequest />} />
         <Route path="/servicerequest" element={<ServiceRequest />} />
         <Route path="/changerequest" element={<ChangeRequest />} />
-        <Route path="/vendors" element={<Vendors />} />
-        <Route path="/vendorsmembers" element={<VendorsMembers />} />
+        <Route path="/company" element={<Company />} />
+        <Route path="/companymembers/:id" element={<CompanyMembers />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/report" element={<TicketReport />} />
         <Route path="/register" element={<Register />} />
@@ -79,7 +80,7 @@ function App() {
         <Route path="/itincidentrequest" element={<ITIncidentRequest />} />
         <Route path="/itservicerequest" element={<ITServiceRequest />} />
         <Route path="/itchangerequest" element={<ITChangeRequest />} />
-        <Route path="/itsettings" element={<ITSettings />} />
+        <Route path="/supervisorsettings" element={<ITSettings />} />
         {/* Leads Screen */}
         <Route path="/leadsdashboard" element={<LeadsDashboard />} />
         <Route path="/incident-request" element={<LeadsIncidentRequest />} />

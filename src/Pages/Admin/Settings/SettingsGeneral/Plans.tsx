@@ -21,7 +21,7 @@ const Plans = () => {
 				<h3>Plans</h3>
 				<p>Lorem ipsum dolor sit amet consectetur</p>
 			</div>
-			<div className='plans_toggle_container_main'>
+			{/* <div className='plans_toggle_container_main'>
 				<div className='plans_toggle_container'>
 					<div className={`plans_toggle ${selectedOption === 'Yearly' ? 'selected' : 'plans_toggle_inactive'}`} onClick={() => handleToggle('Yearly')}>
 						<div>Yearly</div>
@@ -30,7 +30,7 @@ const Plans = () => {
 						Monthly
 					</div>
 				</div>
-			</div>
+			</div> */}
 
 			{/* */}
 			<PricingCardsContainer />

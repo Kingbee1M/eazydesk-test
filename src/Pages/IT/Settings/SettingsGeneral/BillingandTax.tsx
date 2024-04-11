@@ -19,11 +19,6 @@ const BillingandTax = () => {
           <p>Manage your invoices</p>
           <button className='btn'>Update</button>
         </div>
-        <div className='settings_credit_card_btn'>
-          <h4 className='settings_main_credit_card'>Credit Card</h4>
-          <p>Manage your tax information</p>
-          <button className='btn'>Update</button>
-        </div>
       </div>
     </div>
   )

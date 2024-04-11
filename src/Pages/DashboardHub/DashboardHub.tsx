@@ -1,15 +1,16 @@
-
+import { useNavigate } from "react-router-dom";
 import { getUserPrivileges } from "../../hooks/auth";
-import AdminDashboard from "../Admin/Dashboard/AdminDashboard";
-import ITDashboard from "../IT/Dashboard/ITDashboard";
-import LeadsDashboard from "../Leads/LeadsDashboard";
-import SupervisorDashboard from "../Supervisor/Dashboard/SupervisorDashboard";
-
+import { useEffect } from "react";
+import { logoutUserAction } from "../../features/Auth/authService";
+import { useAppDispatch } from "../../store/useStore";
+import DataService from "../../features/Auth/dataService";
 
 const DashboardHUB = () => {
-
-
-
+	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
+	const dataService = DataService();
+	// @ts-ignore  
+	const userInfo = JSON.parse(localStorage.getItem("service_desk"));
 	const {
 		isSuperAdmin,
 		isAdmin,
@@ -19,24 +20,31 @@ const DashboardHUB = () => {
 
 	} = getUserPrivileges();
 
-	console.log(isSuperAdmin)
-	return (
-		<div className="h-100">
-			{isSuperAdmin || isAdmin ? (
-				<AdminDashboard />
-			) : isSupervisor ? (
-				<SupervisorDashboard />
-			) : isITSupport ? (
-				<ITDashboard />
-			) : isTeamLead ? (
-				<LeadsDashboard />
-			) : (
-				<AdminDashboard />
-			)}
+	useEffect(() => {
+		if (userInfo) {
+			switch (true) {
+				case isSuperAdmin || isAdmin:
+					navigate('/admindashboard');
+					break;
+				case isSupervisor:
+					navigate('/supervisordashboard');
+					break;
+				case isITSupport:
+					navigate('/itdashboard');
+					break;
+				case isTeamLead:
+					navigate('/leadsdashboard');
+					break;
+				default:
+					dispatch(logoutUserAction());
+					dataService.clearData()
+					navigate('/');
+					break;
+			}
+		}
+	}, [dataService, dispatch, isAdmin, isITSupport, isSuperAdmin, isSupervisor, isTeamLead, navigate, userInfo]);
 
-		</div>
-	);
+	return null; // Adjust as needed
 };
 
 export default DashboardHUB;
-

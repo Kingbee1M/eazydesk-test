@@ -1,4 +1,4 @@
-import { EntriesPerPage, } from './TableOptions';
+import { EntriesPerPage, } from './Options';
 import FilterModal from './FilterModal';
 // import { useIsMobile } from '../hooks/resize';
 import Search from './Search';

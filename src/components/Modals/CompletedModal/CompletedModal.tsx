@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { Modal } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
 import { BsXLg } from "react-icons/bs";
-import { customId } from '../../TableOptions';
+import { customId } from '../../Options';
 import { SVGLoader } from '../../SVGLoader';
 
 const CompletedModal = ({ id, show, setShow }: any) => {

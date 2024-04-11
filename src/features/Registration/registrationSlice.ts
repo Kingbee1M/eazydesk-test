@@ -3,6 +3,13 @@ import registrationService from './registrationService'
 
 
 const initialState = {
+  signUpdata:   [],
+  signUpisError: false,
+  signUpisSuccess: false,
+  signUpisLoading: false, 
+  signUpmessage: '',
+  signUperror: '', 
+
   data:   [],
   isError: false,
   isSuccess: false,
@@ -52,15 +59,22 @@ const initialState = {
 
  
 
-// Registration User
+// Sign Up
+export const signUp = createAsyncThunk('register/signUp', async ( value,thunkAPI) => {
+  try { 
+    return await registrationService.signUp(value)
+  } catch (error:any) {
+    const message = error?.response?.data?.message ||
+    (error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+    return thunkAPI.rejectWithValue(message)
+  }
+})
 export const userRegistration = createAsyncThunk('register/userRegistration', async ( value,thunkAPI) => {
   try { 
     return await registrationService.userRegistration(value)
   } catch (error:any) {
-    const message =
-     error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message
+    const message = error?.response?.data?.message ||
+    (error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
     return thunkAPI.rejectWithValue(message)
   }
 })
@@ -71,10 +85,8 @@ export const getallReguser = createAsyncThunk('register/getallReguser', async ( 
   try { 
     return await registrationService.getallReguser()
   } catch (error:any) {
-    const message =
-       error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message
+      const message = error?.response?.data?.message ||
+    (error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
     
     return thunkAPI.rejectWithValue(message)
   }
@@ -84,20 +96,18 @@ export const getallReguser = createAsyncThunk('register/getallReguser', async ( 
 // Get Login User
 export const getLoginUser = createAsyncThunk('register/getLoginUser', async (  data,thunkAPI) => {
   try { 
-    return await registrationService.getLoginUser(  )
+    return await registrationService.getLoginUser()
   } catch (error:any) {
-    const message =
-       error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message 
+      const message = error?.response?.data?.message ||
+    (error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', '); 
     
     return thunkAPI.rejectWithValue(message)
   }
 })
 // Get user by Agent role
-export const getUserByRole = createAsyncThunk('register/getUserByRole', async (  data,thunkAPI) => {
+export const getUserByRole = createAsyncThunk('register/getUserByRole', async (data,thunkAPI) => {
   try { 
-    return await registrationService.getUserByRole(  )
+    return await registrationService.getUserByRole()
   } catch (error:any) {
     const message =
     error.response && error.response.data.message
@@ -109,28 +119,24 @@ export const getUserByRole = createAsyncThunk('register/getUserByRole', async ( 
 })
  
 // Reset Password
-export const resetPassword = createAsyncThunk('register/resetPassword', async (  data,thunkAPI) => {
+export const resetPassword = createAsyncThunk('register/resetPassword', async (data,thunkAPI) => {
   try { 
-    return await registrationService.resetPassword( data )
+    return await registrationService.resetPassword(data)
   } catch (error:any) {
-    const message =
-       error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message
+      const message = error?.response?.data?.message ||
+    (error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
     
     return thunkAPI.rejectWithValue(message)
   }
 })
 
 // edituser
-export const edituser = createAsyncThunk('register/edituser', async (  data,thunkAPI) => {
+export const edituser = createAsyncThunk('register/edituser', async (data,thunkAPI) => {
   try { 
     return await registrationService.edituser( data )
   } catch (error:any) {
-    const message =
-       error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message
+      const message = error?.response?.data?.message ||
+    (error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
     
     return thunkAPI.rejectWithValue(message)
   }
@@ -141,10 +147,8 @@ export const getsupervisors = createAsyncThunk('register/getsupervisors', async 
   try { 
     return await registrationService.getsupervisors(  )
   } catch (error:any) {
-    const message =
-       error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message
+      const message = error?.response?.data?.message ||
+    (error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
     
     return thunkAPI.rejectWithValue(message)
   }
@@ -158,6 +162,11 @@ export const registrationSlice = createSlice({
   initialState,
   reducers: {
     reset: (state) => {  
+      state.signUpisLoading = false
+      state.signUpisSuccess = false
+      state.signUpisError = false
+      state.signUpmessage = ''  
+
       state.isLoading = false
       state.isSuccess = false
       state.isError = false
@@ -199,6 +208,20 @@ export const registrationSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder  
+    .addCase(signUp.pending, (state) => {
+        state.signUpisLoading = true 
+      })
+      .addCase(signUp.fulfilled, (state:any, action) => {
+        state.signUpisLoading = false
+        state.signUpisSuccess = true
+        state.signUpdata = action.payload 
+      })
+      .addCase(signUp.rejected, (state:any, action) => {
+        state.signUpisLoading = false
+        state.signUpisError = true
+        state.signUpmessage = action.payload
+        state.signUpdata = [] 
+      })
     .addCase(userRegistration.pending, (state) => {
         state.isLoading = true 
       })

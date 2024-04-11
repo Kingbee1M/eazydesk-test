@@ -10,14 +10,18 @@ import { useAppDispatch, useAppSelector } from "../../store/useStore";
 import { login, reset } from "../../features/Auth/authSlice";
 import * as yup from 'yup'
 import { Formik } from 'formik';
+import DataService from "../../features/Auth/dataService";
 
+
+const dataService = DataService();
 const Login = () => {
+	const token = dataService.getToken()
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate();
 	const [showPassword, setShowPassword] = useState<any>(false);
 	const [email, setEmail] = useState<any>(false);
 
-	const { user, isError, message, isLoading, isSuccess } = useAppSelector(
+	const { isError, message, isLoading, isSuccess } = useAppSelector(
 		(state: { auth: any; }) => state.auth)
 
 
@@ -30,10 +34,10 @@ const Login = () => {
 		dispatch(login(value))
 	}
 	useEffect(() => {
-		if (user) {
+		if (token) {
 			navigate('/dashboard')
 		}
-	}, [user, dispatch, navigate])
+	}, [token, dispatch, navigate])
 
 
 

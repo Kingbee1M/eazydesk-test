@@ -7518,7 +7518,6 @@ const ITDashboard = () => {
 							<table id="table" className="table">
 								<thead>
 									<tr>
-										<th></th>
 										<th>Reference</th>
 										<th>Ticket Type</th>
 										<th>Severity</th>
@@ -7545,15 +7544,6 @@ const ITDashboard = () => {
 									) : (
 										result?.slice(0, 7)?.map((user: any) => (
 											<tr key={user?.id}>
-												<td>
-													{user?.ticketType === "INCIDENT" ? (
-														<FcHighPriority size={20} />
-													) : user?.ticketType === "SERVICE" ? (
-														<FcServices size={20} />
-													) : (
-														<FcDoughnutChart size={20} />
-													)}
-												</td>
 
 												<td data-title="Reference">
 													{user.ticketType === "INCIDENT"
@@ -7595,7 +7585,7 @@ const ITDashboard = () => {
 														</NavLink>
 													) : (
 														<NavLink
-																	to={`/itchangerequest`}
+															to={`/itchangerequest`}
 															className="admin-btn-View">
 															<AiOutlineEye size={20} />
 														</NavLink>
