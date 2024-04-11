@@ -43,7 +43,7 @@ const Pricing = () => {
 													</li>
 													<li>
 														<i className="fa-solid fa-check"></i>
-														<strong>100GB </strong>of bandwidth
+														<strong>100GB</strong>of bandwidth
 													</li>
 													<li>
 														<i className="fa-solid fa-check"></i>

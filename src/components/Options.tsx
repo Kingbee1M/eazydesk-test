@@ -122,6 +122,7 @@ const InputField = ({ placeholder, style, label, value, type, onChange, max, cla
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 const customId = "custom-id-yes";
+const tokenKey = "svd-sYUDugysad-sdkjhsadkrjyteyugd--dskghjksdh";
 
 const getMonth = (data: any) => {
   // Get the current date
@@ -159,8 +160,7 @@ const getWeeklyData = (data: any) => {
   startOfWeek.setDate(today.getDate() - currentDay); // Calculate the start date of the current week
 
   const endOfWeek = new Date(startOfWeek);
-  endOfWeek.setDate(startOfWeek.getDate() + 6); // Calculate the end date of the current week
-
+  endOfWeek.setDate(startOfWeek.getDate() + 6); // Calculate the end date of the current week 
   // Filter the data for the current week
   const currentWeekData = data?.filter((item: { createdAt: string | number | Date }) => {
     const itemDate = new Date(item?.createdAt);
@@ -202,8 +202,6 @@ function TooltipPositioned2(words: any) {
     </>
   );
 }
-// @ts-ignore  
-// const userInfo = JSON.parse(localStorage.getItem("taskmaneger"));
 
 
 const customStyles = {
@@ -271,6 +269,26 @@ const svgPaths = {
 };
 
 
+const menu = [
+  {
+    name: "Home",
+    path: "/leadsdashboard",
+  },
+  {
+    name: "Incident",
+    path: "/incident-request",
+  },
+  {
+    name: "Service",
+    path: "/service-request",
+  },
+  {
+    name: "Change",
+    path: "/change-request",
+  },
+];
+
+
 
 export {
   TableFetch,
@@ -286,11 +304,12 @@ export {
   getWeeklyData,
   TooltipPositioned,
   TooltipPositioned2,
-  // userInfo,
   LoginSpiner,
   customId,
   customStyles,
   getPriorityStyle,
   getInputColorClass,
-  svgPaths
+  svgPaths,
+  tokenKey,
+  menu
 };

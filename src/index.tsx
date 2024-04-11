@@ -8,6 +8,8 @@ import 'react-quill/dist/quill.snow.css';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 import { UserProvider } from './hooks/UserContext';
+import { ToastContainer } from 'react-toastify';
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,6 +18,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <UserProvider>
+        <ToastContainer />
         <App />
       </UserProvider>
     </Provider>

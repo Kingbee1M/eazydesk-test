@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import LoginHeader from "../../components/LoginHeader";
 import Copyright from "../../components/Copyright";
 import Carousels from "../../components/Carousels";
-import { useAppDispatch, useAppSelector } from "../../store/useStore";
-
-
+import { useAppDispatch } from "../../store/useStore";
 import createHttpService from "../../helpers/HttpService";
 import VerifyLoader from "../../components/Toast/VerifyLoader";
-import { svgPaths } from "../../components/TableOptions";
+import { svgPaths } from "../../components/Options";
 
 const VerifyEmail = () => {
 	// Get the id and token from the URL parameters
@@ -62,12 +60,10 @@ const VerifyEmail = () => {
 
 
 	useEffect(() => {
-		if (isError) {
-			toast.error(message);
-		} else if (isSuccess) {
-			toast.success(message);
+		if (isSuccess) {
+			toast.success("Email Validation Successful!");
 		}
-	}, [isError, message, dispatch, isSuccess, navigate])
+	}, [message, dispatch, isSuccess, navigate])
 
 
 
@@ -79,14 +75,12 @@ const VerifyEmail = () => {
 			const { data } = await HttpService.post('/api/v2/auth/verify-email', input);
 			trueIt()
 			setiIsSuccessr(true)
-			console.log(data); // Handle success response
 		} catch (error: any) {
-			console.log('error', error)
 			falseIt()
 			setIsError(true)  // Handle error
 			setMessage(error.response && error.response.data.message
 				? error.response.data.message
-				: error?.response?.data?.errors?.map((error: { message: any; }) => error?.message ?? '').join(', '))
+				: error?.response?.data?.errors?.map((error: { message: any; }) => error?.message ?? '').join(','))
 			falseIt()
 		} finally {
 			setIsLoading(false);
@@ -151,7 +145,6 @@ const VerifyEmail = () => {
 									{isSuccess && <button type="submit" onClick={() => navigate("/")}>
 										Login
 									</button>}
-
 								</div>
 								<Copyright />
 							</div>

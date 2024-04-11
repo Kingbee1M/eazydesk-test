@@ -4,7 +4,7 @@ import * as Yup from "yup";
 
 // import CountrySelectField from "../../../components/Inputs/CountrySelectField";
 import { EmployeeFormProps } from "../../interfaces/employee";
-import { InputField } from "../TableOptions";
+import { InputField } from "../Options";
 
 const Address = ({
   active,

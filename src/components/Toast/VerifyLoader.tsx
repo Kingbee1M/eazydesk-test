@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 
 const VerifyLoader = ({ spinning, setSpinning, setState, svgPaths, state }: any) => {
@@ -9,7 +9,7 @@ const VerifyLoader = ({ spinning, setSpinning, setState, svgPaths, state }: any)
 		// Set the initial state to loading when component mounts
 		setState(null);
 		setSpinning(0);
-	}, []);
+	}, [setSpinning, setState]);
 
 	const handleIteration = () => {
 		if (spinning) {
@@ -28,8 +28,6 @@ const VerifyLoader = ({ spinning, setSpinning, setState, svgPaths, state }: any)
 
 
 
-
-
 	return (
 		<div className="loader-container_main">
 			<div className="txtcenter mtm">
@@ -43,6 +41,5 @@ const VerifyLoader = ({ spinning, setSpinning, setState, svgPaths, state }: any)
 		</div>
 	);
 };
-
 
 export default VerifyLoader;

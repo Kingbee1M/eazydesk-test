@@ -83,10 +83,8 @@ export const login = createAsyncThunk('auth/login', async (data, thunkAPI) => {
     return await authService.login(data)
 
   } catch (error: any) {  
-    const message =
-    error.response && error.response.data.message
-				? error.response.data.message
-				: error?.response?.data?.errors?.map((error: { message: any; }) => error?.message ?? '').join(', ')
+  		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
     return thunkAPI.rejectWithValue(message)
   }
 })
@@ -97,10 +95,8 @@ export const ViewUserByID = createAsyncThunk('auth/ViewUserByID', async (  data,
   try {
     return await authService.ViewUserByID(data)
   } catch (error:any) {
-    const message =
-       error.response && error.response.data.message
-				? error.response.data.message
-				: error?.response?.data?.errors?.map((error: { message: any; }) => error?.message ?? '').join(', ')
+  		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
      return thunkAPI.rejectWithValue(message)
   }
 })
@@ -111,10 +107,8 @@ export const logout = createAsyncThunk('auth/logout', async (data, thunkAPI) => 
     try {
     return await authService.logout()
   } catch (error:any) {
-    const message =
-   error.response && error.response.data.message
-				? error.response.data.message
-				: error?.response?.data?.errors?.map((error: { message: any; }) => error?.message ?? '').join(', ')
+    		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
      return thunkAPI.rejectWithValue(message)
   }
 })
@@ -125,10 +119,8 @@ export const forgetPassword = createAsyncThunk('auth/forgetPassword', async (dat
       return await authService.forgetPassword(data)
     
     } catch (error: any) { 
-    const message =
-    error.response && error.response.data.message
-				? error.response.data.message
-				: error?.response?.data?.errors?.map((error: { message: any; }) => error?.message ?? '').join(', ')
+ 		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
      return thunkAPI.rejectWithValue(message)
   }
 })
@@ -139,10 +131,8 @@ export const resetPassword = createAsyncThunk('auth/resetPassword', async (data,
     try {
     return await authService.resetPassword(data)
   } catch (error:any) {
-    const message =
-        error.response && error.response.data.message
-				? error.response.data.message
-				: error?.response?.data?.errors?.map((error: { message: any; }) => error?.message ?? '').join(', ')
+   		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
      return thunkAPI.rejectWithValue(message)
   }
 })
@@ -152,10 +142,8 @@ export const updateProfile = createAsyncThunk('auth/updateProfile', async (data,
     try {
     return await authService.updateProfile(data)
   } catch (error:any) {
-    const message =
-         error.response && error.response.data.message
-				? error.response.data.message
-				: error?.response?.data?.errors?.map((error: { message: any; }) => error?.message ?? '').join(', ')
+    		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
      return thunkAPI.rejectWithValue(message)
   }
 })
@@ -165,10 +153,8 @@ export const currentUser = createAsyncThunk('auth/currentUser', async (data, thu
     try {
     return await authService.currentUser( )
   } catch (error:any) {
-    const message =
-       error.response && error.response.data.message
-				? error.response.data.message
-				: error?.response?.data?.errors?.map((error: { message: any; }) => error?.message ?? '').join(', ')
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
      return thunkAPI.rejectWithValue(message)
   }
 })
@@ -178,10 +164,8 @@ export const supervisorUser = createAsyncThunk('auth/supervisorUser', async (dat
     try {
     return await authService.supervisorUser(data )
   } catch (error:any) {
-    const message =
-    error.response && error.response.data.message
-				? error.response.data.message
-				: error?.response?.data?.errors?.map((error: { message: any; }) => error?.message ?? '').join(', ')
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
      return thunkAPI.rejectWithValue(message)
   }
 })

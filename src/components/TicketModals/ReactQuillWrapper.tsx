@@ -1,22 +1,34 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 // Importing core components
 import QuillEditor from "react-quill";
 
 
 
-const ReactQuillWrapper = () => {
+const ReactQuillWrapper = ({ value, setValue }: any) => {
 	// Editor state
-	const [value, setValue] = useState("");
 
-	console.log('value', value)
+
+	// useEffect(() => {
+	// 	setInput((prevState: any) => {
+	// 		return ({
+	// 			...prevState,
+	// 			firstname: data?.firstname,
+	// 			lastname: data?.lastname,
+	// 			email: data?.email,
+	// 			mobileNumber: data?.mobileNumber,
+	// 			role: data?.role,
+	// 			activated: data?.activated,
+	// 		});
+	// 	});
+	// }, [ ]);
 
 	// Editor ref
 	const quill: any = useRef();
 
 	// Handler to handle button clicked
-	function handler() {
-		console.log(value);
-	}
+	// function handler() {
+	// 	console.log(value);
+	// }
 
 	const imageHandler = useCallback(() => {
 		// Create an input element of type 'file'
@@ -88,10 +100,10 @@ const ReactQuillWrapper = () => {
 				ref={(el) => (quill.current = el)}
 				className={"editor"}
 				theme="snow"
-				value={value}
 				formats={formats}
 				modules={modules}
 				onChange={(value) => setValue(value)}
+				value={value}
 			/>
 			{/* <button onClick={handler} className={"btn"}>
 				Submit

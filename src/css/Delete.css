@@ -1,3 +1,4 @@
+ 
   .popup__modal::before {
   content: "";
   position: absolute;
@@ -39,7 +40,7 @@
   height: 5px;
   border-radius: 5px;
   width: 100%;
-  background-color: var(--accent-purple);
+  background-color: var(--accent-blue);
   left: 0;
   bottom: -10px;
 }
@@ -61,9 +62,8 @@
   gap: 10px;
 }
 .popup__modal_button {
-  border: none;
-  width: 100px;
-  /* padding: 10px  ; */
+  border: none; 
+  padding: 10px  ;  
   cursor: pointer;
 		box-sizing: border-box;
 }
@@ -71,32 +71,24 @@
   background-color: #8D99AE;
   color: white;
   font-weight: bold;
+      padding: 10px !important;
 }
 .popup__modal_button:nth-child(1):hover {
   background-color: #fff;
-  color: #2B2D42;
+  color: #2B2D42; 
   border: 1px solid #8D99AE;
   font-weight: bold;
 }
-.popup__modal_button:nth-child(2) {
+ 
+.popup__modal_button_accent:nth-child(2) {
   background-color: #EF233C;
   color: white;
   font-weight: bold;
-}
-.popup__modal_button:nth-child(2):hover {
-  background: #fff;
-  border: 1px solid #EF233C;
-  color: #2B2D42;
-  font-weight: bold;
-}
-.popup__modal_button_accent:nth-child(2) {
-  background-color: var(--accent-purple);
-  color: white;
-  font-weight: bold;
+    padding: 10px !important;
 }
 .popup__modal_button_accent:nth-child(2):hover {
   background: #fff;
-  border: 1px solid var(--accent-purple);
+  border: 1px solid #EF233C;
   color: #2B2D42;
   font-weight: bold;
 }

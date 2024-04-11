@@ -1,17 +1,31 @@
 import axios from "axios";  
 import { baseUrl } from "../shared/baseUrl";
 import { fireAlert } from "../components/Alert";
+import { toast } from "react-toastify";
+import { customId } from "../components/Options"; 
+import DataService from "../features/Auth/dataService";
  
  
 
 
+ // Create an instance of DataService
+const dataService = DataService();
  
- 
-const createHttpService = () => {  
+const createHttpService = () => {   
+ // Retrieve the token from the data service
+const token = dataService.getToken();
+
+// Set the token in the data service if it exists
+if (token) {
+  dataService.setToken(token);
+}
+
+
+
   const get = async (url: string) => { 
     const endpoint = baseUrl + url;
     try {
-      const data = await axios.get(endpoint);
+      const data = await axios.get(endpoint );
       return data;
     } catch (e) {
       handleError(e);
@@ -22,7 +36,7 @@ const createHttpService = () => {
   const search = async (url: string, params: any) => {
     const endpoint = baseUrl + url + objectToQueryString(params);
     try {
-      const data = await axios.get(endpoint);
+      const data = await axios.get(endpoint );
       return data;
     } catch (e) {
       handleError(e);
@@ -33,7 +47,7 @@ const createHttpService = () => {
   const deleteRequest = async (url: string) => {
     const endpoint = baseUrl + url;
     try {
-      const data = await axios.delete(endpoint);
+      const data = await axios.delete(endpoint );
       return data;
     } catch (e) {
       handleError(e);
@@ -105,11 +119,20 @@ const uploadFile = (url: string, data: Record<string, any>, files: Record<string
   });
 };
 
-  const handleError = (e: any) => {  
-    if (e.response.status === 401 && e.response.statusText === "Unauthorized") {
-      fireAlert("Session Expired", "Please log in again", "error", "/"); 
-    }  
-  };
+const handleError = (error: any) => {
+  // Extract error message from response 
+  const message = error?.response?.data?.message ||
+    (error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+
+  // Handle unauthorized error
+  if (error?.response?.status === 401 && error?.response?.statusText === "Unauthorized") {
+    fireAlert("Session Expired", "Please log in again", "error", "/");
+  } else {
+    // Display error message using toast
+    toast.error(message, {  toastId: customId });
+  }
+};
+
 
  const objectToQueryString = (obj: { [key: string]: string | number | boolean }) => {
   let str = [];
@@ -122,8 +145,7 @@ const uploadFile = (url: string, data: Record<string, any>, files: Record<string
   return query;
  };
     
-
-
+  
     return { 
     get,
     search,
@@ -131,7 +153,7 @@ const uploadFile = (url: string, data: Record<string, any>, files: Record<string
     post,
     put,
     patch,
-    uploadFile 
+    uploadFile
   };
 };
 
