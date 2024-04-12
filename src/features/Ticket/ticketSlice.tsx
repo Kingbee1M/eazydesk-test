@@ -3,11 +3,17 @@ import ticketService from './ticketService'
 
 
 const initialState = {
-	// data: [],
-	// isError: false,
-	// isSuccess: false,
-	// isLoading: false,
-	// message: '',
+	data: [],
+	isError: false,
+	isSuccess: false,
+	isLoading: false,
+	message: '',
+
+	itdata: [],
+	itisError: false,
+	itisSuccess: false,
+	itisLoading: false,
+	itmessage: '',
 
 	createdata: [],
 	createisError: false,
@@ -91,16 +97,27 @@ const initialState = {
 }
 
 
-// Get Todos
-// export const getTicket = createAsyncThunk('ticket/getTicket', async (data, thunkAPI) => {
-// 	try {
-// 		return await ticketService.getTicket()
-// 	} catch (error: any) {
-// 		const message = error?.response?.data?.message ||
-// 			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
-// 		return thunkAPI.rejectWithValue(message)
-// 	}
-// })
+// Get getTicket
+export const getTicket = createAsyncThunk('ticket/getTicket', async (data, thunkAPI) => {
+	try {
+		return await ticketService.getTicket()
+	} catch (error: any) {
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		return thunkAPI.rejectWithValue(message)
+	}
+})
+
+// Get IT Ticket
+export const getItTicket = createAsyncThunk('ticket/getItTicket', async (data, thunkAPI) => {
+	try {
+		return await ticketService.getItTicket()
+	} catch (error: any) {
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		return thunkAPI.rejectWithValue(message)
+	}
+})
 
 
 // Craete Ticket
@@ -251,10 +268,15 @@ export const ticketSlice = createSlice({
 	reducers: {
 		reset: (state) => {
 
-			// state.isLoading = false
-			// state.isSuccess = false
-			// state.isError = false
-			// state.message = ''
+			state.isLoading = false
+			state.isSuccess = false
+			state.isError = false
+			state.message = ''
+
+			state.itisLoading = false
+			state.itisSuccess = false
+			state.itisError = false
+			state.itmessage = ''
 
 			state.createisLoading = false
 			state.createisSuccess = false
@@ -322,25 +344,42 @@ export const ticketSlice = createSlice({
 
 	extraReducers: (builder) => {
 		builder
-			// .addCase(getTicket.pending, (state) => {
-			// 	state.isLoading = true
+			.addCase(getTicket.pending, (state) => {
+				state.isLoading = true
 
-			// })
-			// .addCase(getTicket.fulfilled, (state: any, action) => {
-			// 	state.isLoading = false
-			// 	state.isSuccess = true
-			// 	state.data = action.payload?.data
-			// })
-			// .addCase(getTicket.rejected, (state: any, action) => {
-			// 	state.isLoading = false
-			// 	state.isError = true
-			// 	state.message = action.payload
-			// 	state.data = null
-			// })
+			})
+			.addCase(getTicket.fulfilled, (state: any, action) => {
+				state.isLoading = false
+				state.isSuccess = true
+				state.data = action.payload?.data
+			})
+			.addCase(getTicket.rejected, (state: any, action) => {
+				state.isLoading = false
+				state.isError = true
+				state.message = action.payload
+				state.data = null
+			})
+
+
+			.addCase(getItTicket.pending, (state) => {
+				state.isLoading = true
+			})
+			.addCase(getItTicket.fulfilled, (state: any, action) => {
+				state.isLoading = false
+				state.isSuccess = true
+				state.data = action.payload?.data
+			})
+			.addCase(getItTicket.rejected, (state: any, action) => {
+				state.isLoading = false
+				state.isError = true
+				state.message = action.payload
+				state.data = null
+			})
+
+
 
 			.addCase(createTicket.pending, (state) => {
 				state.createisLoading = true
-
 			})
 			.addCase(createTicket.fulfilled, (state: any, action) => {
 				state.createisLoading = false

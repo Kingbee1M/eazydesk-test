@@ -1,12 +1,22 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import BottomNavigation from '../../../components/BottomNavigation'
 import Header from '../../../components/Header'
 import SearchConponent from '../../../components/SearchConponent'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 import { data } from '../../../components/StateData'
 import ITSideNav from '../../../components/SideNav/ITSideNav'
+import { useAppDispatch, useAppSelector } from '../../../store/useStore'
+import { getItTicket } from '../../../features/Ticket/ticketSlice'
 
 const ITServiceRequest = () => {
+	const dispatch = useAppDispatch();
+	const { itdata: ticket, itisLoading } = useAppSelector((state: any) => state.ticket)
+	const data = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("SERVICE REQUEST"));
+
+	useEffect(() => {
+		dispatch(getItTicket())
+	}, [dispatch])
+
 	const [startDates, setStartDates] = useState([]);
 	const [endDates, setEndDates] = useState([]);
 	const [show, setShow] = useState(false);
@@ -26,7 +36,7 @@ const ITServiceRequest = () => {
 			<main>
 				<div className='dashboard-first-card-boards '>
 					<div>
-						<h5 className='dashboard-first-card-h'>Incident Request</h5>
+						<h5 className='dashboard-first-card-h'>Service Request</h5>
 						{/* <p className='dashboard-first-card-p'>15 incident request ticket</p> */}
 					</div>
 				</div>
@@ -50,7 +60,8 @@ const ITServiceRequest = () => {
 						pageheader={"SERVICE REQUEST"}
 						Request={"Service Request"}
 						TYPE={"SERVICE"}
-						data={data} />
+						data={data}
+						isLoading={itisLoading} />
 				</div>
 			</main>
 		</div>

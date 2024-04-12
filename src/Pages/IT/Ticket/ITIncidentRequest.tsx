@@ -1,12 +1,23 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import BottomNavigation from '../../../components/BottomNavigation'
 import Header from '../../../components/Header'
 import SearchConponent from '../../../components/SearchConponent'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 import { data } from '../../../components/StateData'
 import ITSideNav from '../../../components/SideNav/ITSideNav'
+import { useAppDispatch, useAppSelector } from '../../../store/useStore'
+import { getItTicket } from '../../../features/Ticket/ticketSlice'
 
 const ITIncidentRequest = () => {
+	const dispatch = useAppDispatch();
+	const { itdata: ticket, itisLoading } = useAppSelector((state: any) => state.ticket)
+	const data = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("INCIDENT REQUEST"));
+
+	useEffect(() => {
+		dispatch(getItTicket())
+	}, [dispatch])
+
+
 	const [startDates, setStartDates] = useState([]);
 	const [endDates, setEndDates] = useState([]);
 	const [show, setShow] = useState(false);
@@ -50,7 +61,8 @@ const ITIncidentRequest = () => {
 						pageheader={"Incident Request"}
 						Request={"Incident Request"}
 						TYPE={"INCIDENT"}
-						data={data} />
+						data={data}
+						isLoading={itisLoading} />
 				</div>
 			</main>
 		</div>

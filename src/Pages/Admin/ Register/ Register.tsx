@@ -23,7 +23,7 @@ const Register = ({ switchs }: any) => {
 	const { isSuccess } = useAppSelector((state) => state.reg)
 	const { edituserisSuccess } = useAppSelector((state: any) => state.reg);
 
-	console.log('dataAll', dataAll)
+
 
 
 	// --- Pagination --- //

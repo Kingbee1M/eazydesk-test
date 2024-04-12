@@ -3,11 +3,16 @@ import createHttpService from "../../helpers/HttpService";
 
 
 
-// const getTicket = async () => {
-// 	const HttpService = createHttpService();
-// 	const { data }: any = await HttpService.get(`/api/v1/ticket`)
-// 	return data
-// }
+const getTicket = async () => {
+	const HttpService = createHttpService();
+	const { data }: any = await HttpService.get(`/api/v2/ticket`)
+	return data
+}
+const getItTicket = async () => {
+	const HttpService = createHttpService();
+	const { data }: any = await HttpService.get(`/api/v2/ticket/it`)
+	return data
+}
 
 // const getTicketbyID = async (id: any) => {
 // 	const HttpService = createHttpService();
@@ -90,8 +95,9 @@ const createTicket = async (formData: any) => {
 
 
 const ticketService = {
-	// getTicket,
+	getTicket,
 	createTicket,
+	getItTicket,
 	// viewTicket,
 	// deleteTicket,
 	// updateTicket,

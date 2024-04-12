@@ -9,11 +9,23 @@ import { EntriesPerPage } from '../../components/Options';
 import TicketTableComponent from '../../components/Table/TicketTableComponent';
 import { data } from '../../components/StateData';
 import ServiceRequestModal from '../../components/TicketModals/ServiceRequestModal';
+import { useAppDispatch, useAppSelector } from '../../store/useStore';
+import { getTicket } from '../../features/Ticket/ticketSlice';
 
 
 
 const LeadsServiceRequest = () => {
-	const navigate = useNavigate()
+	const dispatch = useAppDispatch();
+	const { data: ticket, isLoading } = useAppSelector((state: any) => state.ticket)
+	const { createisSuccess } = useAppSelector((state: any) => state.ticket)
+	const data = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("SERVICE REQUEST"));
+
+	useEffect(() => {
+		dispatch(getTicket())
+		if (createisSuccess) {
+			dispatch(getTicket())
+		}
+	}, [dispatch, createisSuccess])
 
 
 	const [result, setResult] = useState("")
@@ -70,8 +82,9 @@ const LeadsServiceRequest = () => {
 						<TicketTableComponent
 							pageheader={"Incident Request"}
 							Request={"Incident Request"}
-							TYPE={"SERVICE"}
-							data={data} />
+							TYPE={"SERVICE REQUEST"}
+							data={data}
+							isLoading={isLoading} />
 					</div>
 				</div>
 			</main>

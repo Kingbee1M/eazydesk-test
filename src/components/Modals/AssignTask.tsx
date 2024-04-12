@@ -10,7 +10,7 @@ import { SVGLoader } from '../SVGLoader';
 import Select from 'react-select'
 
 
-const AssignTask = () => {
+const AssignTask = ({ id }: any) => {
 
 	const navigate = useNavigate();
 	const handleClose = () => setShow(false);
