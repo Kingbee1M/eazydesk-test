@@ -3,7 +3,6 @@ import BottomNavigation from '../../../components/BottomNavigation'
 import Header from '../../../components/Header'
 import SearchConponent from '../../../components/SearchConponent'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
-import { data } from '../../../components/StateData'
 import ITSideNav from '../../../components/SideNav/ITSideNav'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import { getItTicket } from '../../../features/Ticket/ticketSlice'
@@ -11,7 +10,7 @@ import { getItTicket } from '../../../features/Ticket/ticketSlice'
 const ITServiceRequest = () => {
 	const dispatch = useAppDispatch();
 	const { itdata: ticket, itisLoading } = useAppSelector((state: any) => state.ticket)
-	const data = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("SERVICE REQUEST"));
+	const data = ticket?.filter((ticket: any) => ticket?.ticketType?.includes("SERVICE REQUEST"));
 
 	useEffect(() => {
 		dispatch(getItTicket())

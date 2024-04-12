@@ -362,18 +362,18 @@ export const ticketSlice = createSlice({
 
 
 			.addCase(getItTicket.pending, (state) => {
-				state.isLoading = true
+				state.itisLoading = true
 			})
 			.addCase(getItTicket.fulfilled, (state: any, action) => {
-				state.isLoading = false
-				state.isSuccess = true
-				state.data = action.payload?.data
+				state.itisLoading = false
+				state.itisSuccess = true
+				state.itdata = action.payload?.data
 			})
 			.addCase(getItTicket.rejected, (state: any, action) => {
-				state.isLoading = false
-				state.isError = true
-				state.message = action.payload
-				state.data = null
+				state.itisLoading = false
+				state.itisError = true
+				state.itmessage = action.payload
+				state.itdata = null
 			})
 
 
