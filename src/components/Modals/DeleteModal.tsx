@@ -3,7 +3,7 @@ import { Modal } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
 import { SVGLoader } from '../SVGLoader';
 import { BsXLg } from "react-icons/bs";
-import { customId } from '../TableOptions';
+import { customId } from '../Options';
 
 const DeleteModal = ({ id, show, setShow }: any) => {
 

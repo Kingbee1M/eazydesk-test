@@ -34,9 +34,8 @@ const Header = () => {
 
   return (
     <div id="header">
-      <SearchInput />
+      {/* <SearchInput /> */}
       <NetworkConnetion />
-
       <div className='FaPlus-icon-container' >
         <div className='FaPlus-icon-container_sup'>
           <IoCalendarOutline size={16} />
@@ -70,14 +69,3 @@ export default Header;
 
 
 
-// {/* <NetworkConnetion /> */ }
-//       <ToastContainer position="top-right" />
-//       <div style={{ position: "relative" }}>
-//         {/* <Button onClick={() => setIsDrawerOpen(!isDrawerOpen)}>
-//           <div className="user_avatar" >
-//             {userInfo.user.firstName.charAt(0)}{userInfo.user.LastName.charAt(0)}
-//           </div>
-//         </Button> */}
-//         {/* <DrawerComponent isOpen={isDrawerOpen} onClose={toggleDrawer} /> */}
-
-//       </div>

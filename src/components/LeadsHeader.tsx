@@ -7,10 +7,20 @@ import { RiLogoutCircleRLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import Logo from "../assets/img/logo.svg";
 import NetworkConnetion from "./NetworkConnetion";
+import { customId, menu } from "./Options";
+import DataService from "../features/Auth/dataService";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { logoutUserAction } from "../features/Auth/authService";
+import { logout, reset } from "../features/Auth/authSlice";
+import { useAppDispatch, useAppSelector } from "../store/useStore";
+import UserProfile from "../Pages/Leads/UserProfile";
 
-
+// Create an instance of DataService
+const dataService = DataService();
 const LeadsHeader = () => {
 	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
 	const [dropdown, setDropdown] = useState(false);
 	const [toggleMenu, setToggleMenu] = useState(false);
 	const [firstname, setFirstName] = useState("");
@@ -20,26 +30,39 @@ const LeadsHeader = () => {
 	const [roleName, setRoleName] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
 
+	const { isLoadinglogout, isErrorlogout, messagelogout, isSuccesslogout } = useAppSelector((state: { auth: any; }) => state.auth)
+
+	// @ts-ignore  
+	const userInfo = JSON.parse(localStorage.getItem("service_desk"));
+
+	const handleLogout = () => {
+		dispatch(logout());
+	};
+
+	useEffect(() => {
+		if (!userInfo || userInfo == null) {
+			navigate("/");
+			dispatch(reset());
+		}
+	}, [dispatch, navigate, userInfo]);
+
+	useEffect(() => {
+		if (isSuccesslogout) {
+			// localStorage.removeItem("service_desk");
+			delete axios.defaults.headers.common['Authorization'];
+			dispatch(logoutUserAction());
+			dataService.clearData()
+		} else if (isErrorlogout) {
+			toast.error(messagelogout, {
+				toastId: customId
+			});
+			dispatch(logoutUserAction());
+			dataService.clearData()
+		}
+		dispatch(reset());
+	}, [dispatch, isErrorlogout, isSuccesslogout, messagelogout, navigate])
 
 
-	const menu = [
-		{
-			name: "Home",
-			path: "/leadsdashboard",
-		},
-		{
-			name: "Incident",
-			path: "/incident-request",
-		},
-		{
-			name: "Service",
-			path: "/service-request",
-		},
-		{
-			name: "Change",
-			path: "/change-request",
-		},
-	];
 
 	//profile modal
 	const [lgShow, setLgShow] = useState(false);
@@ -71,13 +94,13 @@ const LeadsHeader = () => {
 
 	return (
 		<header className="client-header">
+
 			{/* <NetworkConnetion /> */}
 			<Link to="/dashboard" className="logo">
 				<div className="logo_area_leads">
 					<img src={Logo} alt='logo' crossOrigin="anonymous" className="logo-leads-img" />
 					<h2>Eazy Desk</h2>
 				</div>
-				{/* <img src={Logo} alt="Outcess Logo" className="adon-logo" style={{ width: "40px" }} /> */}
 			</Link>
 			<nav>
 				{menu?.map((item, i) => (
@@ -91,9 +114,10 @@ const LeadsHeader = () => {
 			</nav>
 			<div className="user-info" onClick={() => setDropdown(!dropdown)}>
 				<FaRegUserCircle size={30} color={"rgba(0,0,0,.5)"} />
-				<p>firstname</p>
+				<p>{userInfo?.firstname}</p>
 				<MdKeyboardArrowDown size={25} color={"rgba(0,0,0,.5)"} />
 			</div>
+
 			<div className={dropdown ? "dropdown display" : "dropdown"}>
 				<div className="dropdown-container">
 					<div className="drop-item" onClick={handleClick}>
@@ -102,9 +126,7 @@ const LeadsHeader = () => {
 					</div>
 					<button
 						className="drop-item"
-						onClick={() => {
-							navigate("/");
-						}}>
+						onClick={handleLogout}>
 						<RiLogoutCircleRLine size={23} />
 						<span>Sign Out</span>
 					</button>
@@ -129,35 +151,35 @@ const LeadsHeader = () => {
 						</NavLink>
 					))}
 					<div className="dropdown-container2">
-						<div onClick={handleClick}>
+
+						{/* <div onClick={handleClick}>
 							<FiUser size={25} className="dropdown-a" />
 							<span>Profile</span>
-						</div>
+						</div> */}
 						<div
-							onClick={() => {
-								navigate("/");
-							}}>
+							onClick={handleLogout}>
 							<RiLogoutCircleRLine size={25} className="dropdown-a" />
 							<span>Logout</span>
 						</div>
 					</div>
 				</div>
 				{/* <UserProfile
-          setLgShow={setLgShow}
-          lgShow={lgShow}
-          setFirstName={setFirstName}
-          firstname={firstname}
-          setLastName={setLastName}
-          lastname={lastname}
-          setEmail={setEmail}
-          email={email}
-          setPhoneNumber={setPhoneNumber}
-          phoneNumber={phoneNumber}
-          setClient={setClient}
-          client={client}
-          setRoleName={setRoleName}
-          roleName={roleName}
-        /> */}
+					setLgShow={setLgShow}
+					lgShow={lgShow}
+					setFirstName={setFirstName}
+					firstname={firstname}
+					setLastName={setLastName}
+					lastname={lastname}
+					setEmail={setEmail}
+					email={email}
+					setPhoneNumber={setPhoneNumber}
+					phoneNumber={phoneNumber}
+					setClient={setClient}
+					client={client}
+					setRoleName={setRoleName}
+					roleName={roleName}
+				/> */}
+				{/* <UserProfile lgShow={lgShow} setLgShow={setLgShow} /> */}
 			</div>
 		</header>
 	);

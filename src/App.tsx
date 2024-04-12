@@ -1,14 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AdminDashboard from './Pages/Admin/Dashboard/AdminDashboard';
 import OpenTicket from "./Pages/Admin/Ticket/OpenTicket";
-import TicketProgress from "./Pages/Admin/Ticket/TicketProgress";
 import ClosedTicket from "./Pages/Admin/Ticket/ClosedTicket";
 import Settings from "./Pages/Admin/Settings/Settings";
 import TicketReport from "./Pages/Admin/Report/TicketReport";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Admin/ Register/ Register";
-import Vendors from "./Pages/Admin/Vendors/Vendors";
-import VendorsMembers from "./Pages/Admin/Vendors/VendorsMembers";
+import Company from "./Pages/Admin/Company/Company";
+import CompanyMembers from "./Pages/Admin/Company/CompanysMembers";
 import IncidentRequest from "./Pages/Admin/Ticket/IncidentRequest";
 import ServiceRequest from "./Pages/Admin/Ticket/ServiceRequest";
 import ChangeRequest from "./Pages/Admin/Ticket/ChangeRequest";
@@ -25,7 +24,6 @@ import LeadsDashboard from "./Pages/Leads/LeadsDashboard";
 import LeadsIncidentRequest from "./Pages/Leads/LeadsIncidentRequest";
 import LeadsServiceRequest from "./Pages/Leads/LeadsServiceRequest";
 import LeadsChangeRequest from "./Pages/Leads/LeadsChangeRequest";
-import Chat from "./components/Chat/Chat";
 import SignUp from "./Pages/Login/SignUp";
 import Pricing from "./Pages/Login/Pricing";
 import Help from "./Pages/Login/Help";
@@ -33,7 +31,8 @@ import SuccessPage from "./components/SuccessPage/SuccessPage";
 import VerifyEmail from "./Pages/Login/VerifyEmail";
 import DashboardHUB from "./Pages/DashboardHub/DashboardHub";
 import ForgotPassword from "./Pages/Login/ForgotPassword";
-
+import ResetPassword from "./Pages/Login/ResetPassword";
+import TicketProgress from "./components/Chat/TicketProgress";
 
 
 function App() {
@@ -48,20 +47,20 @@ function App() {
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/help" element={<Help />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/passwordreset/:id" element={<ResetPassword />} />
         <Route path="/dashboard" element={<DashboardHUB />} />
         <Route path="/admindashboard" element={<AdminDashboard />} />
         <Route path="/openticket" element={<OpenTicket />} />
-        <Route path="/ticketprogress" element={<TicketProgress />} />
         <Route path="/closedticket" element={<ClosedTicket />} />
         <Route path="/incidentrequest" element={<IncidentRequest />} />
         <Route path="/servicerequest" element={<ServiceRequest />} />
         <Route path="/changerequest" element={<ChangeRequest />} />
-        <Route path="/vendors" element={<Vendors />} />
-        <Route path="/vendorsmembers" element={<VendorsMembers />} />
+        <Route path="/company" element={<Company />} />
+        <Route path="/companymembers/:id" element={<CompanyMembers />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/report" element={<TicketReport />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/ticket-progress/:id" element={<Chat />} />
+        <Route path="/ticket-progress/:id" element={<TicketProgress />} />
         {/* IT Screens */}
         <Route path="/itdashboard" element={<ITDashboard />} />
         <Route path="/itopenticket" element={<ITOpenTicket />} />
@@ -79,7 +78,7 @@ function App() {
         <Route path="/itincidentrequest" element={<ITIncidentRequest />} />
         <Route path="/itservicerequest" element={<ITServiceRequest />} />
         <Route path="/itchangerequest" element={<ITChangeRequest />} />
-        <Route path="/itsettings" element={<ITSettings />} />
+        <Route path="/supervisorsettings" element={<ITSettings />} />
         {/* Leads Screen */}
         <Route path="/leadsdashboard" element={<LeadsDashboard />} />
         <Route path="/incident-request" element={<LeadsIncidentRequest />} />

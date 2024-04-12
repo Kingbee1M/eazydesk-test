@@ -5,6 +5,7 @@ import ModalHeader from '../Modals/ModalHeader'
 
 const IncidentRequestModal = ({ headerTitle }: any) => {
 
+
  const [show, setShow] = useState(false);
 
  return (
@@ -20,7 +21,8 @@ const IncidentRequestModal = ({ headerTitle }: any) => {
     <ModalHeader setShow={setShow} headerTitle={headerTitle} />
     <Modal.Body>
      <TicketForm
-      type={"SERVICE"}
+      type={"INCIDENT REQUEST"}
+      setShow={setShow}
      />
     </Modal.Body>
    </Modal>

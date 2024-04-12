@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaExchangeAlt } from "react-icons/fa";
 import { RiAlarmWarningFill } from "react-icons/ri";
@@ -10,13 +10,24 @@ import LeadsThreeinOneBarChart from "../../components/Charts/LeadsThreeinOneBarC
 import { GoDotFill } from "react-icons/go";
 import DoughnutChat from "../../components/DoughnutChat";
 import ThreeinOneBarChart from "../../components/ThreeinOneBarChart";
+import { getTicket } from "../../features/Ticket/ticketSlice";
+import { useAppDispatch, useAppSelector } from "../../store/useStore";
 
 
 const LeadsDashboard = () => {
-	const [data, setData] = useState<any>([]);
-	const [result, setResult] = useState("");
+	const dispatch = useAppDispatch();
+	const { data: ticket, isSuccess } = useAppSelector((state: any) => state.ticket)
 
+	useEffect(() => {
+		dispatch(getTicket())
+		if (isSuccess) {
+			dispatch(getTicket())
+		}
+	}, [dispatch, isSuccess])
 
+	const INCIDENT = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("INCIDENT REQUEST"));
+	const SERVICE = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("SERVICE REQUEST"));
+	const CHANGE = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("CHANGE REQUEST"));
 
 	// @ts-ignore
 	// const loginSuccess = JSON.parse(localStorage.getItem("loginToast"));
@@ -43,10 +54,7 @@ const LeadsDashboard = () => {
 									<RiAlarmWarningFill size={25} />
 								</div>
 								<h4>
-									{
-										data?.filter((item: any) => item?.ticketType === "INCIDENT")
-											?.length
-									}
+									{INCIDENT?.length}
 								</h4>
 							</div>
 							<h5>Incident Request</h5>
@@ -60,10 +68,7 @@ const LeadsDashboard = () => {
 									<AiTwotoneSetting size={25} />
 								</div>
 								<h4>
-									{
-										data?.filter((item: any) => item?.ticketType === "SERVICE")
-											?.length
-									}
+									{SERVICE?.length}
 								</h4>
 							</div>
 							<h5>Service Request</h5>
@@ -77,10 +82,7 @@ const LeadsDashboard = () => {
 									<FaExchangeAlt size={25} />
 								</div>
 								<h4>
-									{
-										data?.filter((item: any) => item?.ticketType === "CHANGE")
-											?.length
-									}
+									{CHANGE?.length}
 								</h4>
 							</div>
 							<h5>Change Request</h5>

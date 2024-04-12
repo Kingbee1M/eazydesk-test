@@ -4,14 +4,18 @@ import { useNavigate } from "react-router-dom";
 import { SVGLoader } from "./SVGLoader";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
-import { customId } from "./TableOptions";
+import { customId } from "./Options";
 import { logout, reset } from "../features/Auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../store/useStore";
 import { logoutUserAction } from "../features/Auth/authService";
 import axios from "axios";
+import DataService from "../features/Auth/dataService";
+
 
 const ProfileDropDown = () => {
 	const { isLoadinglogout, isErrorlogout, messagelogout, isSuccesslogout } = useAppSelector((state: { auth: any; }) => state.auth)
+	// Create an instance of DataService
+	const dataService = DataService();
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	// @ts-ignore  
@@ -30,14 +34,16 @@ const ProfileDropDown = () => {
 
 	useEffect(() => {
 		if (isSuccesslogout) {
-			localStorage.removeItem("service_desk");
+			// localStorage.removeItem("service_desk");
 			delete axios.defaults.headers.common['Authorization'];
-			logoutUserAction()
+			dispatch(logoutUserAction());
+			dataService.clearData()
 		} else if (isErrorlogout) {
 			toast.error(messagelogout, {
 				toastId: customId
 			});
-			logoutUserAction()
+			dispatch(logoutUserAction());
+			dataService.clearData()
 		}
 		dispatch(reset());
 	}, [dispatch, isErrorlogout, isSuccesslogout, messagelogout, navigate])

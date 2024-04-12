@@ -26,7 +26,7 @@ const ITOpenTicket = () => {
 			<main>
 				<div className='dashboard-first-card-boards  mt-2'>
 					<div>
-						<h5 className='dashboard-first-card-h'>Open Ticket</h5>
+						<h5 className='dashboard-first-card-h'>Service Request</h5>
 					</div>
 				</div>
 				<SearchConponent

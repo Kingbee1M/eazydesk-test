@@ -13,9 +13,18 @@ import { LuUsers } from "react-icons/lu";
 import logo from '../../assets/img/logo.svg'
 import { RiAlarmWarningLine } from "react-icons/ri";
 import { TbExchange } from "react-icons/tb";
+import { getUserPrivileges } from "../../hooks/auth";
 
 
 const SideNav = () => {
+  const {
+    isSuperAdmin,
+    isAdmin,
+    isSupervisor,
+    isITSupport,
+    isTeamLead,
+
+  } = getUserPrivileges();
   const [dropdownOpen, setDropdownOpen] = useState(
     localStorage.getItem('dropdownOpen') === 'true'
   );
@@ -141,9 +150,8 @@ const SideNav = () => {
           </div>
         )}
       </nav>
-
-      <nav>
-        <NavLink to="/vendors" className={({ isActive }) =>
+      {isSuperAdmin && <nav>
+        <NavLink to="/company" className={({ isActive }) =>
           [
             "nav-link",
             isActive ? "active" : null,
@@ -152,10 +160,11 @@ const SideNav = () => {
             .join(" ")
         }>
           <LuTag size={15} />
-          <span>Vendors</span>
+          <span>Company</span>
         </NavLink>
-      </nav>
-      <nav>
+      </nav>}
+
+      {isSuperAdmin && <nav>
         <NavLink to="/register" className={({ isActive }) =>
           [
             "nav-link",
@@ -167,7 +176,7 @@ const SideNav = () => {
           <LuUsers size={15} />
           <span>Register</span>
         </NavLink>
-      </nav>
+      </nav>}
       <nav>
         <NavLink to="/report" className={({ isActive }) =>
           [

@@ -10,7 +10,7 @@ import { forgetPassword, reset } from "../../features/Auth/authSlice";
 import * as yup from 'yup'
 import { Formik } from 'formik';
 import VerifyLoader from "../../components/Toast/VerifyLoader";
-import { svgPaths } from "../../components/TableOptions";
+import { svgPaths } from "../../components/Options";
 
 const ForgotPassword = () => {
 	const dispatch = useAppDispatch()

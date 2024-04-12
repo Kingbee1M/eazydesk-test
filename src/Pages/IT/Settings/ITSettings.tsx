@@ -9,7 +9,7 @@ import Plans from './SettingsGeneral/Plans';
 import Security from './SettingsGeneral/Security';
 import ITSideNav from '../../../components/SideNav/ITSideNav';
 
-const ITSettings = () => {
+const Settings = () => {
 	const [activeIndex, setActiveIndex] = useState<any>(0);
 
 
@@ -51,4 +51,4 @@ const ITSettings = () => {
 	)
 }
 
-export default ITSettings
+export default Settings

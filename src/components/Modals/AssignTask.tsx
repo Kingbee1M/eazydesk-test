@@ -1,5 +1,5 @@
 import Modal from 'react-bootstrap/Modal';
-import { customId, customStyles } from '../TableOptions';
+import { customId, customStyles } from '../Options';
 import ModalHeader from './ModalHeader';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ import { SVGLoader } from '../SVGLoader';
 import Select from 'react-select'
 
 
-const AssignTask = () => {
+const AssignTask = ({ id }: any) => {
 
 	const navigate = useNavigate();
 	const handleClose = () => setShow(false);

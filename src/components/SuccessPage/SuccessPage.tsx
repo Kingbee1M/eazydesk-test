@@ -1,12 +1,14 @@
-import { useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
 import CountdownTimer from '../../hooks/CountdownTimer';
 import PowerResetComponent from '../../hooks/PowerResetComponent';
 import { Spinner } from 'react-bootstrap';
 
 const SuccessPage = () => {
+	const navigate = useNavigate();
 	const { email } = useParams();
 	const [isLoading, setIsLoading] = useState(false);
+	const [domains, setIsDomains] = useState("");
 
 	const emailServiceUrls: any = {
 		'gmail.com': 'https://mail.google.com/',
@@ -17,12 +19,17 @@ const SuccessPage = () => {
 		'protonmail.com': 'https://mail.protonmail.com/',
 		'zoho.com': 'https://mail.zoho.com/',
 		'yandex.com': 'https://mail.yandex.com/',
-		// Add more email domains and their corresponding URLs here
-		'*': 'https://www.example.com/', // Default URL for other email domains
 	};
 
+	useEffect(() => {
+		if (email) {
+			const domain = email.substring(email.lastIndexOf('@') + 1);
+			setIsDomains(domain);
+		}
+	}, [email])
 
-	const EmailServiceRedirect = (email: any) => {
+
+	const EmailServiceRedirect = (email: string | undefined | any) => {
 		// Extract domain from email
 		const domain = email.substring(email.lastIndexOf('@') + 1);
 
@@ -31,18 +38,16 @@ const SuccessPage = () => {
 			// Open the corresponding email service URL in a new tab
 			window.open(emailServiceUrls[domain], '_blank');
 		} else {
-			// If the domain is not in the mapping, use the default URL
-			window.open(emailServiceUrls['*'], '_blank');
+			navigate('/');
 		}
 
 		// This component doesn't render anything, as it redirects immediately
 		return null;
 	};
 
-
 	return (
 		<div className="container-page">
-			{isLoading ? <Spinner /> :
+			{isLoading ? <Spinner /> : (
 				<div>
 					<div className="heading">
 						<span className="tick-container"><i className="tick">&nbsp;</i></span>
@@ -50,13 +55,19 @@ const SuccessPage = () => {
 					</div>
 					<div className="text-container">
 						<PowerResetComponent setIsLoading={setIsLoading} isLoading={isLoading} email={email || ''} />
-						<CountdownTimer seconds={59} EmailServiceRedirect={EmailServiceRedirect} email={email} />
-						<div>Click the button below, if you are not redirected to the website.</div>
-						<button className="primary-button" onClick={() => EmailServiceRedirect(email)}>Verify Email</button>
+						<CountdownTimer seconds={59} email={email} />
+						<div>Click the button below, if you are not redirected to {(domains in emailServiceUrls) ? "the website." : "login."} </div>
+						<button
+							className="primary-button"
+							onClick={(domains in emailServiceUrls) ? () => EmailServiceRedirect(email) : () => navigate('/')}
+						>
+							{domains in emailServiceUrls ? "Verify Email" : "Login"}
+						</button>
 					</div>
-				</div>}
+				</div>
+			)}
 		</div>
-	)
-}
 
+	);
+}
 export default SuccessPage

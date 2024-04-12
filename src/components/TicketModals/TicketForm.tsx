@@ -1,61 +1,90 @@
 import { useState, useEffect, useRef } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { baseUrl } from "../../shared/baseUrl";
 import ToSelect from "./ToSelect";
 import CcSelect from "./CcSelect";
 import ReactQuillWrapper from "./ReactQuillWrapper";
-// import {
-//   getTicketsAction,
-//   createTicketAction,
-// } from "../store/actions/ticketingActions";
-// import { CREATE_TICKET_RESET } from "../store/constants/ticketingConstants";
-// import { getRegisteredUserAction } from "../store/actions/registeredUsersAction";
-// import emailjs from "@emailjs/browser";
+import { useAppDispatch, useAppSelector } from "../../store/useStore";
+import { createTicket, reset } from "../../features/Ticket/ticketSlice";
+import { SVGLoader } from "../SVGLoader";
+import { toast } from "react-toastify";
+import { customId } from "../Options";
+import { getallReguser } from "../../features/Registration/registrationSlice";
 
 
 
-const TicketForm = ({ handleCloseModal, type }: any) => {
+const TicketForm = ({ type, setShow }: any) => {
+  const { createisLoading, createisSuccess } = useAppSelector((state: any) => state.ticket)
+  const dispatch = useAppDispatch();
+  const { dataAll, isLoadingAll } = useAppSelector((state: any) => state.reg);
+  const user = dataAll?.users
 
+  // console.log("user", user)
+
+  useEffect(() => {
+    // Fetch data when the component is mounted or dispatch changes
+    dispatch(getallReguser());
+  }, [dispatch]);
+  const formData = new FormData();
   const form: any = useRef();
-  const navigate = useNavigate();
-
-  // const userLogin = useSelector((state: any) => state.userLogin);
-  // const { userInfo } = userLogin;
-
-  // const createsTicket = useSelector((state: any) => state.createsTicket);
-  // const { success, error, loading } = createsTicket;
-
-  // const getRegisteredUsers = useSelector((state) => state.getRegisteredUsers);
-  // const { data } = getRegisteredUsers;
-
-  // useEffect(() => {
-  //   if (userInfo) {
-  //     dispatch(getRegisteredUserAction());
-  //   }
-  // }, [dispatch, navigate, userInfo]);
-
   const [value, setValue] = useState('');
+  const [input, setInput] = useState<any>({
+    file: [],
+    ticketType: type,
+    affectedUsers: "",
+    severity: "",
+    emails: "",
+    description: ""
+  })
 
+
+  useEffect(() => {
+    if (createisSuccess) {
+      toast.success("Ticket Created!", { toastId: customId });
+      setShow(false)
+    }
+
+    dispatch(reset());
+  }, [createisSuccess, dispatch, setShow]);
   const [issueCategories, setIssueCategories] = useState<any>([]);
   const [severityStyle, setSeverityStyle] = useState<any>({
     background: "transparent",
     width: "0%",
   });
-  // const [loading, setLoading] = useState(false)
-  // const [success,setSuccess] =useState(false)
-  const [isLoadingImg, setIsLoadingImg] = useState<any>(false);
-  // const [error,setError]=useState(true)
 
-  const [inputs, setInputs] = useState<any>({
-    ticketType: type,
-    ticketId: "",
-    issueCategory: "",
-    issueDescription: "",
-    affectedUsers: "",
-    severity: "",
-    images: []
-  })
+
+
+
+  // console.log("formData", input);
+
+
+
+
+  const formFields = [
+    { key: 'file', value: input.file },
+    { key: 'ticketType', value: input.ticketType },
+    { key: 'affectedUsers', value: input.affectedUsers },
+    { key: 'severity', value: input.severity },
+    {
+      key: 'emails', value: JSON.stringify(
+        Array.isArray(input?.emails) ? input.emails.map((item: { value: any; }) => item?.value) : []
+      )
+    },
+    { key: 'description', value: input.description },
+  ];
+
+  formFields.forEach(field => {
+    formData.append(field.key, field.value);
+  });
+
+
+  useEffect(() => {
+    setInput((prevState: any) => {
+      return ({
+        ...prevState,
+        description: value,
+
+      });
+    });
+  }, [value]);
 
 
   useEffect(() => {
@@ -136,25 +165,25 @@ const TicketForm = ({ handleCloseModal, type }: any) => {
   }, [type])
 
   useEffect(() => {
-    if (inputs.affectedUsers >= 1 && inputs.affectedUsers <= 5) {
+    if (input.affectedUsers >= 1 && input.affectedUsers <= 5) {
       handleOnChange("severity", "Low");
       setSeverityStyle(() => ({
         background: "green",
         width: "25%",
       }));
-    } else if (inputs.affectedUsers >= 6 && inputs.affectedUsers <= 10) {
+    } else if (input.affectedUsers >= 6 && input.affectedUsers <= 10) {
       handleOnChange("severity", "Medium");
       setSeverityStyle(() => ({
         background: "yellow",
         width: "50%",
       }));
-    } else if (inputs.affectedUsers >= 11) {
+    } else if (input.affectedUsers >= 11) {
       handleOnChange("severity", "High");
       setSeverityStyle(() => ({
         background: "red",
         width: "100%",
       }));
-    } else if (inputs.issueCategory === "Total DOWNTIME") {
+    } else if (input.issueCategory === "Total DOWNTIME") {
       handleOnChange("severity", "Critical");
       setSeverityStyle(() => ({
         background: "red",
@@ -167,137 +196,87 @@ const TicketForm = ({ handleCloseModal, type }: any) => {
         width: "0%",
       }));
     }
-  }, [inputs.affectedUsers, inputs.issueCategory]);
+  }, [input.affectedUsers, input.issueCategory]);
 
   const handleOnChange = (input: string, value: string) => {
-    setInputs((prevState: any) => ({
+    setInput((prevState: any) => ({
       ...prevState,
       [input]: value,
     }));
   };
   const handleCreateTicket = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    // dispatch(createTicketAction(inputs));
+    // @ts-ignore 
+    dispatch(createTicket(formData));
   };
 
-  // useEffect(() => {
-  //   if (success) {
-  //     dispatch(getTicketsAction());
-  //     handleCloseModal();
-  //     toast.success("Ticket Created Succesfully");
-  //     dispatch({
-  //       type: CREATE_TICKET_RESET,
-  //     });
-  //     emailjs
-  //       .sendForm(
-  //         "service_3c8qetx",
-  //         "template_01epnxn",
-  //         form?.current,
-  //         "6phhK1l5rjAVFUMio"
-  //       )
-  //       .then(
-  //         (result) => console.log(result?.text),
-  //         (error) => console.log(error?.text)
-  //       );
-  //   } else if (error) {
-  //     toast.error(error);
-  //     dispatch({
-  //       type: CREATE_TICKET_RESET,
-  //     });
+
+
+  // const handleUploadMultiImg = async (e: { target: { files: any; }; }) => {
+  //   const files = e.target.files;
+  //   let formData = new FormData();
+
+  //   for (const file of files) {
+  //     formData.append("image", file);
   //   }
-  // }, [success, dispatch, error, handleCloseModal]);
 
-  const [message, setMessage] = useState<any>([]);
-  const [to_name, setTo_name] = useState<any>("");
-  const [from_name, setFrom_name] = useState<any>("");
-
-  useEffect(() => {
-    setTo_name("IT Support");
-    // Created By Firstname: ${ userInfo.firstname }
-    // setFrom_name(userInfo.firstname);
-    setMessage([
-      ` Ticket Type: ${inputs.ticketType}
-        Issue Category: ${inputs.issueCategory}
-        Issue Description: ${inputs.issueDescription}
-        Affected Users: ${inputs.affectedUsers}
-        severity: ${inputs.severity}
-        
-      `,
-    ]);
-  }, [
-    // userInfo.firstname,
-    inputs.ticketType,
-    inputs.issueCategory,
-    inputs.issueDescription,
-    inputs.affectedUsers,
-    inputs.severity,
-  ]);
-
-  const handleUploadMultiImg = async (e: { target: { files: any; }; }) => {
-    const files = e.target.files;
-    let formData = new FormData();
-
-    for (const file of files) {
-      formData.append("image", file);
-    }
-
-    try {
-      setIsLoadingImg(true);
-      const data = await axios.post(
-        baseUrl + "/api/v1/imageupload/multiple",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            // Authorization: `Bearer ${userInfo?.token}`,
-          },
-        }
-      );
-      setInputs((prevState: any) => ({
-        ...prevState,
-        images: data.data.IMAGES,
-      }));
-      setIsLoadingImg(false);
-    } catch (err: any) {
-      setIsLoadingImg(false);
-      console.log(
-        err.response && err.response.data.message
-          ? err.response.data.message
-          : err.message
-      );
-    }
-  };
+  //   try {
+  //     setIsLoadingImg(true);
+  //     const data = await axios.post(
+  //       baseUrl + "/api/v1/imageupload/multiple",
+  //       formData,
+  //       {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //           // Authorization: `Bearer ${userInfo?.token}`,
+  //         },
+  //       }
+  //     );
+  //     setInput((prevState: any) => ({
+  //       ...prevState,
+  //       images: data.data.IMAGES,
+  //     }));
+  //     setIsLoadingImg(false);
+  //   } catch (err: any) {
+  //     setIsLoadingImg(false);
+  //     console.log(
+  //       err.response && err.response.data.message
+  //         ? err.response.data.message
+  //         : err.message
+  //     );
+  //   }
+  // };
 
   return (
     <div>
       <form id="ticket-form" onSubmit={handleCreateTicket} ref={form}>
         <div className="form-grp">
           <label htmlFor="contact-details">To</label>
-          <ToSelect />
+          <ToSelect user={user} isLoading={isLoadingAll} handleOnChange={handleOnChange} input={input} />
         </div>
         <div className="form-grp">
           <label htmlFor="contact-details">Cc</label>
-          <CcSelect />
+          <CcSelect user={user} isLoading={isLoadingAll} />
         </div>
         <div className="form-grp">
           <label htmlFor="contact-details">Ticket Type</label>
           <input
             type="text"
             id="contact-details"
-            value={inputs.ticketType}
+            value={input.ticketType}
             disabled={true}
             required
             onChange={(e) => handleOnChange("ticketType", e.target.value)}
           />
         </div>
 
-        <div className="form-grp">
+        {/* <div className="form-grp">
           <label htmlFor="category">Issue Category</label>
           <select
             // placeholder="subject"
             id="category"
             required
-            value={inputs.issueCategory}
+            value={input.issueCategory}
             onChange={(e) => handleOnChange("issueCategory", e.target.value)}>
             <option></option>
             {issueCategories.map((item: any, i: any) => (
@@ -306,19 +285,10 @@ const TicketForm = ({ handleCloseModal, type }: any) => {
               </option>
             ))}
           </select>
-        </div>
+        </div> */}
         <div className="form-grp">
           <label htmlFor="description">Issue Description</label>
-          {/* <textarea
-            id="description"
-            rows={3}
-            required
-            value={inputs.issueDescription}
-            onChange={(e) => handleOnChange("issueDescription", e.target.value)}
-          /> */}
-
-
-          <ReactQuillWrapper />
+          <ReactQuillWrapper setValue={setValue} value={value} />
         </div>
         <div className="form-grp_row">
           <div className="form-grp">
@@ -326,9 +296,9 @@ const TicketForm = ({ handleCloseModal, type }: any) => {
             <input
               type="number"
               id="affected"
-              value={inputs.affectedUsers}
+              value={input.affectedUsers}
               required={
-                inputs.issueCategory === "Total DOWNTIME" ? false : true
+                input.issueCategory === "Total DOWNTIME" ? false : true
               }
               onChange={(e) => handleOnChange("affectedUsers", e.target.value)}
             />
@@ -348,7 +318,7 @@ const TicketForm = ({ handleCloseModal, type }: any) => {
                 }}
               />
             </label>
-            <select id="severity" value={inputs.severity} disabled>
+            <select id="severity" value={input.severity} disabled>
               <option></option>
               <option value="Low">Low</option>
               <option value="Medium">Medium</option>
@@ -359,55 +329,22 @@ const TicketForm = ({ handleCloseModal, type }: any) => {
         </div>
 
         <div className="form-grp">
-          <label htmlFor="attach-image">Attach Error Screen</label>
+          <label htmlFor="attach-image">Attach Screen</label>
           <input
             type="file"
             accept="image/*"
             multiple
-            onChange={handleUploadMultiImg}
+            // @ts-ignore 
+            onChange={(e) => handleOnChange("file", e.target.files)}
             id="attach-image"
           />
-          {isLoadingImg && <p style={{ color: "red" }}>Please wait...</p>}
         </div>
         <div className="form-grp_btn">
-          <button type="submit" id="custom-btn">
-            Submit
+          <button type="submit" id="custom-btn" disabled={createisLoading}>
+            {createisLoading ? <SVGLoader width={"35px"} height={"35px"} color={"#fff"} /> : "Submit"}
           </button>
-          {/* <button type="submit" disabled={loading}>
-            {loading ? "Submitting..." : "Submit"}
-          </button> */}
+
         </div>
-
-        {/* <div className="question-container" style={{ display: "none" }}>
-          <input
-            name="from_name"
-            id="from_name"
-            className="row-input"
-            type="text"
-            placeholder="Enter your name"
-            defaultValue={from_name}
-            onChange={(e) => setFrom_name(e.target.value)}
-          />
-          <input
-            name="to_name"
-            id="to_name"
-            className="row-input"
-            type="text"
-            placeholder="Enter your name"
-            defaultValue={to_name}
-            onChange={(e) => setTo_name(e.target.value)}
-          />
-
-          <textarea
-            name="message"
-            id="message"
-            className="row-input"
-            rows={5}
-            required
-            defaultValue={message} />
-
-
-        </div> */}
       </form>
     </div>
   );

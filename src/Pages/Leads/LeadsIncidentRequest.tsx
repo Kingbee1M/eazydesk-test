@@ -10,14 +10,31 @@ import LeadsHeader from '../../components/LeadsHeader';
 import SearchConponent from '../../components/SearchConponent';
 import TicketTableComponent from '../../components/Table/TicketTableComponent';
 import { data } from '../../components/StateData';
-import { EntriesPerPage } from '../../components/TableOptions';
+import { EntriesPerPage } from '../../components/Options';
 import IncidentRequestModal from '../../components/TicketModals/IncidentRequestModal';
+import { useAppDispatch, useAppSelector } from '../../store/useStore';
+import { getTicket } from '../../features/Ticket/ticketSlice';
 
 
 const LeadsIncidentRequest = () => {
+	const dispatch = useAppDispatch();
+	const { data: ticket, isLoading } = useAppSelector((state: any) => state.ticket)
+	const { createisSuccess } = useAppSelector((state: any) => state.ticket)
+	const data = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("INCIDENT REQUEST"));
+
+	useEffect(() => {
+		dispatch(getTicket())
+		if (createisSuccess) {
+			dispatch(getTicket())
+		}
+	}, [dispatch, createisSuccess])
+
+
 	const [startDates, setStartDates] = useState([]);
 	const [endDates, setEndDates] = useState([]);
 
+	// --- End Modal 
+	const [result, setResult] = useState("")
 	const [searchItem, setSearchItem] = useState("");
 	const [datas, setDatas] = useState([]);
 	const [entriesPerPage, setEntriesPerPage] = useState(() => {
@@ -25,8 +42,7 @@ const LeadsIncidentRequest = () => {
 	});
 
 
-	// --- End Modal 
-	const [result, setResult] = useState("")
+
 
 
 
@@ -72,8 +88,9 @@ const LeadsIncidentRequest = () => {
 						<TicketTableComponent
 							pageheader={"Incident Request"}
 							Request={"Incident Request"}
-							TYPE={"INCIDENT"}
-							data={data} />
+							TYPE={"INCIDENT REQUEST"}
+							data={data}
+							isLoading={isLoading} />
 					</div>
 				</div>
 			</main>

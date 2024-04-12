@@ -5,15 +5,27 @@ import { Modal } from "react-bootstrap";
 // import TicketForm from "../components/TicketForm";
 import { useNavigate } from "react-router-dom";
 import LeadsHeader from "../../components/LeadsHeader";
-import { EntriesPerPage } from "../../components/TableOptions";
+import { EntriesPerPage } from "../../components/Options";
 import { data } from "../../components/StateData";
 import TicketTableComponent from "../../components/Table/TicketTableComponent";
 import ChangeRequestModal from "../../components/TicketModals/ChangeRequestModal";
+import { useAppDispatch, useAppSelector } from "../../store/useStore";
+import { getTicket } from "../../features/Ticket/ticketSlice";
 
 
 
 const LeadsChangeRequest = () => {
-	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
+	const { data: ticket, isLoading } = useAppSelector((state: any) => state.ticket)
+	const { createisSuccess } = useAppSelector((state: any) => state.ticket)
+	const data = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("CHANGE REQUEST"));
+
+	useEffect(() => {
+		dispatch(getTicket())
+		if (createisSuccess) {
+			dispatch(getTicket())
+		}
+	}, [dispatch, createisSuccess])
 
 	const [result, setResult] = useState("");
 	const [entriesPerPage, setEntriesPerPage] = useState(() => {
@@ -47,8 +59,6 @@ const LeadsChangeRequest = () => {
 				<div className='request-container'>
 					<div className="container-items">
 						<h5 className='dashboard-first-card-h'>Incident Request</h5>
-
-
 						<div className="entries-perpage">
 							{data && (
 								<EntriesPerPage
@@ -56,8 +66,6 @@ const LeadsChangeRequest = () => {
 									entriesPerPage={entriesPerPage}
 									setEntriesPerPage={setEntriesPerPage}
 								/>
-
-
 							)}
 						</div>
 						<ChangeRequestModal headerTitle={"Raise a Ticket - Change Reques"} />
@@ -67,8 +75,9 @@ const LeadsChangeRequest = () => {
 						<TicketTableComponent
 							pageheader={"Incident Request"}
 							Request={"Incident Request"}
-							TYPE={"CHANGE"}
-							data={data} />
+							TYPE={"CHANGE REQUEST"}
+							data={data}
+							isLoading={isLoading} />
 					</div>
 				</div>
 			</main>

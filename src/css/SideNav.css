@@ -286,9 +286,9 @@ color: var(--black);
   transition: transform 0.3s ease; /* Apply transition animation */
 }
 
-.open {
-  transform: rotate(180deg); /* Rotate the arrow icon when dropdown is open */
-}
+/* .open {
+  transform: rotate(180deg);  
+} */
 
 
 .side_number{

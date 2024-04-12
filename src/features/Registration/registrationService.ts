@@ -4,10 +4,16 @@ import createHttpService from "../../helpers/HttpService";
  
  
 
- // Registration
-const userRegistration = async (value: any) => {   
+ // Sign-Up
+const signUp = async (inputs: any) => {   
   	const HttpService = createHttpService();
-  const { data } = await HttpService.post('/api/v1/auth/admin-register-user',value) 
+  const { data } = await HttpService.post('/api/v2/auth/signup-user',inputs) 
+  return data
+}
+ // Registration
+const userRegistration = async (input: any) => {   
+  	const HttpService = createHttpService();
+  const { data } = await HttpService.post('/api/v2/auth/admin-create-user',input) 
   return data
 }
 
@@ -38,15 +44,16 @@ const getUserByRole = async () => {
 const resetPassword = async (value: any) => {  
   const HttpService = createHttpService();
   const {id ,newPassword} = value
-  const { data } = await HttpService.post(`/api/v1/auth/reset-password/${id}` ,{"password":newPassword } )  
+  const { data } = await HttpService.post(`/api/v2/auth/reset-password/${id}` ,{"password":newPassword } )  
   return data
 }
 
 
-// Get user by Agent role
+// Edit User
 const edituser = async (value: any) => {  
+    const {id ,input} = value
     const HttpService = createHttpService();
-  const { data } = await HttpService.put( '/api/v1/auth/users/admin-update-user',value ) 
+  const { data } = await HttpService.put( `/api/v2/auth/admin-update-user/${id}`,input ) 
   return data
 }
 
@@ -59,6 +66,7 @@ const getsupervisors = async ( ) => {
 
 
 const registrationSlice = { 
+  signUp,
   userRegistration,
   getallReguser,
   getLoginUser,

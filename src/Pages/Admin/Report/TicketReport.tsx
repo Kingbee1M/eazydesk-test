@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import moment from "moment";
-import { EntriesPerPage, NoRecordFound, TableFetch } from "../../../components/TableOptions";
+import { EntriesPerPage, NoRecordFound, TableFetch } from "../../../components/Options";
 import Pagination from "../../../components/Pagination";
 import { data } from "../../../components/StateData";
 import SideNav from "../../../components/SideNav/SideNav";

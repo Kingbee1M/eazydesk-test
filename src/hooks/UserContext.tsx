@@ -5,7 +5,7 @@ export const UserContext = createContext({ user: null, updateUser: () => { } });
 // 2. Create a Provider Component
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 	// @ts-ignore 
-	const [user, setUser] = useState(JSON.parse(localStorage.getItem("service_desk")));
+	const [user, setUser] = useState(JSON?.parse(localStorage.getItem("service_desk")));
 
 	const updateUser = (userData: any) => {
 		console.log("userData", userData);

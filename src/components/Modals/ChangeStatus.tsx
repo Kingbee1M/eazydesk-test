@@ -1,5 +1,5 @@
 import Modal from 'react-bootstrap/Modal';
-import { customId } from '../TableOptions';
+import { customId } from '../Options';
 import ModalHeader from './ModalHeader';
 import { useNavigate } from 'react-router-dom';
 

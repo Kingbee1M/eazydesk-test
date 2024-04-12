@@ -1,6 +1,6 @@
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import { InputField } from '../TableOptions';
+import { InputField } from '../Options';
 import ModalHeader from './ModalHeader';
 
 const CraeteBoardTask = ({ showTask, setShowTask }: any) => {

@@ -1,13 +1,15 @@
-import { useState } from "react"; 
+import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import { SVGLoader } from "../SVGLoader";
+import { SVGLoader } from "../../../components/SVGLoader";
+import { useAppDispatch, useAppSelector } from "../../../store/useStore";
+import { reset, resetPassword } from "../../../features/Registration/registrationSlice";
+import { customId } from "../../../components/Options";
 
 
 
 const ResetPasswordModal = ({ id }: any) => {
-	 
-
-
+	const { resetPasswordisSuccess, resetPasswordisLoading } = useAppSelector((state: any) => state.reg);
+	const dispatch = useAppDispatch();
 	//  Update Current Password State
 	const [newPassword, setNewPassword] = useState("");
 	const [confirmNewPassword, setConfirmNewPassword] = useState("");
@@ -24,6 +26,15 @@ const ResetPasswordModal = ({ id }: any) => {
 		}
 	};
 
+	useEffect(() => {
+		if (resetPasswordisSuccess) {
+			toast.success("User Edited!", { toastId: customId });
+
+		};
+		setTimeout(() => {
+			dispatch(reset())
+		}, 5000);
+	}, [resetPasswordisLoading, dispatch, resetPasswordisSuccess]);
 
 
 
@@ -57,8 +68,8 @@ const ResetPasswordModal = ({ id }: any) => {
 						className='mt-4'
 						type="submit"
 						value="Submit"
-						disabled={false && true}>
-						{false ? <SVGLoader width={"30px"} height={"30px"} color={"#fff"} /> : "Submit"}
+						disabled={resetPasswordisLoading}>
+						{resetPasswordisLoading ? <SVGLoader width={"30px"} height={"30px"} color={"#fff"} /> : "Submit"}
 
 					</button>
 				</div>

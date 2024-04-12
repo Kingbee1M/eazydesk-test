@@ -1,6 +1,6 @@
 import React from 'react'
 import Modal from 'react-bootstrap/Modal';
-import { InputField, customId } from '../TableOptions';
+import { InputField, customId } from '../Options';
 import ModalHeader from './ModalHeader';
 import { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';

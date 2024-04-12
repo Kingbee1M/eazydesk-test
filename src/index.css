@@ -118,7 +118,7 @@ a {
 main {
   grid-area: main !important;
   padding: 2rem 2rem !important;
-  overflow-y: scroll!important; 
+  overflow: auto; 
 }
 
 table {
@@ -405,6 +405,9 @@ transition: opacity 150ms linear;
 @import url(./css/Pricing.css);  
 @import url(./css/SuccessPage.css);  
 @import url(./css/VerifyLoader.css);  
+@import url(./css/Delete.css);  
+@import url(./css/Company.css);  
+@import url(./css/UserProfile.css);  
 
  
 
@@ -415,7 +418,7 @@ transition: opacity 150ms linear;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  height: 70vh;
    /* Media query for smaller screens */
   @media (max-width: 600px) {
     height: 60vh;  
