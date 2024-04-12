@@ -10,7 +10,8 @@ const getTicket = async () => {
 }
 const getItTicket = async () => {
 	const HttpService = createHttpService();
-	const { data }: any = await HttpService.get(`/api/v2/ticket/it`)
+	const { data }: any = await HttpService.get(`/api/v2/ticket/itsupport`)
+
 	return data
 }
 
