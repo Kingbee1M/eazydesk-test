@@ -1,7 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { baseUrl } from "../../shared/baseUrl";
 import ToSelect from "./ToSelect";
 import CcSelect from "./CcSelect";
 import ReactQuillWrapper from "./ReactQuillWrapper";
@@ -10,12 +7,22 @@ import { createTicket, reset } from "../../features/Ticket/ticketSlice";
 import { SVGLoader } from "../SVGLoader";
 import { toast } from "react-toastify";
 import { customId } from "../Options";
+import { getallReguser } from "../../features/Registration/registrationSlice";
 
 
 
-const TicketForm = ({ type, user, isLoading, setShow }: any) => {
+const TicketForm = ({ type, setShow }: any) => {
   const { createisLoading, createisSuccess } = useAppSelector((state: any) => state.ticket)
   const dispatch = useAppDispatch();
+  const { dataAll, isLoadingAll } = useAppSelector((state: any) => state.reg);
+  const user = dataAll?.users
+
+  // console.log("user", user)
+
+  useEffect(() => {
+    // Fetch data when the component is mounted or dispatch changes
+    dispatch(getallReguser());
+  }, [dispatch]);
   const formData = new FormData();
   const form: any = useRef();
   const [value, setValue] = useState('');
@@ -46,7 +53,7 @@ const TicketForm = ({ type, user, isLoading, setShow }: any) => {
 
 
 
-  console.log("formData", input);
+  // console.log("formData", input);
 
 
 
@@ -69,8 +76,6 @@ const TicketForm = ({ type, user, isLoading, setShow }: any) => {
   });
 
 
-
-
   useEffect(() => {
     setInput((prevState: any) => {
       return ({
@@ -80,8 +85,6 @@ const TicketForm = ({ type, user, isLoading, setShow }: any) => {
       });
     });
   }, [value]);
-
-
 
 
   useEffect(() => {
@@ -249,11 +252,11 @@ const TicketForm = ({ type, user, isLoading, setShow }: any) => {
       <form id="ticket-form" onSubmit={handleCreateTicket} ref={form}>
         <div className="form-grp">
           <label htmlFor="contact-details">To</label>
-          <ToSelect user={user} isLoading={isLoading} handleOnChange={handleOnChange} input={input} />
+          <ToSelect user={user} isLoading={isLoadingAll} handleOnChange={handleOnChange} input={input} />
         </div>
         <div className="form-grp">
           <label htmlFor="contact-details">Cc</label>
-          <CcSelect user={user} isLoading={isLoading} />
+          <CcSelect user={user} isLoading={isLoadingAll} />
         </div>
         <div className="form-grp">
           <label htmlFor="contact-details">Ticket Type</label>
@@ -326,7 +329,7 @@ const TicketForm = ({ type, user, isLoading, setShow }: any) => {
         </div>
 
         <div className="form-grp">
-          <label htmlFor="attach-image">Attach Error Screen</label>
+          <label htmlFor="attach-image">Attach Screen</label>
           <input
             type="file"
             accept="image/*"
@@ -342,8 +345,6 @@ const TicketForm = ({ type, user, isLoading, setShow }: any) => {
           </button>
 
         </div>
-
-
       </form>
     </div>
   );

@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AdminDashboard from './Pages/Admin/Dashboard/AdminDashboard';
 import OpenTicket from "./Pages/Admin/Ticket/OpenTicket";
-import TicketProgress from "./Pages/Admin/Ticket/TicketProgress";
 import ClosedTicket from "./Pages/Admin/Ticket/ClosedTicket";
 import Settings from "./Pages/Admin/Settings/Settings";
 import TicketReport from "./Pages/Admin/Report/TicketReport";
@@ -25,7 +24,6 @@ import LeadsDashboard from "./Pages/Leads/LeadsDashboard";
 import LeadsIncidentRequest from "./Pages/Leads/LeadsIncidentRequest";
 import LeadsServiceRequest from "./Pages/Leads/LeadsServiceRequest";
 import LeadsChangeRequest from "./Pages/Leads/LeadsChangeRequest";
-import Chat from "./components/Chat/Chat";
 import SignUp from "./Pages/Login/SignUp";
 import Pricing from "./Pages/Login/Pricing";
 import Help from "./Pages/Login/Help";
@@ -34,6 +32,7 @@ import VerifyEmail from "./Pages/Login/VerifyEmail";
 import DashboardHUB from "./Pages/DashboardHub/DashboardHub";
 import ForgotPassword from "./Pages/Login/ForgotPassword";
 import ResetPassword from "./Pages/Login/ResetPassword";
+import TicketProgress from "./components/Chat/TicketProgress";
 
 
 function App() {
@@ -52,7 +51,6 @@ function App() {
         <Route path="/dashboard" element={<DashboardHUB />} />
         <Route path="/admindashboard" element={<AdminDashboard />} />
         <Route path="/openticket" element={<OpenTicket />} />
-        <Route path="/ticketprogress" element={<TicketProgress />} />
         <Route path="/closedticket" element={<ClosedTicket />} />
         <Route path="/incidentrequest" element={<IncidentRequest />} />
         <Route path="/servicerequest" element={<ServiceRequest />} />
@@ -62,7 +60,7 @@ function App() {
         <Route path="/settings" element={<Settings />} />
         <Route path="/report" element={<TicketReport />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/ticket-progress/:id" element={<Chat />} />
+        <Route path="/ticket-progress/:id" element={<TicketProgress />} />
         {/* IT Screens */}
         <Route path="/itdashboard" element={<ITDashboard />} />
         <Route path="/itopenticket" element={<ITOpenTicket />} />

@@ -34,7 +34,7 @@ const Header = () => {
 
   return (
     <div id="header">
-      <SearchInput />
+      {/* <SearchInput /> */}
       <NetworkConnetion />
       <div className='FaPlus-icon-container' >
         <div className='FaPlus-icon-container_sup'>

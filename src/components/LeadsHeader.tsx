@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import { logoutUserAction } from "../features/Auth/authService";
 import { logout, reset } from "../features/Auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../store/useStore";
+import UserProfile from "../Pages/Leads/UserProfile";
 
 // Create an instance of DataService
 const dataService = DataService();
@@ -93,6 +94,7 @@ const LeadsHeader = () => {
 
 	return (
 		<header className="client-header">
+
 			{/* <NetworkConnetion /> */}
 			<Link to="/dashboard" className="logo">
 				<div className="logo_area_leads">
@@ -115,6 +117,7 @@ const LeadsHeader = () => {
 				<p>{userInfo?.firstname}</p>
 				<MdKeyboardArrowDown size={25} color={"rgba(0,0,0,.5)"} />
 			</div>
+
 			<div className={dropdown ? "dropdown display" : "dropdown"}>
 				<div className="dropdown-container">
 					<div className="drop-item" onClick={handleClick}>
@@ -148,10 +151,11 @@ const LeadsHeader = () => {
 						</NavLink>
 					))}
 					<div className="dropdown-container2">
-						<div onClick={handleClick}>
+
+						{/* <div onClick={handleClick}>
 							<FiUser size={25} className="dropdown-a" />
 							<span>Profile</span>
-						</div>
+						</div> */}
 						<div
 							onClick={handleLogout}>
 							<RiLogoutCircleRLine size={25} className="dropdown-a" />
@@ -175,6 +179,7 @@ const LeadsHeader = () => {
 					setRoleName={setRoleName}
 					roleName={roleName}
 				/> */}
+				{/* <UserProfile lgShow={lgShow} setLgShow={setLgShow} /> */}
 			</div>
 		</header>
 	);

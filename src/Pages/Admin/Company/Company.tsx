@@ -31,9 +31,7 @@ const Company = () => {
 
 
 	useEffect(() => {
-		if (deleteisSuccess) {
-			dispatch(getCompany());
-		} else if (updateisSuccess) {
+		if (deleteisSuccess || updateisSuccess) {
 			dispatch(getCompany());
 		}
 		// If success is true, fetch data again
@@ -41,7 +39,7 @@ const Company = () => {
 	}, [deleteisSuccess, dispatch, updateisSuccess]);
 
 
-	console.log('data', data)
+
 
 	return (
 		<div id="page-wrapper">

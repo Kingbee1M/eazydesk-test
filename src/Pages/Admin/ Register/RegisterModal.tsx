@@ -7,6 +7,7 @@ import { getCompany } from '../../../features/Company/companySlice';
 import { useAppDispatch, useAppSelector } from '../../../store/useStore';
 import { reset, userRegistration } from '../../../features/Registration/registrationSlice';
 import { FiPlus } from 'react-icons/fi';
+import { customId } from '../../../components/Options';
 
 
 const RegisterModal = () => {
@@ -25,24 +26,27 @@ const RegisterModal = () => {
 		companyId: ""
 	})
 
-	console.log('data', data)
-
-
 
 	useEffect(() => {
 		dispatch(getCompany());
 	}, [dispatch])
 
 	useEffect(() => {
-		if (isError) {
-			toast.error(message);
-		} else if (isSuccess) {
-			toast.success("User Created");
+		if (isSuccess) {
+			toast.success("User Created", { toastId: customId });
 			setShow(false)
+			setInput({
+				firstname: "",
+				lastname: "",
+				email: "",
+				role: "",
+				password: "",
+				companyId: ""
+			})
 		}
-		setTimeout(() => {
-			dispatch(reset())
-		}, 5000);
+		// setTimeout(() => {
+		dispatch(reset())
+		// }, 5000);
 	}, [isError, message, dispatch, isSuccess])
 
 
@@ -62,10 +66,10 @@ const RegisterModal = () => {
 
 	return (
 		<div>
+			<ToastContainer position="top-right" />
 			<button className='btn' onClick={() => setShow(true)}>
 				<FiPlus size={18} /> <span>Register users</span>
 			</button>
-			<ToastContainer position="top-right" />
 
 			<Modal
 				size="lg"

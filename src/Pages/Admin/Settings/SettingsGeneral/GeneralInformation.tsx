@@ -77,9 +77,6 @@ const GeneralInformation = () => {
 								onChange={(e) => handleChange("address", e.target.value)}
 								required />
 						</div>
-
-
-
 					</div>
 				</form>
 			</div>
