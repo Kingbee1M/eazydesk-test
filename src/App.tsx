@@ -33,6 +33,7 @@ import DashboardHUB from "./Pages/DashboardHub/DashboardHub";
 import ForgotPassword from "./Pages/Login/ForgotPassword";
 import ResetPassword from "./Pages/Login/ResetPassword";
 import TicketProgress from "./components/Chat/TicketProgress";
+import InProgress from "./Pages/Admin/Ticket/InProgress";
 
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
         <Route path="/incidentrequest" element={<IncidentRequest />} />
         <Route path="/servicerequest" element={<ServiceRequest />} />
         <Route path="/changerequest" element={<ChangeRequest />} />
+        <Route path="/ticketprogress" element={<InProgress />} />
         <Route path="/company" element={<Company />} />
         <Route path="/companymembers/:id" element={<CompanyMembers />} />
         <Route path="/settings" element={<Settings />} />
@@ -70,15 +72,9 @@ function App() {
         <Route path="/itservicerequest" element={<ITServiceRequest />} />
         <Route path="/itchangerequest" element={<ITChangeRequest />} />
         <Route path="/itsettings" element={<ITSettings />} />
+        <Route path="/supervisorsettings" element={<ITSettings />} />
         {/* IT Screens */}
         <Route path="/supervisordashboard" element={<SupervisorDashboard />} />
-        <Route path="/itopenticket" element={<ITOpenTicket />} />
-        <Route path="/itticketprogress" element={<ITTicketProgress />} />
-        <Route path="/itclosedticket" element={<ITClosedTicket />} />
-        <Route path="/itincidentrequest" element={<ITIncidentRequest />} />
-        <Route path="/itservicerequest" element={<ITServiceRequest />} />
-        <Route path="/itchangerequest" element={<ITChangeRequest />} />
-        <Route path="/supervisorsettings" element={<ITSettings />} />
         {/* Leads Screen */}
         <Route path="/leadsdashboard" element={<LeadsDashboard />} />
         <Route path="/incident-request" element={<LeadsIncidentRequest />} />

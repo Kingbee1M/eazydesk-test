@@ -164,7 +164,7 @@ const SideNav = () => {
         </NavLink>
       </nav>}
 
-     <nav>
+      <nav>
         <NavLink to="/register" className={({ isActive }) =>
           [
             "nav-link",

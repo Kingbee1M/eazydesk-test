@@ -8,9 +8,19 @@ import { useAppDispatch, useAppSelector } from '../../../store/useStore';
 import { reset, userRegistration } from '../../../features/Registration/registrationSlice';
 import { FiPlus } from 'react-icons/fi';
 import { customId } from '../../../components/Options';
+import { getUserPrivileges } from '../../../hooks/auth';
 
 
 const RegisterModal = () => {
+	const {
+		isSuperAdmin,
+		isAdmin
+	} = getUserPrivileges();
+	// @ts-ignore  
+	const userInfo = JSON.parse(localStorage.getItem("service_desk"));
+
+
+
 	const [show, setShow] = useState(false);
 	const dispatch = useAppDispatch();
 	const { data } = useAppSelector((state: any) => state.company)
@@ -26,10 +36,24 @@ const RegisterModal = () => {
 		companyId: ""
 	})
 
+	useEffect(() => {
+		if (isAdmin) {
+			setInput((prevState: any) => {
+				return ({
+					...prevState,
+					companyId: userInfo?.companyId,
+				});
+			});
+		}
+
+	}, [isAdmin, userInfo?.companyId]);
+
 
 	useEffect(() => {
-		dispatch(getCompany());
-	}, [dispatch])
+		if (isSuperAdmin) {
+			dispatch(getCompany());
+		}
+	}, [dispatch, isSuperAdmin])
 
 	useEffect(() => {
 		if (isSuccess) {
@@ -123,7 +147,7 @@ const RegisterModal = () => {
 										value={input?.password}
 										onChange={(e) => handleOnChange("password", e.target.value)} required />
 								</div>
-								<div className="input__box">
+								{isSuperAdmin && <div className="input__box">
 									<span className="details">Company</span>
 									<select name="country" id="register-select"
 										value={input?.companyId}
@@ -135,7 +159,8 @@ const RegisterModal = () => {
 											</option>
 										))}
 									</select>
-								</div>
+								</div>}
+
 							</div>
 							<div className="Register-button-container">
 								<button
