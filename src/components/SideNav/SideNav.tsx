@@ -164,7 +164,7 @@ const SideNav = () => {
         </NavLink>
       </nav>}
 
-      {isSuperAdmin && <nav>
+     <nav>
         <NavLink to="/register" className={({ isActive }) =>
           [
             "nav-link",
@@ -176,7 +176,7 @@ const SideNav = () => {
           <LuUsers size={15} />
           <span>Register</span>
         </NavLink>
-      </nav>}
+      </nav>
       <nav>
         <NavLink to="/report" className={({ isActive }) =>
           [
