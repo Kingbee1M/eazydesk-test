@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import moment from "moment";
 import { OverlayTrigger, Image, Tooltip, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -6,6 +6,8 @@ import { baseUrl } from "../../shared/baseUrl";
 import ViewTicketDetailsModal from "../Modals/ViewTicketDetailsModal";
 import { NoRecordFound, TableFetch } from "../Options";
 import AssignTask from "../Modals/AssignTask";
+import { admingetTicket } from "../../features/Ticket/ticketSlice";
+import { useAppDispatch, useAppSelector } from "../../store/useStore";
 
 const TicketTableComponent = ({
  pageheader,
@@ -27,7 +29,26 @@ const TicketTableComponent = ({
  const [Unassigned, setUnassigned] = useState(false);
 
 
+  const dispatch = useAppDispatch();
+  const { admingetticketdata: ticket } = useAppSelector((state: any) => state.ticket)
+  
+  console.log("All tickets:", ticket)
+    
+	useEffect(() => {
+		dispatch(admingetTicket())
+		
+	}, [dispatch])
+  
+	// useEffect(() => {
+	// 	dispatch(getTicket())
+	// 	if (isSuccess) {
+	// 		dispatch(getTicket())
+	// 	}
+	// }, [dispatch, isSuccess])
 
+	// const INCIDENT = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("INCIDENT REQUEST"));
+	// const SERVICE = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("SERVICE REQUEST"));
+	// const CHANGE = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("CHANGE REQUEST"));
 
 
  return (
