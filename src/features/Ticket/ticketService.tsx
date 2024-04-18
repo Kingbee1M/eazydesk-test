@@ -1,4 +1,6 @@
+import axios from "axios";
 import createHttpService from "../../helpers/HttpService";
+import { baseUrl, buildDynamicURL } from "../../shared/baseUrl";
 
 
 
@@ -8,14 +10,21 @@ const getTicket = async () => {
 	const { data }: any = await HttpService.get(`/api/v2/ticket`)
 	return data
 }
-const getItTicket = async () => {
-	const HttpService = createHttpService();
-	const { data }: any = await HttpService.get(`/api/v2/ticket/itsupport`)
+const getItTicket = async (datas: any) => {
+	const { endDate, startDate, limit, page, ticketType } = datas
+	const base = baseUrl + `/api/v2/ticket/itsupport`
+	const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType);
+	// const HttpService = createHttpService();
+	// const { data }: any = await HttpService.get(url)
+	const { data } = await axios.get(url)
 	return data
 }
-const admingetTicket = async () => {
-	const HttpService = createHttpService();
-	const { data }: any = await HttpService.get(`/api/v2/ticket/admin`)
+const admingetTicket = async (datas: any) => {
+	const { endDate, startDate, limit, page, ticketType } = datas
+	const base = baseUrl + `/api/v2/ticket/admin`
+	const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType);
+	const { data } = await axios.get(url)
+
 	return data
 }
 
