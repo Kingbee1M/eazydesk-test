@@ -18,9 +18,9 @@ const userRegistration = async (input: any) => {
 }
 
  // Get All Reguser
-const getallReguser = async () => {  
+const getallReguser = async (id:any) => {   
   const HttpService = createHttpService();
-  const { data } = await HttpService.get('/api/v2/auth/users' ) 
+  const { data } = await HttpService.get(id?`/api/v2/auth/users/${id}`:`/api/v2/auth/users` ) 
   return data
 }
 

@@ -3,6 +3,7 @@ import authSlice from '../features/Auth/authSlice'
 import registrationSlice from '../features/Registration/registrationSlice'
 import companySlice from '../features/Company/companySlice'
 import ticketSlice from '../features/Ticket/ticketSlice'
+import commentSlice from '../features/Comment/commentSlice'
   
  
   
@@ -12,6 +13,7 @@ export const store = configureStore({
     reg: registrationSlice, 
     company: companySlice, 
     ticket: ticketSlice, 
+    comment: commentSlice, 
   },
 })
 

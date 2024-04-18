@@ -43,7 +43,7 @@ const ChangeRequest = () => {
 
 
 	useEffect(() => {
-		const datas = { ticketType: "changeRequest" };
+		const datas = { ticketType: "CHANGE" };
 		// @ts-ignore 
 		dispatch(admingetTicket(datas))
 

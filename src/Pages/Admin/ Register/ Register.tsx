@@ -11,12 +11,15 @@ import { getallReguser } from '../../../features/Registration/registrationSlice'
 import Pagination from '../../../components/Pagination';
 import TableLoader from '../../../components/TableLoader';
 import { NoRecordFound, TableFetch } from '../../../components/Options';
+import { getUserPrivileges } from '../../../hooks/auth';
 
 
 
 const Register = ({ switchs }: any) => {
-
-
+	// @ts-ignore 
+	const userInfo = JSON.parse(localStorage.getItem("service_desk"));
+	const { isAdmin } = getUserPrivileges();
+	const id = isAdmin ? userInfo?.companyId : null
 	const [showEditUser, setShowEditUser] = useState(false)
 	const dispatch = useAppDispatch();
 	const { dataAll, isLoadingAll } = useAppSelector((state: any) => state.reg);
@@ -37,15 +40,18 @@ const Register = ({ switchs }: any) => {
 
 	// Data Fetching (Conditional) Effect
 	useEffect(() => {
+
 		if (isSuccess || edituserisSuccess) {
 			// If success is true, fetch data again
-			dispatch(getallReguser());
+			// @ts-ignore 
+			dispatch(getallReguser(id));
 		} else {
 			// Fetch data when the component is mounted or dispatch changes
-			dispatch(getallReguser());
+			// @ts-ignore 
+			dispatch(getallReguser(id));
 		}
 
-	}, [dispatch, edituserisSuccess, isSuccess]);
+	}, [dispatch, edituserisSuccess, id, isSuccess]);
 
 	// Local Storage Effect
 	useEffect(() => {
