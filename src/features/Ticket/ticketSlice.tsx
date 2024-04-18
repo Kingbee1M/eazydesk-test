@@ -21,6 +21,12 @@ const initialState = {
 	createisLoading: false,
 	createmessage: '',
 
+	admingetticketdata: [],
+	admingetticketisError: false,
+	admingetticketisSuccess: false,
+	admingetticketisLoading: false,
+	admingetticketmessage: '',
+
 	// viewdata: [],
 	// viewisError: false,
 	// viewisSuccess: false,
@@ -124,6 +130,17 @@ export const getItTicket = createAsyncThunk('ticket/getItTicket', async (data, t
 export const createTicket = createAsyncThunk('ticket/createTicket', async (data, thunkAPI) => {
 	try {
 		return await ticketService.createTicket(data)
+	} catch (error: any) {
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		return thunkAPI.rejectWithValue(message)
+	}
+})
+
+// admin get all ticket
+export const admingetTicket = createAsyncThunk('ticket/admingetTicket', async (data, thunkAPI) => {
+	try {
+		return await ticketService.admingetTicket()
 	} catch (error: any) {
 		const message = error?.response?.data?.message ||
 			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
@@ -283,6 +300,12 @@ export const ticketSlice = createSlice({
 			state.createisError = false
 			state.createmessage = ''
 
+			
+			state.admingetticketisLoading = false
+			state.admingetticketisSuccess=  false
+			state.admingetticketisError = false
+			state.admingetticketmessage = ''
+
 			// state.viewisLoading = false
 			// state.viewisSuccess = false
 			// state.viewisError = false
@@ -392,6 +415,24 @@ export const ticketSlice = createSlice({
 				state.createmessage = action.payload
 				state.createdata = null
 			})
+
+
+
+			.addCase(admingetTicket.pending, (state) => {
+				state.admingetticketisLoading = true
+			})
+			.addCase(admingetTicket.fulfilled, (state: any, action) => {
+				state.admingetticketisLoading = false
+				state.admingetticketisSuccess = true
+				state.admingetticketdata = action.payload?.data
+			})
+			.addCase(admingetTicket.rejected, (state: any, action) => {
+				state.admingetticketisLoading = false
+				state.admingetticketisError = true
+				state.admingetticketmessage = action.payload
+				state.admingetticketdata = null
+			})
+
 
 
 		// .addCase(viewTicket.pending, (state) => {
