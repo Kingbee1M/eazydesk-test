@@ -30,7 +30,7 @@ const TicketTableComponent = ({
 
 
   const dispatch = useAppDispatch();
-  const { admingetticketdata: ticket } = useAppSelector((state: any) => state.ticket)
+  const { admingetticketdata: ticket , admingetticketisSuccess} = useAppSelector((state: any) => state.ticket)
   
   console.log("All tickets:", ticket)
     
@@ -40,9 +40,9 @@ const TicketTableComponent = ({
 	}, [dispatch])
   
 	// useEffect(() => {
-	// 	dispatch(getTicket())
-	// 	if (isSuccess) {
-	// 		dispatch(getTicket())
+	// 	dispatch(admingetTicket())
+	// 	if (admingetticketisSuccess) {
+	// 		dispatch(admingetTicket())
 	// 	}
 	// }, [dispatch, isSuccess])
 
