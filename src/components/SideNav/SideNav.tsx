@@ -177,7 +177,6 @@ const SideNav = () => {
           <span>Register</span>
         </NavLink>
       </nav>
-
       <nav>
         <NavLink to="/report" className={({ isActive }) =>
           [

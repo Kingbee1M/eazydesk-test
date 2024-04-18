@@ -5,23 +5,23 @@ import { baseUrl, buildDynamicURL } from "../../shared/baseUrl";
 
 
 
-const getTicket = async () => {
+const getComment = async () => {
 	const HttpService = createHttpService();
-	const { data }: any = await HttpService.get(`/api/v2/ticket`)
+	const { data }: any = await HttpService.get(`/api/v2/comment?ticketId`)
 	return data
 }
-const getItTicket = async (datas: any) => {
-	const { endDate, startDate, limit, page, ticketType, ticketId } = datas
-	const base = baseUrl + `/api/v2/ticket/itsupport`
+const getItComment = async (datas: any) => {
+	const { endDate, startDate, limit, page, ticketType, ticketId} = datas
+	const base = baseUrl + `/api/v2/comment?ticketId`
 	const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType, ticketId);
 	// const HttpService = createHttpService();
 	// const { data }: any = await HttpService.get(url)
 	const { data } = await axios.get(url)
 	return data
 }
-const admingetTicket = async (datas: any) => {
-	const { endDate, startDate, limit, page, ticketType, ticketId } = datas
-	const base = baseUrl + `/api/v2/ticket/admin`
+const admingetComment = async (datas: any) => {
+	const { endDate, startDate, limit, page, ticketType, ticketId} = datas
+	const base = baseUrl + `/api/v2/comment?ticketId`
 	const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType, ticketId);
 	const { data } = await axios.get(url)
 
@@ -34,9 +34,9 @@ const admingetTicket = async (datas: any) => {
 // 	return data
 // }
 
-const createTicket = async (formData: any) => {
+const createComment = async (formData: any) => {
 	const HttpService = createHttpService();
-	const { data }: any = await HttpService.post(`/api/v2/ticket`, formData)
+	const { data }: any = await HttpService.post(`/api/v2/comment?ticketId`, formData)
 	return data
 }
 // const assignTicket = async (input: any) => {
@@ -108,11 +108,11 @@ const createTicket = async (formData: any) => {
 
 
 
-const ticketService = {
-	getTicket,
-	createTicket,
-	getItTicket,
-	admingetTicket,
+const commentService = {
+	getComment,
+	// createTicket,
+	// getItTicket,
+	// admingetTicket,
 	// viewTicket,
 	// deleteTicket,
 	// updateTicket,
@@ -127,4 +127,4 @@ const ticketService = {
 	// getSupervisorTicket
 }
 
-export default ticketService
+export default commentService
