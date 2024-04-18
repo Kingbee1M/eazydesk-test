@@ -11,18 +11,18 @@ const getTicket = async () => {
 	return data
 }
 const getItTicket = async (datas: any) => {
-	const { endDate, startDate, limit, page, ticketType } = datas
+	const { endDate, startDate, limit, page, ticketType, ticketId } = datas
 	const base = baseUrl + `/api/v2/ticket/itsupport`
-	const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType);
+	const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType, ticketId);
 	// const HttpService = createHttpService();
 	// const { data }: any = await HttpService.get(url)
 	const { data } = await axios.get(url)
 	return data
 }
 const admingetTicket = async (datas: any) => {
-	const { endDate, startDate, limit, page, ticketType } = datas
+	const { endDate, startDate, limit, page, ticketType, ticketId } = datas
 	const base = baseUrl + `/api/v2/ticket/admin`
-	const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType);
+	const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType, ticketId);
 	const { data } = await axios.get(url)
 
 	return data
