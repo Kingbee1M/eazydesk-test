@@ -140,7 +140,7 @@ export const createTicket = createAsyncThunk('ticket/createTicket', async (data,
 // admin get all ticket
 export const admingetTicket = createAsyncThunk('ticket/admingetTicket', async (data, thunkAPI) => {
 	try {
-		return await ticketService.admingetTicket()
+		return await ticketService.admingetTicket(data)
 	} catch (error: any) {
 		const message = error?.response?.data?.message ||
 			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
@@ -300,9 +300,9 @@ export const ticketSlice = createSlice({
 			state.createisError = false
 			state.createmessage = ''
 
-			
+
 			state.admingetticketisLoading = false
-			state.admingetticketisSuccess=  false
+			state.admingetticketisSuccess = false
 			state.admingetticketisError = false
 			state.admingetticketmessage = ''
 
