@@ -3,22 +3,30 @@
 const NetworkConnetion = () => {
 
 
-  window.addEventListener("offline", () => {
-    const online: any = document.getElementById("online");
-    const offline: any = document.getElementById("offline");
-    online.style.display = "none";
-    offline.style.display = "block";
+  document.addEventListener("DOMContentLoaded", function () {
+    // Your JavaScript code here
+    window.addEventListener("offline", () => {
+      const online = document.getElementById("online");
+      const offline = document.getElementById("offline");
+      if (online && offline) {
+        online.style.display = "none";
+        offline.style.display = "block";
+      }
+    });
+
+    window.addEventListener("online", () => {
+      const online = document.getElementById("online");
+      const offline = document.getElementById("offline");
+      if (online && offline) {
+        online.style.display = "block";
+        offline.style.display = "none";
+        setInterval(async () => {
+          online.style.display = "none";
+        }, 10000);
+      }
+    });
   });
 
-  window.addEventListener("online", () => {
-    const online: any = document.getElementById("online");
-    const offline: any = document.getElementById("offline");
-    online.style.display = "block";
-    offline.style.display = "none";
-    setInterval(async () => {
-      online.style.display = "none";
-    }, 10000);
-  });
 
 
 

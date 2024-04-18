@@ -7,9 +7,9 @@ export const buildDynamicURL = (id: any, fromDate: any, endDate: any, limit: any
   const queryParams = [];
 
     // Add 'id' to the query parameters if it's not null or undefined
-  // if (id !== null && id !== undefined) {
-  //   queryParams.push(`id=${id}`);
-  // }
+  if (id !== null && id !== undefined) {
+    queryParams.push(`id=${id}`);
+  }
 
   // Add 'ticketId' to the query parameters if it's not null or undefined
   if (ticketId !== null && ticketId !== undefined && !Array.isArray(ticketId)) {

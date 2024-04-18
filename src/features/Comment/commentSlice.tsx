@@ -104,9 +104,9 @@ const initialState = {
 
 
 // Get getTicket
-export const getComment = createAsyncThunk('ticket/getTicket', async (data, thunkAPI) => {
+export const getComment = createAsyncThunk('comment/getComment', async (data, thunkAPI) => {
 	try {
-		return await commentService.getComment()
+		return await commentService.getComment(data)
 	} catch (error: any) {
 		const message = error?.response?.data?.message ||
 			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
@@ -384,54 +384,54 @@ export const commentSlice = createSlice({
 			})
 
 
-			// .addCase(getItComment.pending, (state) => {
-			// 	state.itisLoading = true
-			// })
-			// .addCase(getItComment.fulfilled, (state: any, action) => {
-			// 	state.itisLoading = false
-			// 	state.itisSuccess = true
-			// 	state.itdata = action.payload?.data
-			// })
-			// .addCase(getItComment.rejected, (state: any, action) => {
-			// 	state.itisLoading = false
-			// 	state.itisError = true
-			// 	state.itmessage = action.payload
-			// 	state.itdata = null
-			// })
+		// .addCase(getItComment.pending, (state) => {
+		// 	state.itisLoading = true
+		// })
+		// .addCase(getItComment.fulfilled, (state: any, action) => {
+		// 	state.itisLoading = false
+		// 	state.itisSuccess = true
+		// 	state.itdata = action.payload?.data
+		// })
+		// .addCase(getItComment.rejected, (state: any, action) => {
+		// 	state.itisLoading = false
+		// 	state.itisError = true
+		// 	state.itmessage = action.payload
+		// 	state.itdata = null
+		// })
 
 
 
-			// .addCase(createTicket.pending, (state) => {
-			// 	state.createisLoading = true
-			// })
-			// .addCase(createTicket.fulfilled, (state: any, action) => {
-			// 	state.createisLoading = false
-			// 	state.createisSuccess = true
-			// 	state.createdata = action.payload?.data
-			// })
-			// .addCase(createTicket.rejected, (state: any, action) => {
-			// 	state.createisLoading = false
-			// 	state.createisError = true
-			// 	state.createmessage = action.payload
-			// 	state.createdata = null
-			// })
+		// .addCase(createTicket.pending, (state) => {
+		// 	state.createisLoading = true
+		// })
+		// .addCase(createTicket.fulfilled, (state: any, action) => {
+		// 	state.createisLoading = false
+		// 	state.createisSuccess = true
+		// 	state.createdata = action.payload?.data
+		// })
+		// .addCase(createTicket.rejected, (state: any, action) => {
+		// 	state.createisLoading = false
+		// 	state.createisError = true
+		// 	state.createmessage = action.payload
+		// 	state.createdata = null
+		// })
 
 
 
-			// .addCase(admingetTicket.pending, (state) => {
-			// 	state.admingetticketisLoading = true
-			// })
-			// .addCase(admingetTicket.fulfilled, (state: any, action) => {
-			// 	state.admingetticketisLoading = false
-			// 	state.admingetticketisSuccess = true
-			// 	state.admingetticketdata = action.payload?.data
-			// })
-			// .addCase(admingetTicket.rejected, (state: any, action) => {
-			// 	state.admingetticketisLoading = false
-			// 	state.admingetticketisError = true
-			// 	state.admingetticketmessage = action.payload
-			// 	state.admingetticketdata = null
-			// })
+		// .addCase(admingetTicket.pending, (state) => {
+		// 	state.admingetticketisLoading = true
+		// })
+		// .addCase(admingetTicket.fulfilled, (state: any, action) => {
+		// 	state.admingetticketisLoading = false
+		// 	state.admingetticketisSuccess = true
+		// 	state.admingetticketdata = action.payload?.data
+		// })
+		// .addCase(admingetTicket.rejected, (state: any, action) => {
+		// 	state.admingetticketisLoading = false
+		// 	state.admingetticketisError = true
+		// 	state.admingetticketmessage = action.payload
+		// 	state.admingetticketdata = null
+		// })
 
 
 

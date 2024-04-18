@@ -5,13 +5,13 @@ import { baseUrl, buildDynamicURL } from "../../shared/baseUrl";
 
 
 
-const getComment = async () => {
+const getComment = async (id: any) => {
 	const HttpService = createHttpService();
-	const { data }: any = await HttpService.get(`/api/v2/comment?ticketId`)
+	const { data }: any = await HttpService.get(`/api/v2/comment/${id}`)
 	return data
 }
 const getItComment = async (datas: any) => {
-	const { endDate, startDate, limit, page, ticketType, ticketId} = datas
+	const { endDate, startDate, limit, page, ticketType, ticketId } = datas
 	const base = baseUrl + `/api/v2/comment?ticketId`
 	const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType, ticketId);
 	// const HttpService = createHttpService();
@@ -20,7 +20,7 @@ const getItComment = async (datas: any) => {
 	return data
 }
 const admingetComment = async (datas: any) => {
-	const { endDate, startDate, limit, page, ticketType, ticketId} = datas
+	const { endDate, startDate, limit, page, ticketType, ticketId } = datas
 	const base = baseUrl + `/api/v2/comment?ticketId`
 	const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType, ticketId);
 	const { data } = await axios.get(url)
