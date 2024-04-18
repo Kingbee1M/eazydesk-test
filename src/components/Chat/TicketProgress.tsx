@@ -1,19 +1,18 @@
-
-
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import moment from "moment";
 
 import { useParams } from "react-router-dom";
 import { MdOutlineClose } from "react-icons/md";
-import { BsChatLeftText } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import ProgressChat from "./ProgressChat";
+import { useAppDispatch, useAppSelector } from "../../store/useStore";
+import { getComment } from "../../features/Comment/commentSlice";
 
 const TicketProgress = () => {
-
 	const { id }: any = useParams();
+	const dispatch = useAppDispatch();
 	const form: any = useRef();
-
+	const { data, isLoading, isSuccess, message } = useAppSelector((state: any) => state.comment)
 	const [ticket, setTicket] = useState<any>({});
 	const [ticketStatus, setTicketStatus] = useState("");
 	const [email, setEmail] = useState("");
@@ -23,9 +22,17 @@ const TicketProgress = () => {
 
 	// const { data } = useSelector((state: any) => state.ticketByID);
 
+	console.log('data-data-@ts-ignore', data)
 
+	useEffect(() => {
+		// if (deleteisSuccess || updateisSuccess) {
+		// 	dispatch(getCompany());
+		// }
 
-
+		// If success is true, fetch data again
+		// @ts-ignore  
+		dispatch(getComment(id));
+	}, [isSuccess, dispatch, id]);
 
 
 	// useEffect(() => {
@@ -48,16 +55,18 @@ const TicketProgress = () => {
 		}
 	};
 
+	console.log('tickeidt', id)
+
 	return (
 		<div>
 			<header className="ChatProgressView-header">
 				<div>
 					<span className="in-progresss">
 						{ticket?.ticketType === "INCIDENT"
-							? "INC - " + ticket?.ticketId
+							? "INCIDENT"
 							: ticket?.ticketType === "SERVICE"
-								? "SRV - " + ticket?.ticketId
-								: "CHG - " + ticket?.ticketId}
+								? "SERVICE"
+								: "CHANGE"}
 					</span>
 				</div>
 				<div className="ChatProgressView-close">
@@ -139,45 +148,12 @@ const TicketProgress = () => {
 										</select>
 										{/* <button
 											type="button"
-											disabled={isLoadingUpdateTicketStatus}
+											disabled={false}
 											onClick={handleUpdateTicketStatus}>
-											{isLoadingUpdateTicketStatus ? "Updating.." : "Update"}
+											{false ? "Updating.." : "Update"}
 										</button> */}
 
-										<div
-											className="question-container"
-											style={{ display: "none" }}>
-											<input
-												name="from_name"
-												id="from_name"
-												className="row-input"
-												type="text"
-												placeholder="Enter your name"
-												defaultValue={from}
-											/>
-											<input
-												name="to_name"
-												id="to_name"
-												className="row-input"
-												type="text"
-												placeholder="Enter your name"
-												defaultValue={to}
-											/>
-											<input
-												name="email"
-												id="email"
-												className="row-input"
-												type="text"
-												defaultValue={email}
-											/>
-											<textarea
-												name="message"
-												id="message"
-												className="row-input"
-												rows={5}
-												required
-												value={updatemessage}></textarea>
-										</div>
+
 									</form>
 								)}
 							</div>

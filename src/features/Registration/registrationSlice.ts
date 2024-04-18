@@ -81,9 +81,9 @@ export const userRegistration = createAsyncThunk('register/userRegistration', as
  
  
 // Registration User
-export const getallReguser = createAsyncThunk('register/getallReguser', async (  data,thunkAPI) => {
+export const getallReguser = createAsyncThunk('register/getallReguser', async (data,thunkAPI) => {
   try { 
-    return await registrationService.getallReguser()
+    return await registrationService.getallReguser(data)
   } catch (error:any) {
       const message = error?.response?.data?.message ||
     (error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
