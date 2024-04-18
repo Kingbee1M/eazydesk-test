@@ -117,7 +117,7 @@ export const getTicket = createAsyncThunk('ticket/getTicket', async (data, thunk
 // Get IT Ticket
 export const getItTicket = createAsyncThunk('ticket/getItTicket', async (data, thunkAPI) => {
 	try {
-		return await ticketService.getItTicket()
+		return await ticketService.getItTicket(data)
 	} catch (error: any) {
 		const message = error?.response?.data?.message ||
 			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
