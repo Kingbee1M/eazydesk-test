@@ -4,6 +4,7 @@ import Header from '../../../components/Header'
 import BottomNavigation from '../../../components/BottomNavigation'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 import SearchConponent from '../../../components/SearchConponent'
+import AdminTicketTable from './AdminTicketTable'
 
 const OpenTicket = () => {
 
@@ -45,7 +46,7 @@ const OpenTicket = () => {
 				/>
 
 				<div  >
-					<TicketTableComponent
+					<AdminTicketTable
 						pageheader={"SERVICE REQUEST"}
 						Request={"Service Request"}
 						TYPE={"SERVICE"} />

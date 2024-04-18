@@ -8,6 +8,8 @@ import { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { SVGLoader } from '../SVGLoader';
 import Select from 'react-select'
+import { getallReguser } from '../../features/Registration/registrationSlice';
+import { useAppDispatch, useAppSelector } from '../../store/useStore';
 
 
 const AssignTask = ({ id }: any) => {
@@ -32,11 +34,6 @@ const AssignTask = ({ id }: any) => {
 	const allAgents = [] as any;
 	const allTeam = [] as any;
 	const allTask = [] as any;
-
-
-
-
-
 
 	const handleSelectedChange1 = (selectedOption1: any) => {
 		setSelectedOption1(selectedOption1);
@@ -69,6 +66,19 @@ const AssignTask = ({ id }: any) => {
 		// @ts-ignore 
 		dispatch(assignTask(input))
 	}
+
+	const dispatch = useAppDispatch();
+	const { dataAll, isLoadingAll } = useAppSelector((state: any) => state.reg);
+	const { isSuccess } = useAppSelector((state) => state.reg)
+	const { edituserisSuccess } = useAppSelector((state: any) => state.reg);
+
+	useEffect(() => {
+		if (isSuccess) {
+			dispatch(getallReguser());
+		} 
+
+	}, [dispatch, edituserisSuccess, isSuccess]);
+	console.log(dataAll)
 
 	return (
 		<>

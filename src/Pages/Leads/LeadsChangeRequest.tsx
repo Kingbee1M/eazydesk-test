@@ -18,7 +18,7 @@ const LeadsChangeRequest = () => {
 	const dispatch = useAppDispatch();
 	const { data: ticket, isLoading } = useAppSelector((state: any) => state.ticket)
 	const { createisSuccess } = useAppSelector((state: any) => state.ticket)
-	const data = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("CHANGE REQUEST"));
+	const data = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("CHANGE"));
 
 	useEffect(() => {
 		dispatch(getTicket())
