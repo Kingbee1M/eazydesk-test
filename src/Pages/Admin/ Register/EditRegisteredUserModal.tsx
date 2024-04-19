@@ -185,7 +185,7 @@ const EditRegisteredUserModal = ({ data, id }: any) => {
 					)}
 					{result === "Reset Password" && (
 
-						< ResetPasswordModal id={data?.id} />
+						<ResetPasswordModal id={data?.id} />
 					)}
 				</Modal.Body>
 			</Modal>

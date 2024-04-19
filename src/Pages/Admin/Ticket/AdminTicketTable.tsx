@@ -28,7 +28,7 @@ const AdminTicketTable= ({
   const [searchItem, setSearchItem] = useState("");
   const [Unassigned, setUnassigned] = useState(false);
 
-console.log(data)
+// console.log(data)
 
 
 

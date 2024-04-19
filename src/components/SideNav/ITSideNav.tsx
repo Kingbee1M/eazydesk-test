@@ -41,6 +41,7 @@ const ITSideNav = () => {
 		localStorage.removeItem('password');
 		navigate("/");
 	};
+	
 
 
 	return (
@@ -79,7 +80,7 @@ const ITSideNav = () => {
 
 				{dropdownOpen && (
 					<div>
-						<NavLink to="/itopenticket" className={({ isActive }) =>
+						{/* <NavLink to="/itopenticket" className={({ isActive }) =>
 							["nav-link_sup", isActive ? "active_sup" : null]
 								.filter(Boolean)
 								.join(" ")
@@ -89,9 +90,9 @@ const ITSideNav = () => {
 								<span>Open Tickets </span>
 							</div>
 							<div className="side_number">5</div>
-						</NavLink>
+						</NavLink> */}
 
-						<NavLink to="/itclosedticket" className={({ isActive }) =>
+						{/* <NavLink to="/itclosedticket" className={({ isActive }) =>
 							["nav-link_sup", isActive ? "active_sup" : null]
 								.filter(Boolean)
 								.join(" ")
@@ -101,9 +102,9 @@ const ITSideNav = () => {
 								<span>Closed Tickets</span>
 							</div>
 							<div className="side_number_one" >10</div>
-						</NavLink>
+						</NavLink> */}
 
-						<NavLink to="/itticketprogress" className={({ isActive }) =>
+						{/* <NavLink to="/itticketprogress" className={({ isActive }) =>
 							["nav-link_sup", isActive ? "active_sup" : null]
 								.filter(Boolean)
 								.join(" ")
@@ -113,7 +114,7 @@ const ITSideNav = () => {
 								<span>Inprogress</span>
 							</div>
 							<div className="side_number_two">4</div>
-						</NavLink>
+						</NavLink> */}
 						<NavLink to="/itincidentrequest" className={({ isActive }) =>
 							["nav-link_sup", isActive ? "active_sup" : null]
 								.filter(Boolean)
