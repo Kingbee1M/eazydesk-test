@@ -68,14 +68,14 @@ const LeadsChangeRequest = () => {
 								/>
 							)}
 						</div>
-						<ChangeRequestModal headerTitle={"Raise a Ticket - Change Reques"} />
+						<ChangeRequestModal headerTitle={"Raise a Ticket - Change Request"} />
 
 					</div>
 					<div  >
 						<TicketTableComponent
 							pageheader={"Incident Request"}
 							Request={"Incident Request"}
-							TYPE={"CHANGE REQUEST"}
+							TYPE={"CHANGE"}
 							data={data}
 							isLoading={isLoading} />
 					</div>

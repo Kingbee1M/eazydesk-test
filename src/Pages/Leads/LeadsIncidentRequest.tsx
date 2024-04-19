@@ -90,7 +90,7 @@ const LeadsIncidentRequest = () => {
 						<TicketTableComponent
 							pageheader={"Incident Request"}
 							Request={"Incident Request"}
-							TYPE={"INCIDENT REQUEST"}
+							TYPE={"INCIDENT"}
 							data={data}
 							isLoading={isLoading} />
 					</div>

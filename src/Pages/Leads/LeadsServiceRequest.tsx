@@ -82,7 +82,7 @@ const LeadsServiceRequest = () => {
 						<TicketTableComponent
 							pageheader={"Incident Request"}
 							Request={"Incident Request"}
-							TYPE={"SERVICE REQUEST"}
+							TYPE={"SERVICE"}
 							data={data}
 							isLoading={isLoading} />
 					</div>
