@@ -27,6 +27,12 @@ const initialState = {
 	admingetticketisLoading: false,
 	admingetticketmessage: '',
 
+    ticketiddata: [],
+	ticketidisError: false,
+	ticketidisSuccess: false,
+	ticketidisLoading: false,
+	ticketidmessage: '',
+
 	// viewdata: [],
 	// viewisError: false,
 	// viewisSuccess: false,
@@ -148,6 +154,16 @@ export const admingetTicket = createAsyncThunk('ticket/admingetTicket', async (d
 	}
 })
 
+// admin get all ticket
+export const getTicketID = createAsyncThunk('ticket/getTicketID', async (data, thunkAPI) => {
+	try {
+		return await ticketService.getTicketID(data)
+	} catch (error: any) {
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		return thunkAPI.rejectWithValue(message)
+	}
+})
 // View Ticket
 // export const viewTicket = createAsyncThunk('ticket/viewTicket', async (data, thunkAPI) => {
 // 	try {
@@ -306,6 +322,11 @@ export const ticketSlice = createSlice({
 			state.admingetticketisError = false
 			state.admingetticketmessage = ''
 
+			state.ticketidisLoading = false
+			state.ticketidisSuccess = false
+			state.ticketidisError = false
+			state.ticketidmessage = ''
+
 			// state.viewisLoading = false
 			// state.viewisSuccess = false
 			// state.viewisError = false
@@ -434,6 +455,21 @@ export const ticketSlice = createSlice({
 			})
 
 
+
+			.addCase(getTicketID.pending, (state) => {
+				state.ticketidisLoading = true
+			})
+			.addCase(getTicketID.fulfilled, (state: any, action) => {
+				state.ticketidisLoading = false
+				state.ticketidisSuccess = true
+				state.ticketiddata = action.payload?.data
+			})
+			.addCase(getTicketID.rejected, (state: any, action) => {
+				state.ticketidisLoading = false
+				state.ticketidisError = true
+				state.ticketidmessage = action.payload
+				state.ticketiddata = null
+			})
 
 		// .addCase(viewTicket.pending, (state) => {
 		// 	state.viewisLoading = true

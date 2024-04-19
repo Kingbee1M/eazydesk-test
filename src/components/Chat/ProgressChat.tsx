@@ -4,12 +4,24 @@ import axios from "axios";
 import { FaRegUserCircle, FaCamera } from "react-icons/fa";
 import { IoMdSend } from "react-icons/io";
 import { baseUrl } from "../../shared/baseUrl";
+import { useAppDispatch, useAppSelector } from "../../store/useStore";
+import { getTicket } from "../../features/Ticket/ticketSlice";
 
 
 
 const ProgressChat = ({ id, ticket, path }: any) => {
+  const dispatch = useAppDispatch();
+  const { data, isLoading, isSuccess, getTicketID } = useAppSelector((state: any) => state.comment)
 
-  const form: any = useRef();
+  console.log(data)
+
+  useEffect(() => {
+    dispatch(getTicket())
+    if (isSuccess) {
+      dispatch(getTicket())
+    }
+  }, [isSuccess])
+    const form: any = useRef();
 
   const [inputs, setInputs] = useState({
     comment: "",
