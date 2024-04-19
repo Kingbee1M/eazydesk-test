@@ -21,7 +21,7 @@ const IncidentRequestModal = ({ headerTitle }: any) => {
     <ModalHeader setShow={setShow} headerTitle={headerTitle} />
     <Modal.Body>
      <TicketForm
-      type={"INCIDENT REQUEST"}
+      type={"INCIDENT"}
       setShow={setShow}
      />
     </Modal.Body>

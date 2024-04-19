@@ -20,7 +20,7 @@ const ServiceRequestModal = ({ headerTitle }: any) => {
 				<ModalHeader setShow={setShow} headerTitle={headerTitle} />
 				<Modal.Body>
 					<TicketForm
-						type={"SERVICE REQUEST"}
+						type={"SERVICE"}
 						setShow={setShow}
 					/>
 				</Modal.Body>

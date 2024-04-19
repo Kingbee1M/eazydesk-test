@@ -20,7 +20,7 @@ const ChangeRequestModal = ({ headerTitle }: any) => {
 				<ModalHeader setShow={setShow} headerTitle={headerTitle} />
 				<Modal.Body>
 					<TicketForm
-						type={"CHANGE REQUEST"}
+						type={"CHANGE"}
 						setShow={setShow}
 					/>
 				</Modal.Body>

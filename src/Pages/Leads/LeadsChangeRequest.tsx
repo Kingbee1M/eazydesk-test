@@ -18,7 +18,7 @@ const LeadsChangeRequest = () => {
 	const dispatch = useAppDispatch();
 	const { data: ticket, isLoading } = useAppSelector((state: any) => state.ticket)
 	const { createisSuccess } = useAppSelector((state: any) => state.ticket)
-	const data = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("CHANGE REQUEST"));
+	const data = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("CHANGE"));
 
 	useEffect(() => {
 		dispatch(getTicket())
@@ -68,14 +68,14 @@ const LeadsChangeRequest = () => {
 								/>
 							)}
 						</div>
-						<ChangeRequestModal headerTitle={"Raise a Ticket - Change Reques"} />
+						<ChangeRequestModal headerTitle={"Raise a Ticket - Change Request"} />
 
 					</div>
 					<div  >
 						<TicketTableComponent
 							pageheader={"Incident Request"}
 							Request={"Incident Request"}
-							TYPE={"CHANGE REQUEST"}
+							TYPE={"CHANGE"}
 							data={data}
 							isLoading={isLoading} />
 					</div>
