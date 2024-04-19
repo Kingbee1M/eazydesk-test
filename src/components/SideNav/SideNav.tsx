@@ -79,7 +79,7 @@ const SideNav = () => {
 
         {dropdownOpen && (
           <div>
-            <NavLink to="/openticket" className={({ isActive }) =>
+            {/* <NavLink to="/openticket" className={({ isActive }) =>
               ["nav-link_sup", isActive ? "active_sup" : null,]
                 .filter(Boolean)
                 .join(" ")
@@ -89,9 +89,9 @@ const SideNav = () => {
                 <span>Open Tickets </span>
               </div>
               <div className="side_number">5</div>
-            </NavLink>
+            </NavLink> */}
 
-            <NavLink to="/closedticket" className={({ isActive }) =>
+            {/* <NavLink to="/closedticket" className={({ isActive }) =>
               ["nav-link_sup", isActive ? "active_sup" : null,]
                 .filter(Boolean)
                 .join(" ")
@@ -101,8 +101,8 @@ const SideNav = () => {
                 <span>Closed Tickets</span>
               </div>
               <div className="side_number_one" >10</div>
-            </NavLink>
-
+            </NavLink> */}
+{/* 
             <NavLink to="/ticketprogress" className={({ isActive }) =>
               ["nav-link_sup", isActive ? "active_sup" : null,]
                 .filter(Boolean)
@@ -113,7 +113,7 @@ const SideNav = () => {
                 <span>Inprogress</span>
               </div>
               <div className="side_number_two">4</div>
-            </NavLink>
+            </NavLink> */}
             <NavLink to="/incidentrequest" className={({ isActive }) =>
               ["nav-link_sup", isActive ? "active_sup" : null,]
                 .filter(Boolean)

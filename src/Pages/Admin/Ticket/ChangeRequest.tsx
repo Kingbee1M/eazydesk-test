@@ -8,9 +8,11 @@ import { data } from '../../../components/StateData'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import moment from 'moment'
 import { admingetTicket } from '../../../features/Ticket/ticketSlice'
+import AdminTicketTable from './AdminTicketTable'
 
 const ChangeRequest = () => {
 	const dispatch = useAppDispatch();
+	
 
 	const [entriesPerPage, setEntriesPerPage] = useState(() => {
 		return "6";
@@ -37,17 +39,19 @@ const ChangeRequest = () => {
 	const sevenDays = moment().subtract(7, "days").format("YYYY-MM-DD");
 	const yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
 	const [data, setData] = useState<any>([]);
-	useEffect(() => {
-		setData(admingetticketdata);
-	}, [admingetticketdata]);
 
 
+
+	console.log("admingetticketdata", admingetticketdata)
+	
 	useEffect(() => {
 		const datas = { ticketType: "CHANGE" };
 		// @ts-ignore 
 		dispatch(admingetTicket(datas))
 
 	}, [dispatch, endDate1, startDate1])
+
+	// console.log(admingetticketdata)
 
 	return (
 		<div id="page-wrapper">
@@ -77,11 +81,11 @@ const ChangeRequest = () => {
 				/>
 
 				<div  >
-					<TicketTableComponent
+					<AdminTicketTable
 						pageheader={"CHANGE REQUEST"}
 						Request={"Change Request"}
 						TYPE={"CHANGE"}
-						data={data} />
+						data={admingetticketdata?.tickets} />
 				</div>
 			</main>
 		</div>

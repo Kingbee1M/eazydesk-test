@@ -6,25 +6,53 @@ import TicketTableComponent from '../../../components/Table/TicketTableComponent
 import ITSideNav from '../../../components/SideNav/ITSideNav'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import { getItTicket } from '../../../features/Ticket/ticketSlice'
+import ITTicketTable from './ITTicketTable'
+import moment from 'moment'
 
 const ITServiceRequest = () => {
 	const dispatch = useAppDispatch();
-	const { itdata: ticket, itisLoading } = useAppSelector((state: any) => state.ticket)
-	const data = ticket?.filter((ticket: any) => ticket?.ticketType?.includes("SERVICE REQUEST"));
-
-	useEffect(() => {
-		dispatch(getItTicket())
-	}, [dispatch])
-
-	const [startDates, setStartDates] = useState([]);
-	const [endDates, setEndDates] = useState([]);
-	const [show, setShow] = useState(false);
-	const [searchItem, setSearchItem] = useState("");
-	const [datas, setDatas] = useState([]);
+	
 
 	const [entriesPerPage, setEntriesPerPage] = useState(() => {
 		return "6";
 	});
+
+	const [startDates, setStartDates] = useState([]);
+	let [endDates, setEndDates] = useState<any>([]);
+	const [show, setShow] = useState(false);
+	const [datas, setDatas] = useState([]);
+	const [find, setFind] = useState<any>();
+	const [sortData, setSortData] = useState<any>([]);
+	const [searchItem, setSearchItem] = useState("");
+	const [Unassigned, setUnassigned] = useState(false);
+
+	const { itdata, itisLoading } = useAppSelector((state: any) => state.ticket)
+
+	endDates = new Date();
+	const formattedEndDate = endDates.toISOString().split('T')[0]; // Extracting date part and removing time
+	const [startDate1] = useState(formattedEndDate);
+	const [endDate1] = useState(formattedEndDate);
+	const [selectedDate, setSelectedDate] = useState("");
+
+
+	const currentDate = moment().format("YYYY-MM-DD");
+	const sevenDays = moment().subtract(7, "days").format("YYYY-MM-DD");
+	const yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
+	const [data, setData] = useState<any>([]);
+
+	
+
+
+	useEffect(() => {
+		const datas = { ticketType: "SERVICE" };
+		// @ts-ignore 
+		dispatch(getItTicket(datas))
+
+	}, [dispatch, endDate1, startDate1])
+
+	// useEffect(() => {
+	// 	setData(itdata);
+	// }, [itdata]);
 
 
 	return (
@@ -43,7 +71,7 @@ const ITServiceRequest = () => {
 					placeholder={"search ticket"}
 					setSearchItem={setSearchItem}
 					searchItem={searchItem}
-					data={data}
+					data={itdata?.tickets}
 					entriesPerPage={entriesPerPage}
 					setEntriesPerPage={setEntriesPerPage}
 					filter={true}
@@ -55,11 +83,11 @@ const ITServiceRequest = () => {
 				/>
 
 				<div  >
-					<TicketTableComponent
+					<ITTicketTable
 						pageheader={"SERVICE REQUEST"}
 						Request={"Service Request"}
 						TYPE={"SERVICE"}
-						data={data}
+						data={itdata?.tickets}
 						isLoading={itisLoading} />
 				</div>
 			</main>

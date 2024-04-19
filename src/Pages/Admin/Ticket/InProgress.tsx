@@ -4,6 +4,7 @@ import BottomNavigation from '../../../components/BottomNavigation'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 import SearchConponent from '../../../components/SearchConponent'
 import SideNav from '../../../components/SideNav/SideNav'
+import AdminTicketTable from './AdminTicketTable'
 
 const InProgress = () => {
 
@@ -45,7 +46,7 @@ const InProgress = () => {
 				/>
 
 				<div  >
-					<TicketTableComponent
+					<AdminTicketTable
 						pageheader={"SERVICE REQUEST"}
 						Request={"Service Request"}
 						TYPE={"SERVICE"} />

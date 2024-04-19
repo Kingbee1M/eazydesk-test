@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 import { OverlayTrigger, Image, Tooltip, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { baseUrl } from "../../shared/baseUrl";
-import ViewTicketDetailsModal from "../Modals/ViewTicketDetailsModal";
-import { NoRecordFound, TableFetch } from "../Options";
-import AssignTask from "../Modals/AssignTask";
-import { admingetTicket } from "../../features/Ticket/ticketSlice";
-import { useAppDispatch, useAppSelector } from "../../store/useStore";
+import { baseUrl } from "../../../shared/baseUrl";
+import ViewTicketDetailsModal from "../../../components/Modals/ViewTicketDetailsModal";
+import { NoRecordFound, TableFetch } from "../../../components/Options";
+import AssignTask from "../../../components/Modals/AssignTask";
+import { admingetTicket } from "../../../features/Ticket/ticketSlice";
+import { useAppDispatch, useAppSelector } from "../../../store/useStore";
 
-const TicketTableComponent = ({
+const ITTicketTable= ({
   pageheader,
   TYPE,
   Request,
@@ -164,7 +164,7 @@ const TicketTableComponent = ({
                         <button className="ticket-Closed">Closed</button>
                       ) : (
 
-                        < AssignTask
+                        <AssignTask
                           id={user?.id}
                           TYPE={TYPE}
                           // assignToName={assignToName}
@@ -255,6 +255,6 @@ const TicketTableComponent = ({
   );
 };
 
-export default TicketTableComponent;
+export default ITTicketTable;
 
 

@@ -4,6 +4,7 @@ import Header from '../../../components/Header'
 import BottomNavigation from '../../../components/BottomNavigation'
 import SearchConponent from '../../../components/SearchConponent'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
+import AdminTicketTable from './AdminTicketTable'
 
 const ClosedTicket = () => {
 	const [startDates, setStartDates] = useState([]);
@@ -43,7 +44,7 @@ const ClosedTicket = () => {
 				/>
 
 				<div  >
-					<TicketTableComponent
+					<AdminTicketTable
 						pageheader={"SERVICE REQUEST"}
 						Request={"Service Request"}
 						TYPE={"SERVICE"} />
