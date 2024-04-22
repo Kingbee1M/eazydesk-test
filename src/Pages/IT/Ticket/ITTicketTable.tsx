@@ -8,6 +8,7 @@ import { NoRecordFound, TableFetch } from "../../../components/Options";
 import AssignTask from "../../../components/Modals/AssignTask";
 import { admingetTicket } from "../../../features/Ticket/ticketSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/useStore";
+import ReassignTask from "../../../components/Modals/ReassignTask";
 
 const ITTicketTable= ({
   pageheader,
@@ -164,7 +165,7 @@ const ITTicketTable= ({
                         <button className="ticket-Closed">Closed</button>
                       ) : (
 
-                        <AssignTask
+                        <ReassignTask
                           id={user?.id}
                           TYPE={TYPE}
                           // assignToName={assignToName}
