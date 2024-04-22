@@ -6,8 +6,7 @@ import { PiCalendarCheckDuotone } from "react-icons/pi";
 import { MdOutlineSettings } from "react-icons/md";
 import { BsFileText } from "react-icons/bs";
 import { LuTag } from "react-icons/lu";
-import { IoMdOpen } from "react-icons/io";
-import { FiChevronDown } from 'react-icons/fi';
+import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
 import { useEffect, useState } from "react";
 import { LuUsers } from "react-icons/lu";
 import logo from '../../assets/img/logo.svg'
@@ -17,14 +16,7 @@ import { getUserPrivileges } from "../../hooks/auth";
 
 
 const SideNav = () => {
-  const {
-    isSuperAdmin,
-    isAdmin,
-    isSupervisor,
-    isITSupport,
-    isTeamLead,
-
-  } = getUserPrivileges();
+  const { isSuperAdmin } = getUserPrivileges();
   const [dropdownOpen, setDropdownOpen] = useState(
     localStorage.getItem('dropdownOpen') === 'true'
   );
@@ -70,50 +62,17 @@ const SideNav = () => {
               <BsFileEarmarkCheck size={15} />
               <span>All Tickets</span>
             </div>
-            <FiChevronDown
+            {dropdownOpen ? <FiChevronDown
               size={25}
-              className={dropdownOpen ? 'arrow open' : 'arrow'} // Apply open class when dropdown is open
-            />
+              className={'arrow open'}
+            /> : <FiChevronRight size={25}
+              className={'arrow open'} />}
           </div>
         </div>
 
         {dropdownOpen && (
           <div>
-            {/* <NavLink to="/openticket" className={({ isActive }) =>
-              ["nav-link_sup", isActive ? "active_sup" : null,]
-                .filter(Boolean)
-                .join(" ")
-            }>
-              <div className="nav_dropdown_sub">
-                <IoMdOpen size={15} />
-                <span>Open Tickets </span>
-              </div>
-              <div className="side_number">5</div>
-            </NavLink> */}
 
-            {/* <NavLink to="/closedticket" className={({ isActive }) =>
-              ["nav-link_sup", isActive ? "active_sup" : null,]
-                .filter(Boolean)
-                .join(" ")
-            }>
-              <div className="nav_dropdown_sub">
-                <AiOutlineCloseCircle size={15} />
-                <span>Closed Tickets</span>
-              </div>
-              <div className="side_number_one" >10</div>
-            </NavLink> */}
-{/* 
-            <NavLink to="/ticketprogress" className={({ isActive }) =>
-              ["nav-link_sup", isActive ? "active_sup" : null,]
-                .filter(Boolean)
-                .join(" ")
-            }>
-              <div className="nav_dropdown_sub">
-                <PiCalendarCheckDuotone size={15} />
-                <span>Inprogress</span>
-              </div>
-              <div className="side_number_two">4</div>
-            </NavLink> */}
             <NavLink to="/incidentrequest" className={({ isActive }) =>
               ["nav-link_sup", isActive ? "active_sup" : null,]
                 .filter(Boolean)

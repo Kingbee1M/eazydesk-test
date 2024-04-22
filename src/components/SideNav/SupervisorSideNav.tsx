@@ -6,7 +6,7 @@ import { PiCalendarCheckDuotone } from "react-icons/pi";
 import { MdOutlineSettings } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 import { IoMdOpen } from "react-icons/io";
-import { FiChevronDown } from 'react-icons/fi';
+import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
 import { useEffect, useState } from "react";
 import logo from '../../assets/img/logo.svg'
 import { RiAlarmWarningLine } from "react-icons/ri";
@@ -65,10 +65,11 @@ const SupervisorSideNav = () => {
 							<BsFileEarmarkCheck size={21} />
 							<span>All Tickets</span>
 						</div>
-						<FiChevronDown
+						{dropdownOpen ? <FiChevronDown
 							size={25}
-							className={dropdownOpen ? 'arrow open' : 'arrow'} // Apply open class when dropdown is open
-						/>
+							className={'arrow'}
+						/> : <FiChevronRight size={25}
+							className={'arrow'} />}
 					</div>
 				</div>
 

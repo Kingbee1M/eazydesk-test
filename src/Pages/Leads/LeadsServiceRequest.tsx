@@ -11,6 +11,7 @@ import { data } from '../../components/StateData';
 import ServiceRequestModal from '../../components/TicketModals/ServiceRequestModal';
 import { useAppDispatch, useAppSelector } from '../../store/useStore';
 import { getTicket } from '../../features/Ticket/ticketSlice';
+import LeadTicketTableComponent from '../../components/Table/LeadTicketTableComponent';
 
 
 
@@ -79,7 +80,7 @@ const LeadsServiceRequest = () => {
 					</div>
 
 					<div  >
-						<TicketTableComponent
+						<LeadTicketTableComponent
 							pageheader={"Incident Request"}
 							Request={"Incident Request"}
 							TYPE={"SERVICE"}

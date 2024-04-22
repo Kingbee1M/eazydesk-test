@@ -1,7 +1,5 @@
 import { useState } from 'react'
 import { Modal } from 'react-bootstrap';
-import { MdBorderColor } from 'react-icons/md';
-import moment from 'moment';
 import { NoRecordFound } from '../Options';
 import ImageLightbox from '../ImageLightbox';
 import ModalHeader from './ModalHeader';
