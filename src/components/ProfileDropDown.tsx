@@ -13,7 +13,14 @@ import DataService from "../features/Auth/dataService";
 
 
 const ProfileDropDown = () => {
-	const { isLoadinglogout, isErrorlogout, messagelogout, isSuccesslogout } = useAppSelector((state: { auth: any; }) => state.auth)
+	const {
+		isLoadinglogout,
+		isErrorlogout,
+		messagelogout,
+		isSuccesslogout
+	} = useAppSelector((state: { auth: any; }) => state.auth)
+
+	// @ts-ignore
 	// Create an instance of DataService
 	const dataService = DataService();
 	const dispatch = useAppDispatch();

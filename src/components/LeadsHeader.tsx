@@ -35,6 +35,8 @@ const LeadsHeader = () => {
 	// @ts-ignore  
 	const userInfo = JSON.parse(localStorage.getItem("service_desk"));
 
+	console.log("userInfo", userInfo)
+
 	const handleLogout = () => {
 		dispatch(logout());
 	};

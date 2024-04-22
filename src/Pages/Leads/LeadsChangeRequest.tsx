@@ -11,6 +11,7 @@ import TicketTableComponent from "../../components/Table/TicketTableComponent";
 import ChangeRequestModal from "../../components/TicketModals/ChangeRequestModal";
 import { useAppDispatch, useAppSelector } from "../../store/useStore";
 import { getTicket } from "../../features/Ticket/ticketSlice";
+import LeadTicketTableComponent from "../../components/Table/LeadTicketTableComponent";
 
 
 
@@ -72,7 +73,7 @@ const LeadsChangeRequest = () => {
 
 					</div>
 					<div  >
-						<TicketTableComponent
+						<LeadTicketTableComponent
 							pageheader={"Incident Request"}
 							Request={"Incident Request"}
 							TYPE={"CHANGE"}

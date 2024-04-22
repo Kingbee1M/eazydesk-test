@@ -27,17 +27,17 @@ const initialState = {
 	admingetticketisLoading: false,
 	admingetticketmessage: '',
 
-    ticketiddata: [],
+	ticketiddata: [],
 	ticketidisError: false,
 	ticketidisSuccess: false,
 	ticketidisLoading: false,
 	ticketidmessage: '',
 
-	// viewdata: [],
-	// viewisError: false,
-	// viewisSuccess: false,
-	// viewisLoading: false,
-	// viewmessage: '',
+	viewdata: [],
+	viewisError: false,
+	viewisSuccess: false,
+	viewisLoading: false,
+	viewmessage: '',
 
 
 	// deletedata: [],
@@ -164,16 +164,17 @@ export const getTicketID = createAsyncThunk('ticket/getTicketID', async (data, t
 		return thunkAPI.rejectWithValue(message)
 	}
 })
+
 // View Ticket
-// export const viewTicket = createAsyncThunk('ticket/viewTicket', async (data, thunkAPI) => {
-// 	try {
-// 		return await ticketService.viewTicket(data)
-// 	} catch (error: any) {
-// 		const message = error?.response?.data?.message ||
-// 			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
-// 		return thunkAPI.rejectWithValue(message)
-// 	}
-// })
+export const viewTicket = createAsyncThunk('ticket/viewTicket', async (data, thunkAPI) => {
+	try {
+		return await ticketService.viewTicket(data)
+	} catch (error: any) {
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		return thunkAPI.rejectWithValue(message)
+	}
+})
 
 
 // // Delete Ticket
@@ -327,10 +328,10 @@ export const ticketSlice = createSlice({
 			state.ticketidisError = false
 			state.ticketidmessage = ''
 
-			// state.viewisLoading = false
-			// state.viewisSuccess = false
-			// state.viewisError = false
-			// state.viewmessage = ''
+			state.viewisLoading = false
+			state.viewisSuccess = false
+			state.viewisError = false
+			state.viewmessage = ''
 
 
 			// state.deleteisLoading = false
@@ -390,7 +391,6 @@ export const ticketSlice = createSlice({
 		builder
 			.addCase(getTicket.pending, (state) => {
 				state.isLoading = true
-
 			})
 			.addCase(getTicket.fulfilled, (state: any, action) => {
 				state.isLoading = false
@@ -420,8 +420,6 @@ export const ticketSlice = createSlice({
 				state.itdata = null
 			})
 
-
-
 			.addCase(createTicket.pending, (state) => {
 				state.createisLoading = true
 			})
@@ -436,7 +434,6 @@ export const ticketSlice = createSlice({
 				state.createmessage = action.payload
 				state.createdata = null
 			})
-
 
 
 			.addCase(admingetTicket.pending, (state) => {
@@ -471,20 +468,20 @@ export const ticketSlice = createSlice({
 				state.ticketiddata = null
 			})
 
-		// .addCase(viewTicket.pending, (state) => {
-		// 	state.viewisLoading = true
-		// })
-		// .addCase(viewTicket.fulfilled, (state: any, action) => {
-		// 	state.viewisLoading = false
-		// 	state.viewisSuccess = true
-		// 	state.viewdata = action.payload?.data
-		// })
-		// .addCase(viewTicket.rejected, (state: any, action) => {
-		// 	state.viewisLoading = false
-		// 	state.viewisError = true
-		// 	state.viewmessage = action.payload
-		// 	state.viewdata = null
-		// })
+			.addCase(viewTicket.pending, (state) => {
+				state.viewisLoading = true
+			})
+			.addCase(viewTicket.fulfilled, (state: any, action) => {
+				state.viewisLoading = false
+				state.viewisSuccess = true
+				state.viewdata = action.payload?.data
+			})
+			.addCase(viewTicket.rejected, (state: any, action) => {
+				state.viewisLoading = false
+				state.viewisError = true
+				state.viewmessage = action.payload
+				state.viewdata = null
+			})
 
 		// .addCase(deleteTicket.pending, (state) => {
 		// 	state.deleteisLoading = true

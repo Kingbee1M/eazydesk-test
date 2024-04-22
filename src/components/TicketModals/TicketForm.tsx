@@ -12,17 +12,24 @@ import { getallReguser } from "../../features/Registration/registrationSlice";
 
 
 const TicketForm = ({ type, setShow }: any) => {
+  // @ts-ignore  
+  const userInfo = JSON.parse(localStorage.getItem("service_desk"));
   const { createisLoading, createisSuccess } = useAppSelector((state: any) => state.ticket)
   const dispatch = useAppDispatch();
   const { dataAll, isLoadingAll } = useAppSelector((state: any) => state.reg);
   const user = dataAll?.users
 
-  // console.log("user", user)
+
+
+
+
+
 
   useEffect(() => {
     // Fetch data when the component is mounted or dispatch changes
-    dispatch(getallReguser());
-  }, [dispatch]);
+    // @ts-ignore  
+    dispatch(getallReguser(userInfo?.id));
+  }, [dispatch, userInfo?.id]);
   const formData = new FormData();
   const form: any = useRef();
   const [value, setValue] = useState('');

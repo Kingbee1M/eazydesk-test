@@ -27,7 +27,7 @@ const getTicketID = async (datas: any) => {
 	// const { data }: any = await HttpService.get(url)
 	const { data } = await axios.get(url)
 	return data
-}	
+}
 const admingetTicket = async (datas: any) => {
 	const { endDate, startDate, limit, page, ticketType, ticketId } = datas
 	const base = baseUrl + `/api/v2/ticket/admin`
@@ -37,11 +37,11 @@ const admingetTicket = async (datas: any) => {
 	return data
 }
 
-// const getTicketbyID = async (id: any) => {
-// 	const HttpService = createHttpService();
-// 	const { data }: any = await HttpService.get(`/api/v1/ticket/${id}`)
-// 	return data
-// }
+const viewTicket = async (id: any) => {
+	const HttpService = createHttpService();
+	const { data }: any = await HttpService.get(`/api/v1/ticket/${id}`)
+	return data
+}
 
 const createTicket = async (formData: any) => {
 	const HttpService = createHttpService();
@@ -123,22 +123,7 @@ const ticketService = {
 	getItTicket,
 	admingetTicket,
 	getTicketID,
-    // getTicketbyID,
-    // assignTicket,
-    // getAssignTicketID,
-    // updateTicket,
-	// viewTicket,
-	// deleteTicket,
-	// updateTicket,
-	// noteTicket,
-	// adminUpdateTicket,
-	// assignTicket,
-	// getAssignTicketID,
-	// acceptTicket,
-	// getTicketbyID,
-	// markTicket,
-	// acknowledgeTicket,
-	// getSupervisorTicket
+	viewTicket
 }
 
 export default ticketService

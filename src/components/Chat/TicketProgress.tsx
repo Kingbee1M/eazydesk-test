@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import moment from "moment";
 
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { MdOutlineClose } from "react-icons/md";
 import { Link } from "react-router-dom";
 import ProgressChat from "./ProgressChat";
@@ -11,6 +11,7 @@ import { getComment } from "../../features/Comment/commentSlice";
 const TicketProgress = () => {
 	const { id }: any = useParams();
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 	const form: any = useRef();
 	const { data, isLoading, isSuccess, message } = useAppSelector((state: any) => state.comment)
 	const [ticket, setTicket] = useState<any>({});
@@ -69,21 +70,14 @@ const TicketProgress = () => {
 								: "CHANGE"}
 					</span>
 				</div>
-				<div className="ChatProgressView-close">
-					<Link
-						to={
-							ticket?.ticketType === "INCIDENT"
-								? "/incident-desk"
-								: ticket?.ticketType === "SERVICE"
-									? "/service-request"
-									: "/change-request"
-						}>
+				<div className="ChatProgressView-close" >
+					<div onClick={() => navigate(-1)}>
 						<MdOutlineClose
 							size={25}
 							style={{ color: "white", backgroundColor: "" }}
 							className="ChatProgressView-close-icon"
 						/>
-					</Link>
+					</div>
 				</div>
 			</header>
 			<div id="tp-header"></div>

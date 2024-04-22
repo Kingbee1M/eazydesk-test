@@ -5,23 +5,31 @@ import { FaRegUserCircle, FaCamera } from "react-icons/fa";
 import { IoMdSend } from "react-icons/io";
 import { baseUrl } from "../../shared/baseUrl";
 import { useAppDispatch, useAppSelector } from "../../store/useStore";
-import { getTicket } from "../../features/Ticket/ticketSlice";
+import { getTicket, viewTicket } from "../../features/Ticket/ticketSlice";
 
 
 
 const ProgressChat = ({ id, ticket, path }: any) => {
+
   const dispatch = useAppDispatch();
   const { data, isLoading, isSuccess, getTicketID } = useAppSelector((state: any) => state.comment)
+  const { viewData, viewisLoading, viewisSuccess } = useAppSelector((state: any) => state.ticket)
 
-  console.log(data)
+  console.log("viewTicket", viewData)
 
   useEffect(() => {
-    dispatch(getTicket())
+    dispatch(viewTicket())
     if (isSuccess) {
-      dispatch(getTicket())
+      dispatch(viewTicket())
     }
-  }, [isSuccess])
-    const form: any = useRef();
+  }, [dispatch, isSuccess])
+  // useEffect(() => {
+  //   dispatch(getTicket())
+  //   if (isSuccess) {
+  //     dispatch(getTicket())
+  //   }
+  // }, [isSuccess])
+  const form: any = useRef();
 
   const [inputs, setInputs] = useState({
     comment: "",
