@@ -11,7 +11,7 @@ import { getItTicket, reset } from '../../features/Ticket/ticketSlice';
 import { useAppDispatch, useAppSelector } from '../../store/useStore';
 
 
-const AssignTask = ({ id }: any) => {
+const ReassignTask = ({ id }: any) => {
 
 	const navigate = useNavigate();
 	const handleClose = () => setShow(false);
@@ -79,38 +79,31 @@ const AssignTask = ({ id }: any) => {
 		// @ts-ignore 
 		
 		console.log(input)
-		// @ts-ignore
-		// dispatch(getItTicket(input))
-		
+		// @ts-ignore 
+		dispatch(getItTicket(input))
 		
 		
 	}
 
-// 	useEffect(() => {
-//     if (itisSuccess && show) {
-//         toast.success("Ticket Assigned", { toastId: customId });
-//         setShow(false);
-//         setInput({
-//             assignedToId: "",
-//         });
-//     }
-    
-//     dispatch(reset());
-// }, [itisSuccess, show, dispatch]);
-
-	
 	useEffect(() => {
-		 //@ts-ignore
-		dispatch(getItTicket(input))
-		
-	}, [dispatch]);
+    if (itisSuccess && show) {
+        toast.success("Ticket Assigned", { toastId: customId });
+        setShow(false);
+        setInput({
+            assignedToId: "",
+        });
+    }
+    
+    dispatch(reset());
+}, [itisSuccess, show, dispatch]);
 
 	
+
 
 	return (
 		<>
 			<ToastContainer position="top-right" />
-			<button className="assign-btn" onClick={() => setShow(true)} >Assign</button>
+			<button className="assign-btn" onClick={() => setShow(true)} >Reassign</button>
 			
 
 			<Modal show={show} onHide={handleClose} centered>
@@ -144,4 +137,4 @@ const AssignTask = ({ id }: any) => {
 	);
 }
 
-export default AssignTask;
+export default ReassignTask;

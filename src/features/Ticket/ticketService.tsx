@@ -49,6 +49,13 @@ const createTicket = async (formData: any) => {
 	const { data }: any = await HttpService.post(`/api/v2/ticket`, formData)
 	return data
 }
+
+const itAssignTicket =  async (id: any) => {
+	const HttpService = createHttpService();
+	const { data }: any = await HttpService.get(`/api/v2/ticket/${id}/itsupport`)
+	return data
+}
+
 // const assignTicket = async (input: any) => {
 // 	const HttpService = createHttpService();
 // 	const { data }: any = await HttpService.post(`/api/v1/assigned-ticket`, input)
@@ -124,7 +131,8 @@ const ticketService = {
 	getItTicket,
 	admingetTicket,
 	getTicketID,
-	viewTicket
+	viewTicket,
+	itAssignTicket,
 }
 
 export default ticketService
