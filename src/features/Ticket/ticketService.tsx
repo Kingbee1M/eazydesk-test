@@ -39,7 +39,8 @@ const admingetTicket = async (datas: any) => {
 
 const viewTicket = async (id: any) => {
 	const HttpService = createHttpService();
-	const { data }: any = await HttpService.get(`/api/v1/ticket/${id}`)
+	const { data }: any = await HttpService.get(`/api/v2/ticket/${id}`)
+	console.log('data', data)
 	return data
 }
 

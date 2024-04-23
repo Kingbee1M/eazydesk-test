@@ -1,29 +1,38 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import moment from "moment";
-
 import { useNavigate, useParams } from "react-router-dom";
 import { MdOutlineClose } from "react-icons/md";
-import { Link } from "react-router-dom";
 import ProgressChat from "./ProgressChat";
 import { useAppDispatch, useAppSelector } from "../../store/useStore";
 import { getComment } from "../../features/Comment/commentSlice";
+import { viewTicket } from "../../features/Ticket/ticketSlice";
 
 const TicketProgress = () => {
 	const { id }: any = useParams();
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const form: any = useRef();
-	const { data, isLoading, isSuccess, message } = useAppSelector((state: any) => state.comment)
+
 	const [ticket, setTicket] = useState<any>({});
-	const [ticketStatus, setTicketStatus] = useState("");
-	const [email, setEmail] = useState("");
-	const [updatemessage, setUpdateMessage] = useState("");
-	const [to, setTo] = useState("");
-	const [from, setFrom] = useState("");
+	const [ticketStatus, setTicketStatus] = useState("")
+	const { data, isLoading, isSuccess, getTicketID } = useAppSelector((state: any) => state.comment)
+	const { viewdata, viewisLoading, viewisSuccess } = useAppSelector((state: any) => state.ticket)
 
-	// const { data } = useSelector((state: any) => state.ticketByID);
 
-	console.log('data-data-@ts-ignore', data)
+
+	useEffect(() => {
+		// @ts-ignore 
+		dispatch(viewTicket(id))
+		if (isSuccess) {
+			// @ts-ignore 
+			dispatch(viewTicket(id))
+		}
+	}, [dispatch, id, isSuccess])
+
+
+
+
+	console.log('data-data-@ts-ignore', viewdata)
 
 	useEffect(() => {
 		// if (deleteisSuccess || updateisSuccess) {
@@ -58,6 +67,9 @@ const TicketProgress = () => {
 
 	console.log('tickeidt', id)
 
+
+
+
 	return (
 		<div>
 			<header className="ChatProgressView-header">
@@ -87,11 +99,12 @@ const TicketProgress = () => {
 						<ProgressChat id={id} ticket={ticket} />
 						<h5 className="page-title">STATUS</h5>
 						<div className="tp-status-area">
-							{ticket?.status?.map((item: any, i: any) => (
+							{viewdata?.data?.map((item: any, i: any) => (
 								<p key={i}>
 									Request status changed to <strong>{item?.status}</strong> on{" "}
 									<span>
 										{moment(item?.createdAt).format("MMM Do YYYY, h:mm A")}
+
 									</span>
 								</p>
 							))}
@@ -100,31 +113,47 @@ const TicketProgress = () => {
 					<div className="tp-shared-section">
 						<div className="tp-shared-container">
 							<div>
-								{ticket?.finalStatus === "Assigned" ? (
-									<div className="finalStatus-assigned">IN PROGRESS</div>
-								) : ticket?.finalStatus === "Unassigned" ? (
-									<div className="admin-btn-unassigned ">
-										{ticket?.finalStatus}
-									</div>
-								) : ticket?.finalStatus === "Completed" ? (
-									<div className="finalStatus-Resolved">Resolved</div>
-								) : ticket?.finalStatus === "Reopen" ? (
-									<div className="finalStatus-reopned">Reopened</div>
-								) : (
-									<div className="finalStatus-Closed">Closed</div>
-								)}
+								{viewdata?.data?.map((item: any, i: any) => (
+									item?.status === "INPROGRESS" ? (
+										<div className="status-assigned">IN PROGRESS</div>
+									) : item?.status === "DISAPPROVED" ? (
+										<div className="admin-btn-unassigned ">
+											{item?.status}
+										</div>
+									) : item?.status === "INVALID" ? (
+										<div className="status-Resolved">
+											{item?.status}</div>
+									) : item?.status === "REOPENED" ? (
+										<div className="status-reopned">
+											{item?.status}
+										</div>
+									) : item?.status === "COMPLETED" ? (
+										<div className="status-reopned">
+											{item?.status}
+										</div>
+									) : item?.status === "OPEN" ? (
+										<div className="status-reopned">
+											{item?.status}
+										</div>
+									) : (
+										<div className="status-Closed">
+											{item?.status}
+										</div>
+									)))}
+
+
 							</div>
 							<div className="tp-shared-with">
 								<h6>Created By:</h6>
 								<strong>
-									{ticket?.createdBy?.firstname} {ticket?.createdBy?.lastname}
+									{viewdata?.data?.user?.firstname} {viewdata?.adata?.user?.lastname}
 								</strong>
 								<h6>Assigned to:</h6>
 								<strong>
-									{ticket?.assignedTo?.firstname} {ticket?.assignedTo?.lastname}
+									{viewdata?.assignedTo?.firstname} {viewdata?.assignedTo?.lastname}
 								</strong>
-								<p>{ticket?.assignedTo?.email}</p>
-								{ticket?.finalStatus === "Closed" ? (
+								<p>{viewdata?.assignedTo?.email}</p>
+								{viewdata?.finalStatus === "Closed" ? (
 									""
 								) : (
 									<form className="tp-update" ref={form}>
