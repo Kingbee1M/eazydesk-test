@@ -9,6 +9,7 @@ import Select from 'react-select'
 import { getallReguser } from '../../features/Registration/registrationSlice';
 import { getItTicket, reset } from '../../features/Ticket/ticketSlice';
 import { useAppDispatch, useAppSelector } from '../../store/useStore';
+import {itAssignTicket} from '../../features/Ticket/ticketSlice';
 
 
 const AssignTask = ({ id }: any) => {
@@ -21,7 +22,6 @@ const AssignTask = ({ id }: any) => {
 	const [selectedOption3, setSelectedOption3] = useState(null);
 	const [input, setInput] = useState<any>({
 		assignedToId: "",
-	
 	})
 
 

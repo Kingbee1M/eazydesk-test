@@ -39,6 +39,12 @@ const initialState = {
 	viewisLoading: false,
 	viewmessage: '',
 
+	itassigndata: [],
+	itassignisError: false,
+	itassignisSuccess: false,
+	itassignisLoading: false,
+	itassignmessage: '',
+
 
 	// deletedata: [],
 	// deleteisError: false,
@@ -167,6 +173,18 @@ export const getTicketID = createAsyncThunk('ticket/getTicketID', async (data, t
 
 // View Ticket
 export const viewTicket = createAsyncThunk('ticket/viewTicket', async (data, thunkAPI) => {
+	try {
+		return await ticketService.viewTicket(data)
+	} catch (error: any) {
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		return thunkAPI.rejectWithValue(message)
+	}
+})
+
+//IT assign ticket
+
+export const itAssignTicket = createAsyncThunk('ticket/itAssignTicket', async (data, thunkAPI) => {
 	try {
 		return await ticketService.viewTicket(data)
 	} catch (error: any) {
@@ -333,6 +351,11 @@ export const ticketSlice = createSlice({
 			state.viewisError = false
 			state.viewmessage = ''
 
+			state.itassignisLoading = false
+			state.itassignisSuccess = false
+			state.itassignisError = false
+			state.itassignmessage = ''
+
 
 			// state.deleteisLoading = false
 			// state.deleteisSuccess = false
@@ -481,6 +504,20 @@ export const ticketSlice = createSlice({
 				state.viewisError = true
 				state.viewmessage = action.payload
 				state.viewdata = null
+			})
+			.addCase(itAssignTicket.pending, (state) => {
+				state.itassignisLoading = true
+			})
+			.addCase(itAssignTicket.fulfilled, (state: any, action) => {
+				state.itassignisLoading = false
+				state.itassignisSuccess = true
+				state.itassigndata = action.payload?.data
+			})
+			.addCase(itAssignTicket.rejected, (state: any, action) => {
+				state.itassignisLoading = false
+				state.itassignisError = true
+				state.itassignviewmessage = action.payload
+				state.itassigndata = null
 			})
 
 		// .addCase(deleteTicket.pending, (state) => {
