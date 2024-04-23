@@ -6,29 +6,19 @@ import { IoMdSend } from "react-icons/io";
 import { baseUrl } from "../../shared/baseUrl";
 import { useAppDispatch, useAppSelector } from "../../store/useStore";
 import { getTicket, viewTicket } from "../../features/Ticket/ticketSlice";
+import { useParams } from "react-router-dom";
 
 
 
-const ProgressChat = ({ id, ticket, path }: any) => {
+const ProgressChat = ({ ticket, path }: any) => {
 
   const dispatch = useAppDispatch();
   const { data, isLoading, isSuccess, getTicketID } = useAppSelector((state: any) => state.comment)
-  const { viewData, viewisLoading, viewisSuccess } = useAppSelector((state: any) => state.ticket)
 
-  console.log("viewTicket", viewData)
 
-  useEffect(() => {
-    dispatch(viewTicket())
-    if (isSuccess) {
-      dispatch(viewTicket())
-    }
-  }, [dispatch, isSuccess])
-  // useEffect(() => {
-  //   dispatch(getTicket())
-  //   if (isSuccess) {
-  //     dispatch(getTicket())
-  //   }
-  // }, [isSuccess])
+
+
+
   const form: any = useRef();
 
   const [inputs, setInputs] = useState({
@@ -95,9 +85,7 @@ const ProgressChat = ({ id, ticket, path }: any) => {
   //   }
   // };
 
-  const [message, setMessage] = useState<any>([]);
-  const [to_name, setTo_name] = useState<any>("");
-  const [from_name, setFrom_name] = useState<any>("");
+
 
   // useEffect(() => {
   //   setTo_name("IT Support");
@@ -115,18 +103,6 @@ const ProgressChat = ({ id, ticket, path }: any) => {
       <div>
         <form onSubmit={handleSubmitComment} className="form" ref={form}>
           <div className="btn-area-container">
-            {/* <Toaster
-              position="top-center"
-              toastOptions={{
-                // Define default options
-                className: "",
-                duration: 5000,
-                // Default options for specific types
-                success: {
-                  duration: 5000,
-                },
-              }}
-            /> */}
 
             <input
               type="text"
@@ -152,34 +128,7 @@ const ProgressChat = ({ id, ticket, path }: any) => {
             </button>
           </div>
 
-          <div className="question-container" style={{ display: "none" }}>
-            <input
-              name="from_name"
-              id="from_name"
-              className="row-input"
-              type="text"
-              placeholder="Enter your name"
-              defaultValue={from_name}
-              onChange={(e) => setFrom_name(e.target.value)}
-            />
-            <input
-              name="to_name"
-              id="to_name"
-              className="row-input"
-              type="text"
-              placeholder="Enter your name"
-              defaultValue={to_name}
-              onChange={(e) => setTo_name(e.target.value)}
-            />
 
-            <textarea
-              name="message"
-              id="message"
-              className="row-input"
-              rows={5}
-              required
-              defaultValue={message} />
-          </div>
         </form>
         <div className="img-preview">
           {imgsLocalURL?.length > 0 && isLoadingImg ? (
