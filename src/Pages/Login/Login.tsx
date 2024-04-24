@@ -15,7 +15,25 @@ import DataService from "../../features/Auth/dataService";
 
 const dataService = DataService();
 const Login = () => {
-	const token = dataService.getToken()
+
+	function getToken() {
+		try {
+			// Attempt to retrieve the token from the dataService object
+			const token = dataService && typeof dataService.getToken === 'function' ? dataService.getToken() : null;
+
+			// Return the token if retrieval is successful
+			return token;
+		} catch (error) {
+			// Log any errors that occur during token retrieval
+			console.error('Error processing data:', error);
+
+			// Handle the error case by returning null or throwing a custom error
+			return null;
+		}
+	}
+	const token = getToken();
+
+
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate();
 	const [showPassword, setShowPassword] = useState<any>(false);
@@ -29,7 +47,7 @@ const Login = () => {
 
 	const onSubmitFormlogin = (values: any) => {
 		const value = { ...values };
-		setEmail(values.email)
+		setEmail(values?.email)
 		// @ts-ignore
 		dispatch(login(value))
 	}
@@ -95,24 +113,24 @@ const Login = () => {
 													<input
 														type="text"
 														placeholder="Enter your Agent ID"
-														value={values.email}
+														value={values?.email}
 														onChange={handleChange('email')}
 													/>
-													{errors.email && <p className="formik-errors">{errors.email}</p>}
+													{errors?.email && <p className="formik-errors">{errors?.email}</p>}
 												</div>
 												<div className="form-ctrl">
 													<label>Password</label>
 													<input
 														type={showPassword ? "text" : "password"}
 														placeholder="Enter your password"
-														value={values.password}
+														value={values?.password}
 														onChange={handleChange('password')}
 													/>
 
 													<span id="i-FaEye" onClick={() => setShowPassword(!showPassword)}>
 														{showPassword ? <FaEye /> : <FaEyeSlash />}
 													</span>
-													{errors.password && <p className="formik-errors" id="password">{errors.password}</p>}
+													{errors?.password && <p className="formik-errors" id="password">{errors?.password}</p>}
 												</div>
 												<button
 													type="submit"
