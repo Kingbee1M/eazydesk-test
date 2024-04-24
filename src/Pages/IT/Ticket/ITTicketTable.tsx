@@ -5,10 +5,9 @@ import { Link } from "react-router-dom";
 import { baseUrl } from "../../../shared/baseUrl";
 import ViewTicketDetailsModal from "../../../components/Modals/ViewTicketDetailsModal";
 import { NoRecordFound, TableFetch } from "../../../components/Options";
-import AssignTask from "../../../components/Modals/AssignTask";
-import { admingetTicket } from "../../../features/Ticket/ticketSlice";
-import { useAppDispatch, useAppSelector } from "../../../store/useStore";
 import ReassignTask from "../../../components/Modals/ReassignTask";
+import AssignTask from "../../../components/Modals/AssignTask";
+
 
 const ITTicketTable= ({
   pageheader,
@@ -29,17 +28,6 @@ const ITTicketTable= ({
   const [searchItem, setSearchItem] = useState("");
   const [Unassigned, setUnassigned] = useState(false);
 
-// console.log(data)
-
-
-
-
-  // useEffect(() => {
-  // 	dispatch(getTicket())
-  // 	if (isSuccess) {
-  // 		dispatch(getTicket())
-  // 	}
-  // }, [dispatch, isSuccess])
 
 
 
@@ -82,11 +70,12 @@ const ITTicketTable= ({
                 data?.map((user: any) => (
                   <tr key={user?._id}>
                     <td className="Reference" data-title="Reference">
-                      {user?.ticketType === "INCIDENT REQUEST"
-                        ? "INC - " + user?.ticketId
-                        : user?.ticketType === "SERVICE REQUEST"
-                          ? "SRV - " + user?.ticketId
-                          : "CHG - " + user?.ticketId}
+                      {user?.ticketType === "INCIDENT"
+                        ? "INC - "
+                        : user?.ticketType === "SERVICE"
+                          ? "SRV - " 
+                          : "CHG - "}
+                      
                     </td>
                     <td data-title="ticket type">{user?.ticketType}</td>
                     {/* <td data-title="ticket type">{user?.location}</td> */}
@@ -165,7 +154,7 @@ const ITTicketTable= ({
                         <button className="ticket-Closed">Closed</button>
                       ) : (
 
-                        <ReassignTask
+                        <AssignTask
                           id={user?.id}
                           TYPE={TYPE}
                           // assignToName={assignToName}

@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { SVGLoader } from '../SVGLoader';
 import Select from 'react-select'
 import { getallReguser } from '../../features/Registration/registrationSlice';
-import { getItTicket, reset } from '../../features/Ticket/ticketSlice';
+import { getItTicket,reset } from '../../features/Ticket/ticketSlice';
 import { useAppDispatch, useAppSelector } from '../../store/useStore';
 import {itAssignTicket} from '../../features/Ticket/ticketSlice';
 
@@ -23,6 +23,7 @@ const AssignTask = ({ id }: any) => {
 	const [input, setInput] = useState<any>({
 		assignedToId: "",
 	})
+
 
 
 
@@ -62,10 +63,9 @@ const AssignTask = ({ id }: any) => {
 
 	const dispatch = useAppDispatch();
 	const { itdata, itisLoading, itisError, itisSuccess } = useAppSelector((state: any) => state.ticket);
+	const { itassigndata,itassignisError, itassignisSuccess, itassignisLoading } = useAppSelector((state: any) => state.ticket);
 	const { dataAll, isLoadingAll } = useAppSelector((state: any) => state.reg);
-	const { isSuccess } = useAppSelector((state) => state.reg)
 	const { edituserisSuccess } = useAppSelector((state: any) => state.reg);
-
 
 	const Itmember = dataAll?.users?.filter((user: any) => user.role === "IT_SUPPORT").map((user: any) =>
 	({
@@ -73,37 +73,44 @@ const AssignTask = ({ id }: any) => {
         label: `${user.firstname} ${user.lastname}`,
 	}));
 	
+	//dispatch to get all registered users
+	useEffect(() => {
+		 //@ts-ignore
+		dispatch(getallReguser(id))
+		
+	}, [dispatch, id]);
 	
+	//dispatch to get all ticket assigned to It Member
+	useEffect(() => {
+		 //@ts-ignore
+		dispatch(getItTicket(id))
+		
+	}, [dispatch,id]);
+
+	//Handle assigning of task  using an ID
+
 	const handleSubmit = (e: any) => {
 		e.preventDefault()
 		// @ts-ignore 
-		
-		console.log(input)
+		console.log(id)
 		// @ts-ignore
-		// dispatch(getItTicket(input))
-		
-		
-		
+
+		dispatch(itAssignTicket(id))		
 	}
 
-// 	useEffect(() => {
-//     if (itisSuccess && show) {
-//         toast.success("Ticket Assigned", { toastId: customId });
-//         setShow(false);
-//         setInput({
-//             assignedToId: "",
-//         });
-//     }
+	useEffect(() => {
+    if (itassignisSuccess && show) {
+        toast.success("Ticket Assigned", { toastId: customId });
+        setShow(false);
+        setInput({
+            assignedToId: "",
+        });
+    }
     
-//     dispatch(reset());
-// }, [itisSuccess, show, dispatch]);
+    dispatch(reset());
+}, [itisSuccess, show, dispatch, itassignisSuccess]);
 
 	
-	useEffect(() => {
-		 //@ts-ignore
-		dispatch(getItTicket(input))
-		
-	}, [dispatch]);
 
 	
 
@@ -135,7 +142,7 @@ const AssignTask = ({ id }: any) => {
 							id='custom-btn'
 							className='mt-4'
 							disabled={false} >
-							{itisLoading ? <SVGLoader width={"30px"} height={"30px"} color={"#fff"} /> : "Assign Task"}
+							{itassignisLoading ? <SVGLoader width={"30px"} height={"30px"} color={"#fff"} /> : "Assign Task"}
 						</button>
 					</form>
 				</Modal.Body>

@@ -45,14 +45,13 @@ const ITServiceRequest = () => {
 
 	useEffect(() => {
 		const datas = { ticketType: "SERVICE" };
+		console.log(datas)
 		// @ts-ignore 
 		dispatch(getItTicket(datas))
 
 	}, [dispatch, endDate1, startDate1])
 
-	// useEffect(() => {
-	// 	setData(itdata);
-	// }, [itdata]);
+
 
 
 	return (
