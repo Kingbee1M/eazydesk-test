@@ -7,6 +7,9 @@ import { useEffect, useState } from "react";
 import logo from '../../assets/img/logo.svg'
 import { RiAlarmWarningLine } from "react-icons/ri";
 import { TbExchange } from "react-icons/tb";
+import { IoMdOpen } from "react-icons/io";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import { PiCalendarCheckDuotone } from "react-icons/pi";
 
 
 const ITSideNav = () => {
@@ -73,6 +76,41 @@ const ITSideNav = () => {
 
 				{dropdownOpen && (
 					<div>
+						<NavLink to="/itopenticket" className={({ isActive }) =>
+							["nav-link_sup", isActive ? "active_sup" : null,]
+								.filter(Boolean)
+								.join(" ")
+						}>
+							<div className="nav_dropdown_sub">
+								<IoMdOpen size={21} />
+								<span>In Progress </span>
+							</div>
+							<div className="side_number">5</div>
+						</NavLink>
+
+						<NavLink to="/itclosedticket" className={({ isActive }) =>
+							["nav-link_sup", isActive ? "active_sup" : null,]
+								.filter(Boolean)
+								.join(" ")
+						}>
+							<div className="nav_dropdown_sub">
+								<AiOutlineCloseCircle size={21} />
+								<span>Resolved Tickets</span>
+							</div>
+							<div className="side_number_one" >10</div>
+						</NavLink>
+
+						<NavLink to="/itticketprogress" className={({ isActive }) =>
+							["nav-link_sup", isActive ? "active_sup" : null,]
+								.filter(Boolean)
+								.join(" ")
+						}>
+							<div className="nav_dropdown_sub">
+								<PiCalendarCheckDuotone size={22} />
+								<span>Closed Ticked</span>
+							</div>
+							<div className="side_number_two">4</div>
+						</NavLink>
 
 						<NavLink to="/itincidentrequest" className={({ isActive }) =>
 							["nav-link_sup", isActive ? "active_sup" : null]
