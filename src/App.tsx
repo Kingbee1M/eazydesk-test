@@ -34,6 +34,7 @@ import ForgotPassword from "./Pages/Login/ForgotPassword";
 import ResetPassword from "./Pages/Login/ResetPassword";
 import TicketProgress from "./components/Chat/TicketProgress";
 import InProgress from "./Pages/Admin/Ticket/InProgress";
+import Support from "./Pages/Support/Support";
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/help" element={<Help />} />
+        <Route path="/support" element={<Support />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/passwordreset/:id" element={<ResetPassword />} />
         <Route path="/dashboard" element={<DashboardHUB />} />

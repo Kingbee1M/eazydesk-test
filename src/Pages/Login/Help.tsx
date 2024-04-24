@@ -2,6 +2,7 @@ import React from 'react'
 import Carousels from '../../components/Carousels'
 import { ToastContainer } from 'react-toastify'
 import LoginHeader from '../../components/LoginHeader'
+import Support from '../Support/Support'
 
 const Help = () => {
 	return (
@@ -17,7 +18,7 @@ const Help = () => {
 					<div className="login-content-grid">
 						<div className="logo-section">
 							<div className="copyright_login_container">
-								Help
+								<Support />
 							</div>
 						</div>
 					</div>
