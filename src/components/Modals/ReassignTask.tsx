@@ -103,7 +103,7 @@ const ReassignTask = ({ id }: any) => {
 	return (
 		<>
 			<ToastContainer position="top-right" />
-			<button className="assign-btn" onClick={() => setShow(true)} >Reassign</button>
+			<button className="assign-btn" onClick={() => setShow(true)} >Assign</button>
 			
 
 			<Modal show={show} onHide={handleClose} centered>
