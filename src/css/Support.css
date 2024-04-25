@@ -110,7 +110,9 @@
 } */
 .half-background {
   margin-top: 50px;
-  padding: 0px 20px;
+  padding: 10px 30px;
+  width: 70%;
+  margin: auto;
 }
 .accordion-button:not(.collapsed) {
   color: #000 !important;
@@ -130,7 +132,7 @@
 .accordion-button {
   box-shadow: none !important;
   font-weight: bold !important;
-  font-size: 20px !important;
+  font-size: 18px !important;
 }
 
 .accordion {
@@ -163,7 +165,7 @@
 }
 
 .accordion-body {
-  padding: 0px 10px !important;
+  padding: 10px 20px !important;
 }
 
 #accordion-body-form {

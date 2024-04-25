@@ -35,7 +35,12 @@ const Support = () => {
           <div>
             <Accordion.Item eventKey='0'>
               <div id='accordion-body-form'>
-                <Accordion.Header>Employee Details</Accordion.Header>
+                <Accordion.Header>
+                  <h4>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Sunt, magni?
+                  </h4>
+                </Accordion.Header>
                 <Accordion.Body>
                   <div>
                     <p>
@@ -63,7 +68,12 @@ const Support = () => {
             </Accordion.Item>
             <Accordion.Item eventKey='1'>
               <div id='accordion-body-form'>
-                <Accordion.Header>Address</Accordion.Header>
+                <Accordion.Header>
+                  <h4>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Sunt, magni?
+                  </h4>
+                </Accordion.Header>
                 <Accordion.Body>
                   <div>
                     <p>
@@ -91,7 +101,12 @@ const Support = () => {
             </Accordion.Item>
             <Accordion.Item eventKey='2'>
               <div id='accordion-body-form'>
-                <Accordion.Header>Employment Details</Accordion.Header>
+                <Accordion.Header>
+                  <h4>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Sunt, magni?
+                  </h4>
+                </Accordion.Header>
                 <Accordion.Body>
                   <div>
                     <p>
@@ -118,7 +133,12 @@ const Support = () => {
             </Accordion.Item>
             <Accordion.Item eventKey='3'>
               <div id='accordion-body-form'>
-                <Accordion.Header>Finance Details</Accordion.Header>
+                <Accordion.Header>
+                  <h4>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Sunt, magni?
+                  </h4>
+                </Accordion.Header>
                 <Accordion.Body>
                   <div>
                     <p>
@@ -145,7 +165,12 @@ const Support = () => {
             </Accordion.Item>
             <Accordion.Item eventKey='4'>
               <div id='accordion-body-form'>
-                <Accordion.Header>References</Accordion.Header>
+                <Accordion.Header>
+                  <h4>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Sunt, magni?
+                  </h4>
+                </Accordion.Header>
                 <Accordion.Body>
                   <div>
                     <p>
