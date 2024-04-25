@@ -4,9 +4,7 @@ import { tokenKey } from '../../components/Options';
 
 const DataService = () => {
  
-  
    
-  // };
   const setToken = (token: any) => { 
     // Encrypt 
     const hashedToken = CryptoJS.AES.encrypt(token, `${process.env.REACT_APP_ENCRIPTION_SECRET_KEY}`).toString();

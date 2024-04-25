@@ -23,6 +23,7 @@ if (token) {
 
 
   const get = async (url: string) => { 
+    console.log('endpoint_endpoint', url);
     const endpoint = baseUrl + url;
     try {
       const data = await axios.get(endpoint );
@@ -123,11 +124,14 @@ const handleError = (error: any) => {
   // Extract error message from response 
   const message = error?.response?.data?.message ||
     (error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
-
+console.log('error?.response?.status ',error?.response?.statusText )
   // Handle unauthorized error
   if (error?.response?.status === 401 && error?.response?.statusText === "Unauthorized") {
     fireAlert("Session Expired", "Please log in again", "error", "/");
-  } else {
+  } else if(error?.response?.status === undefined || error?.response?.statusText === null){
+ 
+ 
+  }else {
     // Display error message using toast
     toast.error(message, {  toastId: customId });
   }

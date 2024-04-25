@@ -10,16 +10,36 @@ const getTicket = async () => {
 	const { data }: any = await HttpService.get(`/api/v2/ticket`)
 	return data
 }
-const getItTicket = async (datas: any) => {
-	const { endDate, startDate, limit, page, ticketType, ticketId } = datas
-	const base = baseUrl + `/api/v2/ticket/itsupport`
+const getItTicket = async (requestData: any) => {
+
+	// Destructure parameters from requestData object
+	const { endDate, startDate, limit, page, ticketType, ticketId } = requestData;
+
+	// Construct URL for fetching tickets
+	const base = baseUrl + `/api/v2/ticket/itsupport`;
 	const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType, ticketId);
-	
-	// const HttpService = createHttpService();
-	// const { data }: any = await HttpService.get(url)
-	const { data } = await axios.get(url)
-	return data
+
+	// Log the constructed URL
+	console.log('Constructed URL:', url);
+	// Make GET request to fetch tickets
+	const { data }: any = await createHttpService().get(url);
+
+	// Log success message and return the retrieved data
+	console.log('Tickets retrieved successfully:', data);
+	return data;
 }
+
+
+// const getItTicket = async (datas: any) => {
+// 	const HttpService = createHttpService();
+// 	const { endDate, startDate, limit, page, ticketType, ticketId } = datas
+// 	const base = baseUrl + `/api/v2/ticket/itsupport`
+// 	const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType, ticketId);
+
+// 	console.log('url--url', url)
+// 	const { data }: any = await HttpService.get(url)
+// 	return data
+// }
 const getTicketID = async (datas: any) => {
 	const { endDate, startDate, limit, page, ticketType, ticketId } = datas
 	const base = baseUrl + `/api/v2/ticket/itsupport`
@@ -51,7 +71,7 @@ const createTicket = async (formData: any) => {
 	return data
 }
 
-const itAssignTicket =  async (id: any) => {
+const itAssignTicket = async (id: any) => {
 	const HttpService = createHttpService();
 	const { data }: any = await HttpService.get(`/api/v2/ticket/${id}/itsupport`)
 	console.log('data', data)
