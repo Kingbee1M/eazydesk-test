@@ -11,7 +11,7 @@ import moment from 'moment'
 
 const ITServiceRequest = () => {
 	const dispatch = useAppDispatch();
-	
+
 
 	const [entriesPerPage, setEntriesPerPage] = useState(() => {
 		return "6";
@@ -40,12 +40,11 @@ const ITServiceRequest = () => {
 	const yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
 	const [data, setData] = useState<any>([]);
 
-	
+
 
 
 	useEffect(() => {
 		const datas = { ticketType: "SERVICE" };
-		console.log(datas)
 		// @ts-ignore 
 		dispatch(getItTicket(datas))
 

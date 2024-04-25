@@ -7,24 +7,40 @@ import { baseUrl } from "../../shared/baseUrl";
 import { useAppDispatch, useAppSelector } from "../../store/useStore";
 import { getTicket, viewTicket } from "../../features/Ticket/ticketSlice";
 import { useParams } from "react-router-dom";
+import { createComment } from "../../features/Comment/commentSlice";
+import { SVGLoader } from "../SVGLoader";
 
 
 
-const ProgressChat = ({ ticket, path }: any) => {
+const ProgressChat = ({ ticket, path, viewdata, id }: any) => {
 
   const dispatch = useAppDispatch();
   const { data, isLoading, isSuccess, getTicketID } = useAppSelector((state: any) => state.comment)
+  const { createdata, createisLoading, createisSuccess, creategetTicketID } = useAppSelector((state: any) => state.comment)
 
 
 
 
-
+  const formData = new FormData();
   const form: any = useRef();
 
-  const [inputs, setInputs] = useState({
+
+  const [input, setInputs] = useState({
     comment: "",
     images: [],
   });
+
+  const formFields = [
+    { key: 'ticketId', value: id },
+    { key: 'comment', value: input.comment },
+    { key: 'file', value: input.images },
+
+  ];
+
+  formFields.forEach(field => {
+    formData.append(field.key, field.value);
+  });
+
   const [imgsLocalURL, setImgsLocalURL] = useState<any>([]);
   const [isLoadingImg, setIsLoadingImg] = useState(false);
 
@@ -38,12 +54,9 @@ const ProgressChat = ({ ticket, path }: any) => {
 
   const handleSubmitComment = (e: any) => {
     e.preventDefault();
-    if (inputs.comment) {
-      // dispatch(createTicketCommentAction(id, inputs.comment, inputs.images));
-      setImgsLocalURL([]);
-    }
-  };
-
+    // @ts-ignore 
+    dispatch(createComment(formData));
+  }
   // const handleUploadMultiImg = async (e: any) => {
   //   setImgsLocalURL([]);
 
@@ -107,13 +120,13 @@ const ProgressChat = ({ ticket, path }: any) => {
             <input
               type="text"
               placeholder="Comment on this request..."
-              value={inputs?.comment}
+              value={input?.comment}
               onChange={(e) => handleChangeInput("comment", e.target.value)}
             />
           </div>
           <div className="btn-area">
             <label className="img-pckr">
-              <FaCamera size={20} color="rgb(0,91,144)" />
+              <FaCamera size={20} color="#0240BC" />
               <input
                 type="file"
                 accept="image/*"
@@ -123,8 +136,8 @@ const ProgressChat = ({ ticket, path }: any) => {
               // disabled={loading}
               />
             </label>
-            <button type="submit" disabled={isLoadingImg || false}>
-              <IoMdSend size={20} />
+            <button type="submit" disabled={createisLoading}>
+              {createisLoading ? <SVGLoader width={"30px"} height={"30px"} color={"#fff"} /> : <IoMdSend size={20} color="#0240BC" />}
             </button>
           </div>
 
@@ -141,13 +154,13 @@ const ProgressChat = ({ ticket, path }: any) => {
         </div>
         <h5 className="page-title">CHAT</h5>
         <div className="chat-container">
-          {ticket?.comments?.map((item: any, i: any) => (
+          {ticket?.Comment?.map((item: any, i: any) => (
             <div
               key={i}
-            // className={userDetails?._id === item?.createdBy?.id
-            //   ? "msg outgoing"
-            //   : "msg incoming"
-            // }
+              className={viewdata?._id === item?.createdById?.id
+                ? "msg outgoing"
+                : "msg incoming"
+              }
             >
               <div className="msg-icon">
                 <FaRegUserCircle size={35} color="#e5e5e5" />

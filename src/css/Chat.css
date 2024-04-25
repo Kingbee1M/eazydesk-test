@@ -178,15 +178,14 @@ color: #fff;
   width: fit-content;
   border-radius: 3px;
   border: 1px solid var(--clr-blue);
+  box-shadow: 0 1px 15px #1b1f2326, 0 0 1px #6a737d59;
 }
-
  
- 
-
 .tp-shared-container .tp-shared-with {
   padding: 1rem;
-  /* padding-right: 5rem; */
-  border-top: 1px solid var(--clr-blue);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .tp-shared-container .tp-shared-with h6 {
@@ -283,4 +282,14 @@ color: #fff;
   .ChatProgressView-close-icon:hover{
     color: var( --white) !important;
      background-color: var(--accent-red);
+  }
+
+  .affectedUsers_chat{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+  }
+  .affectedUsers_chat p{
+   font-size: 15px;
   }

@@ -22,11 +22,10 @@ if (token) {
 
 
 
-  const get = async (url: string) => { 
-    console.log('endpoint_endpoint', url);
+  const get = async (url: string) => {  
     const endpoint = baseUrl + url;
     try {
-      const data = await axios.get(endpoint );
+      const data = await axios.get(endpoint);
       return data;
     } catch (e) {
       handleError(e);

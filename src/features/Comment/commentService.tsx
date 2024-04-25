@@ -36,7 +36,7 @@ const admingetComment = async (datas: any) => {
 
 const createComment = async (formData: any) => {
 	const HttpService = createHttpService();
-	const { data }: any = await HttpService.post(`/api/v2/comment?ticketId`, formData)
+	const { data }: any = await HttpService.post(`/api/v2/comment`, formData)
 	return data
 }
 // const assignTicket = async (input: any) => {
@@ -110,21 +110,8 @@ const createComment = async (formData: any) => {
 
 const commentService = {
 	getComment,
-	// createTicket,
-	// getItTicket,
-	// admingetTicket,
-	// viewTicket,
-	// deleteTicket,
-	// updateTicket,
-	// noteTicket,
-	// adminUpdateTicket,
-	// assignTicket,
-	// getAssignTicketID,
-	// acceptTicket,
-	// getTicketbyID,
-	// markTicket,
-	// acknowledgeTicket,
-	// getSupervisorTicket
+	createComment,
+
 }
 
 export default commentService

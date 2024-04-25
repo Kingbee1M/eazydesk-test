@@ -1,13 +1,19 @@
 import { useState } from 'react'
 import { Modal } from 'react-bootstrap';
-import { NoRecordFound } from '../Options';
-import ImageLightbox from '../ImageLightbox';
+// import { NoRecordFound } from '../Options';
+// import ImageLightbox from '../ImageLightbox';
 import ModalHeader from './ModalHeader';
-// import { baseUrl } from '../../shared/baseUrl';
+import ReactQuillWrapper from '../TicketModals/ReactQuillWrapper';
+
+
 
 
 const ViewTicketDetailsModal = ({ data }: any) => {
+
+
+
 	const [showModal, setLgShow] = useState(false);
+	const [value, setValue] = useState('');
 
 
 
@@ -42,8 +48,8 @@ const ViewTicketDetailsModal = ({ data }: any) => {
 										<span className='form_info'>{data?.issueDescription} </span>
 									</div>
 								</div>
-
-								<div className="image_gallery">
+								<ReactQuillWrapper setValue={setValue} value={data?.description} />
+								{/* <div className="image_gallery">
 									<span className='form_info'> Image </span>
 									{Image?.length === 0 || Image === undefined ? (
 										<div className='ang-dash-notfound'>
@@ -54,7 +60,7 @@ const ViewTicketDetailsModal = ({ data }: any) => {
 										<ImageLightbox images={data?.images} />
 									)}
 
-								</div>
+								</div> */}
 							</div>
 						</div>
 					</Modal.Body>

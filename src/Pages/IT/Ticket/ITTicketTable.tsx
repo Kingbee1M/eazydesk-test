@@ -7,9 +7,10 @@ import ViewTicketDetailsModal from "../../../components/Modals/ViewTicketDetails
 import { NoRecordFound, TableFetch } from "../../../components/Options";
 import ReassignTask from "../../../components/Modals/ReassignTask";
 import AssignTask from "../../../components/Modals/AssignTask";
+import TicketStatusCell from "../../Admin/Ticket/TicketStatusCell";
 
 
-const ITTicketTable= ({
+const ITTicketTable = ({
   pageheader,
   TYPE,
   Request,
@@ -73,9 +74,9 @@ const ITTicketTable= ({
                       {user?.ticketType === "INCIDENT"
                         ? "INC - "
                         : user?.ticketType === "SERVICE"
-                          ? "SRV - " 
+                          ? "SRV - "
                           : "CHG - "}
-                      
+
                     </td>
                     <td data-title="ticket type">{user?.ticketType}</td>
                     {/* <td data-title="ticket type">{user?.location}</td> */}
@@ -156,82 +157,11 @@ const ITTicketTable= ({
 
                         <AssignTask
                           id={user?.id}
-                          TYPE={TYPE}
-                          // assignToName={assignToName}
-                          // assignerName={userInfo?.firstname}
-                          ticketId={user?.ticketId}
-                          ticketType={user.ticketType}
-                          issueCategory={user?.issueCategory}
-                          affectedUsers={user?.affectedUsers}
-                          ticketStatus={user?.finalStatus}
-                          timeStamp={moment(user?.createdAt)?.format("DD-MMM-YY H:mm:ss")}
-                          severity={user?.severity}
-                          createdByFirstname={user?.createdBy?.firstname}
-                          data={user}
                         />
                       )}
                     </td>
                     <td>
-                      {user?.status === "INPROGRESS" && (
-                        <Link
-                          to={`/ticket-progress/${user?.id}`}
-                          className="admin-btn-progresss">
-                          IN-PROGRESS
-                        </Link>
-                      )}
-                      {user?.status === "APPROVED" && (
-                        <Link
-                          to={`/ticket-progress/${user?._id}`}
-                          className="admin-btn-reopen">
-                          APPROVED
-                        </Link>
-                      )}
-                      {user?.status === "DISAPPROVED" && (
-                        <button
-                          className="admin-btn-Unassigned"
-                          onClick={() => {
-                            setUnassigned(true);
-                          }}>
-                          DISAPPROVED
-                        </button>
-                      )}
-                      {user?.status === "OPEN" && (
-                        <Link
-                          to={`/ticket-progress/${user?.id}`}
-                          className="admin-btn-reopen">
-                          OPEN
-                        </Link>
-                      )}
-                      {user?.status === "COMPLETED" && (
-                        <Link
-                          to={`/ticket-progress/${user?.id}`}
-                          className="admin-btn-resolved">
-                          COMPLETED
-                        </Link>
-                      )}
-                      {user?.status === "CLOSED" && (
-                        <Link
-                          to={`/ticket-progress/${user?.id}`}
-                          className="admin-btn-closed">
-                          CLOSED
-                        </Link>
-                      )}
-                      {user?.status === "REOPEN" && (
-                        <Link
-                          to={`/ticket-progress/${user?.id}`}
-                          className="admin-btn-reopen">
-                          REOPENED
-                        </Link>
-                      )}
-                      {user?.status === "INVALID" && (
-                        <button
-                          className="admin-btn-Unassigned"
-                          onClick={() => {
-                            setUnassigned(true);
-                          }}>
-                          INVALID
-                        </button>
-                      )}
+                      <TicketStatusCell user={user} customId={user?.id} />
                     </td>
                   </tr>
                 ))
