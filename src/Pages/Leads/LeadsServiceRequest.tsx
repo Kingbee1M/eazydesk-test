@@ -63,8 +63,6 @@ const LeadsServiceRequest = () => {
 				<div className='request-container'>
 					<div className="container-items">
 						<h5 className='dashboard-first-card-h'>Service Request </h5>
-
-
 						<div className="entries-perpage">
 							{data && (
 								<EntriesPerPage

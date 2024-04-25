@@ -1,93 +1,69 @@
 import Modal from 'react-bootstrap/Modal';
 import { customId, customStyles } from '../Options';
 import ModalHeader from './ModalHeader';
-import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { SVGLoader } from '../SVGLoader';
 import Select from 'react-select'
 import { getallReguser } from '../../features/Registration/registrationSlice';
-import { getItTicket,reset } from '../../features/Ticket/ticketSlice';
+import { reset } from '../../features/Ticket/ticketSlice';
 import { useAppDispatch, useAppSelector } from '../../store/useStore';
-import {itAssignTicket} from '../../features/Ticket/ticketSlice';
+import { itAssignTicket } from '../../features/Ticket/ticketSlice';
 
 
-const AssignTask = ({ id }: any) => {
-
-	const navigate = useNavigate();
+const AssignTask = ({ id, Assigned }: any) => {
+	const dispatch = useAppDispatch();
 	const handleClose = () => setShow(false);
 	const [show, setShow] = useState(false);
-	const [assignedUserId, setAssignedUserId] = useState(null); 
-	 
-
-	
+	const [assignedUserId, setAssignedUserId] = useState(null);
 
 	const handleSelectedChange1 = (assignedUserId: any) => {
 		setAssignedUserId(assignedUserId);
 	};
- 
 
 
-
-	const dispatch = useAppDispatch();
-	const { itdata, itisLoading, itisSuccess } = useAppSelector((state: any) => state.ticket);
-	const {  itassignisSuccess, itassignisLoading } = useAppSelector((state: any) => state.ticket);
+	const { itassignisSuccess, itassignisLoading } = useAppSelector((state: any) => state.ticket);
 	const { dataAll } = useAppSelector((state: any) => state.reg);
 
 	const Itmember = dataAll?.users?.filter((user: any) => user.role === "IT_SUPPORT").map((user: any) =>
 	({
-        value: user?.id,
-        label: `${user.firstname} ${user.lastname}`,
+		value: user?.id,
+		label: `${user.firstname} ${user.lastname}`,
 	}));
-	
+
 	//dispatch to get all registered users
 	useEffect(() => {
-		 //@ts-ignore
+		//@ts-ignore
 		dispatch(getallReguser(id))
-		
+
 	}, [dispatch, id]);
-	
-	//dispatch to get all ticket assigned to It Member
-	useEffect(() => {
-		 //@ts-ignore
-		dispatch(getItTicket(id))
-		
-	}, [dispatch,id]);
 
-	//Handle assigning of task  using an ID
 
+	//@ts-ignore
+	const formData = { "assignedUserId": assignedUserId?.value }
 	const handleSubmit = (e: any) => {
 		e.preventDefault()
-		const datas = { id,  assignedUserId  }
-		// @ts-ignore 
-
-		dispatch(itAssignTicket(datas))		
+		const datas = { id, formData }
+		// @ts-ignore  
+		dispatch(itAssignTicket(datas))
 	}
 
 	useEffect(() => {
-    if (itassignisSuccess && show) {
-        toast.success("Ticket Assigned", { toastId: customId });
-        setShow(false);
-        // setInput({
-        //     assignedToId: "",
-        // });
-    }
-    
-    dispatch(reset());
-}, [itisSuccess, show, dispatch, itassignisSuccess]);
+		if (itassignisSuccess && show) {
+			toast.success(`Ticket ${Assigned}`, { toastId: customId });
+			setShow(false);
+		}
 
-	
+		dispatch(reset());
+	}, [show, dispatch, itassignisSuccess, Assigned]);
 
-	
 
 	return (
 		<>
 			<ToastContainer position="top-right" />
 			<button className="assign-btn" onClick={() => setShow(true)} >Assign</button>
-			
 
 			<Modal show={show} onHide={handleClose} centered>
-				
 				<ModalHeader setShow={setShow} headerTitle={"Assign Ticket to"} />
 				<Modal.Body>
 					<form onSubmit={handleSubmit}>
@@ -101,7 +77,6 @@ const AssignTask = ({ id }: any) => {
 								isLoading={false}
 								styles={customStyles} />
 						</div>
-
 
 						<button
 							type="submit"

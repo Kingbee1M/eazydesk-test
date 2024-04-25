@@ -11,22 +11,22 @@ const getTicket = async () => {
 	return data
 }
 const getItTicket = async (datas: any) => {
-	const { endDate, startDate, limit, page, ticketType, ticketId } = datas
-	const base = baseUrl + `/api/v2/ticket/itsupport`
+	// Destructure parameters from datas object
+	const { endDate, startDate, limit, page, ticketType, ticketId } = datas;
+	const base = baseUrl + `/api/v2/ticket/itsupport`;
 	const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType, ticketId);
-	
-	// const HttpService = createHttpService();
-	// const { data }: any = await HttpService.get(url)
 	const { data } = await axios.get(url)
-	return data
+	return data;
 }
+
+
 const getTicketID = async (datas: any) => {
 	const { endDate, startDate, limit, page, ticketType, ticketId } = datas
 	const base = baseUrl + `/api/v2/ticket/itsupport`
 	const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType, ticketId);
-	// const HttpService = createHttpService();
-	// const { data }: any = await HttpService.get(url)
-	const { data } = await axios.get(url)
+	const HttpService = createHttpService();
+	const { data }: any = await HttpService.get(url)
+	// const { data } = await axios.get(url)
 	return data
 }
 const admingetTicket = async (datas: any) => {
@@ -50,14 +50,22 @@ const createTicket = async (formData: any) => {
 	const { data }: any = await HttpService.post(`/api/v2/ticket`, formData)
 	return data
 }
-
 const itAssignTicket = async (datas: any) => {
-	const {id , assignedUserId} = datas
+	const { id, formData } = datas
 	const HttpService = createHttpService();
-	const { data }: any = await HttpService.post(`/api/v2/ticket/${id}/itsupport`,{"assignedUserId":assignedUserId})
-	console.log('data', assignedUserId)
+	const { data }: any = await HttpService.post(`/api/v2/ticket/${id}/itsupport`, formData)
 	return data
 }
+
+// const itAssignTicket = async (datas: any) => {
+// 	const { id, assignedUserId } = datas
+// 	const HttpService = createHttpService();
+// 	const { data }: any = await HttpService.post(`/api/v2/ticket/${id}/itsupport`, {
+// 		"assignedUserId": "3b0c3c98-46db-4499-bc65-5439c95849ea"
+// 	})
+// 	console.log('data', assignedUserId)
+// 	return data
+// }
 
 // const assignTicket = async (input: any) => {
 // 	const HttpService = createHttpService();

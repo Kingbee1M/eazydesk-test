@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import BottomNavigation from '../../../components/BottomNavigation'
 import Header from '../../../components/Header'
 import SideNav from '../../../components/SideNav/SideNav'
 import SearchConponent from '../../../components/SearchConponent'
-import TicketTableComponent from '../../../components/Table/TicketTableComponent'
-import { data } from '../../../components/StateData'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import moment from 'moment'
 import { admingetTicket } from '../../../features/Ticket/ticketSlice'
@@ -12,7 +10,7 @@ import AdminTicketTable from './AdminTicketTable'
 
 const ChangeRequest = () => {
 	const dispatch = useAppDispatch();
-	
+
 
 	const [entriesPerPage, setEntriesPerPage] = useState(() => {
 		return "6";
@@ -43,12 +41,11 @@ const ChangeRequest = () => {
 
 
 	console.log("admingetticketdata", admingetticketdata)
-	
+
 	useEffect(() => {
 		const datas = { ticketType: "CHANGE" };
 		// @ts-ignore 
 		dispatch(admingetTicket(datas))
-
 	}, [dispatch, endDate1, startDate1])
 
 	// console.log(admingetticketdata)
@@ -62,7 +59,6 @@ const ChangeRequest = () => {
 				<div className='dashboard-first-card-boards '>
 					<div>
 						<h5 className='dashboard-first-card-h'>Incident Request</h5>
-						{/* <p className='dashboard-first-card-p'>15 incident request ticket</p> */}
 					</div>
 				</div>
 				<SearchConponent

@@ -307,12 +307,7 @@ overflow: auto;
   color: var(--white);
 }
 
-.plans_toggle_container_main {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 40px;
-}
+ 
 
 .plans_toggle_1 {
   background: #ffffff;

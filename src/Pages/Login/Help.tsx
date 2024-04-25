@@ -1,4 +1,3 @@
-import React from 'react'
 import Carousels from '../../components/Carousels'
 import { ToastContainer } from 'react-toastify'
 import LoginHeader from '../../components/LoginHeader'
@@ -11,7 +10,6 @@ const Help = () => {
 
 			<div className="login-container">
 				<ToastContainer position="top-right" />
-
 				<div className="login-content-layout">
 					{/* Login Header */}
 					<LoginHeader />

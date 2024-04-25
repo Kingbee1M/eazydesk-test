@@ -73,41 +73,41 @@ const SideNav = () => {
 
         {dropdownOpen && (
           <div>
-            <NavLink to="/itopenticket" className={({ isActive }) =>
-							["nav-link_sup", isActive ? "active_sup" : null,]
-								.filter(Boolean)
-								.join(" ")
-						}>
-							<div className="nav_dropdown_sub">
-								<IoMdOpen size={21} />
-								<span>In Progress </span>
-							</div>
-							<div className="side_number">5</div>
-						</NavLink>
+            <NavLink to="/openticket" className={({ isActive }) =>
+              ["nav-link_sup", isActive ? "active_sup" : null,]
+                .filter(Boolean)
+                .join(" ")
+            }>
+              <div className="nav_dropdown_sub">
+                <IoMdOpen size={21} />
+                <span>In Progress </span>
+              </div>
+              <div className="side_number">5</div>
+            </NavLink>
 
-						<NavLink to="/itclosedticket" className={({ isActive }) =>
-							["nav-link_sup", isActive ? "active_sup" : null,]
-								.filter(Boolean)
-								.join(" ")
-						}>
-							<div className="nav_dropdown_sub">
-								<AiOutlineCloseCircle size={21} />
-								<span>Resolved Tickets</span>
-							</div>
-							<div className="side_number_one" >10</div>
-						</NavLink>
+            <NavLink to="/closedticket" className={({ isActive }) =>
+              ["nav-link_sup", isActive ? "active_sup" : null,]
+                .filter(Boolean)
+                .join(" ")
+            }>
+              <div className="nav_dropdown_sub">
+                <AiOutlineCloseCircle size={21} />
+                <span>Resolved Tickets</span>
+              </div>
+              <div className="side_number_one" >10</div>
+            </NavLink>
 
-						<NavLink to="/itticketprogress" className={({ isActive }) =>
-							["nav-link_sup", isActive ? "active_sup" : null,]
-								.filter(Boolean)
-								.join(" ")
-						}>
-							<div className="nav_dropdown_sub">
-								<PiCalendarCheckDuotone size={22} />
-								<span>Closed ticket</span>
-							</div>
-							<div className="side_number_two">4</div>
-						</NavLink>
+            <NavLink to="/ticketprogress" className={({ isActive }) =>
+              ["nav-link_sup", isActive ? "active_sup" : null,]
+                .filter(Boolean)
+                .join(" ")
+            }>
+              <div className="nav_dropdown_sub">
+                <PiCalendarCheckDuotone size={22} />
+                <span>Closed ticket</span>
+              </div>
+              <div className="side_number_two">4</div>
+            </NavLink>
 
             <NavLink to="/incidentrequest" className={({ isActive }) =>
               ["nav-link_sup", isActive ? "active_sup" : null,]

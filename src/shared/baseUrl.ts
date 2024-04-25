@@ -44,12 +44,7 @@ export const buildDynamicURL = (id: any, fromDate: any, endDate: any, limit: any
   if (queryParams.length > 0) {
     baseURL += "?" + queryParams.join("&");
   }
-
-    // Add 'id' to the URL if it's not null or undefined
-  // if (id !== null && id !== undefined) {
-  //   baseURL += `${id}`;
-  // }
-
+ 
   return baseURL;
 }
 

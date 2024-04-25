@@ -6,6 +6,7 @@ import ProgressChat from "./ProgressChat";
 import { useAppDispatch, useAppSelector } from "../../store/useStore";
 import { getComment } from "../../features/Comment/commentSlice";
 import { viewTicket } from "../../features/Ticket/ticketSlice";
+import { SVGLoader } from "../SVGLoader";
 
 const TicketProgress = () => {
 	const { id }: any = useParams();
@@ -65,7 +66,7 @@ const TicketProgress = () => {
 		}
 	};
 
-	console.log('tickeidt', id)
+
 
 
 
@@ -96,10 +97,10 @@ const TicketProgress = () => {
 			<main className="container">
 				<div className="tp-main-grid">
 					<div className="tp-activity-section">
-						<ProgressChat id={id} ticket={ticket} />
+						<ProgressChat id={id} ticket={ticket} viewdata={viewdata} />
 						<h5 className="page-title">STATUS</h5>
 						<div className="tp-status-area">
-							{viewdata?.data?.map((item: any, i: any) => (
+							{[viewdata]?.map((item: any, i: any) => (
 								<p key={i}>
 									Request status changed to <strong>{item?.status}</strong> on{" "}
 									<span>
@@ -113,9 +114,9 @@ const TicketProgress = () => {
 					<div className="tp-shared-section">
 						<div className="tp-shared-container">
 							<div>
-								{viewdata?.data?.map((item: any, i: any) => (
+								{[viewdata]?.map((item: any, i: any) => (
 									item?.status === "INPROGRESS" ? (
-										<div className="status-assigned">IN PROGRESS</div>
+										<div className="finalStatus-assigned">IN PROGRESS</div>
 									) : item?.status === "DISAPPROVED" ? (
 										<div className="admin-btn-unassigned ">
 											{item?.status}
@@ -140,19 +141,38 @@ const TicketProgress = () => {
 											{item?.status}
 										</div>
 									)))}
-
-
 							</div>
+
 							<div className="tp-shared-with">
-								<h6>Created By:</h6>
-								<strong>
-									{viewdata?.data?.user?.firstname} {viewdata?.adata?.user?.lastname}
-								</strong>
-								<h6>Assigned to:</h6>
-								<strong>
-									{viewdata?.assignedTo?.firstname} {viewdata?.assignedTo?.lastname}
-								</strong>
-								<p>{viewdata?.assignedTo?.email}</p>
+								<div className="affectedUsers_chat">
+									<h4>Created By:</h4>
+									<p> 	{viewdata?.createdBy?.firstname} {viewdata?.createdBy?.lastname} </p>
+								</div>
+								<div className="affectedUsers_chat">
+									<h4>Assigned to:</h4>
+									<p> 	{viewdata?.assignedUser?.assignedTo?.firstname} {viewdata?.assignedUser?.assignedTo?.lastname} </p>
+								</div>
+								<div className="affectedUsers_chat">
+									<h4>Ticke Type:</h4>
+									<p>{viewdata?.ticketType}</p>
+								</div>
+								<div className="affectedUsers_chat2">
+									<h4>Email to:</h4>
+
+									{viewdata?.emails?.map((data: any, i: any) => (
+										<p key={i}>{data}</p>
+									))}
+
+								</div>
+								<div className="affectedUsers_chat">
+									<h4>Affected Users:</h4>
+									<p>{viewdata?.affectedUsers}</p>
+								</div>
+								<div className="affectedUsers_chat">
+									<h4>Created At:</h4>
+									<p>	{moment(viewdata?.createdAt).format("MMM Do YYYY, h:mm A")}</p>
+								</div>
+
 								{viewdata?.finalStatus === "Closed" ? (
 									""
 								) : (
@@ -169,22 +189,17 @@ const TicketProgress = () => {
 											<option value="Closed">Closed</option>
 											<option value="Reopen">Reopen</option>
 										</select>
-										{/* <button
-											type="button"
-											disabled={false}
-											onClick={handleUpdateTicketStatus}>
-											{false ? "Updating.." : "Update"}
-										</button> */}
-
-
+										<button type="submit" id="custom-btn" disabled={false} onClick={handleUpdateTicketStatus}>
+											{false ? <SVGLoader width={"35px"} height={"35px"} color={"#fff"} /> : "Update"}
+										</button>
 									</form>
 								)}
 							</div>
 						</div>
 					</div>
 				</div>
-			</main>
-		</div>
+			</main >
+		</div >
 	);
 };
 

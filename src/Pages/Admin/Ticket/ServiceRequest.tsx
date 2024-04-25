@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 
 const ServiceRequest = () => {
 	const dispatch = useAppDispatch();
-	
+	const { itassignisSuccess } = useAppSelector((state: any) => state.ticket);
 
 	const [entriesPerPage, setEntriesPerPage] = useState(() => {
 		return "6";
@@ -22,10 +22,7 @@ const ServiceRequest = () => {
 	let [endDates, setEndDates] = useState<any>([]);
 	const [show, setShow] = useState(false);
 	const [datas, setDatas] = useState([]);
-	const [find, setFind] = useState<any>();
-	const [sortData, setSortData] = useState<any>([]);
 	const [searchItem, setSearchItem] = useState("");
-	const [Unassigned, setUnassigned] = useState(false);
 
 	const { admingetticketdata } = useAppSelector((state: any) => state.ticket)
 	endDates = new Date();
@@ -50,7 +47,7 @@ const ServiceRequest = () => {
 		// @ts-ignore 
 		dispatch(admingetTicket(datas))
 
-	}, [dispatch, endDate1, startDate1])
+	}, [dispatch, endDate1, startDate1, itassignisSuccess])
 
 	// console.log(admingetticketdata)
 

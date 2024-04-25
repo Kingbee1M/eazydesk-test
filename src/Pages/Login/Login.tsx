@@ -20,7 +20,6 @@ const Login = () => {
 		try {
 			// Attempt to retrieve the token from the dataService object
 			const token = dataService && typeof dataService.getToken === 'function' ? dataService.getToken() : null;
-
 			// Return the token if retrieval is successful
 			return token;
 		} catch (error) {

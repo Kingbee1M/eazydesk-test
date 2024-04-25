@@ -143,15 +143,16 @@ const LeadsHeader = () => {
 			</div>
 			<div className={[toggleMenu ? "open" : "", "mobile-nav"].join(" ")}>
 				<div>
-					{menu?.map((item, i) => (
+					{/* {menu?.map((item, i) => (
 						<NavLink
 							key={i}
 							to={item?.path}
-							onClick={() => setToggleMenu(!toggleMenu)}
-							className={({ isActive }) => (isActive ? "selected" : "")}>
+							onClick={() => setToggleMenu(prevToggleMenu => !prevToggleMenu)} // Use functional update to toggle the value based on previous state
+							className={({ isActive }) => (isActive ? "selected" : "")}
+						>
 							{item?.name}
 						</NavLink>
-					))}
+					))} */}
 					<div className="dropdown-container2">
 
 						{/* <div onClick={handleClick}>
@@ -165,7 +166,7 @@ const LeadsHeader = () => {
 						</div>
 					</div>
 				</div>
-				{/* <UserProfile
+				<UserProfile
 					setLgShow={setLgShow}
 					lgShow={lgShow}
 					setFirstName={setFirstName}
@@ -180,7 +181,7 @@ const LeadsHeader = () => {
 					client={client}
 					setRoleName={setRoleName}
 					roleName={roleName}
-				/> */}
+				/>
 				{/* <UserProfile lgShow={lgShow} setLgShow={setLgShow} /> */}
 			</div>
 		</header>
