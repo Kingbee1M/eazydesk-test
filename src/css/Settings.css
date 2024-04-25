@@ -717,7 +717,7 @@ overflow: auto;
   -webkit-border-radius: 7;
   -moz-border-radius: 7;
   border-radius: 7px;
-  color: #224893;
+  color: var(--accent-blue);
   font-size: 25px;
   padding: 8px 16px 8px 16px;
   border: solid transparent 2px;
@@ -730,5 +730,5 @@ overflow: auto;
 
 .settings_main_password_change-button:hover {
   text-decoration: none;
-  border: solid #4f80e1 2px;
+  border: solid var(--accent-blue) 2px;
 }
