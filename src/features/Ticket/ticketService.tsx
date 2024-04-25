@@ -51,10 +51,11 @@ const createTicket = async (formData: any) => {
 	return data
 }
 
-const itAssignTicket =  async (id: any) => {
+const itAssignTicket = async (datas: any) => {
+	const {id , assignedUserId} = datas
 	const HttpService = createHttpService();
-	const { data }: any = await HttpService.get(`/api/v2/ticket/${id}/itsupport`)
-	console.log('data', data)
+	const { data }: any = await HttpService.post(`/api/v2/ticket/${id}/itsupport`,{"assignedUserId":assignedUserId})
+	console.log('data', assignedUserId)
 	return data
 }
 
