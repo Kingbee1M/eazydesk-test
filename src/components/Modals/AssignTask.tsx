@@ -17,55 +17,22 @@ const AssignTask = ({ id }: any) => {
 	const navigate = useNavigate();
 	const handleClose = () => setShow(false);
 	const [show, setShow] = useState(false);
-	const [selectedOption1, setSelectedOption1] = useState(null);
-	const [selectedOption2, setSelectedOption2] = useState(null);
-	const [selectedOption3, setSelectedOption3] = useState(null);
-	const [input, setInput] = useState<any>({
-		assignedToId: "",
-	})
+	const [assignedUserId, setAssignedUserId] = useState(null); 
+	 
 
+	
 
-
-
-
-
-
-	const allAgents = [] as any;
-	const allTeam = [] as any;
-	const allTask = [] as any;
-
-	const handleSelectedChange1 = (selectedOption1: any) => {
-		setSelectedOption1(selectedOption1);
+	const handleSelectedChange1 = (assignedUserId: any) => {
+		setAssignedUserId(assignedUserId);
 	};
-	// const handleSelectedChange2 = (selectedOption2: any) => {
-	// 	setSelectedOption2(selectedOption2);
-	// };
-	// const handleSelectedChange3 = (selectedOption3: any) => {
-	// 	setSelectedOption3(selectedOption3);
-	// };
-	useEffect(() => {
-		setInput((prevState: any) => {
-			return ({
-				...prevState,
-				// @ts-ignore
-				assignedToId: selectedOption1?.value,
-				// // @ts-ignore
-				// taskId: selectedOption2?.value,
-				// // @ts-ignore
-				// assignedTeamId: selectedOption3?.value,
-			});
-		});
-		// @ts-ignore
-	}, [selectedOption1?.value, setInput]);
-
+ 
 
 
 
 	const dispatch = useAppDispatch();
-	const { itdata, itisLoading, itisError, itisSuccess } = useAppSelector((state: any) => state.ticket);
-	const { itassigndata,itassignisError, itassignisSuccess, itassignisLoading } = useAppSelector((state: any) => state.ticket);
-	const { dataAll, isLoadingAll } = useAppSelector((state: any) => state.reg);
-	const { edituserisSuccess } = useAppSelector((state: any) => state.reg);
+	const { itdata, itisLoading, itisSuccess } = useAppSelector((state: any) => state.ticket);
+	const {  itassignisSuccess, itassignisLoading } = useAppSelector((state: any) => state.ticket);
+	const { dataAll } = useAppSelector((state: any) => state.reg);
 
 	const Itmember = dataAll?.users?.filter((user: any) => user.role === "IT_SUPPORT").map((user: any) =>
 	({
@@ -91,20 +58,19 @@ const AssignTask = ({ id }: any) => {
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault()
+		const datas = { id,  assignedUserId  }
 		// @ts-ignore 
-		console.log(id)
-		// @ts-ignore
 
-		dispatch(itAssignTicket(id))		
+		dispatch(itAssignTicket(datas))		
 	}
 
 	useEffect(() => {
     if (itassignisSuccess && show) {
         toast.success("Ticket Assigned", { toastId: customId });
         setShow(false);
-        setInput({
-            assignedToId: "",
-        });
+        // setInput({
+        //     assignedToId: "",
+        // });
     }
     
     dispatch(reset());
@@ -128,7 +94,7 @@ const AssignTask = ({ id }: any) => {
 						<div className='mb-4'>
 							<label className='label-side'>Assigned To</label>
 							<Select name="AssignedTo" id="register-select"
-								value={selectedOption1}
+								value={assignedUserId}
 								onChange={handleSelectedChange1}
 								options={Itmember}
 								isDisabled={false}

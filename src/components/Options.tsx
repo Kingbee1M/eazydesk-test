@@ -288,28 +288,46 @@ const menu = [
   },
 ];
 
+const ticketMenu = [
+   {
+    name: "Home",
+    path: "/leadsdashboard",
+  },
+  {
+    name: "Incident",
+    path: "/incident-request",
+  },
+  {
+    name: "Service",
+    path: "/service-request",
+  },
+  {
+    name: "Change",
+    path: "/change-request",
+  },
+]
 
 
 export {
-  TableFetch,
-  EntriesPerPage,
-  EmployeeStatus,
-  NoRecordFound,
-  InputField,
-  TableProgressBar,
-  months,
-  getMonth,
-  getCurrentMonth,
-  getDailyData,
-  getWeeklyData,
-  TooltipPositioned,
-  TooltipPositioned2,
-  LoginSpiner,
-  customId,
-  customStyles,
-  getPriorityStyle,
-  getInputColorClass,
-  svgPaths,
-  tokenKey,
-  menu
+	TableFetch,
+	EntriesPerPage,
+	EmployeeStatus,
+	NoRecordFound,
+	InputField,
+	TableProgressBar,
+	months,
+	getMonth,
+	getCurrentMonth,
+	getDailyData,
+	getWeeklyData,
+	TooltipPositioned,
+	TooltipPositioned2,
+	LoginSpiner,
+	customId,
+	customStyles,
+	getPriorityStyle,
+	getInputColorClass,
+	svgPaths,
+	tokenKey,
+	menu, ticketMenu
 };

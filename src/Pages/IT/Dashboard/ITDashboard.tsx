@@ -15,9 +15,13 @@ import { MdOutlineErrorOutline } from 'react-icons/md';
 import { FcDoughnutChart, FcHighPriority, FcServices } from 'react-icons/fc';
 import { NavLink } from 'react-router-dom';
 import { VscCloudDownload } from 'react-icons/vsc';
+import moment from "moment";
+import AssignTask from '../../../components/Modals/AssignTask';
 
 
-const ITDashboard = () => {
+const ITDashboard = ({
+	TYPE,
+}:any) => {
 
 	const ticketdata =
 		[
@@ -7498,7 +7502,7 @@ const ITDashboard = () => {
 				</div>
 
 				<div className='dash_statistics_container'>
-					<div className='dash_statistics_sub1'>
+					{/* <div className='dash_statistics_sub1'>
 						<div>
 							<h3>Ticket</h3>
 							<p>Summary</p>
@@ -7506,12 +7510,12 @@ const ITDashboard = () => {
 						<div>
 							<DoughnutChat />
 						</div>
-					</div>
+					</div> */}
 					<div className='dash_statistics_sub_it'>
 						<div className='dash_statistics_sub2_text'>
 							<div>
-								<h3>Statistics</h3>
-								<p>Revenue and Sales</p>
+								<h3>Pending Tickets</h3>
+								
 							</div>
 						</div>
 						<div className='statistics_sub2_table_container'>
@@ -7522,7 +7526,9 @@ const ITDashboard = () => {
 										<th>Ticket Type</th>
 										<th>Severity</th>
 										<th>Affected Users</th>
-										<th>Status</th>
+										<th>Time Stamp</th>
+										<th>Assign To</th>
+										<th>Ticket Status</th>
 										<th></th>
 									</tr>
 								</thead>
@@ -7564,6 +7570,29 @@ const ITDashboard = () => {
 														<span className="severity-low">{user?.severity}</span>
 													)}
 												</td>
+												<td data-title="affected users">{user?.affectedUsers}</td>
+												<td data-title="Assign To">
+													{user?.finalStatus === "Closed" ? (
+														<button className="ticket-Closed">Closed</button>
+													) : (
+
+														<AssignTask
+														id={user?.id}
+														TYPE={TYPE}
+														// assignToName={assignToName}
+														// assignerName={userInfo?.firstname}
+														ticketId={user?.ticketId}
+														ticketType={user.ticketType}
+														issueCategory={user?.issueCategory}
+														affectedUsers={user?.affectedUsers}
+														ticketStatus={user?.finalStatus}
+														timeStamp={moment(user?.createdAt)?.format("DD-MMM-YY H:mm:ss")}
+														severity={user?.severity}
+														createdByFirstname={user?.createdBy?.firstname}
+														data={user}
+														/>
+                     					 			)}
+                    							</td>
 												<td data-title="affected users">{user?.affectedUsers}</td>
 												<td data-title="progresss">
 													<button className="admin-btn-progresss">
