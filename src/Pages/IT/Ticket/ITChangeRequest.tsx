@@ -5,7 +5,7 @@ import SearchConponent from '../../../components/SearchConponent'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 import ITSideNav from '../../../components/SideNav/ITSideNav'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
-import { getItTicket } from '../../../features/Ticket/ticketSlice'
+import { getItTicketParameter } from '../../../features/Ticket/ticketSlice'
 import ITTicketTable from './ITTicketTable'
 import moment from 'moment'
 
@@ -26,7 +26,7 @@ const ITChangeRequest = () => {
 	const [searchItem, setSearchItem] = useState("");
 	const [Unassigned, setUnassigned] = useState(false);
 
-	const { itdata, itisLoading } = useAppSelector((state: any) => state.ticket)
+	const { itdata, itisLoading,itticketparameterdata } = useAppSelector((state: any) => state.ticket)
 	console.log(itdata)
 
 	endDates = new Date();
@@ -47,7 +47,7 @@ const ITChangeRequest = () => {
 	useEffect(() => {
 		const datas = { ticketType: "CHANGE" };
 		// @ts-ignore 
-		dispatch(getItTicket(datas))
+		dispatch(getItTicketParameter(datas))
 
 	}, [dispatch, endDate1, startDate1])
 
@@ -88,7 +88,7 @@ const ITChangeRequest = () => {
 						pageheader={"CHANGE REQUEST"}
 						Request={"Change Request"}
 						TYPE={"CHANGE REQUEST"}
-						data={itdata?.tickets}
+						data={itticketparameterdata?.tickets}
 						isLoading={itisLoading} />
 				</div>
 			</main>

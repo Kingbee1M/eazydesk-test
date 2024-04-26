@@ -27,7 +27,7 @@ const getallReguser = async () => {
 const ITgetallReguser = async () => {   
   const HttpService = createHttpService();
   const { data } = await HttpService.get(`/api/v2/auth/company_usersInfo`) 
-  console.log('data',data)
+ 
   return data
 }
 
