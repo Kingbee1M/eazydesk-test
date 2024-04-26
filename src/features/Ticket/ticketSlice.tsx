@@ -15,6 +15,12 @@ const initialState = {
 	itisLoading: false,
 	itmessage: '',
 
+	itticketparameterdata: [],
+	itticketparameterisError: false,
+	itticketparameterisSuccess: false,
+	itticketparameterisLoading: false,
+	itticketparametermessage: '',
+
 	createdata: [],
 	createisError: false,
 	createisSuccess: false,
@@ -70,7 +76,16 @@ export const getTicket = createAsyncThunk('ticket/getTicket', async (data, thunk
 // Get IT Ticket
 export const getItTicket = createAsyncThunk('ticket/getItTicket', async (data, thunkAPI) => {
 	try {
-		return await ticketService.getItTicket(data)
+		return await ticketService.getItTicket()
+	} catch (error: any) {
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		return thunkAPI.rejectWithValue(message)
+	}
+})
+export const getItTicketParameter = createAsyncThunk('ticket/getItTicketParameter', async (data, thunkAPI) => {
+	try {
+		return await ticketService.getItTicketParameter(data)
 	} catch (error: any) {
 		const message = error?.response?.data?.message ||
 			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
@@ -168,6 +183,11 @@ export const ticketSlice = createSlice({
 			state.itisError = false
 			state.itmessage = ''
 
+			state.itticketparameterisLoading = false
+			state.itticketparameterisSuccess = false
+			state.itticketparameterisError = false
+			state.itticketparametermessage = ''
+
 			state.createisLoading = false
 			state.createisSuccess = false
 			state.createisError = false
@@ -236,6 +256,22 @@ export const ticketSlice = createSlice({
 				state.itisError = true
 				state.itmessage = action.payload
 				state.itdata = null
+			})
+
+
+			.addCase(getItTicketParameter.pending, (state) => {
+				state.itticketparameterisLoading = true
+			})
+			.addCase(getItTicketParameter.fulfilled, (state: any, action) => {
+				state.itticketparameterisLoading = false
+				state.itticketparameterisSuccess = true
+				state.itticketparameterdata = action.payload?.data
+			})
+			.addCase(getItTicketParameter.rejected, (state: any, action) => {
+				state.itticketparameterisLoading = false
+				state.itticketparameterisError = true
+				state.itticketparametermessage = action.payload
+				state.itticketparameterdata = null
 			})
 
 			.addCase(createTicket.pending, (state) => {

@@ -6,6 +6,7 @@ import TicketTableComponent from '../../../components/Table/TicketTableComponent
 import ITSideNav from '../../../components/SideNav/ITSideNav'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import { getItTicket } from '../../../features/Ticket/ticketSlice'
+import { getItTicketParameter } from '../../../features/Ticket/ticketSlice'
 import ITTicketTable from './ITTicketTable'
 import moment from 'moment'
 
@@ -26,7 +27,7 @@ const ITServiceRequest = () => {
 	const [searchItem, setSearchItem] = useState("");
 	const [Unassigned, setUnassigned] = useState(false);
 
-	const { itdata, itisLoading } = useAppSelector((state: any) => state.ticket)
+	const { itdata, itisLoading, itticketparameterdata } = useAppSelector((state: any) => state.ticket)
 
 	endDates = new Date();
 	const formattedEndDate = endDates.toISOString().split('T')[0]; // Extracting date part and removing time
@@ -46,7 +47,7 @@ const ITServiceRequest = () => {
 	useEffect(() => {
 		const datas = { ticketType: "SERVICE" };
 		// @ts-ignore 
-		dispatch(getItTicket(datas))
+		dispatch(getItTicketParameter(datas))
 
 	}, [dispatch, endDate1, startDate1])
 
@@ -85,7 +86,7 @@ const ITServiceRequest = () => {
 						pageheader={"SERVICE REQUEST"}
 						Request={"Service Request"}
 						TYPE={"SERVICE"}
-						data={itdata?.tickets}
+						data={itticketparameterdata?.tickets}
 						isLoading={itisLoading} />
 				</div>
 			</main>

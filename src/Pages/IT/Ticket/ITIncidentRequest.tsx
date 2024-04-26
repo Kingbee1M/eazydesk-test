@@ -5,14 +5,14 @@ import SearchConponent from '../../../components/SearchConponent'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 import ITSideNav from '../../../components/SideNav/ITSideNav'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
-import { getItTicket } from '../../../features/Ticket/ticketSlice'
+import { getItTicketParameter } from '../../../features/Ticket/ticketSlice'
 import ITTicketTable from './ITTicketTable'
 import moment from 'moment'
 
 const ITIncidentRequest = () => {
 	const dispatch = useAppDispatch();
-	const { itdata, itisLoading } = useAppSelector((state: any) => state.ticket)
-
+	const { itdata, itisLoading, itticketparameterdata } = useAppSelector((state: any) => state.ticket)
+	console.log(itticketparameterdata?.tickets)
 
 	const [entriesPerPage, setEntriesPerPage] = useState(() => {
 		return "6";
@@ -46,8 +46,9 @@ const ITIncidentRequest = () => {
 
 	useEffect(() => {
 		const datas = { ticketType: "INCIDENT" };
+		console.log(datas)
 		// @ts-ignore 
-		dispatch(getItTicket(datas))
+		dispatch(getItTicketParameter(datas))
 
 	}, [dispatch, endDate1, startDate1])
 
@@ -84,7 +85,7 @@ const ITIncidentRequest = () => {
 						pageheader={"Incident Request"}
 						Request={"Incident Request"}
 						TYPE={"INCIDENT"}
-						data={itdata?.tickets}
+						data={itticketparameterdata?.tickets}
 						isLoading={itisLoading} />
 				</div>
 			</main>
