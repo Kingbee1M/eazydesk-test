@@ -128,8 +128,7 @@ console.log('error?.response?.status ',error?.response?.statusText )
   if (error?.response?.status === 401 && error?.response?.statusText === "Unauthorized") {
     fireAlert("Session Expired", "Please log in again", "error", "/");
   } else if(error?.response?.status === undefined || error?.response?.statusText === null){
- 
- 
+
   }else {
     // Display error message using toast
     toast.error(message, {  toastId: customId });

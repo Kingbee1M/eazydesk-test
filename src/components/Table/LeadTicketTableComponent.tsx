@@ -1,19 +1,13 @@
 import { useState } from "react";
 import moment from "moment";
 import { OverlayTrigger, Image, Tooltip, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { baseUrl } from "../../shared/baseUrl";
 import ViewTicketDetailsModal from "../Modals/ViewTicketDetailsModal";
-import { customId, NoRecordFound, TableFetch } from "../Options";
-import { toast, ToastContainer } from "react-toastify";
+import { NoRecordFound, TableFetch } from "../Options";
+import { ToastContainer } from "react-toastify";
+import TicketStatusCell from "../../Pages/Admin/Ticket/TicketStatusCell";
 
 const LeadTicketTableComponent = ({
-	pageheader,
-	TYPE,
-	Request,
-	request,
-	TicketData,
-	setShowTable,
 	switchs,
 	data,
 	Requester,
@@ -47,10 +41,10 @@ const LeadTicketTableComponent = ({
 						</thead>
 						<tbody>
 							{isLoading ? (
-								<TableFetch colSpan={11} />
+								<TableFetch colSpan={6} />
 							) : data?.length === 0 || data?.length === undefined ? (
 								<NoRecordFound
-									colSpan={11}
+									colSpan={6}
 									children={"No Tickets record found!"}
 								/>
 							) : (
@@ -122,60 +116,7 @@ const LeadTicketTableComponent = ({
 											{moment(user?.createdAt)?.format("DD-MMM-YY H:mm:ss")}
 										</td>
 										<td>
-											{user?.status === "INPROGRESS" && (
-												<Link
-													to={`/ticket-progress/${user?.id}`}
-													className="admin-btn-progresss">
-													IN-PROGRESS
-												</Link>
-											)}
-											{user?.status === "APPROVED" && (
-												<Link
-													to={`/ticket-progress/${user?._id}`}
-													className="admin-btn-reopen">
-													APPROVED
-												</Link>
-											)}
-											{user?.status === "DISAPPROVED" && (
-												<button
-													className="admin-btn-Unassigned"
-													onClick={() => toast.success("The tickek have been DISAPPROVED", { toastId: customId })}>
-													DISAPPROVED
-												</button>
-											)}
-											{user?.status === "OPEN" && (
-												<button className="admin-btn-Unassigned" onClick={() => toast.success("The tickek have not been ASSIGNED", { toastId: customId })}>
-													UNASSIGNED
-												</button>
-											)}
-											{user?.status === "COMPLETED" && (
-												<Link
-													to={`/ticket-progress/${user?.id}`}
-													className="admin-btn-resolved">
-													COMPLETED
-												</Link>
-											)}
-											{user?.status === "CLOSED" && (
-												<Link
-													to={`/ticket-progress/${user?.id}`}
-													className="admin-btn-closed">
-													CLOSED
-												</Link>
-											)}
-											{user?.status === "REOPEN" && (
-												<Link
-													to={`/ticket-progress/${user?.id}`}
-													className="admin-btn-reopen">
-													REOPENED
-												</Link>
-											)}
-											{user?.status === "INVALID" && (
-												<button
-													className="admin-btn-Unassigned"
-													onClick={() => toast.success("The tickek is INVALID", { toastId: customId })}>
-													INVALID
-												</button>
-											)}
+											<TicketStatusCell user={user} customId={user?.id} />
 										</td>
 									</tr>
 								))

@@ -7,29 +7,24 @@ import { createTicket, reset } from "../../features/Ticket/ticketSlice";
 import { SVGLoader } from "../SVGLoader";
 import { toast } from "react-toastify";
 import { customId } from "../Options";
-import { getallReguser } from "../../features/Registration/registrationSlice";
+import { ITgetallReguser } from "../../features/Registration/registrationSlice";
 
 
 
 const TicketForm = ({ type, setShow }: any) => {
-  // @ts-ignore  
-  const userInfo = JSON.parse(localStorage.getItem("service_desk"));
+
   const { createisLoading, createisSuccess } = useAppSelector((state: any) => state.ticket)
   const dispatch = useAppDispatch();
-  const { dataAll, isLoadingAll } = useAppSelector((state: any) => state.reg);
-  const user = dataAll?.users
-
-
-
+  const { ITgetallReguserdata, ITgetallReguserisLoading } = useAppSelector((state: any) => state.reg);
+  const user = ITgetallReguserdata?.data?.users
 
 
 
 
   useEffect(() => {
-    // Fetch data when the component is mounted or dispatch changes
-    // @ts-ignore  
-    dispatch(getallReguser(userInfo?.id));
-  }, [dispatch, userInfo?.id]);
+    // Fetch data when the component is mounted or dispatch changes 
+    dispatch(ITgetallReguser());
+  }, [dispatch]);
   const formData = new FormData();
   const form: any = useRef();
   const [value, setValue] = useState('');
@@ -51,16 +46,11 @@ const TicketForm = ({ type, setShow }: any) => {
 
     dispatch(reset());
   }, [createisSuccess, dispatch, setShow]);
-  const [issueCategories, setIssueCategories] = useState<any>([]);
   const [severityStyle, setSeverityStyle] = useState<any>({
     background: "transparent",
     width: "0%",
   });
 
-
-
-
-  // console.log("formData", input);
 
 
 
@@ -184,11 +174,11 @@ const TicketForm = ({ type, setShow }: any) => {
       <form id="ticket-form" onSubmit={handleCreateTicket} ref={form}>
         <div className="form-grp">
           <label htmlFor="contact-details">To</label>
-          <ToSelect user={user} isLoading={isLoadingAll} handleOnChange={handleOnChange} input={input} />
+          <ToSelect user={user} isLoading={ITgetallReguserisLoading} handleOnChange={handleOnChange} input={input} />
         </div>
         <div className="form-grp">
           <label htmlFor="contact-details">Cc</label>
-          <CcSelect user={user} isLoading={isLoadingAll} />
+          <CcSelect user={user} isLoading={ITgetallReguserisLoading} />
         </div>
         <div className="form-grp">
           <label htmlFor="contact-details">Ticket Type</label>

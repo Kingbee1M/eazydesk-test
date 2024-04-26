@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { IoCalendarOutline } from "react-icons/io5";
-import SearchInput from './SearchInput';
 import Badge from './Badge/Badge';
 import pro_img from '../assets/img/pro_img.svg'
 import { pageTitles } from './StateData';
@@ -28,11 +27,8 @@ const Header = () => {
 
 
 
-
-
   return (
     <div id="header">
-      {/* <SearchInput /> */}
       <NetworkConnetion />
       <div className='FaPlus-icon-container' >
         <div className='FaPlus-icon-container_sup'>

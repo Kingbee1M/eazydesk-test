@@ -43,15 +43,14 @@ const Register = ({ switchs }: any) => {
 
 		if (isSuccess || edituserisSuccess) {
 			// If success is true, fetch data again
-			// @ts-ignore 
-			dispatch(getallReguser(id));
+
+			dispatch(getallReguser());
 		} else {
-			// Fetch data when the component is mounted or dispatch changes
-			// @ts-ignore 
-			dispatch(getallReguser(id));
+			// Fetch data when the component is mounted or dispatch changes 
+			dispatch(getallReguser());
 		}
 
-	}, [dispatch, edituserisSuccess, id, isSuccess]);
+	}, [dispatch, edituserisSuccess, isSuccess]);
 
 	// Local Storage Effect
 	useEffect(() => {

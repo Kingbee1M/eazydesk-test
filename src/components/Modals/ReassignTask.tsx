@@ -21,7 +21,6 @@ const ReassignTask = ({ id }: any) => {
 	const [selectedOption3, setSelectedOption3] = useState(null);
 	const [input, setInput] = useState<any>({
 		assignedToId: "",
-	
 	})
 
 
@@ -69,45 +68,45 @@ const ReassignTask = ({ id }: any) => {
 
 	const Itmember = dataAll?.users?.filter((user: any) => user.role === "IT_SUPPORT").map((user: any) =>
 	({
-        value: user?.id,
-        label: `${user.firstname} ${user.lastname}`,
+		value: user?.id,
+		label: `${user.firstname} ${user.lastname}`,
 	}));
-	
-	
+
+
 	const handleSubmit = (e: any) => {
 		e.preventDefault()
 		// @ts-ignore 
-		
+
 		console.log(input)
 		// @ts-ignore 
 		dispatch(getItTicket(input))
-		
-		
+
+
 	}
 
 	useEffect(() => {
-    if (itisSuccess && show) {
-        toast.success("Ticket Assigned", { toastId: customId });
-        setShow(false);
-        setInput({
-            assignedToId: "",
-        });
-    }
-    
-    dispatch(reset());
-}, [itisSuccess, show, dispatch]);
+		if (itisSuccess && show) {
+			toast.success("Ticket Assigned", { toastId: customId });
+			setShow(false);
+			setInput({
+				assignedToId: "",
+			});
+		}
 
-	
+		dispatch(reset());
+	}, [itisSuccess, show, dispatch]);
+
+
 
 
 	return (
 		<>
 			<ToastContainer position="top-right" />
 			<button className="assign-btn" onClick={() => setShow(true)} >Assign</button>
-			
+
 
 			<Modal show={show} onHide={handleClose} centered>
-				
+
 				<ModalHeader setShow={setShow} headerTitle={"Assign Ticket to"} />
 				<Modal.Body>
 					<form onSubmit={handleSubmit}>

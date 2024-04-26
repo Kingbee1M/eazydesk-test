@@ -45,6 +45,12 @@ const initialState = {
 	itassignisLoading: false,
 	itassignmessage: '',
 
+	getTicketAssignTicketdata: [],
+	getTicketAssignTicketisError: false,
+	getTicketAssignTicketisSuccess: false,
+	getTicketAssignTicketisLoading: false,
+	getTicketAssignTicketmessage: '',
+
 
 
 }
@@ -117,11 +123,22 @@ export const viewTicket = createAsyncThunk('ticket/viewTicket', async (data, thu
 	}
 })
 
-//IT assign ticket
-
+//IT Assign Ticket 
 export const itAssignTicket = createAsyncThunk('ticket/itAssignTicket', async (data, thunkAPI) => {
 	try {
 		return await ticketService.itAssignTicket(data)
+	} catch (error: any) {
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		return thunkAPI.rejectWithValue(message)
+	}
+})
+
+
+// Get Assign Ticket 
+export const getTicketAssignTicket = createAsyncThunk('ticket/getTicketAssignTicket', async (data, thunkAPI) => {
+	try {
+		return await ticketService.getTicketAssignTicket(data)
 	} catch (error: any) {
 		const message = error?.response?.data?.message ||
 			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
@@ -177,6 +194,11 @@ export const ticketSlice = createSlice({
 			state.itassignisError = false
 			state.itassignmessage = ''
 
+
+			state.getTicketAssignTicketisLoading = false
+			state.getTicketAssignTicketisSuccess = false
+			state.getTicketAssignTicketisError = false
+			state.getTicketAssignTicketmessage = ''
 
 
 
@@ -293,7 +315,20 @@ export const ticketSlice = createSlice({
 				state.itassigndata = null
 			})
 
-
+			.addCase(getTicketAssignTicket.pending, (state) => {
+				state.getTicketAssignTicketisLoading = true
+			})
+			.addCase(getTicketAssignTicket.fulfilled, (state: any, action) => {
+				state.getTicketAssignTicketisLoading = false
+				state.getTicketAssignTicketisSuccess = true
+				state.getTicketAssignTicketdata = action.payload?.data
+			})
+			.addCase(getTicketAssignTicket.rejected, (state: any, action) => {
+				state.getTicketAssignTicketisLoading = false
+				state.getTicketAssignTicketisError = true
+				state.getTicketAssignTicketmessage = action.payload
+				state.getTicketAssignTicketdata = null
+			})
 
 	},
 })

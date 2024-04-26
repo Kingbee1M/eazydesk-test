@@ -7,9 +7,6 @@ import { SetStateAction } from 'react';
 const SettingsIcon = ({ setActiveIndex, activeIndex }: any) => {
 
 
-
-
-
 	const handleItemClick = (index: number | SetStateAction<null>) => {
 		setActiveIndex(index);
 	};

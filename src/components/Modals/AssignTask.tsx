@@ -5,10 +5,11 @@ import { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { SVGLoader } from '../SVGLoader';
 import Select from 'react-select'
-import { getallReguser } from '../../features/Registration/registrationSlice';
-import { reset } from '../../features/Ticket/ticketSlice';
+import { getallReguser, ITgetallReguser } from '../../features/Registration/registrationSlice';
+import { itAssignTicket, reset } from '../../features/Ticket/ticketSlice';
 import { useAppDispatch, useAppSelector } from '../../store/useStore';
-import { itAssignTicket } from '../../features/Ticket/ticketSlice';
+import { getUserPrivileges } from '../../hooks/auth';
+
 
 
 const AssignTask = ({ id, Assigned }: any) => {
@@ -16,6 +17,10 @@ const AssignTask = ({ id, Assigned }: any) => {
 	const handleClose = () => setShow(false);
 	const [show, setShow] = useState(false);
 	const [assignedUserId, setAssignedUserId] = useState(null);
+	const {
+		isSuperAdmin,
+		isAdmin
+	} = getUserPrivileges();
 
 	const handleSelectedChange1 = (assignedUserId: any) => {
 		setAssignedUserId(assignedUserId);
@@ -23,6 +28,7 @@ const AssignTask = ({ id, Assigned }: any) => {
 
 
 	const { itassignisSuccess, itassignisLoading } = useAppSelector((state: any) => state.ticket);
+	const { ITgetallReguserdata, ITgetallReguserisSuccess, ITgetallReguserisLoading } = useAppSelector((state: any) => state.ticket);
 	const { dataAll } = useAppSelector((state: any) => state.reg);
 
 	const Itmember = dataAll?.users?.filter((user: any) => user.role === "IT_SUPPORT").map((user: any) =>
@@ -33,10 +39,15 @@ const AssignTask = ({ id, Assigned }: any) => {
 
 	//dispatch to get all registered users
 	useEffect(() => {
-		//@ts-ignore
-		dispatch(getallReguser(id))
+		if (isSuperAdmin || isAdmin) {
+			dispatch(getallReguser())
+		} else {
+			//@ts-ignore
+			dispatch(ITgetallReguser(id))
+		}
+	}, [dispatch, id, isAdmin, isSuperAdmin]);
 
-	}, [dispatch, id]);
+	console.log('ITgetallReguserdata', ITgetallReguserdata)
 
 
 	//@ts-ignore
@@ -53,7 +64,6 @@ const AssignTask = ({ id, Assigned }: any) => {
 			toast.success(`Ticket ${Assigned}`, { toastId: customId });
 			setShow(false);
 		}
-
 		dispatch(reset());
 	}, [show, dispatch, itassignisSuccess, Assigned]);
 
@@ -62,7 +72,6 @@ const AssignTask = ({ id, Assigned }: any) => {
 		<>
 			<ToastContainer position="top-right" />
 			<button className="assign-btn" onClick={() => setShow(true)} >Assign</button>
-
 			<Modal show={show} onHide={handleClose} centered>
 				<ModalHeader setShow={setShow} headerTitle={"Assign Ticket to"} />
 				<Modal.Body>

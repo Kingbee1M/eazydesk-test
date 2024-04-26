@@ -7,7 +7,6 @@ import DataService from "./dataService";
 const dataService = DataService();
  
 
- 
 //  Login user 
  const login = async (value: any) => { 
    const { data } = await axios.post(baseUrl + '/api/v2/auth/login-user', value) 
@@ -15,8 +14,7 @@ const dataService = DataService();
      try {    
        dataService?.setToken(data?.data?.token)  
        localStorage.setItem('service_desk', JSON.stringify(data?.data?.user));  
-       localStorage.setItem("loginToast", JSON.stringify(data?.message)); 
-        
+       localStorage.setItem("loginToast", JSON.stringify(data?.message));    
   } catch (e) {
      console.log(`isLoggedIn in error ${e}`)
   }

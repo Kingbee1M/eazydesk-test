@@ -1,28 +1,21 @@
 import Header from '../../../components/Header'
-import SideNav from '../../../components/SideNav/SideNav'
 import BottomNavigation from '../../../components/BottomNavigation';
 import { RiArrowUpSFill } from "react-icons/ri";
 import dIcon1 from "../../../assets/DashboardIcons/Dicon1.svg"
 import dIcon2 from "../../../assets/DashboardIcons/Dicon2.svg"
 import dIcon3 from "../../../assets/DashboardIcons/Dicon3.svg"
 import dIcon4 from "../../../assets/DashboardIcons/Dicon4.svg"
-import { GoDotFill } from "react-icons/go";
-import ThreeinOneBarChart from '../../../components/ThreeinOneBarChart';
-import DoughnutChat from '../../../components/DoughnutChat';
 import ITSideNav from '../../../components/SideNav/ITSideNav';
 import { AiOutlineEye } from 'react-icons/ai';
 import { MdOutlineErrorOutline } from 'react-icons/md';
-import { FcDoughnutChart, FcHighPriority, FcServices } from 'react-icons/fc';
 import { NavLink } from 'react-router-dom';
 import { VscCloudDownload } from 'react-icons/vsc';
-import moment from "moment";
 import AssignTask from '../../../components/Modals/AssignTask';
+import { useAppSelector } from '../../../store/useStore';
 
 
-const ITDashboard = ({
-	TYPE,
-}:any) => {
-
+const ITDashboard = ({ TYPE }: any) => {
+	const { itdata, itisLoading } = useAppSelector((state: any) => state.ticket)
 	const ticketdata =
 		[
 			{
@@ -7515,7 +7508,7 @@ const ITDashboard = ({
 						<div className='dash_statistics_sub2_text'>
 							<div>
 								<h3>Pending Tickets</h3>
-								
+
 							</div>
 						</div>
 						<div className='statistics_sub2_table_container'>
@@ -7575,24 +7568,9 @@ const ITDashboard = ({
 													{user?.finalStatus === "Closed" ? (
 														<button className="ticket-Closed">Closed</button>
 													) : (
-
-														<AssignTask
-														id={user?.id}
-														TYPE={TYPE}
-														// assignToName={assignToName}
-														// assignerName={userInfo?.firstname}
-														ticketId={user?.ticketId}
-														ticketType={user.ticketType}
-														issueCategory={user?.issueCategory}
-														affectedUsers={user?.affectedUsers}
-														ticketStatus={user?.finalStatus}
-														timeStamp={moment(user?.createdAt)?.format("DD-MMM-YY H:mm:ss")}
-														severity={user?.severity}
-														createdByFirstname={user?.createdBy?.firstname}
-														data={user}
-														/>
-                     					 			)}
-                    							</td>
+														<AssignTask id={user?.id} />
+													)}
+												</td>
 												<td data-title="affected users">{user?.affectedUsers}</td>
 												<td data-title="progresss">
 													<button className="admin-btn-progresss">
