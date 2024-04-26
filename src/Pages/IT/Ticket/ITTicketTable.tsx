@@ -1,40 +1,24 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import moment from "moment";
 import { OverlayTrigger, Image, Tooltip, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { baseUrl } from "../../../shared/baseUrl";
 import ViewTicketDetailsModal from "../../../components/Modals/ViewTicketDetailsModal";
 import { NoRecordFound, TableFetch } from "../../../components/Options";
-import ReassignTask from "../../../components/Modals/ReassignTask";
 import AssignTask from "../../../components/Modals/AssignTask";
 import TicketStatusCell from "../../Admin/Ticket/TicketStatusCell";
 
 
 const ITTicketTable = ({
-  pageheader,
-  TYPE,
-  Request,
-  request,
-  TicketData,
-  setShowTable,
-  showTable,
   switchs,
   data,
   Requester,
   isLoading
 }: any) => {
-  const [datas, setDatas] = useState([]);
-  const [find, setFind] = useState<any>();
+
   const [sortData, setSortData] = useState<any>([]);
-  const [searchItem, setSearchItem] = useState("");
-  const [Unassigned, setUnassigned] = useState(false);
 
 
 
-
-  // const INCIDENT = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("INCIDENT REQUEST"));
-  // const SERVICE = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("SERVICE REQUEST"));
-  // const CHANGE = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("CHANGE REQUEST"));
   return (
     <div id="table-container">
       <div className="table-responsive-vertical ">
@@ -44,16 +28,13 @@ const ITTicketTable = ({
               <tr>
                 <th>Reference</th>
                 <th>Ticket Type</th>
-                {/* <th>Location</th> */}
                 <th>Severity</th>
-                {/* <th>Issue Category</th> */}
                 <th>Issue Description</th>
                 <th>Affected Users</th>
-                {/* <th>Requester</th> */}
                 <th>Time Stamp</th>
                 <th>Assign To</th>
                 <th>
-                  {sortData?.finalStatus === "Unassigned"
+                  {sortData?.status === "Unassigned"
                     ? ""
                     : "Ticket Status"}
                 </th>
@@ -72,14 +53,13 @@ const ITTicketTable = ({
                   <tr key={user?._id}>
                     <td className="Reference" data-title="Reference">
                       {user?.ticketType === "INCIDENT"
-                        ? "INC - "
+                        ? "INC "
                         : user?.ticketType === "SERVICE"
-                          ? "SRV - "
-                          : "CHG - "}
+                          ? "SRV "
+                          : "CHG "}
 
                     </td>
                     <td data-title="ticket type">{user?.ticketType}</td>
-                    {/* <td data-title="ticket type">{user?.location}</td> */}
                     <td data-title="severity">
                       {user?.severity === "High" ? (
                         <button className="severity-high">
@@ -101,7 +81,6 @@ const ITTicketTable = ({
                         <button className="severity-low">Low</button>
                       )}
                     </td>
-                    {/* <td data-title="issue">{user?.issueCategory}</td> */}
                     <td data-title="description">
                       <ViewTicketDetailsModal text={"View"} data={user} />
                     </td>

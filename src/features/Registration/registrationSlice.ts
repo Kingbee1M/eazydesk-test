@@ -7,36 +7,31 @@ const initialState = {
   signUpisError: false,
   signUpisSuccess: false,
   signUpisLoading: false, 
-  signUpmessage: '',
-  signUperror: '', 
+  signUpmessage: '', 
 
   data:   [],
   isError: false,
   isSuccess: false,
   isLoading: false, 
-  message: '',
-  error: '', 
+  message: '', 
 
   dataAll:   [],
   isErrorAll: false,
   isSuccessAll: false,
   isLoadingAll: false, 
-  messageAll: '',
-  errorAll: '', 
+  messageAll: '', 
 
   dataLoginUser:   [],
   isErrorLoginUser: false,
   isSuccessLoginUser: false,
   isLoadingLoginUser: false, 
-  messageLoginUser: '',
-  errorLoginUser: '', 
+  messageLoginUser: '', 
 
   dataAllAgent:   [],
   isErrorAllAgent: false,
   isSuccessAllAgent: false,
   isLoadingAllAgent: false, 
-  messageAllAgent: '',
-  errorAllAgent: '', 
+  messageAllAgent: '', 
 
   resetPassworddata:   [],
   resetPasswordisError: false,
@@ -55,6 +50,12 @@ const initialState = {
   getsupervisorsisSuccess: false,
   getsupervisorsisLoading: false, 
   getsupervisorsmessage: '', 
+
+  ITgetallReguserdata:   [],
+  ITgetallReguserisError: false,
+  ITgetallReguserisSuccess: false,
+  ITgetallReguserisLoading: false, 
+  ITgetallRegusermessage: '', 
 }
 
  
@@ -83,7 +84,7 @@ export const userRegistration = createAsyncThunk('register/userRegistration', as
 // Registration User
 export const getallReguser = createAsyncThunk('register/getallReguser', async (data,thunkAPI) => {
   try { 
-    return await registrationService.getallReguser(data)
+    return await registrationService.getallReguser()
   } catch (error:any) {
       const message = error?.response?.data?.message ||
     (error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
@@ -153,6 +154,18 @@ export const getsupervisors = createAsyncThunk('register/getsupervisors', async 
     return thunkAPI.rejectWithValue(message)
   }
 })
+
+// Get Supervisors
+export const ITgetallReguser = createAsyncThunk('register/ITgetallReguser', async (  data,thunkAPI) => {
+  try { 
+    return await registrationService.ITgetallReguser()
+  } catch (error:any) {
+      const message = error?.response?.data?.message ||
+    (error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+    
+    return thunkAPI.rejectWithValue(message)
+  }
+})
  
 
 
@@ -200,7 +213,12 @@ export const registrationSlice = createSlice({
       state.getsupervisorsisLoading = false
       state.getsupervisorsisSuccess = false  
       state.getsupervisorsisError = false
-      state.getsupervisorsmessage= ''
+      state.getsupervisorsmessage = ''
+      
+      state.ITgetallReguserisLoading = false
+      state.ITgetallReguserisSuccess = false  
+      state.ITgetallReguserisError = false
+      state.ITgetallRegusermessage= ''
       
     },
     
@@ -328,9 +346,27 @@ export const registrationSlice = createSlice({
         state.getsupervisorsmessage = action.payload
         state.getsupervisorsdata = [] 
       })
+
+    .addCase(ITgetallReguser.pending, (state) => {
+        state.ITgetallReguserisLoading = true 
+      })
+      .addCase(ITgetallReguser.fulfilled, (state:any, action) => {
+        state.ITgetallReguserisLoading = false
+        state.ITgetallReguserisSuccess = true
+        state.ITgetallReguserdata = action.payload 
+      })
+      .addCase(ITgetallReguser.rejected, (state:any, action) => {
+        state.ITgetallReguserisLoading = false
+        state.ITgetallReguserisError = true
+        state.ITgetallRegusermessage = action.payload
+        state.ITgetallReguserdata = [] 
+      })
       
   },
 })
 
 export const { reset } = registrationSlice.actions
 export default registrationSlice.reducer
+
+
+

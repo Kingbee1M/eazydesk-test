@@ -43,17 +43,15 @@ const LeadsChangeRequest = () => {
 		<div id="dashboard">
 			<div className="hero-section4">
 				<LeadsHeader />
-				<div className="hero-search container">
-					<div className="hero-search-container">
-						<input
-							type="text"
-							value={result}
-							onChange={(e) => setResult(e.target.value)}
-						/>
-						<span>
-							<HiOutlineSearch size={30} color="#fff" />
-						</span>
-					</div>
+				<div className="hero-search-container">
+					<input
+						type="text"
+						value={result}
+						onChange={(e) => setResult(e.target.value)}
+					/>
+					<span>
+						<HiOutlineSearch size={30} color="#fff" />
+					</span>
 				</div>
 			</div>
 			<main  >
@@ -70,7 +68,6 @@ const LeadsChangeRequest = () => {
 							)}
 						</div>
 						<ChangeRequestModal headerTitle={"Raise a Ticket - Change Request"} />
-
 					</div>
 					<div  >
 						<LeadTicketTableComponent

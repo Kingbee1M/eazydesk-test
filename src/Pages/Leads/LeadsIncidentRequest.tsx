@@ -23,7 +23,7 @@ const LeadsIncidentRequest = () => {
 	const { createisSuccess } = useAppSelector((state: any) => state.ticket)
 	const data = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("INCIDENT"));
 
-	console.log('data', data)
+
 
 	useEffect(() => {
 		dispatch(getTicket())

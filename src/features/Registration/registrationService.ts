@@ -18,9 +18,16 @@ const userRegistration = async (input: any) => {
 }
 
  // Get All Reguser
-const getallReguser = async (id:any) => {   
+const getallReguser = async () => {   
   const HttpService = createHttpService();
-  const { data } = await HttpService.get(id?`/api/v2/auth/users/${id}`:`/api/v2/auth/users` ) 
+  const { data } = await HttpService.get(`/api/v2/auth/company_users` ) 
+  return data
+}
+ //IT Get All Reguser
+const ITgetallReguser = async () => {   
+  const HttpService = createHttpService();
+  const { data } = await HttpService.get(`/api/v2/auth/company_usersInfo`) 
+  console.log('data',data)
   return data
 }
 
@@ -73,7 +80,8 @@ const registrationSlice = {
   getUserByRole,
   resetPassword,
   edituser,
-  getsupervisors
+  getsupervisors,
+  ITgetallReguser
 }
 
 export default registrationSlice

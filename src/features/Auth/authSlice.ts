@@ -19,8 +19,7 @@ const initialState = {
   data:   [],
   isErrorinput: false,
   isSuccessinput: false,
-  isLoadinginput: false,
-  userTokeninput:null,
+  isLoadinginput: false, 
   messageinput: '',
   errorinput: '', 
 
@@ -34,43 +33,37 @@ const initialState = {
   
   isErrorlogout: false,
   isSuccesslogout: false,
-  isLoadinglogout: false,
-  userTokenlogout:null,
+  isLoadinglogout: false, 
   messagelogout: '',
   errorlogout: '',
 
   forgetisError: false,
   forgetisSuccess: false,
-  forgetisLoading: false,
-  forgetuserToken:null,
+  forgetisLoading: false, 
   forgetmessage: '',
   forgeterror: '',
 
   resetisError: false,
   resetisSuccess: false,
-  resetisLoading: false,
-  resetuserToken:null,
+  resetisLoading: false, 
   resetmessage: '',
   reseterror: '',
 
   profileisError: false,
   profileisSuccess: false,
-  profileisLoading: false,
-  profileuserToken:null,
+  profileisLoading: false, 
   profilemessage: '',
   profileerror: '',
 
   currentisError: false,
   currentisSuccess: false,
-  currentisLoading: false,
-  currentuserToken:null,
+  currentisLoading: false, 
   currentmessage: '',
   currenterror: '',
 
   supervisorUserisError: false,
   supervisorUserisSuccess: false,
-  supervisorUserisLoading: false,
-  supervisorUseruserToken:null,
+  supervisorUserisLoading: false, 
   supervisorUsermessage: '',
   supervisorUsererror: '',
  
@@ -253,8 +246,7 @@ export const authSlice = createSlice({
         // state.userToken = null 
         state.isSuccesslogout = true
       }) 
-     .addCase(logout.rejected, (state:any, action) => {
-      
+     .addCase(logout.rejected, (state:any, action) => { 
         state.isLoadinglogout  = false
         state.isErrorlogout  = true
         state.messagelogout  = action.payload

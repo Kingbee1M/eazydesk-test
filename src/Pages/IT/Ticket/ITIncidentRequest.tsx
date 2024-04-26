@@ -11,7 +11,8 @@ import moment from 'moment'
 
 const ITIncidentRequest = () => {
 	const dispatch = useAppDispatch();
-	
+	const { itdata, itisLoading } = useAppSelector((state: any) => state.ticket)
+
 
 	const [entriesPerPage, setEntriesPerPage] = useState(() => {
 		return "6";
@@ -26,7 +27,6 @@ const ITIncidentRequest = () => {
 	const [searchItem, setSearchItem] = useState("");
 	const [Unassigned, setUnassigned] = useState(false);
 
-	const { itdata, itisLoading } = useAppSelector((state: any) => state.ticket)
 
 
 	endDates = new Date();
@@ -41,7 +41,7 @@ const ITIncidentRequest = () => {
 	const yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
 	const [data, setData] = useState<any>([]);
 
-	
+
 
 
 	useEffect(() => {
@@ -51,9 +51,7 @@ const ITIncidentRequest = () => {
 
 	}, [dispatch, endDate1, startDate1])
 
-	// useEffect(() => {
-	// 	setData(itdata);
-	// }, [itdata]);
+
 
 	return (
 		<div id="page-wrapper">
@@ -64,7 +62,6 @@ const ITIncidentRequest = () => {
 				<div className='dashboard-first-card-boards '>
 					<div>
 						<h5 className='dashboard-first-card-h'>Incident Request</h5>
-						{/* <p className='dashboard-first-card-p'>15 incident request ticket</p> */}
 					</div>
 				</div>
 				<SearchConponent
