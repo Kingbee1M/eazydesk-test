@@ -47,7 +47,7 @@ const AssignTask = ({ id, Assigned }: any) => {
 		}
 	}, [dispatch, id, isAdmin, isSuperAdmin]);
 
-	console.log('ITgetallReguserdata', ITgetallReguserdata)
+	// console.log('ITgetallReguserdata', ITgetallReguserdata)
 
 
 	//@ts-ignore

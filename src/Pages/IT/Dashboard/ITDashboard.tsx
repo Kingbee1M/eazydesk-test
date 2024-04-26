@@ -11,11 +11,27 @@ import { MdOutlineErrorOutline } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 import { VscCloudDownload } from 'react-icons/vsc';
 import AssignTask from '../../../components/Modals/AssignTask';
-import { useAppSelector } from '../../../store/useStore';
+import { useAppDispatch, useAppSelector } from '../../../store/useStore';
+import { getItTicket } from '../../../features/Ticket/ticketSlice'
+import { useEffect, useState } from 'react';
 
 
 const ITDashboard = ({ TYPE }: any) => {
-	const { itdata, itisLoading } = useAppSelector((state: any) => state.ticket)
+	const dispatch = useAppDispatch();
+
+	const { itdata } = useAppSelector((state: any) => state.ticket)
+
+
+	console.log("Data: ", itdata?.tickets)
+
+	const [result] = useState(itdata?.tickets)
+	
+
+
+	useEffect(() => {
+		dispatch(getItTicket())
+	}, [dispatch])
+
 	const ticketdata =
 		[
 			{
@@ -7421,9 +7437,14 @@ const ITDashboard = ({ TYPE }: any) => {
 
 	const ID = "628b66fa420ab2bed20335c0";
 
-	const result = ticketdata?.filter((data: any) =>
-		data?.assignedTo?._id?.toString()?.includes(ID)
-	);
+	// const result = itdata?.filter((data: any) =>
+	// 	data?.assignedTo?._id?.toString()?.includes(ID)
+	// );
+
+	
+
+
+	
 
 	return (
 		<div id="page-wrapper">
@@ -7541,7 +7562,7 @@ const ITDashboard = ({ TYPE }: any) => {
 											</td>
 										</tr>
 									) : (
-										result?.slice(0, 7)?.map((user: any) => (
+										result?.map((user: any) => (
 											<tr key={user?.id}>
 
 												<td data-title="Reference">
