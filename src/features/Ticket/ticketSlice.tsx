@@ -52,6 +52,13 @@ const initialState = {
 	getTicketAssignTicketmessage: '',
 
 
+	dashBoardInfodata: [],
+	dashBoardInfoisError: false,
+	dashBoardInfoisSuccess: false,
+	dashBoardInfoisLoading: false,
+	dashBoardInfomessage: '',
+
+
 
 }
 
@@ -146,7 +153,16 @@ export const getTicketAssignTicket = createAsyncThunk('ticket/getTicketAssignTic
 	}
 })
 
-
+// DashBoard Info 
+export const dashBoardInfo = createAsyncThunk('ticket/dashBoardInfo', async (data, thunkAPI) => {
+	try {
+		return await ticketService.dashBoardInfo(data)
+	} catch (error: any) {
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		return thunkAPI.rejectWithValue(message)
+	}
+})
 
 
 
@@ -201,6 +217,10 @@ export const ticketSlice = createSlice({
 			state.getTicketAssignTicketmessage = ''
 
 
+			state.dashBoardInfoisLoading = false
+			state.dashBoardInfoisSuccess = false
+			state.dashBoardInfoisError = false
+			state.dashBoardInfomessage = ''
 
 		},
 	},
@@ -328,6 +348,21 @@ export const ticketSlice = createSlice({
 				state.getTicketAssignTicketisError = true
 				state.getTicketAssignTicketmessage = action.payload
 				state.getTicketAssignTicketdata = null
+			})
+
+			.addCase(dashBoardInfo.pending, (state) => {
+				state.dashBoardInfoisLoading = true
+			})
+			.addCase(dashBoardInfo.fulfilled, (state: any, action) => {
+				state.dashBoardInfoisLoading = false
+				state.dashBoardInfoisSuccess = true
+				state.dashBoardInfodata = action.payload?.data
+			})
+			.addCase(dashBoardInfo.rejected, (state: any, action) => {
+				state.dashBoardInfoisLoading = false
+				state.dashBoardInfoisError = true
+				state.dashBoardInfomessage = action.payload
+				state.dashBoardInfodata = null
 			})
 
 	},

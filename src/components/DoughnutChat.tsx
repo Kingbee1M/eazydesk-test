@@ -36,7 +36,7 @@ const DoughnutChat = () => {
           '#EB3D4D',
           '#E5ECFB'
         ],
-        cutout: 70,
+        cutout: 50,
       },
     ],
   }

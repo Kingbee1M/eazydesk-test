@@ -9,7 +9,8 @@ import { getTicket, viewTicket } from "../../features/Ticket/ticketSlice";
 import { useParams } from "react-router-dom";
 import { createComment } from "../../features/Comment/commentSlice";
 import { SVGLoader } from "../SVGLoader";
-
+import { RiMailSendLine } from "react-icons/ri";
+import { ToastContainer } from "react-toastify";
 
 
 const ProgressChat = ({ ticket, path, viewdata, id }: any) => {
@@ -114,6 +115,7 @@ const ProgressChat = ({ ticket, path, viewdata, id }: any) => {
   return (
     <>
       <div>
+        <ToastContainer />
         <form onSubmit={handleSubmitComment} className="form" ref={form}>
           <div className="btn-area-container">
 
@@ -137,7 +139,7 @@ const ProgressChat = ({ ticket, path, viewdata, id }: any) => {
               />
             </label>
             <button type="submit" disabled={createisLoading}>
-              {createisLoading ? <SVGLoader width={"30px"} height={"30px"} color={"#fff"} /> : <IoMdSend size={20} color="#0240BC" />}
+              {createisLoading ? <SVGLoader width={"30px"} height={"30px"} color={"#fff"} /> : <RiMailSendLine size={20} color="#0240BC" />}
             </button>
           </div>
 

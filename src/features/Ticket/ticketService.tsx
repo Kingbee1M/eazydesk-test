@@ -62,7 +62,12 @@ const getTicketAssignTicket = async (datas: any) => {
 	const base = baseUrl + `/api/v2/ticket/itsupport`;
 	const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType, ticketId);
 	const { data } = await axios.get(url)
+	return data
+}
 
+const dashBoardInfo = async (datas: any) => {
+	const HttpService = createHttpService();
+	const { data }: any = await HttpService.get(`/api/v2/ticket/totals`)
 	return data
 }
 
@@ -78,7 +83,8 @@ const ticketService = {
 	getTicketID,
 	viewTicket,
 	itAssignTicket,
-	getTicketAssignTicket
+	getTicketAssignTicket,
+	dashBoardInfo
 }
 
 export default ticketService
