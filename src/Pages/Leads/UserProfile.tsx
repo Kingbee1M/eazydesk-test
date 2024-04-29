@@ -8,7 +8,6 @@ import axios from "axios";
 import { baseUrl } from "../../shared/baseUrl";
 import ModalHeader from "../../components/Modals/ModalHeader";
 
-
 const UserProfile = ({
   lgShow,
   setLgShow,
@@ -27,7 +26,6 @@ const UserProfile = ({
 }: any) => {
   // @ts-ignore
   const UserDetails = JSON.parse(localStorage.getItem("service_desk"));
-
 
   //  Update Current Password State
   const [currentPassword, setCurrentPassword] = useState("");
@@ -135,15 +133,12 @@ const UserProfile = ({
 
   return (
     <div>
-      <Modal
-        size="lg"
-        show={lgShow}
-        onHide={() => setLgShow(false)} >
+      <Modal size='lg' show={lgShow} onHide={() => setLgShow(false)}>
         <ModalHeader setShow={setLgShow} headerTitle={result} />
         <Modal.Body>
-          <div className="container">
-            <div className="container-head">
-              <div className="page-btn-title">
+          <div className='container'>
+            <div className='container-head'>
+              <div className='page-btn-title'>
                 {Edit.map((catagory, i) => (
                   <button
                     className={activeTab === i ? "btn-case active" : "btn-case"}
@@ -151,25 +146,26 @@ const UserProfile = ({
                       showInfo(catagory);
                       setActiveTab(i);
                     }}
-                    key={i}>
+                    key={i}
+                  >
                     {catagory}
                   </button>
                 ))}
               </div>
             </div>
-            <div className="container-body">
+            <div className='container-body'>
               <center>
-                <div className="profile-picture">
+                <div className='profile-picture'>
                   {!UserDetails?.profilePic ? (
                     <div>
-                      <FaUserCircle size={120} className="profile-notfound" />
+                      <FaUserCircle size={120} className='profile-notfound' />
                     </div>
                   ) : (
                     <img
-                      crossOrigin="anonymous"
+                      crossOrigin='anonymous'
                       src={baseUrl + "/" + UserDetails?.profilePic}
-                      alt="Profile"
-                      className="prifile-pics-full"
+                      alt='Profile'
+                      className='prifile-pics-full'
                     />
                   )}
                 </div>
@@ -177,158 +173,123 @@ const UserProfile = ({
 
               <div>
                 {result === "Edit Profile" && (
-                  <form action=""  >
-                    <h6 className="text-center">Edit Personal Information</h6>
-                    <div className="row">
-                      <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <TextField
-                          className="TextField-Outline"
-                          id="outlined-basic"
-                          label="First Name"
-                          variant="outlined"
-                          size="medium"
-                          fullWidth
+                  <form action=''>
+                    <h6 className='text-center'>Edit Personal Information</h6>
+                    <div className='row'>
+                      <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
+                        <input
+                          className='TextField-Outline'
+                          id='outlined-basic'
+                          placeholder='First Name'
                           value={firstname}
                           onChange={(e) => {
                             setFirstName(e.target.value);
                           }}
-                          style={{ marginBottom: "15px" }}
                         />
                       </div>
-                      <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <TextField
-                          className="TextField-Outline"
-                          id="outlined-basic"
-                          label="Last Name"
-                          variant="outlined"
-                          size="medium"
-                          fullWidth
+                      <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
+                        <input
+                          className='TextField-Outline'
+                          id='outlined-basic'
+                          placeholder='Last Name'
                           value={lastname}
                           onChange={(e) => {
                             setLastName(e.target.value);
                           }}
-                          style={{ marginBottom: "15px" }}
                         />
                       </div>
                     </div>
-                    <div className="row">
-                      <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <TextField
-                          className="TextField-Outline"
-                          id="outlined-basic"
-                          label="Location"
-                          variant="outlined"
-                          size="medium"
-                          fullWidth
+                    <div className='row'>
+                      <div className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+                        <input
+                          className='TextField-Outline'
+                          id='outlined-basic'
+                          placeholder='Location'
                           disabled
                           value={location}
                           onChange={(e) => {
                             setLocation(e.target.value);
                           }}
-                          style={{ marginBottom: "15px" }}
                         />
                       </div>
                     </div>
-                    <div className="row">
-                      <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <TextField
-                          className="TextField-Outline"
-                          id="outlined-basic"
-                          label="Email Address"
-                          variant="outlined"
-                          size="medium"
-                          fullWidth
+                    <div className='row'>
+                      <div className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+                        <input
+                          className='TextField-Outline'
+                          id='outlined-basic'
+                          placeholder='Email Address'
                           disabled
                           value={email}
                           onChange={(e) => {
                             setEmail(e.target.value);
                           }}
-                          style={{ marginBottom: "15px" }}
                         />
                       </div>
                     </div>
-                    <div className="row">
-                      <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <TextField
-                          className="TextField-Outline"
-                          id="outlined-basic"
-                          label="Role Name"
-                          variant="outlined"
-                          size="medium"
-                          fullWidth
+                    <div className='row'>
+                      <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
+                        <input
+                          className='TextField-Outline'
+                          id='outlined-basic'
+                          placeholder='Role Name'
                           disabled
                           value={roleName}
                           onChange={(e) => {
                             setRoleName(e.target.value);
                           }}
-                          style={{ marginBottom: "15px" }}
                         />
                       </div>
-                      <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <TextField
-                          className="TextField-Outline"
-                          id="outlined-basic"
-                          label="Contact No"
-                          variant="outlined"
-                          size="medium"
-                          fullWidth
+                      <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
+                        <input
+                          className='TextField-Outline'
+                          id='outlined-basic'
+                          placeholder='Contact No'
                           value={phoneNumber}
                           onChange={(e) => {
                             setPhoneNumber(e.target.value);
                           }}
-                          style={{ marginBottom: "15px" }}
                         />
                       </div>
                     </div>
 
                     <button
-                      className="button-subnit ripple"
-                      type="submit"
-                      value="Submit"
-                      disabled={false && true}>
+                      className='button-subnit ripple'
+                      type='submit'
+                      value='Submit'
+                      disabled={false && true}
+                    >
                       {false ? "UPDATING..." : "UPDATE"}
                     </button>
                   </form>
                 )}
                 {result === "Reset Password" && (
                   <form onSubmit={passwordhandelSubmit}>
-                    <h6 className="text-center">Reset Password</h6>
-                    <TextField
-                      className="TextField-Outline"
-                      id="outlined-basic"
-                      label="Previous Password"
-                      variant="outlined"
-                      size="medium"
+                    <h6 className='text-center'>Reset Password</h6>
+                    <input
+                      className='TextField-Outline'
+                      id='outlined-basic'
+                      placeholder='Previous Password'
                       required
-                      fullWidth
-                      style={{ marginBottom: "15px" }}
                       value={currentPassword}
                       onChange={(e) => {
                         setCurrentPassword(e.target.value);
                       }}
                     />
 
-                    <TextField
-                      id="outlined-basic"
-                      label="New password"
-                      variant="outlined"
-                      size="medium"
+                    <input
+                      id='outlined-basic'
+                      placeholder='New password'
                       required
-                      fullWidth
-                      style={{ marginBottom: "15px" }}
                       value={newPassword}
                       onChange={(e) => {
                         setNewPassword(e.target.value);
                       }}
                     />
-                    <TextField
-                      id="outlined-basic"
-                      label="Confirm New Password"
-                      variant="outlined"
-                      size="medium"
+                    <input
+                      id='outlined-basic'
+                      placeholder='Confirm New Password'
                       required
-                      fullWidth
-                      style={{ marginBottom: "15px" }}
                       value={confirmNewPassword}
                       onChange={(e) => {
                         setConfirmNewPassword(e.target.value);
@@ -336,56 +297,61 @@ const UserProfile = ({
                     />
 
                     <button
-                      className="button-subnit ripple"
-                      type="submit"
-                      value="Submit"
-                      disabled={false}>
+                      className='button-subnit ripple'
+                      type='submit'
+                      value='Submit'
+                      disabled={false}
+                    >
                       {false ? "UPDATING..." : "UPDATE"}
                     </button>
                   </form>
                 )}
                 {result === "Upload Image" && (
                   <div>
-                    <form  >
+                    <form>
                       <center>
-                        <h1>
+                        <h6 className='text-center'>
                           {previewImgLoading
                             ? "Loading Image Please Wait...."
                             : "Upload Image"}
-                        </h1>
-                        <div className="avatar-upload">
-                          <div className="avatar-edit">
+                        </h6>
+                        <div className='avatar-upload'>
+                          <div className='avatar-edit'>
                             <input
-                              type="file"
-                              id="imageUpload"
-                              accept=".png, .jpg, .jpeg"
+                              type='file'
+                              id='imageUpload'
+                              accept='.png, .jpg, .jpeg'
                               disabled={(false || previewImgLoading) && true}
                             />
-                            <label htmlFor="imageUpload">
-                              <BsCamera className="image-BsCamera" />
-                            </label>
+
+                            {/* <label htmlFor='imageUpload'>
+                              <BsCamera className='image-BsCamera' />
+                            </label> */}
                           </div>
-                          <div className="avatar-preview">
-                            <div id="imagePreview">
+                          {/* <div className='avatar-preview'>
+                            <div id='imagePreview'>
                               {imgLocalURL === null ? (
-                                <FaUserCircle className="AiOutlineUserAdd" />
+                                <FaUserCircle className='AiOutlineUserAdd' />
                               ) : (
                                 <img
                                   src={imgLocalURL}
-                                  alt="Profile Pic"
-                                  className={previewImgLoading && "dark-img-loading"}
+                                  alt='Profile Pic'
+                                  className={
+                                    previewImgLoading && "dark-img-loading"
+                                  }
                                 />
                               )}
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                       </center>
 
                       <button
-                        className="button-subnit ripple"
-                        type="submit"
-                        value="Submit"
-                        disabled={false && true}>
+                        className='button-subnit ripple'
+                        type='submit'
+                        value='Submit'
+                        disabled={false && true}
+                      >
                         {false ? "UPDATING..." : "UPDATE"}
                       </button>
                       <div />
