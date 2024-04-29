@@ -27,7 +27,7 @@ const ITChangeRequest = () => {
 	const [Unassigned, setUnassigned] = useState(false);
 
 	const { itticketparameterdata, itticketparameterisLoading } = useAppSelector((state: any) => state.ticket)
-	console.log('itticketparameterdata', itticketparameterdata)
+
 
 	endDates = new Date();
 	const formattedEndDate = endDates.toISOString().split('T')[0]; // Extracting date part and removing time

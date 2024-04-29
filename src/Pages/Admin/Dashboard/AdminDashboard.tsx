@@ -24,7 +24,7 @@ const AdminDashboard = () => {
 		dispatch(dashBoardInfo())
 	}, [dispatch])
 
-	console.log('dashBoardInfodata', dashBoardInfodata)
+ 
 	const ticketTotal = dashBoardInfodata?.pagination?.totalTickets
 	const changeRequest = dashBoardInfodata?.totals?.ticketType?.changeRequest
 	const incidentRequest = dashBoardInfodata?.totals?.ticketType?.incidentRequest

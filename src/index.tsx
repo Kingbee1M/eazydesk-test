@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import { store } from './store/store';
 import { UserProvider } from './hooks/UserContext';
 import { ToastContainer } from 'react-toastify';
+import { SocketProvider } from './components/Scoket/SocketContext';
 
 
 const root = ReactDOM.createRoot(
@@ -17,10 +18,12 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <UserProvider>
-        <ToastContainer />
-        <App />
-      </UserProvider>
+      <SocketProvider>
+        <UserProvider>
+          <ToastContainer />
+          <App />
+        </UserProvider>
+      </SocketProvider>
     </Provider>
   </React.StrictMode >
 );

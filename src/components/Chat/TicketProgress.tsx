@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import moment from "moment";
 import { useNavigate, useParams } from "react-router-dom";
 import { MdOutlineClose } from "react-icons/md";
@@ -7,15 +7,19 @@ import { useAppDispatch, useAppSelector } from "../../store/useStore";
 import { reset } from "../../features/Comment/commentSlice";
 import { updateTicket, viewTicket } from "../../features/Ticket/ticketSlice";
 import { SVGLoader } from "../SVGLoader";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { customId } from "../Options";
+import NotificationPopUp from "../Scoket/NotificationPopUp";
+import { SocketContext } from "../Scoket/SocketContext";
 
 const TicketProgress = () => {
+
 	const { id }: any = useParams();
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const form: any = useRef();
-
+	const [notification, setNotification] = useState<any>();
+	const [refresh, setRefresh] = useState(false);
 	const [ticket, setTicket] = useState<any>({});
 	const [inputs, setinputs] = useState("")
 	const { viewdata, viewisLoading } = useAppSelector((state: any) => state.ticket)
@@ -26,12 +30,12 @@ const TicketProgress = () => {
 		images: [],
 	});
 
-	console.log('viewdata', viewdata)
+
 
 
 	useEffect(() => {
 		if (updateTicketisSuccess) {
-			toast.success("Ticket Updaated!", { toastId: customId });
+			toast.success("Ticket Updated!", { toastId: customId });
 		}
 	}, [updateTicketisSuccess])
 
@@ -49,7 +53,7 @@ const TicketProgress = () => {
 		// @ts-ignore 
 		dispatch(reset())
 
-	}, [dispatch, id, createisSuccess, updateTicketisSuccess])
+	}, [dispatch, id, createisSuccess, updateTicketisSuccess, refresh])
 
 
 	const handleUpdateTicketStatus = (e: any) => {
@@ -65,6 +69,8 @@ const TicketProgress = () => {
 
 	return (
 		<div>
+			<NotificationPopUp setNotification={setNotification} setRefresh={setRefresh} />
+			<ToastContainer position="top-right" containerId={"custom1"} />
 			<header className="ChatProgressView-header">
 				<div>
 					<span className="in-progresss-header">

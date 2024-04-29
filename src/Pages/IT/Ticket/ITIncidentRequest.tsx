@@ -11,7 +11,7 @@ import ITTicketTable from './ITTicketTable'
 const ITIncidentRequest = () => {
 	const dispatch = useAppDispatch();
 	const { itdata, itisLoading, itticketparameterdata } = useAppSelector((state: any) => state.ticket)
-	console.log(itticketparameterdata?.tickets)
+
 
 	const [entriesPerPage, setEntriesPerPage] = useState(() => {
 		return "6";
@@ -34,7 +34,7 @@ const ITIncidentRequest = () => {
 
 	useEffect(() => {
 		const datas = { ticketType: "INCIDENT" };
-		console.log(datas)
+
 		// @ts-ignore 
 		dispatch(getItTicketParameter(datas))
 

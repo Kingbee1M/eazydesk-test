@@ -49,7 +49,7 @@ const ServiceRequest = () => {
 
 	}, [dispatch, endDate1, startDate1, itassignisSuccess])
 
-	// console.log(admingetticketdata)
+
 
 
 	return (

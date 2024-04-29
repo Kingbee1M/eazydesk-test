@@ -1,0 +1,63 @@
+import { toast, ToastContainer } from 'react-toastify';
+// import noti from '../NotificationSound/IPhoneNotification.mp3';
+import { customId } from '../Options';
+import { SocketContext } from './SocketContext';
+import { useContext } from 'react';
+
+
+
+
+const NotificationPopUp = ({ setRefresh, setNotification }: any) => {
+	const socket: any = useContext(SocketContext);
+	// @ts-ignore  
+	const userInfo = JSON.parse(localStorage.getItem("service_desk"));
+
+	// Audio File
+	// const myAudio = new Audio(noti);
+
+
+
+	socket.on(userInfo.email.toString() + ":newTicket", (org: any) => {
+		console.log("New Ticket", org);
+		if (org) {
+			toast.success(org?.ticketType, { toastId: customId });
+			setRefresh(true)
+			// myAudio?.play()
+		}
+		setTimeout(() => {
+			setRefresh(false)
+		}, 1000);
+	});
+
+	// socket.on(`${userInfo.companyId}:comment`, (org: any) => {
+	// 	console.log("New Comment", org);
+	// 	if (org) {
+	// 		setRefresh(true)
+	// 		toast.success(org?.comment, { toastId: customId });
+	// 		// myAudio?.play()
+	// 		setTimeout(() => {
+	// 			setRefresh(false)
+	// 		}, 1000);
+	// 	}
+	// });
+
+
+	// socket.on("new-message", (message) => {
+	// 	if (message) {
+	// 		toast.success(message?.details);
+	// 	} else if (message.success === false) {
+	// 		toast.error(message.error);
+	// 	}
+	// 	// console.log('new-message', message)
+	// });
+
+
+
+	return (
+		<>
+			<ToastContainer position="top-right" containerId={"custom1"} />
+		</>
+	)
+
+}
+export default NotificationPopUp

@@ -1,4 +1,4 @@
-  export const baseUrl: any = "http://localhost:5000"; 
+  export const baseUrl: any = "http://localhost:5000";  
 
 
 export const buildDynamicURL = (id: any, fromDate: any, endDate: any, limit: any, page: any, base: any ,ticketType:any,ticketId:any ,status:any) => {

@@ -23,7 +23,6 @@ const Essentials = ({
 
 
   const handleSubmit = (values?: any) => {
-    // console.log("Values", values);
     setEmployee({ ...employee, ...values });
     setActive(2);
   };

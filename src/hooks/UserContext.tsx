@@ -8,7 +8,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 	const [user, setUser] = useState(JSON?.parse(localStorage.getItem("service_desk")));
 
 	const updateUser = (userData: any) => {
-		console.log("userData", userData);
 		setUser(userData);
 	};
 
