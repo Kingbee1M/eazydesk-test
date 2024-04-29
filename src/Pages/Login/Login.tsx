@@ -15,7 +15,15 @@ import DataService from "../../features/Auth/dataService";
 
 const dataService = DataService();
 const Login = () => {
+	const [title, setTitle] = useState("Eazy Desk  | Dashboard");
+	document.title = title;
 
+	useEffect(() => {
+		// This will run when the page first loads and whenever the title changes
+		if (window.location.pathname === "/") {
+			setTitle("Eazy Desk | Login ");
+		}
+	}, [title]);
 	function getToken() {
 		try {
 			// Attempt to retrieve the token from the dataService object
@@ -88,7 +96,7 @@ const Login = () => {
 		<div id="login-wrapper">
 			<Carousels />
 			<div className="login-container">
-				<ToastContainer position="top-right" />
+				<ToastContainer position="top-right" containerId={"custom1"} />
 				<div className="login-content-layout">
 					{/* Login Header */}
 					<LoginHeader />

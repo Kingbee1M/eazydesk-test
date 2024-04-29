@@ -14,9 +14,17 @@ import { RiAlarmWarningLine } from "react-icons/ri";
 import { TbExchange } from "react-icons/tb";
 import { getUserPrivileges } from "../../hooks/auth";
 import { IoMdOpen } from "react-icons/io";
+import { useAppDispatch, useAppSelector } from "../../store/useStore";
+import { dashBoardInfo } from "../../features/Ticket/ticketSlice";
 
 
 const SideNav = () => {
+  const dispatch = useAppDispatch()
+  const { dashBoardInfodata } = useAppSelector((state: any) => state.ticket);
+
+  useEffect(() => {
+    dispatch(dashBoardInfo())
+  }, [dispatch])
   const { isSuperAdmin } = getUserPrivileges();
   const [dropdownOpen, setDropdownOpen] = useState(
     localStorage.getItem('dropdownOpen') === 'true'
@@ -34,6 +42,19 @@ const SideNav = () => {
       setDropdownOpen(storedState);
     }
   }, [dropdownOpen]);
+
+  const changeRequest = dashBoardInfodata?.totals?.ticketType?.changeRequest
+  const incidentRequest = dashBoardInfodata?.totals?.ticketType?.incidentRequest
+  const serviceRequest = dashBoardInfodata?.totals?.ticketType?.serviceRequest
+  // const approved = dashBoardInfodata?.ticketType?.approved
+  const closed = dashBoardInfodata?.totals?.status?.closed
+  // const completed = dashBoardInfodata?.totals?.status?.completed
+  // const dissaproved = dashBoardInfodata?.totals?.status?.dissaproved
+  const inprogress = dashBoardInfodata?.totals?.status?.inprogress
+  // const invalid = dashBoardInfodata?.totals?.status?.invalid
+  const open = dashBoardInfodata?.totals?.status?.open
+  // const pending = dashBoardInfodata?.totals?.status?.pending
+  // const reopen = dashBoardInfodata?.totals?.status?.reopen
 
 
   return (
@@ -73,7 +94,7 @@ const SideNav = () => {
 
         {dropdownOpen && (
           <div>
-            <NavLink to="/openticket" className={({ isActive }) =>
+            <NavLink to="/ticketprogress" className={({ isActive }) =>
               ["nav-link_sup", isActive ? "active_sup" : null,]
                 .filter(Boolean)
                 .join(" ")
@@ -82,7 +103,19 @@ const SideNav = () => {
                 <IoMdOpen size={21} />
                 <span>In Progress </span>
               </div>
-              <div className="side_number">5</div>
+              <div className="side_number">{!inprogress ? 0 : inprogress}</div>
+            </NavLink>
+
+            <NavLink to="/openticket" className={({ isActive }) =>
+              ["nav-link_sup", isActive ? "active_sup" : null,]
+                .filter(Boolean)
+                .join(" ")
+            }>
+              <div className="nav_dropdown_sub">
+                <AiOutlineCloseCircle size={21} />
+                <span>Open Tickets</span>
+              </div>
+              <div className="side_number_one" >{!open ? 0 : open}</div>
             </NavLink>
 
             <NavLink to="/closedticket" className={({ isActive }) =>
@@ -91,22 +124,10 @@ const SideNav = () => {
                 .join(" ")
             }>
               <div className="nav_dropdown_sub">
-                <AiOutlineCloseCircle size={21} />
-                <span>Resolved Tickets</span>
-              </div>
-              <div className="side_number_one" >10</div>
-            </NavLink>
-
-            <NavLink to="/ticketprogress" className={({ isActive }) =>
-              ["nav-link_sup", isActive ? "active_sup" : null,]
-                .filter(Boolean)
-                .join(" ")
-            }>
-              <div className="nav_dropdown_sub">
                 <PiCalendarCheckDuotone size={22} />
                 <span>Closed ticket</span>
               </div>
-              <div className="side_number_two">4</div>
+              <div className="side_number_two">{!closed ? 0 : closed}</div>
             </NavLink>
 
             <NavLink to="/incidentrequest" className={({ isActive }) =>
@@ -118,7 +139,7 @@ const SideNav = () => {
                 <RiAlarmWarningLine size={15} />
                 <span>Incident Request</span>
               </div>
-              <div className="side_number_three">34</div>
+              <div className="side_number_three">{!incidentRequest ? 0 : incidentRequest}</div>
             </NavLink>
             <NavLink to="/servicerequest" className={({ isActive }) =>
               ["nav-link_sup", isActive ? "active_sup" : null,]
@@ -129,7 +150,7 @@ const SideNav = () => {
                 <MdOutlineMiscellaneousServices size={15} />
                 <span>Service request</span>
               </div>
-              <div className="side_number_five">4</div>
+              <div className="side_number_five">{!serviceRequest ? 0 : serviceRequest}</div>
             </NavLink>
             <NavLink to="/changerequest" className={({ isActive }) =>
               ["nav-link_sup", isActive ? "active_sup" : null,]
@@ -140,7 +161,7 @@ const SideNav = () => {
                 <TbExchange size={15} />
                 <span>Change request</span>
               </div>
-              <div className="side_number_two">4</div>
+              <div className="side_number_two">{!changeRequest ? 0 : changeRequest}</div>
             </NavLink>
           </div>
         )}

@@ -58,6 +58,24 @@ const initialState = {
 	getTicketAssignTicketmessage: '',
 
 
+	dashBoardInfodata: [],
+	dashBoardInfoisError: false,
+	dashBoardInfoisSuccess: false,
+	dashBoardInfoisLoading: false,
+	dashBoardInfomessage: '',
+
+	updateTicketdata: [],
+	updateTicketisError: false,
+	updateTicketisSuccess: false,
+	updateTicketisLoading: false,
+	updateTicketmessage: '',
+
+	giveApprovaldata: [],
+	giveApprovalisError: false,
+	giveApprovalisSuccess: false,
+	giveApprovalisLoading: false,
+	giveApprovalmessage: '',
+
 
 }
 
@@ -161,7 +179,36 @@ export const getTicketAssignTicket = createAsyncThunk('ticket/getTicketAssignTic
 	}
 })
 
-
+// DashBoard Info 
+export const dashBoardInfo = createAsyncThunk('ticket/dashBoardInfo', async (data, thunkAPI) => {
+	try {
+		return await ticketService.dashBoardInfo()
+	} catch (error: any) {
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		return thunkAPI.rejectWithValue(message)
+	}
+})
+// Update Ticket
+export const updateTicket = createAsyncThunk('ticket/updateTicket', async (data, thunkAPI) => {
+	try {
+		return await ticketService.updateTicket(data)
+	} catch (error: any) {
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		return thunkAPI.rejectWithValue(message)
+	}
+})
+// Give Approval
+export const giveApproval = createAsyncThunk('ticket/giveApproval', async (data, thunkAPI) => {
+	try {
+		return await ticketService.giveApproval(data)
+	} catch (error: any) {
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		return thunkAPI.rejectWithValue(message)
+	}
+})
 
 
 
@@ -214,13 +261,25 @@ export const ticketSlice = createSlice({
 			state.itassignisError = false
 			state.itassignmessage = ''
 
-
 			state.getTicketAssignTicketisLoading = false
 			state.getTicketAssignTicketisSuccess = false
 			state.getTicketAssignTicketisError = false
 			state.getTicketAssignTicketmessage = ''
 
+			state.dashBoardInfoisLoading = false
+			state.dashBoardInfoisSuccess = false
+			state.dashBoardInfoisError = false
+			state.dashBoardInfomessage = ''
 
+			state.updateTicketisLoading = false
+			state.updateTicketisSuccess = false
+			state.updateTicketisError = false
+			state.updateTicketmessage = ''
+
+			state.giveApprovalisLoading = false
+			state.giveApprovalisSuccess = false
+			state.giveApprovalisError = false
+			state.giveApprovalmessage = ''
 
 		},
 	},
@@ -364,6 +423,51 @@ export const ticketSlice = createSlice({
 				state.getTicketAssignTicketisError = true
 				state.getTicketAssignTicketmessage = action.payload
 				state.getTicketAssignTicketdata = null
+			})
+
+			.addCase(dashBoardInfo.pending, (state) => {
+				state.dashBoardInfoisLoading = true
+			})
+			.addCase(dashBoardInfo.fulfilled, (state: any, action) => {
+				state.dashBoardInfoisLoading = false
+				state.dashBoardInfoisSuccess = true
+				state.dashBoardInfodata = action.payload?.data
+			})
+			.addCase(dashBoardInfo.rejected, (state: any, action) => {
+				state.dashBoardInfoisLoading = false
+				state.dashBoardInfoisError = true
+				state.dashBoardInfomessage = action.payload
+				state.dashBoardInfodata = null
+			})
+
+			.addCase(updateTicket.pending, (state) => {
+				state.updateTicketisLoading = true
+			})
+			.addCase(updateTicket.fulfilled, (state: any, action) => {
+				state.updateTicketisLoading = false
+				state.updateTicketisSuccess = true
+				state.updateTicketdata = action.payload?.data
+			})
+			.addCase(updateTicket.rejected, (state: any, action) => {
+				state.updateTicketisLoading = false
+				state.updateTicketisError = true
+				state.updateTicketmessage = action.payload
+				state.updateTicketdata = null
+			})
+
+			.addCase(giveApproval.pending, (state) => {
+				state.giveApprovalisLoading = true
+			})
+			.addCase(giveApproval.fulfilled, (state: any, action) => {
+				state.giveApprovalisLoading = false
+				state.giveApprovalisSuccess = true
+				state.giveApprovaldata = action.payload?.data
+			})
+			.addCase(giveApproval.rejected, (state: any, action) => {
+				state.giveApprovalisLoading = false
+				state.giveApprovalisError = true
+				state.giveApprovalmessage = action.payload
+				state.giveApprovaldata = null
 			})
 
 	},

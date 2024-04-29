@@ -5,7 +5,7 @@ import { Modal } from 'react-bootstrap'
 import TicketForm from './TicketForm'
 import ModalHeader from '../Modals/ModalHeader'
 
-const ChangeRequestModal = ({ headerTitle }: any) => {
+const ChangeRequestModal = ({ headerTitle, currentState, proposedChange }: any) => {
 	const [show, setShow] = useState(false);
 	return (
 		<div>
@@ -22,6 +22,8 @@ const ChangeRequestModal = ({ headerTitle }: any) => {
 					<TicketForm
 						type={"CHANGE"}
 						setShow={setShow}
+						currentState={currentState}
+						proposedChange={proposedChange}
 					/>
 				</Modal.Body>
 			</Modal>

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import SideNav from '../../../components/SideNav/SideNav';
 import Header from '../../../components/Header';
 import EditRegisteredUserModal from './EditRegisteredUserModal';
-import { FiPlus } from "react-icons/fi";
 import RegisterModal from './RegisterModal';
 import BottomNavigation from '../../../components/BottomNavigation';
 import { useAppDispatch, useAppSelector } from '../../../store/useStore';
@@ -11,15 +10,14 @@ import { getallReguser } from '../../../features/Registration/registrationSlice'
 import Pagination from '../../../components/Pagination';
 import TableLoader from '../../../components/TableLoader';
 import { NoRecordFound, TableFetch } from '../../../components/Options';
-import { getUserPrivileges } from '../../../hooks/auth';
+
 
 
 
 const Register = ({ switchs }: any) => {
 	// @ts-ignore 
 	const userInfo = JSON.parse(localStorage.getItem("service_desk"));
-	const { isAdmin } = getUserPrivileges();
-	const id = isAdmin ? userInfo?.companyId : null
+
 	const [showEditUser, setShowEditUser] = useState(false)
 	const dispatch = useAppDispatch();
 	const { dataAll, isLoadingAll } = useAppSelector((state: any) => state.reg);
@@ -68,11 +66,13 @@ const Register = ({ switchs }: any) => {
 		setRealData(result);
 	}, [dataAll, searchItem]);
 
+	console.log('result', dataAll.length)
+
 
 
 	return (
 		<div id="page-wrapper">
-			<ToastContainer position="top-right" />
+			<ToastContainer position="top-right" containerId={"custom1"} />
 			<SideNav />
 			<Header />
 			<BottomNavigation />
@@ -100,9 +100,9 @@ const Register = ({ switchs }: any) => {
 						</thead>
 						<tbody className="data-table-content">
 							{isLoadingAll ? (
-								<TableFetch colSpan={18} />
-							) : displayData?.length === 0 ? (
-								<NoRecordFound colSpan={18} />
+								<TableFetch colSpan={7} />
+							) : displayData?.length === 0 || dataAll.length === 0 ? (
+								<NoRecordFound colSpan={7} />
 							) : (
 								displayData?.map((item: any, i: any) => (
 									<tr key={i}>

@@ -2,12 +2,11 @@ import { useEffect, useState } from 'react'
 import BottomNavigation from '../../../components/BottomNavigation'
 import Header from '../../../components/Header'
 import SearchConponent from '../../../components/SearchConponent'
-import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 import ITSideNav from '../../../components/SideNav/ITSideNav'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import { getItTicketParameter } from '../../../features/Ticket/ticketSlice'
 import ITTicketTable from './ITTicketTable'
-import moment from 'moment'
+
 
 const ITIncidentRequest = () => {
 	const dispatch = useAppDispatch();
@@ -18,14 +17,11 @@ const ITIncidentRequest = () => {
 		return "6";
 	});
 
-	const [startDates, setStartDates] = useState([]);
+
 	let [endDates, setEndDates] = useState<any>([]);
 	const [show, setShow] = useState(false);
-	const [datas, setDatas] = useState([]);
-	const [find, setFind] = useState<any>();
-	const [sortData, setSortData] = useState<any>([]);
 	const [searchItem, setSearchItem] = useState("");
-	const [Unassigned, setUnassigned] = useState(false);
+
 
 
 
@@ -33,14 +29,6 @@ const ITIncidentRequest = () => {
 	const formattedEndDate = endDates.toISOString().split('T')[0]; // Extracting date part and removing time
 	const [startDate1] = useState(formattedEndDate);
 	const [endDate1] = useState(formattedEndDate);
-	const [selectedDate, setSelectedDate] = useState("");
-
-
-	const currentDate = moment().format("YYYY-MM-DD");
-	const sevenDays = moment().subtract(7, "days").format("YYYY-MM-DD");
-	const yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
-	const [data, setData] = useState<any>([]);
-
 
 
 
@@ -73,7 +61,7 @@ const ITIncidentRequest = () => {
 					entriesPerPage={entriesPerPage}
 					setEntriesPerPage={setEntriesPerPage}
 					filter={true}
-					setStartDates={setStartDates}
+					// setStartDates={setStartDates}
 					setEndDates={setEndDates}
 					setShow={setShow}
 					show={show}

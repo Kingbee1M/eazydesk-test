@@ -25,7 +25,6 @@ const UserProfile = ({
   setRoleName,
   roleName,
 }: any) => {
-  const dispatch = useDispatch();
   // @ts-ignore
   const UserDetails = JSON.parse(localStorage.getItem("service_desk"));
 
@@ -41,7 +40,6 @@ const UserProfile = ({
   const [errorToastMsg, setErrorToastMgs] = useState(false);
   const [previewImgLoading, setPreviewImgLoading] = useState<any>(false);
   const [imgLocalURL, setImgLocalURL] = useState(null);
-  const [profilePic, setProfilePic] = useState("");
 
   const showInfo = (catagory: React.SetStateAction<string>) => {
     setResult(catagory);

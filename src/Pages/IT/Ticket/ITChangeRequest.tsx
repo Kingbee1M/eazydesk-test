@@ -11,7 +11,7 @@ import moment from 'moment'
 
 const ITChangeRequest = () => {
 	const dispatch = useAppDispatch();
-	
+
 
 	const [entriesPerPage, setEntriesPerPage] = useState(() => {
 		return "6";
@@ -26,8 +26,8 @@ const ITChangeRequest = () => {
 	const [searchItem, setSearchItem] = useState("");
 	const [Unassigned, setUnassigned] = useState(false);
 
-	const { itdata, itisLoading,itticketparameterdata } = useAppSelector((state: any) => state.ticket)
-	console.log(itdata)
+	const { itticketparameterdata, itticketparameterisLoading } = useAppSelector((state: any) => state.ticket)
+	console.log('itticketparameterdata', itticketparameterdata)
 
 	endDates = new Date();
 	const formattedEndDate = endDates.toISOString().split('T')[0]; // Extracting date part and removing time
@@ -41,7 +41,7 @@ const ITChangeRequest = () => {
 	const yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
 	const [data, setData] = useState<any>([]);
 
-	
+
 
 
 	useEffect(() => {
@@ -51,9 +51,7 @@ const ITChangeRequest = () => {
 
 	}, [dispatch, endDate1, startDate1])
 
-	// useEffect(() => {
-	// 	setData(itdata);
-	// }, [itdata]);
+
 
 
 	return (
@@ -72,7 +70,7 @@ const ITChangeRequest = () => {
 					placeholder={"search ticket"}
 					setSearchItem={setSearchItem}
 					searchItem={searchItem}
-					data={itdata?.tickets}
+					data={itticketparameterdata?.tickets}
 					entriesPerPage={entriesPerPage}
 					setEntriesPerPage={setEntriesPerPage}
 					filter={true}
@@ -85,11 +83,11 @@ const ITChangeRequest = () => {
 
 				<div  >
 					<ITTicketTable
-						pageheader={"CHANGE REQUEST"}
+						pageheader={"CHANGE"}
 						Request={"Change Request"}
-						TYPE={"CHANGE REQUEST"}
+						TYPE={"CHANGE"}
 						data={itticketparameterdata?.tickets}
-						isLoading={itisLoading} />
+						isLoading={itticketparameterisLoading} />
 				</div>
 			</main>
 		</div>

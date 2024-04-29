@@ -11,26 +11,51 @@ import ThreeinOneBarChart from '../../../components/ThreeinOneBarChart';
 import DoughnutChat from '../../../components/DoughnutChat';
 import { PiDotsSixVerticalBold } from 'react-icons/pi';
 import LinePerformanceChart from '../../../components/LinePerformanceChart';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../store/useStore';
+import { dashBoardInfo } from '../../../features/Ticket/ticketSlice';
 
 
 const AdminDashboard = () => {
+	const dispatch = useAppDispatch()
+	const { dashBoardInfodata } = useAppSelector((state: any) => state.ticket);
+
+	useEffect(() => {
+		dispatch(dashBoardInfo())
+	}, [dispatch])
+
+	console.log('dashBoardInfodata', dashBoardInfodata)
+	const ticketTotal = dashBoardInfodata?.pagination?.totalTickets
+	const changeRequest = dashBoardInfodata?.totals?.ticketType?.changeRequest
+	const incidentRequest = dashBoardInfodata?.totals?.ticketType?.incidentRequest
+	const serviceRequest = dashBoardInfodata?.totals?.ticketType?.serviceRequest
+	const approved = dashBoardInfodata?.ticketType?.approved
+	const closed = dashBoardInfodata?.totals?.status?.closed
+	const completed = dashBoardInfodata?.totals?.status?.completed
+	const dissaproved = dashBoardInfodata?.totals?.status?.dissaproved
+	const inprogress = dashBoardInfodata?.totals?.status?.inprogress
+	const invalid = dashBoardInfodata?.totals?.status?.invalid
+	const open = dashBoardInfodata?.totals?.status?.open
+	const pending = dashBoardInfodata?.totals?.status?.pending
+	const reopen = dashBoardInfodata?.totals?.status?.reopen
 
 
 	return (
 		<div id="page-wrapper">
-			<SideNav />
+			<SideNav
+			/>
 			<Header />
 			<BottomNavigation />
 			<main>
 				<div className='dashboard_container_grid'>
 					<div className='total_card'>
 						<div className='total_card_flex'>
-							<h6>Total Sales</h6>
+							<h6>Total Total</h6>
 							<div className='total_card_flex_icon1'>
 								<img src={dIcon1} alt='new' crossOrigin="anonymous" />
 							</div>
 						</div>
-						<h1 className='total_card_flex_icon_h1'>6,784</h1>
+						<h1 className='total_card_flex_icon_h1'>{!ticketTotal ? 0 : ticketTotal}</h1>
 						<div>
 							<div className='total_card_flex_icon_source'>
 								<div className='total_card_ArrowUpSFill'>	<p>10%</p> <RiArrowUpSFill size={20} /> </div>
@@ -45,7 +70,7 @@ const AdminDashboard = () => {
 								<img src={dIcon2} alt='new' crossOrigin="anonymous" />
 							</div>
 						</div>
-						<h1 className='total_card_flex_icon_h1'>1,920</h1>
+						<h1 className='total_card_flex_icon_h1'>{!inprogress ? 0 : inprogress}</h1>
 						<div>
 							<div className='total_card_flex_icon_source'>
 								<div className='total_card_ArrowUpSFill'>	<p>50%</p> <RiArrowUpSFill size={20} /> </div>
@@ -60,7 +85,7 @@ const AdminDashboard = () => {
 								<img src={dIcon3} alt='new' crossOrigin="anonymous" />
 							</div>
 						</div>
-						<h1 className='total_card_flex_icon_h1'>4,412</h1>
+						<h1 className='total_card_flex_icon_h1'>{!completed ? 0 : completed}</h1>
 						<div>
 							<div className='total_card_flex_icon_source'>
 								<div className='total_card_ArrowUpSFill'>	<p>30%</p> <RiArrowUpSFill size={20} /> </div>
@@ -70,12 +95,12 @@ const AdminDashboard = () => {
 					</div>
 					<div className='total_card'>
 						<div className='total_card_flex'>
-							<h6>Unsolved Tickets</h6>
+							<h6>Unassigned Tickets</h6>
 							<div className='total_card_flex_icon4'>
 								<img src={dIcon4} alt='new' crossOrigin="anonymous" />
 							</div>
 						</div>
-						<h1 className='total_card_flex_icon_h1'>329</h1>
+						<h1 className='total_card_flex_icon_h1'>{!pending ? 0 : pending}</h1>
 						<div>
 							<div className='total_card_flex_icon_source'>
 								<div className='total_card_ArrowUpSFill'>	<p>70%</p> <RiArrowUpSFill size={20} /> </div>

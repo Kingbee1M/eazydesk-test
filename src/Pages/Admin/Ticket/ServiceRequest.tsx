@@ -83,7 +83,6 @@ const ServiceRequest = () => {
 					<AdminTicketTable
 						pageheader={"SERVICE REQUEST"}
 						Request={"Service Request"}
-						TYPE={"SERVICE"}
 						data={admingetticketdata?.tickets} />
 				</div>
 			</main>

@@ -12,25 +12,31 @@ import { NavLink } from 'react-router-dom';
 import { VscCloudDownload } from 'react-icons/vsc';
 import AssignTask from '../../../components/Modals/AssignTask';
 import { useAppDispatch, useAppSelector } from '../../../store/useStore';
-import { getItTicket } from '../../../features/Ticket/ticketSlice'
+import { dashBoardInfo, getItTicket } from '../../../features/Ticket/ticketSlice'
 import { useEffect, useState } from 'react';
+import TicketStatusCell from '../../Admin/Ticket/TicketStatusCell';
+import { NoRecordFound, TableFetch } from '../../../components/Options';
 
 
-const ITDashboard = ({ TYPE }: any) => {
+const ITDashboard = () => {
 	const dispatch = useAppDispatch();
-
-	const { itdata } = useAppSelector((state: any) => state.ticket)
-
-
-	console.log("Data: ", itdata?.tickets)
-
-	const [result] = useState(itdata?.tickets)
-	
-
+	const { dashBoardInfodata } = useAppSelector((state: any) => state.ticket);
+	const { itdata, itisLoading } = useAppSelector((state: any) => state.ticket)
+	const { itassignisSuccess } = useAppSelector((state: any) => state.ticket);
 
 	useEffect(() => {
 		dispatch(getItTicket())
-	}, [dispatch])
+		dispatch(dashBoardInfo())
+		if (itassignisSuccess) {
+			dispatch(getItTicket())
+			dispatch(dashBoardInfo())
+		}
+	}, [dispatch, itassignisSuccess])
+
+
+
+
+	const [result] = useState(itdata?.tickets)
 
 	const ticketdata =
 		[
@@ -7441,10 +7447,22 @@ const ITDashboard = ({ TYPE }: any) => {
 	// 	data?.assignedTo?._id?.toString()?.includes(ID)
 	// );
 
-	
+	const ticketTotal = dashBoardInfodata?.pagination?.totalTickets
+	const changeRequest = dashBoardInfodata?.totals?.ticketType?.changeRequest
+	const incidentRequest = dashBoardInfodata?.totals?.ticketType?.incidentRequest
+	const serviceRequest = dashBoardInfodata?.totals?.ticketType?.serviceRequest
+	const approved = dashBoardInfodata?.ticketType?.approved
+	const closed = dashBoardInfodata?.totals?.status?.closed
+	const completed = dashBoardInfodata?.totals?.status?.completed
+	const dissaproved = dashBoardInfodata?.totals?.status?.dissaproved
+	const inprogress = dashBoardInfodata?.totals?.status?.inprogress
+	const invalid = dashBoardInfodata?.totals?.status?.invalid
+	const open = dashBoardInfodata?.totals?.status?.open
+	const pending = dashBoardInfodata?.totals?.status?.pending
+	const reopen = dashBoardInfodata?.totals?.status?.reopen
 
 
-	
+
 
 	return (
 		<div id="page-wrapper">
@@ -7455,12 +7473,12 @@ const ITDashboard = ({ TYPE }: any) => {
 				<div className='dashboard_container_grid'>
 					<div className='total_card'>
 						<div className='total_card_flex'>
-							<h6>Total Sales</h6>
+							<h6>Total Total</h6>
 							<div className='total_card_flex_icon1'>
 								<img src={dIcon1} alt='new' crossOrigin="anonymous" />
 							</div>
 						</div>
-						<h1 className='total_card_flex_icon_h1'>6,784</h1>
+						<h1 className='total_card_flex_icon_h1'>{!ticketTotal ? 0 : ticketTotal}</h1>
 						<div>
 							<div className='total_card_flex_icon_source'>
 								<div className='total_card_ArrowUpSFill'>	<p>10%</p> <RiArrowUpSFill size={20} /> </div>
@@ -7475,7 +7493,7 @@ const ITDashboard = ({ TYPE }: any) => {
 								<img src={dIcon2} alt='new' crossOrigin="anonymous" />
 							</div>
 						</div>
-						<h1 className='total_card_flex_icon_h1'>1,920</h1>
+						<h1 className='total_card_flex_icon_h1'>{!inprogress ? 0 : inprogress}</h1>
 						<div>
 							<div className='total_card_flex_icon_source'>
 								<div className='total_card_ArrowUpSFill'>	<p>50%</p> <RiArrowUpSFill size={20} /> </div>
@@ -7490,7 +7508,7 @@ const ITDashboard = ({ TYPE }: any) => {
 								<img src={dIcon3} alt='new' crossOrigin="anonymous" />
 							</div>
 						</div>
-						<h1 className='total_card_flex_icon_h1'>4,412</h1>
+						<h1 className='total_card_flex_icon_h1'>{!completed ? 0 : completed}</h1>
 						<div>
 							<div className='total_card_flex_icon_source'>
 								<div className='total_card_ArrowUpSFill'>	<p>30%</p> <RiArrowUpSFill size={20} /> </div>
@@ -7500,12 +7518,12 @@ const ITDashboard = ({ TYPE }: any) => {
 					</div>
 					<div className='total_card'>
 						<div className='total_card_flex'>
-							<h6>Unsolved Tickets</h6>
+							<h6>Unassigned Tickets</h6>
 							<div className='total_card_flex_icon4'>
 								<img src={dIcon4} alt='new' crossOrigin="anonymous" />
 							</div>
 						</div>
-						<h1 className='total_card_flex_icon_h1'>329</h1>
+						<h1 className='total_card_flex_icon_h1'>{!pending ? 0 : pending}</h1>
 						<div>
 							<div className='total_card_flex_icon_source'>
 								<div className='total_card_ArrowUpSFill'>	<p>70%</p> <RiArrowUpSFill size={20} /> </div>
@@ -7547,65 +7565,56 @@ const ITDashboard = ({ TYPE }: any) => {
 									</tr>
 								</thead>
 								<tbody>
-									{false && result?.length === 0 ? (
-										<tr>
-											<td className="table-msg" colSpan={10}>
-												<VscCloudDownload size={75} />
-												<p>Fetching request...</p>
-											</td>
-										</tr>
-									) : result?.length === 0 ? (
-										<tr>
-											<td className="table-msg" colSpan={10}>
-												<MdOutlineErrorOutline size={75} />
-												<p>No Assigned Ticket found!</p>
-											</td>
-										</tr>
+									{itisLoading ? (
+										<TableFetch colSpan={8} />
+									) : result?.length === undefined ? (
+										<NoRecordFound
+											colSpan={8}
+											children={"No record found!"}
+										/>
 									) : (
-										result?.map((user: any) => (
-											<tr key={user?.id}>
+										result?.map((item: any) => (
+											<tr key={item?.id}>
 
 												<td data-title="Reference">
-													{user.ticketType === "INCIDENT"
-														? "INC-" + user?.ticketId
-														: user.ticketType === "SERVICE"
-															? "SRV-" + user?.ticketId
-															: "CHG-" + user?.ticketId}
+													{item.ticketType === "INCIDENT"
+														? "INC"
+														: item.ticketType === "SERVICE"
+															? "SRV"
+															: "CHG"}
 												</td>
-												<td data-title="ticket type">{user?.ticketType}</td>
+												<td data-title="ticket type">{item?.ticketType}</td>
 												<td data-title="severity">
-													{user?.severity === "High" ? (
-														<span className="severity-high">{user?.severity}</span>
-													) : user?.severity === "Medium" ? (
+													{item?.severity === "High" ? (
+														<span className="severity-high">{item?.severity}</span>
+													) : item?.severity === "Medium" ? (
 														<span className="severity-medium">
-															{user?.severity}
+															{item?.severity}
 														</span>
 													) : (
-														<span className="severity-low">{user?.severity}</span>
+														<span className="severity-low">{item?.severity}</span>
 													)}
 												</td>
-												<td data-title="affected users">{user?.affectedUsers}</td>
+												<td data-title="affected users">{item?.affectedUsers}</td>
 												<td data-title="Assign To">
-													{user?.finalStatus === "Closed" ? (
+													{item?.finalStatus === "Closed" ? (
 														<button className="ticket-Closed">Closed</button>
 													) : (
-														<AssignTask id={user?.id} />
+														<AssignTask id={item?.id} />
 													)}
 												</td>
-												<td data-title="affected users">{user?.affectedUsers}</td>
+												<td data-title="affected users">{item?.affectedUsers}</td>
 												<td data-title="progresss">
-													<button className="admin-btn-progresss">
-														IN PROGRESS
-													</button>
+													<TicketStatusCell user={item} customId={item?.id} />
 												</td>
 												<td data-title="View">
-													{user.ticketType === "INCIDENT" ? (
+													{item?.ticketType === "INCIDENT" ? (
 														<NavLink
 															to={`/itincidentrequest`}
 															className="admin-btn-View">
 															<AiOutlineEye size={20} />
 														</NavLink>
-													) : user.ticketType === "SERVICE" ? (
+													) : item?.ticketType === "SERVICE" ? (
 														<NavLink
 															to={`/itservicerequest`}
 															className="admin-btn-View">

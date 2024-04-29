@@ -202,7 +202,27 @@ function TooltipPositioned2(words: any) {
     </>
   );
 }
-
+const EntriesLimit = ({ data, limit, handlePagination, filterLimit }: any) => (
+  <div className="entries-perpage">
+    {data?.length > 1 && (
+      <>
+        Entries
+        <select
+          value={limit}
+          // @ts-ignore
+          onChange={(e) => handlePagination('limit', e)}  >
+          {["5", "8", "10", "25", "50", "100", "200", "500"].map((optionValue) => (
+            <option key={optionValue} value={optionValue}>
+              {optionValue}
+            </option>
+          ))}
+          <option value={filterLimit}>Ticket Limit</option>
+        </select>
+        Perpage
+      </>
+    )}
+  </div>
+);
 
 const customStyles = {
   // control: (provided: any, state: any) => ({
@@ -213,12 +233,12 @@ const customStyles = {
   // }),
   option: (provided: any, state: any) => ({
     ...provided,
-    backgroundColor: state.isFocused ? '#6F47EB' : null,
+    backgroundColor: state.isFocused ? '#0240BC' : null,
     color: state.isFocused ? 'white' : null,
   }),
   menu: (provided: any) => ({
     ...provided,
-    boxShadow: '0 4px 8px #7047eb7e',
+    boxShadow: '0 4px 8px #E5ECFB',
   }),
 };
 
@@ -289,7 +309,7 @@ const menu = [
 ];
 
 const ticketMenu = [
-   {
+  {
     name: "Home",
     path: "/leadsdashboard",
   },
@@ -309,25 +329,26 @@ const ticketMenu = [
 
 
 export {
-	TableFetch,
-	EntriesPerPage,
-	EmployeeStatus,
-	NoRecordFound,
-	InputField,
-	TableProgressBar,
-	months,
-	getMonth,
-	getCurrentMonth,
-	getDailyData,
-	getWeeklyData,
-	TooltipPositioned,
-	TooltipPositioned2,
-	LoginSpiner,
-	customId,
-	customStyles,
-	getPriorityStyle,
-	getInputColorClass,
-	svgPaths,
-	tokenKey,
-	menu, ticketMenu
+  TableFetch,
+  EntriesPerPage,
+  EmployeeStatus,
+  NoRecordFound,
+  InputField,
+  TableProgressBar,
+  months,
+  getMonth,
+  getCurrentMonth,
+  getDailyData,
+  getWeeklyData,
+  TooltipPositioned,
+  TooltipPositioned2,
+  LoginSpiner,
+  customId,
+  customStyles,
+  getPriorityStyle,
+  getInputColorClass,
+  svgPaths,
+  tokenKey,
+  menu, ticketMenu,
+  EntriesLimit
 };

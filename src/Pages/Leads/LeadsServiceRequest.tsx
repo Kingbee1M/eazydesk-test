@@ -1,13 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { HiOutlineSearch } from 'react-icons/hi';
-import { AiTwotoneSetting } from 'react-icons/ai';
-import { Modal } from 'react-bootstrap';
-// import TicketForm from '../components/TicketForm';
-import { useNavigate } from "react-router-dom";
 import LeadsHeader from '../../components/LeadsHeader';
 import { EntriesPerPage } from '../../components/Options';
-import TicketTableComponent from '../../components/Table/TicketTableComponent';
-import { data } from '../../components/StateData';
 import ServiceRequestModal from '../../components/TicketModals/ServiceRequestModal';
 import { useAppDispatch, useAppSelector } from '../../store/useStore';
 import { getTicket } from '../../features/Ticket/ticketSlice';
@@ -71,7 +65,6 @@ const LeadsServiceRequest = () => {
 									setEntriesPerPage={setEntriesPerPage}
 								/>
 
-
 							)}
 						</div>
 						<ServiceRequestModal headerTitle={"Raise a Ticket - Service Request"} />
@@ -79,7 +72,7 @@ const LeadsServiceRequest = () => {
 
 					<div  >
 						<LeadTicketTableComponent
-							pageheader={"Incident Request"}
+							pageheader={"Service Request"}
 							Request={"Incident Request"}
 							TYPE={"SERVICE"}
 							data={data}

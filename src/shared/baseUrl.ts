@@ -1,11 +1,15 @@
   export const baseUrl: any = "http://localhost:5000"; 
 
 
-export const buildDynamicURL = (id: any, fromDate: any, endDate: any, limit: any, page: any, base: any ,ticketType:any,ticketId:any) => {
+export const buildDynamicURL = (id: any, fromDate: any, endDate: any, limit: any, page: any, base: any ,ticketType:any,ticketId:any ,status:any) => {
  
   let baseURL = `${base}`;
   const queryParams = [];
 
+    // Add 'status' to the query parameters if it's not null or undefined
+  if (status !== null && status !== undefined) {
+    queryParams.push(`status=${status}`);
+  }
     // Add 'id' to the query parameters if it's not null or undefined
   if (id !== null && id !== undefined) {
     queryParams.push(`id=${id}`);
