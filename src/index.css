@@ -47,6 +47,13 @@
    --box-shadow:  rgba(0, 0, 0, 0.1);
    --background:linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), #F5F6F8; 
   --box-shadow-two: 0 0 4px rgba(0, 0, 0, .05), 0 0 16px rgba(0, 0, 0, .05), 0 0 32px rgba(0, 0, 0, .05), 0 0 64px rgba(0, 0, 0, .05);  
+
+     --gradient: linear-gradient(to left,
+            #ffffff00,
+            rgba(169, 169, 169, 0.649),
+            #ffffff00);
+    --bg: #b7b7b782;
+    --speed: 1.4s;
 }
  
  html, body {
@@ -408,6 +415,7 @@ transition: opacity 150ms linear;
 @import url(./css/Delete.css);  
 @import url(./css/Company.css);  
 @import url(./css/UserProfile.css);  
+@import url(./css/Skelenton.css);  
 
  
 

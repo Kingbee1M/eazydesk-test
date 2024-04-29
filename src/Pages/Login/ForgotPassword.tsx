@@ -76,7 +76,7 @@ const ForgotPassword = () => {
 		<div id="login-wrapper">
 			<Carousels />
 			<div className="login-container">
-				<ToastContainer position="top-right" />
+				<ToastContainer position="top-right" containerId={"custom1"} />
 				<div className="login-content-layout">
 					<LoginHeader />
 					<div className="login-content-grid">

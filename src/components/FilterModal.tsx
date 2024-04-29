@@ -1,10 +1,12 @@
 
 import { useEffect, useState } from 'react'
 import { Modal } from 'react-bootstrap';
-
+import Select from 'react-select'
 import { BiFilterAlt } from 'react-icons/bi';
 import moment from 'moment';
 import ModalHeader from './Modals/ModalHeader';
+import { customStyles } from './Options';
+import { ticketstatus, tickettype } from './Data';
 
 const FilterModal = ({ setEndDates, setStartDates, handleCustomFilters, show, setShow }: any) => {
 
@@ -150,6 +152,28 @@ const FilterModal = ({ setEndDates, setStartDates, handleCustomFilters, show, se
 								/>
 							</div>
 						</form>
+					</div>
+					<div className='mb-4 mt-4'>
+						<label className='label-side'>Select by Status</label>
+						<Select name="Select by Status" id="register-select"
+							// value={assignedUserId}
+							// onChange={handleSelectedChange1}
+							options={ticketstatus}
+							// isDisabled={ITgetallReguserisLoading}
+							// isLoading={ITgetallReguserisLoading}
+							styles={customStyles}
+						/>
+					</div>
+					<div className='mb-4 mt-4'>
+						<label className='label-side'>Select by Ticket Type</label>
+						<Select name="Select by Status" id="register-select"
+							// value={assignedUserId}
+							// onChange={handleSelectedChange1}
+							options={tickettype}
+							// isDisabled={ITgetallReguserisLoading}
+							// isLoading={ITgetallReguserisLoading}
+							styles={customStyles}
+						/>
 					</div>
 					<button
 						id='custom-btn'

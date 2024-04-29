@@ -134,7 +134,7 @@ cursor: pointer;
 }
 
 #register-select{
-padding: 10px;
+/* padding: 10px; */
 border-radius: 5px;
 margin-top: 3px;
    border-radius: 8px;
@@ -144,7 +144,7 @@ font-weight: 400;
 font-size: 16px;
 line-height: 24px;
 color: rgba(0, 0, 0, 0.5);
-padding: 12px 20px;
+/* padding: 12px 20px; */
 }
 
 
@@ -191,7 +191,19 @@ padding: 12px 20px;
   border: none;
   color: var(--white);
 }
-
+.needsApproval{
+  height: 2.5rem;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold !important;
+  background-color: var(--accent-yellow) ;
+  border: none;
+  color: var(--white);
+}
+ 
 #custom-btn:hover{
   padding: 10px  ;
   width: 100%;

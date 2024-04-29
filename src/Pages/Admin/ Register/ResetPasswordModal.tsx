@@ -41,7 +41,7 @@ const ResetPasswordModal = ({ id }: any) => {
 
 	return (
 		<div>
-			<ToastContainer position="top-right" />
+			<ToastContainer position="top-right" containerId={"custom1"} />
 			<form onSubmit={passwordhandelSubmit}>
 				<div className="user__details-long">
 					<div className="input__box mt-5">

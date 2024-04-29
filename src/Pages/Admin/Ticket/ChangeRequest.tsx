@@ -5,50 +5,64 @@ import SideNav from '../../../components/SideNav/SideNav'
 import SearchConponent from '../../../components/SearchConponent'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import moment from 'moment'
-import { admingetTicket } from '../../../features/Ticket/ticketSlice'
+import { admingetTicket, giveApproval } from '../../../features/Ticket/ticketSlice'
 import AdminTicketTable from './AdminTicketTable'
 
 const ChangeRequest = () => {
 	const dispatch = useAppDispatch();
-
-
-	const [entriesPerPage, setEntriesPerPage] = useState(() => {
-		return "6";
-	});
-
+	const { giveApprovalisSuccess } = useAppSelector((state: any) => state.ticket);
+	const { admingetticketdata, admingetticketisLoading } = useAppSelector((state: any) => state.ticket)
+	const [entriesPerPage, setEntriesPerPage] = useState(() => { return "6" });
 	const [startDates, setStartDates] = useState([]);
 	let [endDates, setEndDates] = useState<any>([]);
 	const [show, setShow] = useState(false);
-	const [datas, setDatas] = useState([]);
-	const [find, setFind] = useState<any>();
-	const [sortData, setSortData] = useState<any>([]);
 	const [searchItem, setSearchItem] = useState("");
-	const [Unassigned, setUnassigned] = useState(false);
-
-	const { admingetticketdata } = useAppSelector((state: any) => state.ticket)
+	const [limit, setLimit] = useState<any>(10);
 	endDates = new Date();
 	const formattedEndDate = endDates.toISOString().split('T')[0]; // Extracting date part and removing time
 	const [startDate1] = useState(formattedEndDate);
 	const [endDate1] = useState(formattedEndDate);
-	const [selectedDate, setSelectedDate] = useState("");
+	const [data] = useState<any>([]);
 
 
-	const currentDate = moment().format("YYYY-MM-DD");
-	const sevenDays = moment().subtract(7, "days").format("YYYY-MM-DD");
-	const yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
-	const [data, setData] = useState<any>([]);
-
-
-
-	console.log("admingetticketdata", admingetticketdata)
 
 	useEffect(() => {
 		const datas = { ticketType: "CHANGE" };
 		// @ts-ignore 
 		dispatch(admingetTicket(datas))
-	}, [dispatch, endDate1, startDate1])
+		if (giveApprovalisSuccess) {
+			// @ts-ignore 
+			dispatch(admingetTicket(datas))
+		}
+	}, [dispatch, endDate1, giveApprovalisSuccess, startDate1])
 
-	// console.log(admingetticketdata)
+	const handlePagination = (type: string, data?: React.ChangeEvent<HTMLSelectElement> | undefined) => {
+		switch (type) {
+			// @ts-ignore
+			case 'prev': dispatch(admingetTicket({ page: pagination?.page - 1, limit: limit }));
+				break;
+			// @ts-ignore
+			case 'next': dispatch(admingetTicket({ page: pagination?.page + 1, limit: limit }));
+				break;
+			case 'limit':
+				if (data) {
+					setLimit(data.target.value);
+					// @ts-ignore
+					dispatch(admingetTicket({ limit: data.target.value }));
+				}
+				break;
+			default:
+				// For page numbers or any other custom actions
+				const pageNumber = parseInt(type);
+				if (!isNaN(pageNumber)) {
+					// @ts-ignore
+					dispatch(admingetTicket({ page: pageNumber, limit: limit }));
+				}
+				break;
+		}
+	}
+
+
 
 	return (
 		<div id="page-wrapper">
@@ -65,7 +79,8 @@ const ChangeRequest = () => {
 					placeholder={"search ticket"}
 					setSearchItem={setSearchItem}
 					searchItem={searchItem}
-					data={data}
+					data={admingetticketdata?.tickets}
+					pagination={admingetticketdata}
 					entriesPerPage={entriesPerPage}
 					setEntriesPerPage={setEntriesPerPage}
 					filter={true}
@@ -73,15 +88,17 @@ const ChangeRequest = () => {
 					setEndDates={setEndDates}
 					setShow={setShow}
 					show={show}
+					handlePagination={handlePagination}
 				// handleCustomFilters={handleCustomFilters}
 				/>
 
 				<div  >
 					<AdminTicketTable
-						pageheader={"CHANGE REQUEST"}
-						Request={"Change Request"}
-						TYPE={"CHANGE"}
-						data={admingetticketdata?.tickets} />
+						TYPE={true}
+						pagination={admingetticketdata}
+						data={admingetticketdata?.tickets}
+						isLoading={admingetticketisLoading}
+						handlePagination={handlePagination} />
 				</div>
 			</main>
 		</div>

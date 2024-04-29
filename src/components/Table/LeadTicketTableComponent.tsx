@@ -3,7 +3,7 @@ import moment from "moment";
 import { OverlayTrigger, Image, Tooltip, Button } from "react-bootstrap";
 import { baseUrl } from "../../shared/baseUrl";
 import ViewTicketDetailsModal from "../Modals/ViewTicketDetailsModal";
-import { NoRecordFound, TableFetch } from "../Options";
+import { customId, NoRecordFound, TableFetch } from "../Options";
 import { ToastContainer } from "react-toastify";
 import TicketStatusCell from "../../Pages/Admin/Ticket/TicketStatusCell";
 
@@ -11,7 +11,8 @@ const LeadTicketTableComponent = ({
 	switchs,
 	data,
 	Requester,
-	isLoading
+	isLoading,
+
 }: any) => {
 
 	const [sortData, setSortData] = useState<any>([]);
@@ -21,7 +22,7 @@ const LeadTicketTableComponent = ({
 
 	return (
 		<div id="table-container">
-			<ToastContainer position="top-right" />
+			<ToastContainer position="top-right" containerId={"custom1"} />
 			<div className="table-responsive-vertical ">
 				<div className="table-container">
 					<table id="table" className={switchs ? "table" : " table-hover table-mc-light-blue"}>

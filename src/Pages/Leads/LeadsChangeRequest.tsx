@@ -1,13 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
-import { FaExchangeAlt } from "react-icons/fa";
-import { Modal } from "react-bootstrap";
-// import TicketForm from "../components/TicketForm";
-import { useNavigate } from "react-router-dom";
 import LeadsHeader from "../../components/LeadsHeader";
 import { EntriesPerPage } from "../../components/Options";
-import { data } from "../../components/StateData";
-import TicketTableComponent from "../../components/Table/TicketTableComponent";
 import ChangeRequestModal from "../../components/TicketModals/ChangeRequestModal";
 import { useAppDispatch, useAppSelector } from "../../store/useStore";
 import { getTicket } from "../../features/Ticket/ticketSlice";
@@ -43,15 +37,17 @@ const LeadsChangeRequest = () => {
 		<div id="dashboard">
 			<div className="hero-section4">
 				<LeadsHeader />
-				<div className="hero-search-container">
-					<input
-						type="text"
-						value={result}
-						onChange={(e) => setResult(e.target.value)}
-					/>
-					<span>
-						<HiOutlineSearch size={30} color="#fff" />
-					</span>
+				<div className="hero-search container">
+					<div className="hero-search-container">
+						<input
+							type="text"
+							value={result}
+							onChange={(e) => setResult(e.target.value)}
+						/>
+						<span>
+							<HiOutlineSearch size={30} color="#fff" />
+						</span>
+					</div>
 				</div>
 			</div>
 			<main  >
@@ -67,12 +63,15 @@ const LeadsChangeRequest = () => {
 								/>
 							)}
 						</div>
-						<ChangeRequestModal headerTitle={"Raise a Ticket - Change Request"} />
+						<ChangeRequestModal
+							headerTitle={"Raise a Ticket - Change Request"}
+							pageheader={true}
+							currentState={true}
+							proposedChange={true}
+						/>
 					</div>
 					<div  >
 						<LeadTicketTableComponent
-							pageheader={"Incident Request"}
-							Request={"Incident Request"}
 							TYPE={"CHANGE"}
 							data={data}
 							isLoading={isLoading} />

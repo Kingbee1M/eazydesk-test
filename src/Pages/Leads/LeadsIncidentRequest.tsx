@@ -33,13 +33,10 @@ const LeadsIncidentRequest = () => {
 	}, [dispatch, createisSuccess])
 
 
-	const [startDates, setStartDates] = useState([]);
-	const [endDates, setEndDates] = useState([]);
+
 
 	// --- End Modal 
 	const [result, setResult] = useState("")
-	const [searchItem, setSearchItem] = useState("");
-	const [datas, setDatas] = useState([]);
 	const [entriesPerPage, setEntriesPerPage] = useState(() => {
 		return "6";
 	});

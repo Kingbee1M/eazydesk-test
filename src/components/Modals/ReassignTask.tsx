@@ -17,40 +17,21 @@ const ReassignTask = ({ id }: any) => {
 	const handleClose = () => setShow(false);
 	const [show, setShow] = useState(false);
 	const [selectedOption1, setSelectedOption1] = useState(null);
-	const [selectedOption2, setSelectedOption2] = useState(null);
-	const [selectedOption3, setSelectedOption3] = useState(null);
 	const [input, setInput] = useState<any>({
 		assignedToId: "",
 	})
 
 
-
-
-
-
-	const allAgents = [] as any;
-	const allTeam = [] as any;
-	const allTask = [] as any;
-
 	const handleSelectedChange1 = (selectedOption1: any) => {
 		setSelectedOption1(selectedOption1);
 	};
-	// const handleSelectedChange2 = (selectedOption2: any) => {
-	// 	setSelectedOption2(selectedOption2);
-	// };
-	// const handleSelectedChange3 = (selectedOption3: any) => {
-	// 	setSelectedOption3(selectedOption3);
-	// };
+
 	useEffect(() => {
 		setInput((prevState: any) => {
 			return ({
 				...prevState,
 				// @ts-ignore
 				assignedToId: selectedOption1?.value,
-				// // @ts-ignore
-				// taskId: selectedOption2?.value,
-				// // @ts-ignore
-				// assignedTeamId: selectedOption3?.value,
 			});
 		});
 		// @ts-ignore
@@ -101,7 +82,7 @@ const ReassignTask = ({ id }: any) => {
 
 	return (
 		<>
-			<ToastContainer position="top-right" />
+			<ToastContainer position="top-right" containerId={"custom1"} />
 			<button className="assign-btn" onClick={() => setShow(true)} >Assign</button>
 
 

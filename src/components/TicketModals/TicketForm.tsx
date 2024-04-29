@@ -11,7 +11,7 @@ import { ITgetallReguser } from "../../features/Registration/registrationSlice";
 
 
 
-const TicketForm = ({ type, setShow }: any) => {
+const TicketForm = ({ type, setShow, currentState, proposedChange }: any) => {
 
   const { createisLoading, createisSuccess } = useAppSelector((state: any) => state.ticket)
   const dispatch = useAppDispatch();
@@ -34,7 +34,9 @@ const TicketForm = ({ type, setShow }: any) => {
     affectedUsers: "",
     severity: "",
     emails: "",
-    description: ""
+    description: "",
+    currentState: "",
+    proposedChange: ""
   })
 
 
@@ -66,6 +68,8 @@ const TicketForm = ({ type, setShow }: any) => {
       )
     },
     { key: 'description', value: input.description },
+    { key: 'currentState', value: input.currentState },
+    { key: 'proposedChange', value: input.proposedChange },
   ];
 
   formFields.forEach(field => {
@@ -78,7 +82,6 @@ const TicketForm = ({ type, setShow }: any) => {
       return ({
         ...prevState,
         description: value,
-
       });
     });
   }, [value]);
@@ -191,6 +194,30 @@ const TicketForm = ({ type, setShow }: any) => {
             onChange={(e) => handleOnChange("ticketType", e.target.value)}
           />
         </div>
+        {currentState && (
+          <div className="form-grp">
+            <label htmlFor="contact-details">Current State</label>
+            <input
+              type="text"
+              id="contact-details"
+              value={input.currentState}
+              required
+              onChange={(e) => handleOnChange("currentState", e.target.value)}
+            />
+          </div>
+        )}
+
+        {proposedChange && (<div className="form-grp">
+          <label htmlFor="contact-details">Proposed Change</label>
+          <input
+            type="text"
+            id="contact-details"
+            value={input.proposedChange}
+            required
+            onChange={(e) => handleOnChange("proposedChange", e.target.value)}
+          />
+        </div>)}
+
 
         {/* <div className="form-grp">
           <label htmlFor="category">Issue Category</label>

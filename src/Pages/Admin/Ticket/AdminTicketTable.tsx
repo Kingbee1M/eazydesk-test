@@ -1,57 +1,51 @@
-import { useEffect, useState } from "react";
 import moment from "moment";
 import { OverlayTrigger, Image, Tooltip, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { baseUrl } from "../../../shared/baseUrl";
 import ViewTicketDetailsModal from "../../../components/Modals/ViewTicketDetailsModal";
-import { customId, NoRecordFound, TableFetch } from "../../../components/Options";
+import { NoRecordFound, TableFetch } from "../../../components/Options";
 import AssignTask from "../../../components/Modals/AssignTask";
-import { admingetTicket } from "../../../features/Ticket/ticketSlice";
-import { useAppDispatch, useAppSelector } from "../../../store/useStore";
-import { toast } from "react-toastify";
 import TicketStatusCell from "./TicketStatusCell";
+import GiveApproval from "../../../components/Modals/GiveApproval";
+import RealPagination from "../../../components/RealPagination";
 
 const AdminTicketTable = ({
- switchs,
+ TYPE,
  data,
- Requester,
- isLoading
+ switchs,
+ isLoading,
+ handlePagination,
+ pagination
 }: any) => {
 
-
-
-
+ console.log('data', data)
+ console.log('pagination', pagination)
+ console.log('pagination?.totalPages', pagination?.pagination?.totalTickets)
 
  return (
   <div id="table-container">
-   <div className="table-responsive-vertical ">
+   <div className="table-responsive-vertical">
     <div className="table-container">
      <table id="table" className={switchs ? "table" : " table-hover table-mc-light-blue"}>
       <thead>
        <tr>
         <th>Reference</th>
         <th>Ticket Type</th>
-        {/* <th>Location</th> */}
         <th>Severity</th>
-        {/* <th>Issue Category</th> */}
         <th>Issue Description</th>
         <th>Affected Users</th>
-        {/* <th>Requester</th> */}
+        <th>Requester</th>
         <th>Time Stamp</th>
+        {TYPE && <th>Approval</th>}
         <th>Assign To</th>
-        <th>
-         {data?.status === "PENDING"
-          ? ""
-          : "Ticket Status"}
-        </th>
+        <th>Ticket Status</th>
        </tr>
       </thead>
       <tbody>
        {isLoading ? (
-        <TableFetch colSpan={11} />
+        <TableFetch colSpan={9} />
        ) : data?.length === 0 || data?.length === undefined ? (
         <NoRecordFound
-         colSpan={11}
+         colSpan={9}
          children={"No Tickets record found!"}
         />
        ) : (
@@ -59,13 +53,12 @@ const AdminTicketTable = ({
          <tr key={user?._id}>
           <td className="Reference" data-title="Reference">
            {user?.ticketType === "INCIDENT REQUEST"
-            ? "INC - " + user?.ticketId
+            ? "INC"
             : user?.ticketType === "SERVICE REQUEST"
-             ? "SRV - " + user?.ticketId
-             : "CHG - " + user?.ticketId}
+             ? "SRV"
+             : "CHG"}
           </td>
           <td data-title="ticket type">{user?.ticketType}</td>
-          {/* <td data-title="ticket type">{user?.location}</td> */}
           <td data-title="severity">
            {user?.severity === "High" ? (
             <button className="severity-high">
@@ -87,14 +80,13 @@ const AdminTicketTable = ({
             <button className="severity-low">Low</button>
            )}
           </td>
-          {/* <td data-title="issue">{user?.issueCategory}</td> */}
           <td data-title="description">
            <ViewTicketDetailsModal text={"View"} data={user} />
           </td>
           <td data-title="affected users">
            {user?.affectedUsers === null ? 0 : user?.affectedUsers}
           </td>
-          {Requester && <td data-title="Requester">
+          <td data-title="Requester">
            <OverlayTrigger
             placement="bottom"
             overlay={
@@ -123,28 +115,33 @@ const AdminTicketTable = ({
                 }
                />
               )}
-
               <span className="ms-1">
                {user?.createdBy?.firstname}
               </span>
              </Button>
             )}
            </OverlayTrigger>
-          </td>}
-
+          </td>
           <td data-title="createdAt">
            {moment(user?.createdAt)?.format("DD-MMM-YY H:mm:ss")}
           </td>
-
+          {TYPE &&
+           <td data-title="createdAt">
+            {
+             TYPE && user?.status === "DISAPPROVED" ? "" :
+              TYPE && user?.status === "APPROVED" ? "" :
+               TYPE && user?.status === "INPROGRESS" ? "" :
+                TYPE && <GiveApproval id={user?.id} />
+            }
+           </td>
+          }
           <td data-title="Assign To">
-           {user?.finalStatus === "Closed" ? (
+           {user?.status === "CLOSED" ? (
             <button className="ticket-Closed">Closed</button>
            ) : (
-
-            <AssignTask id={user?.id} Assigned={"Assigned"} />
+            <AssignTask id={user?.id} Assigned={"Assigned"} needsApproval={user?.needsApproval} data={user} />
            )}
           </td>
-
           <td>
            <TicketStatusCell user={user} customId={user?.id} />
           </td>
@@ -154,7 +151,10 @@ const AdminTicketTable = ({
       </tbody>
      </table>
     </div>
-
+    {pagination?.pagination?.totalTickets > 1 && <div className="totalResponses">
+     <h3>Total of {pagination?.pagination?.totalTickets} Tickets - <span>Page {pagination?.pagination?.page} of {pagination?.pagination?.totalPages}</span></h3>
+     <RealPagination handlePagination={handlePagination} pagination={pagination?.pagination} />
+    </div>}
    </div>
   </div>
  );

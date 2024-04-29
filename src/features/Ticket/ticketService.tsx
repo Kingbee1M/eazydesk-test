@@ -18,28 +18,28 @@ const getItTicket = async () => {
 
 const getItTicketParameter = async (datas: any) => {
 	// Destructure parameters from datas object
-	const { endDate, startDate, limit, page, ticketType, ticketId } = datas;
-	const base = baseUrl + `/api/v2/ticket/itsupport`;
-	const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType, ticketId);
+	const { endDate, startDate, limit, page, ticketType, ticketId, status } = datas;
+	const base = baseUrl + `/api/v2/ticket/assigned_tickets`;
+	const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType, ticketId, status);
 	const { data } = await axios.get(url)
-	console.log("data", data)
+
 	return data;
 }
 
 
 const getTicketID = async (datas: any) => {
-	const { endDate, startDate, limit, page, ticketType, ticketId } = datas
+	const { endDate, startDate, limit, page, ticketType, ticketId, status } = datas
 	const base = baseUrl + `/api/v2/ticket/itsupport`
-	const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType, ticketId);
+	const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType, ticketId, status);
 	const HttpService = createHttpService();
 	const { data }: any = await HttpService.get(url)
-	// const { data } = await axios.get(url)
+
 	return data
 }
 const admingetTicket = async (datas: any) => {
-	const { endDate, startDate, limit, page, ticketType, ticketId } = datas
+	const { endDate, startDate, limit, page, ticketType, ticketId, status } = datas
 	const base = baseUrl + `/api/v2/ticket/admin`
-	const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType, ticketId);
+	const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType, ticketId, status);
 	const { data } = await axios.get(url)
 
 	return data
@@ -48,7 +48,7 @@ const admingetTicket = async (datas: any) => {
 const viewTicket = async (id: any) => {
 	const HttpService = createHttpService();
 	const { data }: any = await HttpService.get(`/api/v2/ticket/${id}`)
-	// console.log('data', data)
+
 	return data
 }
 
@@ -65,19 +65,33 @@ const itAssignTicket = async (datas: any) => {
 }
 
 const getTicketAssignTicket = async (datas: any) => {
-	const { endDate, startDate, limit, page, ticketType, ticketId } = datas;
+	const { endDate, startDate, limit, page, ticketType, ticketId, status } = datas;
 	const base = baseUrl + `/api/v2/ticket/itsupport`;
-	const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType, ticketId);
+	const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType, ticketId, status);
 	const { data } = await axios.get(url)
 	return data
 }
 
-const dashBoardInfo = async (datas: any) => {
+const dashBoardInfo = async () => {
 	const HttpService = createHttpService();
 	const { data }: any = await HttpService.get(`/api/v2/ticket/totals`)
 	return data
 }
 
+const updateTicket = async (datas: any) => {
+	const { id, inputs } = datas
+	const HttpService = createHttpService();
+	const { data }: any = await HttpService.patch(`/api/v2/ticket/${id}/itsupport`, {
+		"status": inputs
+	})
+	return data
+}
+const giveApproval = async (datas: any) => {
+	const { id, value } = datas
+	const HttpService = createHttpService();
+	const { data }: any = await HttpService.patch(`/api/v2/ticket/${id}/admin`, value)
+	return data
+}
 
 
 
@@ -92,7 +106,9 @@ const ticketService = {
 	itAssignTicket,
 	getTicketAssignTicket,
 	getItTicketParameter,
-	dashBoardInfo
+	dashBoardInfo,
+	updateTicket,
+	giveApproval
 }
 
 export default ticketService

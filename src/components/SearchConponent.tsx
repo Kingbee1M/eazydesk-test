@@ -1,14 +1,16 @@
-import { EntriesPerPage, } from './Options';
+import { EntriesLimit, EntriesPerPage, } from './Options';
 import FilterModal from './FilterModal';
 // import { useIsMobile } from '../hooks/resize';
 import Search from './Search';
+import { useState } from 'react';
 
-const SearchConponent = ({ ID, setEntriesPerPage, entriesPerPage, handleCustomFilters, setEndDates, setStartDates, searchItem, setSearchItem, placeholder, data, filter, show, setShow, rolePerPage, setRolePerPage }: any) => {
+const SearchConponent = ({ ID, setEntriesPerPage, entriesPerPage, handleCustomFilters, setEndDates, setStartDates, searchItem, setSearchItem, placeholder, data, filter, show, setShow, rolePerPage, setRolePerPage, limit, handlePagination }: any) => {
 
-	// const isMobile = useIsMobile();
-	// const handleToggle = () => {
-	// 	setSwitchs((prevState: any) => !prevState);
+
+	// const handleChangeFilter = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+	// 	setResult(e.target.value);
 	// };
+
 
 
 	return (
@@ -30,11 +32,17 @@ const SearchConponent = ({ ID, setEntriesPerPage, entriesPerPage, handleCustomFi
 
 
 					{filter && <FilterModal handleCustomFilters={handleCustomFilters} setStartDates={setStartDates} setEndDates={setEndDates} setShow={setShow} show={show} />}
-
+					{/* 
 					<EntriesPerPage
 						data={data}
 						entriesPerPage={entriesPerPage}
 						setEntriesPerPage={setEntriesPerPage}
+					/> */}
+					<EntriesLimit
+						limit={limit}
+						data={data}
+						handlePagination={handlePagination}
+						filterLimit={data?.totalTickets}
 					/>
 				</form>
 

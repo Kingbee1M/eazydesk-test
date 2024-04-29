@@ -400,7 +400,7 @@ material-table-head {
   letter-spacing: 0.1px;
 }
 .admin-btn-Unassigned {
-  padding: 0.2rem 1rem;
+  padding: 0.2rem 16px;
   border-radius: 15px;
    background-color:var(--accent-blue);
   color:var(--white) ;  
@@ -408,13 +408,28 @@ material-table-head {
     font-weight: bold !important; 
 }
 .admin-btn-Unassigned:hover {
-  padding: 0.2rem 0.88rem;
+  padding: 0.1rem 14px;
   border-radius: 15px;
   border: 2px solid var(--accent-blue);
    background-color: var(--white) ;
-  color:var(--accent-blue) ;  
-  
+  color:var(--accent-blue) ;   
 }
+.admin-btn-Disapproved {
+  padding: 0.2rem 16px;
+  border-radius: 15px;
+   background-color:var(--small-text);
+  color:var(--white) ;  
+  font-size: 14px !important;
+  font-weight: bold !important; 
+}
+.admin-btn-Disapproved:hover {
+  padding: 0.1rem 14px;
+  border-radius: 15px;
+  border: 2px solid var(--small-text);
+   background-color: var(--white) ;
+  color:var(--small-text) ;   
+}
+
 .admin-btn-resolved {
   padding: 0.2rem 1rem;
   border-radius: 15px;

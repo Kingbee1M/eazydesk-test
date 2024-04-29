@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 
 
 const TicketStatusCell = ({ user, customId }: any) => {
-	const [Unassigned, setUnassigned] = useState(false);
 
 	return (
 		<td>
@@ -16,26 +14,31 @@ const TicketStatusCell = ({ user, customId }: any) => {
 					IN-PROGRESS
 				</Link>
 			)}
-			{user?.status === "PENDING" && (
+			{(user?.status === "PENDING" && user?.needsApproval === false) && (
 				<button
 					className="admin-btn-Unassigned"
 					onClick={() => toast.warning("The tickek is yet to be assigned - PENDING", { toastId: customId })}>
 					PENDING
 				</button>
 			)}
+			{(user?.status === "PENDING" && user?.needsApproval === true) && (
+				<button
+					className="admin-btn-Unassigned"
+					onClick={() => toast.warning("Ticket needs - APPROVAL", { toastId: customId })}>
+					PENDING
+				</button>
+			)}
 			{user?.status === "APPROVED" && (
-				<Link
-					to={`/ticket-progress/${user?._id}`}
+				<button
+					onClick={() => toast.info("Ticket have not been  - ASSIGNED", { toastId: customId })}
 					className="admin-btn-reopen">
 					APPROVED
-				</Link>
+				</button>
 			)}
 			{user?.status === "DISAPPROVED" && (
 				<button
-					className="admin-btn-Unassigned"
-					onClick={() => {
-						setUnassigned(true);
-					}}>
+					className="admin-btn-Disapproved"
+					onClick={() => toast.warning("Ticket have been  - DISAPPROVED", { toastId: customId })}>
 					DISAPPROVED
 				</button>
 			)}
@@ -69,8 +72,7 @@ const TicketStatusCell = ({ user, customId }: any) => {
 			)}
 			{user?.status === "INVALID" && (
 				<button
-					className="admin-btn-Unassigned"
-					onClick={() => { setUnassigned(true) }}>
+					className="admin-btn-Unassigned" >
 					INVALID
 				</button>
 			)}

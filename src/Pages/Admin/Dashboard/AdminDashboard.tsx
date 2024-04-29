@@ -18,7 +18,7 @@ import { dashBoardInfo } from '../../../features/Ticket/ticketSlice';
 
 const AdminDashboard = () => {
 	const dispatch = useAppDispatch()
-	const { dashBoardInfodata, dashBoardInfoisLoading } = useAppSelector((state: any) => state.ticket);
+	const { dashBoardInfodata } = useAppSelector((state: any) => state.ticket);
 
 	useEffect(() => {
 		dispatch(dashBoardInfo())
@@ -42,7 +42,8 @@ const AdminDashboard = () => {
 
 	return (
 		<div id="page-wrapper">
-			<SideNav />
+			<SideNav
+			/>
 			<Header />
 			<BottomNavigation />
 			<main>
