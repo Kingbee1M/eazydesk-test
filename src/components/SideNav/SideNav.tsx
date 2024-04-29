@@ -16,6 +16,7 @@ import { getUserPrivileges } from "../../hooks/auth";
 import { IoMdOpen } from "react-icons/io";
 import { useAppDispatch, useAppSelector } from "../../store/useStore";
 import { dashBoardInfo } from "../../features/Ticket/ticketSlice";
+import { MdOutlineSubscriptions } from "react-icons/md";
 
 
 const SideNav = () => {
@@ -191,6 +192,19 @@ const SideNav = () => {
         }>
           <LuUsers size={15} />
           <span>Register</span>
+        </NavLink>
+      </nav>
+      <nav>
+        <NavLink to="/subscription" className={({ isActive }) =>
+          [
+            "nav-link",
+            isActive ? "active" : null,
+          ]
+            .filter(Boolean)
+            .join(" ")
+        }>
+          <MdOutlineSubscriptions size={15} />
+          <span>Subscription</span>
         </NavLink>
       </nav>
       <nav>
