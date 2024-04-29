@@ -35,6 +35,7 @@ import ResetPassword from "./Pages/Login/ResetPassword";
 import TicketProgress from "./components/Chat/TicketProgress";
 import InProgress from "./Pages/Admin/Ticket/InProgress";
 import Support from "./Pages/Support/Support";
+import Subscription from "./Pages/Admin/Subscription/Subscription";
 
 
 function App() {
@@ -84,6 +85,7 @@ function App() {
         <Route path="/change-request" element={<LeadsChangeRequest />} />
         <Route path="/successpage/:email" element={<SuccessPage />} />
         <Route path="/verifyemail/:id/:token" element={<VerifyEmail />} />
+        <Route path="/subscription" element={<Subscription />} />
       </Routes>
     </BrowserRouter>
   );
