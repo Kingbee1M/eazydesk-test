@@ -7,37 +7,29 @@ import { BsCamera } from "react-icons/bs";
 import axios from "axios";
 import { baseUrl } from "../../shared/baseUrl";
 import ModalHeader from "../../components/Modals/ModalHeader";
+import { useAppDispatch } from "../../store/useStore";
+import { edituser } from "../../features/Registration/registrationSlice";
 
-const UserProfile = ({
-  lgShow,
-  setLgShow,
-  setFirstName,
-  firstname,
-  setLastName,
-  lastname,
-  setEmail,
-  email,
-  setPhoneNumber,
-  phoneNumber,
-  setLocation,
-  location,
-  setRoleName,
-  roleName,
-}: any) => {
+const UserProfile = ({ userInfo, userId, lgShow, setLgShow }: any) => {
   // @ts-ignore
-  const UserDetails = JSON.parse(localStorage.getItem("service_desk"));
-
   //  Update Current Password State
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
-
   const [activeTab, setActiveTab] = useState(0);
   const [result, setResult] = useState("Edit Profile");
   const Edit = ["Edit Profile", "Reset Password", "Upload Image"];
+  const dispatch = useAppDispatch();
   const [errorToastMsg, setErrorToastMgs] = useState(false);
   const [previewImgLoading, setPreviewImgLoading] = useState<any>(false);
   const [imgLocalURL, setImgLocalURL] = useState(null);
+  const [input, setInput] = useState<any>({
+    firstname: "",
+    lastname: "",
+    email: "",
+    mobileNumber: "",
+    role: "",
+  });
 
   const showInfo = (catagory: React.SetStateAction<string>) => {
     setResult(catagory);
@@ -53,6 +45,41 @@ const UserProfile = ({
     } else {
       // dispatch(updatePasswordUser(currentPassword, newPassword));
     }
+  };
+
+  useEffect(() => {
+    setInput((prevState: any) => {
+      return {
+        ...prevState,
+        firstname: userInfo?.firstname,
+        lastname: userInfo?.lastname,
+        email: userInfo?.email,
+        mobileNumber: userInfo?.mobileNumber,
+        role: userInfo?.role,
+      };
+    });
+  }, [
+    userInfo?.firstname,
+    userInfo?.lastname,
+    userInfo?.email,
+    userInfo?.mobileNumber,
+    userInfo?.role,
+    setInput,
+  ]);
+
+  const handleOnChange = (input: any, value: any) => {
+    setInput((prevState: any) => ({
+      ...prevState,
+      [input]: value,
+    }));
+  };
+
+  const handleUpdateUser = (e: { preventDefault: () => void }) => {
+    const value = { userId, input };
+    e.preventDefault();
+    // @ts-ignore
+    // dispatch(edituser(value));
+    // console.log(value);
   };
 
   // const profilesubmitHandler = (e: any) => {
@@ -156,14 +183,14 @@ const UserProfile = ({
             <div className='container-body'>
               <center>
                 <div className='profile-picture'>
-                  {!UserDetails?.profilePic ? (
+                  {!userInfo?.profilePic ? (
                     <div>
                       <FaUserCircle size={120} className='profile-notfound' />
                     </div>
                   ) : (
                     <img
                       crossOrigin='anonymous'
-                      src={baseUrl + "/" + UserDetails?.profilePic}
+                      src={baseUrl + "/" + userInfo?.profilePic}
                       alt='Profile'
                       className='prifile-pics-full'
                     />
@@ -173,7 +200,7 @@ const UserProfile = ({
 
               <div>
                 {result === "Edit Profile" && (
-                  <form action=''>
+                  <form action='' onSubmit={handleUpdateUser}>
                     <h6 className='text-center'>Edit Personal Information</h6>
                     <div className='row'>
                       <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
@@ -181,10 +208,10 @@ const UserProfile = ({
                           className='TextField-Outline'
                           id='outlined-basic'
                           placeholder='First Name'
-                          value={firstname}
-                          onChange={(e) => {
-                            setFirstName(e.target.value);
-                          }}
+                          value={input?.firstname}
+                          onChange={(e) =>
+                            handleOnChange("firstname", e.target.value)
+                          }
                         />
                       </div>
                       <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
@@ -192,10 +219,10 @@ const UserProfile = ({
                           className='TextField-Outline'
                           id='outlined-basic'
                           placeholder='Last Name'
-                          value={lastname}
-                          onChange={(e) => {
-                            setLastName(e.target.value);
-                          }}
+                          value={input?.lastname}
+                          onChange={(e) =>
+                            handleOnChange("lastname", e.target.value)
+                          }
                         />
                       </div>
                     </div>
@@ -205,11 +232,11 @@ const UserProfile = ({
                           className='TextField-Outline'
                           id='outlined-basic'
                           placeholder='Location'
-                          disabled
-                          value={location}
-                          onChange={(e) => {
-                            setLocation(e.target.value);
-                          }}
+                          readOnly
+                          value={input?.location}
+                          onChange={(e) =>
+                            handleOnChange("location", e.target.value)
+                          }
                         />
                       </div>
                     </div>
@@ -219,11 +246,11 @@ const UserProfile = ({
                           className='TextField-Outline'
                           id='outlined-basic'
                           placeholder='Email Address'
-                          disabled
-                          value={email}
-                          onChange={(e) => {
-                            setEmail(e.target.value);
-                          }}
+                          readOnly
+                          value={input?.email}
+                          onChange={(e) =>
+                            handleOnChange("email", e.target.value)
+                          }
                         />
                       </div>
                     </div>
@@ -233,11 +260,11 @@ const UserProfile = ({
                           className='TextField-Outline'
                           id='outlined-basic'
                           placeholder='Role Name'
-                          disabled
-                          value={roleName}
-                          onChange={(e) => {
-                            setRoleName(e.target.value);
-                          }}
+                          readOnly
+                          value={input?.role}
+                          onChange={(e) =>
+                            handleOnChange("role", e.target.value)
+                          }
                         />
                       </div>
                       <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
@@ -245,10 +272,10 @@ const UserProfile = ({
                           className='TextField-Outline'
                           id='outlined-basic'
                           placeholder='Contact No'
-                          value={phoneNumber}
-                          onChange={(e) => {
-                            setPhoneNumber(e.target.value);
-                          }}
+                          value={input?.mobileNumber}
+                          onChange={(e) =>
+                            handleOnChange("mobileNumber", e.target.value)
+                          }
                         />
                       </div>
                     </div>
