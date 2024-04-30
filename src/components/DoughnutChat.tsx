@@ -21,20 +21,20 @@ ChartJS.register(
   Legend
 );
 
-const DoughnutChat = () => {
+const DoughnutChat = ({ ticketTotal, completed, inprogress, pending }: any) => {
 
 
 
   const doughnutData = {
     datasets: [
       {
-        label: 'Task',
-        data: [34, 16, 10, 40],
+        label: 'Tickets',
+        data: [ticketTotal, inprogress, completed, pending],
         backgroundColor: [
           '#0240BC',
-          '#0240bc90',
+          '#F86624',
+          '#22CAAD',
           '#EB3D4D',
-          '#E5ECFB'
         ],
         cutout: 50,
       },

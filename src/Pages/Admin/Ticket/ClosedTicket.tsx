@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import SideNav from '../../../components/SideNav/SideNav'
 import Header from '../../../components/Header'
 import BottomNavigation from '../../../components/BottomNavigation'
 import SearchConponent from '../../../components/SearchConponent'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
-import AdminTicketTable from './AdminTicketTable'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import moment from 'moment'
 import { admingetTicket } from '../../../features/Ticket/ticketSlice'
@@ -42,7 +41,7 @@ const ClosedTicket = () => {
 
 
 	useEffect(() => {
-		const datas = { status: "COMPLETED" };
+		const datas = { status: "CLOSED" };
 		// @ts-ignore 
 		dispatch(admingetTicket(datas))
 
@@ -77,7 +76,7 @@ const ClosedTicket = () => {
 				/>
 
 				<div  >
-					<AdminTicketTable
+					<TicketTableComponent
 						data={admingetticketdata?.tickets}
 						isLoading={admingetticketisLoading}
 					/>

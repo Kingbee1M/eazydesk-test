@@ -26,8 +26,7 @@ const ReactQuillWrapper = ({ value, setValue }: any) => {
 	const quill: any = useRef();
 
 	// Handler to handle button clicked
-	// function handler() {
-	// 	console.log(value);
+	// function handler() { 
 	// }
 
 	const imageHandler = useCallback(() => {

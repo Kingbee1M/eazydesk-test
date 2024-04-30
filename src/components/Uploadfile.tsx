@@ -99,13 +99,12 @@ const Uploadfile = () => {
 
 	const DeleteFile = (id: any) => {
 		if (window.confirm("Are you sure you want to delete this Image?")) {
-			console.log("Deleting file with id:", id);
 			// Filter out the file with the specified id and update the Files state
 			// const updatedFiles = Files.filter((data: { id: any; }) => data.id !== id); 
 		} else {
 			// Handle the case when the user cancels the delete operation
 			// You can show a message or perform other actions here
-			console.log("Delete operation canceled.");
+
 		}
 	}
 

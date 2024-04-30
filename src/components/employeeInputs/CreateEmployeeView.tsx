@@ -16,7 +16,6 @@ const CreateEmployeeView = ({ active, employee, departments, roles }: any) => {
 
   const handleSubmit = async () => {
     const inputs = { ...employee };
-    // console.log('inputs', inputs)
     // @ts-ignore
     dispatch(createEmployee(inputs));
   };

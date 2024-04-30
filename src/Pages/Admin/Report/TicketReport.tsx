@@ -37,7 +37,7 @@ const TicketReport = ({ switchs }: any) => {
 
 	const [displayData, setDisplayData] = useState([]);
 
-	console.log('displayData', displayData)
+
 
 	const handleCustomFilters = (e: { preventDefault: () => void; }) => {
 		e.preventDefault();

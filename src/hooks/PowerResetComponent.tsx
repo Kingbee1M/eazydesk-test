@@ -11,7 +11,6 @@ const PowerResetComponent: React.FC<{ setIsLoading: React.Dispatch<React.SetStat
 			const { data } = await HttpService.post('/api/v2/auth/resend-email-verification', {
 				email: email,
 			});
-			console.log(data); // Handle success response
 		} catch (error) {
 			console.error('Error:', error); // Handle error
 		} finally {

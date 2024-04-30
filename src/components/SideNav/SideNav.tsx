@@ -114,7 +114,7 @@ const SideNav = () => {
             }>
               <div className="nav_dropdown_sub">
                 <AiOutlineCloseCircle size={21} />
-                <span>Open Tickets</span>
+                <span>Completed </span>
               </div>
               <div className="side_number_one" >{!open ? 0 : open}</div>
             </NavLink>
