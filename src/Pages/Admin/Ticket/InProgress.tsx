@@ -7,6 +7,7 @@ import AdminTicketTable from './AdminTicketTable'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import moment from 'moment'
 import { admingetTicket } from '../../../features/Ticket/ticketSlice'
+import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 
 const InProgress = () => {
 	const dispatch = useAppDispatch();
@@ -45,6 +46,8 @@ const InProgress = () => {
 
 	}, [dispatch, endDate1, startDate1, itassignisSuccess])
 
+	console.log('itassignisSuccess', admingetticketdata)
+
 	return (
 		<div id="page-wrapper">
 			<SideNav />
@@ -72,7 +75,7 @@ const InProgress = () => {
 				/>
 
 				<div  >
-					<AdminTicketTable
+					<TicketTableComponent
 						data={admingetticketdata?.tickets}
 						isLoading={admingetticketisLoading}
 					/>

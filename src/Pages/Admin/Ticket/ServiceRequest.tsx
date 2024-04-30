@@ -80,7 +80,7 @@ const ServiceRequest = () => {
 				/>
 
 				<div  >
-					<AdminTicketTable
+					<TicketTableComponent
 						pageheader={"SERVICE REQUEST"}
 						Request={"Service Request"}
 						data={admingetticketdata?.tickets} />

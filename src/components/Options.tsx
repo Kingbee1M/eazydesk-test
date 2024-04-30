@@ -202,7 +202,7 @@ function TooltipPositioned2(words: any) {
     </>
   );
 }
-const EntriesLimit = ({ data, limit, handlePagination, filterLimit }: any) => (
+const EntriesLimit = ({ data, limit, handlePagination }: any) => (
   <div className="entries-perpage">
     {data?.length > 1 && (
       <>
@@ -211,12 +211,11 @@ const EntriesLimit = ({ data, limit, handlePagination, filterLimit }: any) => (
           value={limit}
           // @ts-ignore
           onChange={(e) => handlePagination('limit', e)}  >
-          {["5", "8", "10", "25", "50", "100", "200", "500"].map((optionValue) => (
+          {["5", "8", "10", "25", "50", "100", "200"].map((optionValue) => (
             <option key={optionValue} value={optionValue}>
               {optionValue}
             </option>
           ))}
-          <option value={filterLimit}>Ticket Limit</option>
         </select>
         Perpage
       </>

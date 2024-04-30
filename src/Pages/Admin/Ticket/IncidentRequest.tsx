@@ -7,6 +7,7 @@ import { admingetTicket } from '../../../features/Ticket/ticketSlice'
 import AdminTicketTable from './AdminTicketTable'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import moment from 'moment'
+import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 
 
 
@@ -74,9 +75,10 @@ const IncidentRequest = () => {
 				/>
 
 				<div  >
-					<AdminTicketTable
+					<TicketTableComponent
 						data={admingetticketdata?.tickets}
-						isLoading={admingetticketisLoading} />
+						isLoading={admingetticketisLoading}
+						pagination={admingetticketdata} />
 				</div>
 			</main>
 		</div>

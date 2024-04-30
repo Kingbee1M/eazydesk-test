@@ -1,12 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaExchangeAlt } from "react-icons/fa";
 import { RiAlarmWarningFill } from "react-icons/ri";
 import { AiTwotoneSetting } from "react-icons/ai";
 import LeadsHeader from "../../components/LeadsHeader";
-import LinePerformanceChart from "../../components/LinePerformanceChart";
-import { PiDotsSixVerticalBold } from "react-icons/pi";
-import LeadsThreeinOneBarChart from "../../components/Charts/LeadsThreeinOneBarChart";
 import { GoDotFill } from "react-icons/go";
 import DoughnutChat from "../../components/DoughnutChat";
 import ThreeinOneBarChart from "../../components/ThreeinOneBarChart";

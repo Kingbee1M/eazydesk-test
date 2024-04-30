@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import BottomNavigation from '../../../components/BottomNavigation'
 import Header from '../../../components/Header'
 import SearchConponent from '../../../components/SearchConponent'
-import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 import ITSideNav from '../../../components/SideNav/ITSideNav'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import { getItTicketParameter } from '../../../features/Ticket/ticketSlice'
@@ -11,35 +10,48 @@ import moment from 'moment'
 
 const ITChangeRequest = () => {
 	const dispatch = useAppDispatch();
-
-
-	const [entriesPerPage, setEntriesPerPage] = useState(() => {
-		return "6";
-	});
-
+	const { itticketparameterdata, itticketparameterisLoading } = useAppSelector((state: any) => state.ticket)
+	const [entriesPerPage, setEntriesPerPage] = useState(() => { return "6" });
 	const [startDates, setStartDates] = useState([]);
 	let [endDates, setEndDates] = useState<any>([]);
 	const [show, setShow] = useState(false);
-	const [datas, setDatas] = useState([]);
-	const [find, setFind] = useState<any>();
-	const [sortData, setSortData] = useState<any>([]);
 	const [searchItem, setSearchItem] = useState("");
-	const [Unassigned, setUnassigned] = useState(false);
-
-	const { itticketparameterdata, itticketparameterisLoading } = useAppSelector((state: any) => state.ticket)
-
-
+	const [limit, setLimit] = useState<any>(10);
 	endDates = new Date();
 	const formattedEndDate = endDates.toISOString().split('T')[0]; // Extracting date part and removing time
 	const [startDate1] = useState(formattedEndDate);
 	const [endDate1] = useState(formattedEndDate);
-	const [selectedDate, setSelectedDate] = useState("");
+	const [data] = useState<any>([]);
 
 
-	const currentDate = moment().format("YYYY-MM-DD");
-	const sevenDays = moment().subtract(7, "days").format("YYYY-MM-DD");
-	const yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
-	const [data, setData] = useState<any>([]);
+
+
+
+	const handlePagination = (type: string, data?: React.ChangeEvent<HTMLSelectElement> | undefined) => {
+		switch (type) {
+			// @ts-ignore
+			case 'prev': dispatch(getItTicketParameter({ page: pagination?.page - 1, limit: limit }));
+				break;
+			// @ts-ignore
+			case 'next': dispatch(getItTicketParameter({ page: pagination?.page + 1, limit: limit }));
+				break;
+			case 'limit':
+				if (data) {
+					setLimit(data.target.value);
+					// @ts-ignore
+					dispatch(getItTicketParameter({ limit: data.target.value }));
+				}
+				break;
+			default:
+				// For page numbers or any other custom actions
+				const pageNumber = parseInt(type);
+				if (!isNaN(pageNumber)) {
+					// @ts-ignore
+					dispatch(getItTicketParameter({ page: pageNumber, limit: limit }));
+				}
+				break;
+		}
+	}
 
 
 
@@ -78,14 +90,15 @@ const ITChangeRequest = () => {
 					setEndDates={setEndDates}
 					setShow={setShow}
 					show={show}
+					handlePagination={handlePagination}
 				// handleCustomFilters={handleCustomFilters}
 				/>
 
 				<div  >
 					<ITTicketTable
-						pageheader={"CHANGE"}
-						Request={"Change Request"}
-						TYPE={"CHANGE"}
+						TYPE={true}
+						pagination={itticketparameterdata}
+						handlePagination={handlePagination}
 						data={itticketparameterdata?.tickets}
 						isLoading={itticketparameterisLoading} />
 				</div>

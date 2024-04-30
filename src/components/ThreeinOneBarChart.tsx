@@ -24,7 +24,7 @@ ChartJS.register(
 
 
 
-const ThreeinOneBarChart = ({ threeinone }: any) => {
+const ThreeinOneBarChart = ({ threeinone, ticketTotal }: any) => {
 	const data = {
 		labels: ['Isn', 'Mtn', 'Uba', 'Fair Money', 'Access'],
 		datasets: [
