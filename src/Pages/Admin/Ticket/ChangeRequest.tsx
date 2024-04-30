@@ -4,9 +4,9 @@ import Header from '../../../components/Header'
 import SideNav from '../../../components/SideNav/SideNav'
 import SearchConponent from '../../../components/SearchConponent'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
-import moment from 'moment'
-import { admingetTicket, giveApproval } from '../../../features/Ticket/ticketSlice'
-import AdminTicketTable from './AdminTicketTable'
+import { admingetTicket } from '../../../features/Ticket/ticketSlice'
+
+import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 
 const ChangeRequest = () => {
 	const dispatch = useAppDispatch();
@@ -22,7 +22,7 @@ const ChangeRequest = () => {
 	const formattedEndDate = endDates.toISOString().split('T')[0]; // Extracting date part and removing time
 	const [startDate1] = useState(formattedEndDate);
 	const [endDate1] = useState(formattedEndDate);
-	const [data] = useState<any>([]);
+
 
 
 
@@ -93,7 +93,7 @@ const ChangeRequest = () => {
 				/>
 
 				<div  >
-					<AdminTicketTable
+					<TicketTableComponent
 						TYPE={true}
 						pagination={admingetticketdata}
 						data={admingetticketdata?.tickets}

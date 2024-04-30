@@ -20,11 +20,13 @@ const AdminDashboard = () => {
 	const dispatch = useAppDispatch()
 	const { dashBoardInfodata } = useAppSelector((state: any) => state.ticket);
 
+	console.log('dashBoardInfodata', dashBoardInfodata)
+
 	useEffect(() => {
 		dispatch(dashBoardInfo())
 	}, [dispatch])
 
-	console.log('dashBoardInfodata', dashBoardInfodata)
+
 	const ticketTotal = dashBoardInfodata?.pagination?.totalTickets
 	const changeRequest = dashBoardInfodata?.totals?.ticketType?.changeRequest
 	const incidentRequest = dashBoardInfodata?.totals?.ticketType?.incidentRequest
@@ -104,7 +106,7 @@ const AdminDashboard = () => {
 						<div>
 							<div className='total_card_flex_icon_source'>
 								<div className='total_card_ArrowUpSFill'>	<p>70%</p> <RiArrowUpSFill size={20} /> </div>
-								<h3>2477 tickets automated</h3>
+								<h3>2477 tickets </h3>
 							</div>
 						</div>
 					</div>
@@ -117,7 +119,12 @@ const AdminDashboard = () => {
 							{/* <p>Summary</p> */}
 						</div>
 						<div>
-							<DoughnutChat />
+							<DoughnutChat
+								ticketTotal={ticketTotal}
+								inprogress={inprogress}
+								completed={completed}
+								pending={pending}
+							/>
 						</div>
 					</div>
 					<div className='dash_statistics_sub2'>
@@ -141,7 +148,13 @@ const AdminDashboard = () => {
 								</div>
 							</div>
 						</div>
-						<ThreeinOneBarChart threeinone={"threeinone"} />
+						<ThreeinOneBarChart
+							threeinone={"threeinone"}
+							ticketTotal={ticketTotal}
+							inprogress={inprogress}
+							completed={completed}
+							pending={pending}
+						/>
 					</div>
 				</div>
 				{/* My Teams Performance */}

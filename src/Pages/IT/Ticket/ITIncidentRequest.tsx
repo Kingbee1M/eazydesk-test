@@ -5,40 +5,64 @@ import SearchConponent from '../../../components/SearchConponent'
 import ITSideNav from '../../../components/SideNav/ITSideNav'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import { getItTicketParameter } from '../../../features/Ticket/ticketSlice'
-import ITTicketTable from './ITTicketTable'
+import TicketTableComponent from '../../../components/Table/TicketTableComponent'
+
 
 
 const ITIncidentRequest = () => {
 	const dispatch = useAppDispatch();
-	const { itdata, itisLoading, itticketparameterdata } = useAppSelector((state: any) => state.ticket)
-	console.log(itticketparameterdata?.tickets)
+	const { itticketparameterisLoading, itticketparameterdata } = useAppSelector((state: any) => state.ticket)
 
-	const [entriesPerPage, setEntriesPerPage] = useState(() => {
-		return "6";
-	});
-
-
+	const [entriesPerPage, setEntriesPerPage] = useState(() => { return "6" });
+	const [startDates, setStartDates] = useState([]);
 	let [endDates, setEndDates] = useState<any>([]);
 	const [show, setShow] = useState(false);
 	const [searchItem, setSearchItem] = useState("");
-
-
-
-
+	const [limit, setLimit] = useState<any>(10);
 	endDates = new Date();
 	const formattedEndDate = endDates.toISOString().split('T')[0]; // Extracting date part and removing time
 	const [startDate1] = useState(formattedEndDate);
 	const [endDate1] = useState(formattedEndDate);
+	const [data] = useState<any>([]);
 
+
+
+
+
+	const handlePagination = (type: string, data?: React.ChangeEvent<HTMLSelectElement> | undefined) => {
+		switch (type) {
+			// @ts-ignore
+			case 'prev': dispatch(getItTicketParameter({ page: pagination?.page - 1, limit: limit }));
+				break;
+			// @ts-ignore
+			case 'next': dispatch(getItTicketParameter({ page: pagination?.page + 1, limit: limit }));
+				break;
+			case 'limit':
+				if (data) {
+					setLimit(data.target.value);
+					// @ts-ignore
+					dispatch(getItTicketParameter({ limit: data.target.value }));
+				}
+				break;
+			default:
+				// For page numbers or any other custom actions
+				const pageNumber = parseInt(type);
+				if (!isNaN(pageNumber)) {
+					// @ts-ignore
+					dispatch(getItTicketParameter({ page: pageNumber, limit: limit }));
+				}
+				break;
+		}
+	}
 
 
 	useEffect(() => {
 		const datas = { ticketType: "INCIDENT" };
-		console.log(datas)
+
 		// @ts-ignore 
 		dispatch(getItTicketParameter(datas))
 
-	}, [dispatch, endDate1, startDate1])
+	}, [dispatch, endDate1])
 
 
 
@@ -54,27 +78,29 @@ const ITIncidentRequest = () => {
 					</div>
 				</div>
 				<SearchConponent
-					placeholder={"search ticket"}
+					placeholder={"Search ticket"}
 					setSearchItem={setSearchItem}
 					searchItem={searchItem}
-					data={itdata?.tickets}
+					data={itticketparameterdata?.tickets}
 					entriesPerPage={entriesPerPage}
 					setEntriesPerPage={setEntriesPerPage}
 					filter={true}
-					// setStartDates={setStartDates}
+					setStartDates={setStartDates}
 					setEndDates={setEndDates}
 					setShow={setShow}
 					show={show}
+					handlePagination={handlePagination}
 				// handleCustomFilters={handleCustomFilters}
 				/>
 
 				<div  >
-					<ITTicketTable
-						pageheader={"Incident Request"}
-						Request={"Incident Request"}
+					<TicketTableComponent
 						TYPE={"INCIDENT"}
+						pagination={itticketparameterdata}
 						data={itticketparameterdata?.tickets}
-						isLoading={itisLoading} />
+						isLoading={itticketparameterisLoading}
+						handlePagination={handlePagination}
+					/>
 				</div>
 			</main>
 		</div>

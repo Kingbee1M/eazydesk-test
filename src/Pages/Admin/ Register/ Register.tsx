@@ -66,7 +66,6 @@ const Register = ({ switchs }: any) => {
 		setRealData(result);
 	}, [dataAll, searchItem]);
 
-	console.log('result', dataAll.length)
 
 
 

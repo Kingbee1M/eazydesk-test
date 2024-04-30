@@ -58,7 +58,7 @@ const ReassignTask = ({ id }: any) => {
 		e.preventDefault()
 		// @ts-ignore 
 
-		console.log(input)
+
 		// @ts-ignore 
 		dispatch(getItTicket(input))
 

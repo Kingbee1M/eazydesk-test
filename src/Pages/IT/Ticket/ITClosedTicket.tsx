@@ -1,22 +1,64 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Header from '../../../components/Header'
 import BottomNavigation from '../../../components/BottomNavigation'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 import SearchConponent from '../../../components/SearchConponent'
 import ITSideNav from '../../../components/SideNav/ITSideNav'
+import { useAppDispatch, useAppSelector } from '../../../store/useStore'
+import { getItTicketParameter } from '../../../features/Ticket/ticketSlice'
 
 const ITClosedTicket = () => {
-
+	const dispatch = useAppDispatch();
+	const { itticketparameterdata, itticketparameterisLoading } = useAppSelector((state: any) => state.ticket)
+	const [entriesPerPage, setEntriesPerPage] = useState(() => { return "6" });
 	const [startDates, setStartDates] = useState([]);
-	const [endDates, setEndDates] = useState([]);
+	let [endDates, setEndDates] = useState<any>([]);
 	const [show, setShow] = useState(false);
 	const [searchItem, setSearchItem] = useState("");
-	const [datas, setDatas] = useState([]);
+	const [limit, setLimit] = useState<any>(10);
+	endDates = new Date();
+	const formattedEndDate = endDates.toISOString().split('T')[0]; // Extracting date part and removing time
+	const [startDate1] = useState(formattedEndDate);
+	const [endDate1] = useState(formattedEndDate);
+	const [data] = useState<any>([]);
 
-	const [entriesPerPage, setEntriesPerPage] = useState(() => {
-		return "6";
-	});
 
+
+
+
+	const handlePagination = (type: string, data?: React.ChangeEvent<HTMLSelectElement> | undefined) => {
+		switch (type) {
+			// @ts-ignore
+			case 'prev': dispatch(getItTicketParameter({ page: pagination?.page - 1, limit: limit }));
+				break;
+			// @ts-ignore
+			case 'next': dispatch(getItTicketParameter({ page: pagination?.page + 1, limit: limit }));
+				break;
+			case 'limit':
+				if (data) {
+					setLimit(data.target.value);
+					// @ts-ignore
+					dispatch(getItTicketParameter({ limit: data.target.value }));
+				}
+				break;
+			default:
+				// For page numbers or any other custom actions
+				const pageNumber = parseInt(type);
+				if (!isNaN(pageNumber)) {
+					// @ts-ignore
+					dispatch(getItTicketParameter({ page: pageNumber, limit: limit }));
+				}
+				break;
+		}
+	}
+
+	useEffect(() => {
+		const datas = { status: "CLOSED" };
+
+		// @ts-ignore 
+		dispatch(getItTicketParameter(datas))
+
+	}, [dispatch])
 
 	return (
 		<div id="page-wrapper">
@@ -33,7 +75,7 @@ const ITClosedTicket = () => {
 					placeholder={"search ticket report"}
 					setSearchItem={setSearchItem}
 					searchItem={searchItem}
-					data={datas}
+					data={itticketparameterdata?.tickets}
 					entriesPerPage={entriesPerPage}
 					setEntriesPerPage={setEntriesPerPage}
 					filter={true}
@@ -41,13 +83,15 @@ const ITClosedTicket = () => {
 					setEndDates={setEndDates}
 					setShow={setShow}
 					show={show}
+					handlePagination={handlePagination}
 				// handleCustomFilters={handleCustomFilters}
 				/>
 
 				<div  >
 					<TicketTableComponent
-						pageheader={"SERVICE REQUEST"}
-						Request={"Service Request"}
+						pagination={itticketparameterdata}
+						handlePagination={handlePagination}
+						data={itticketparameterdata?.tickets}
 						TYPE={"SERVICE"} />
 				</div>
 			</main>

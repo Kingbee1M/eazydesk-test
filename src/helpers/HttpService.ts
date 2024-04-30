@@ -123,7 +123,7 @@ const handleError = (error: any) => {
   // Extract error message from response 
   const message = error?.response?.data?.message ||
     (error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
-console.log('error?.response?.status ',error?.response?.statusText )
+ 
   // Handle unauthorized error
   if (error?.response?.status === 401 && error?.response?.statusText === "Unauthorized") {
     fireAlert("Session Expired", "Please log in again", "error", "/");

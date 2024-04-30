@@ -1,13 +1,11 @@
-import { EntriesLimit, EntriesPerPage, } from './Options';
+import { EntriesLimit } from './Options';
 import FilterModal from './FilterModal';
 // import { useIsMobile } from '../hooks/resize';
 import Search from './Search';
-import { useState } from 'react';
-import { Button } from 'react-bootstrap';
 import SubscriptionModal from '../Pages/Admin/Subscription/SubscriptionModal';
 
 
-const SearchConponent = ({ ID, setEntriesPerPage, entriesPerPage, handleCustomFilters, setEndDates, setStartDates, searchItem, setSearchItem, placeholder, data, filter, show, setShow, rolePerPage, setRolePerPage, limit, handlePagination, subscription }: any) => {
+const SearchConponent = ({ ID, handleCustomFilters, setEndDates, setStartDates, searchItem, setSearchItem, placeholder, data, filter, show, setShow, limit, handlePagination, subscription }: any) => {
 
 
 	// const handleChangeFilter = (e: { target: { value: React.SetStateAction<string>; }; }) => {
@@ -19,14 +17,14 @@ const SearchConponent = ({ ID, setEntriesPerPage, entriesPerPage, handleCustomFi
 	return (
 		<div id='reports'  >
 			<div className="search-area">
-				
+
 				<Search
 					placeholder={placeholder}
 					setSearchItem={setSearchItem}
 					searchItem={searchItem}
 
 				/>
-			
+
 				<form >
 					{ID && <div className="form-grp">
 						<input id="input-search-colunm-two" type="text" placeholder={placeholder}
@@ -37,12 +35,7 @@ const SearchConponent = ({ ID, setEntriesPerPage, entriesPerPage, handleCustomFi
 
 
 					{filter && <FilterModal handleCustomFilters={handleCustomFilters} setStartDates={setStartDates} setEndDates={setEndDates} setShow={setShow} show={show} />}
-					{/* 
-					<EntriesPerPage
-						data={data}
-						entriesPerPage={entriesPerPage}
-						setEntriesPerPage={setEntriesPerPage}
-					/> */}
+
 					<EntriesLimit
 						limit={limit}
 						data={data}

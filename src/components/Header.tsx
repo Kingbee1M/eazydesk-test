@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { IoCalendarOutline } from "react-icons/io5";
 import Badge from './Badge/Badge';
 import pro_img from '../assets/img/pro_img.svg'
@@ -7,10 +7,15 @@ import NetworkConnetion from './NetworkConnetion';
 import Notification from './Notification/Notification';
 import HeaderDate from './HeaderDate';
 import ProfileDropDown from './ProfileDropDown';
+import { SocketContext } from './Scoket/SocketContext';
+import NotificationPopUp from './Scoket/NotificationPopUp';
 
 
 const Header = () => {
+  const socket = useContext(SocketContext);
+  const [notification, setNotification] = useState<any>();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [refresh, setRefresh] = useState(false);
   const [profile, setProfile] = useState(false)
   // @ts-ignore  
   const userInfo = JSON.parse(localStorage.getItem("service_desk"));
@@ -30,6 +35,7 @@ const Header = () => {
   return (
     <div id="header">
       <NetworkConnetion />
+      <NotificationPopUp setNotification={setNotification} socket={socket} setRefresh={setRefresh} />
       <div className='FaPlus-icon-container' >
         <div className='FaPlus-icon-container_sup'>
           <IoCalendarOutline size={16} />
