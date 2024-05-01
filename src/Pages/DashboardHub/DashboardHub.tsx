@@ -23,7 +23,10 @@ const DashboardHUB = () => {
 	useEffect(() => {
 		if (userInfo) {
 			switch (true) {
-				case isSuperAdmin || isAdmin:
+				case isSuperAdmin:
+					navigate('/superdashboard');
+					break;
+				case isAdmin:
 					navigate('/admindashboard');
 					break;
 				case isSupervisor:

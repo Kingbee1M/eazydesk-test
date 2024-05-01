@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import SideNav from '../../../components/SideNav/SideNav';
 import Header from '../../../components/Header';
 import EditRegisteredUserModal from './EditRegisteredUserModal';
 import RegisterModal from './RegisterModal';
@@ -10,12 +9,14 @@ import { getallReguser } from '../../../features/Registration/registrationSlice'
 import Pagination from '../../../components/Pagination';
 import TableLoader from '../../../components/TableLoader';
 import { NoRecordFound, TableFetch } from '../../../components/Options';
+import SuperSideNav from '../../../components/SideNav/SuperSideNav';
 
 
 
 
-const Register = ({ switchs }: any) => {
-
+const SuperRegister = ({ switchs }: any) => {
+	// @ts-ignore 
+	const userInfo = JSON.parse(localStorage.getItem("service_desk"));
 
 	const [showEditUser, setShowEditUser] = useState(false)
 	const dispatch = useAppDispatch();
@@ -71,7 +72,7 @@ const Register = ({ switchs }: any) => {
 	return (
 		<div id="page-wrapper">
 			<ToastContainer position="top-right" containerId={"custom1"} />
-			<SideNav />
+			<SuperSideNav />
 			<Header />
 			<BottomNavigation />
 			<main >
@@ -99,7 +100,7 @@ const Register = ({ switchs }: any) => {
 						<tbody className="data-table-content">
 							{isLoadingAll ? (
 								<TableFetch colSpan={7} />
-							) : displayData?.length === 0 || displayData?.length === undefined ? (
+							) : displayData?.length === 0 || dataAll.length === 0 ? (
 								<NoRecordFound colSpan={7} />
 							) : (
 								displayData?.map((item: any, i: any) => (
@@ -135,4 +136,4 @@ const Register = ({ switchs }: any) => {
 	)
 }
 
-export default Register
+export default SuperRegister

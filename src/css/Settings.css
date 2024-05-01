@@ -55,6 +55,7 @@
   height: 46px;
   margin-bottom: 10px;
   border-left: 2px solid var(--white);
+  cursor: pointer;
 }
 .settings_main_for_text:hover {
   display: flex;

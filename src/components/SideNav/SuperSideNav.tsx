@@ -5,6 +5,7 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import { PiCalendarCheckDuotone } from "react-icons/pi";
 import { MdOutlineSettings } from "react-icons/md";
 import { BsFileText } from "react-icons/bs";
+import { LuTag } from "react-icons/lu";
 import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
 import { useEffect, useState } from "react";
 import { LuUsers } from "react-icons/lu";
@@ -15,9 +16,10 @@ import { getUserPrivileges } from "../../hooks/auth";
 import { IoMdOpen } from "react-icons/io";
 import { useAppDispatch, useAppSelector } from "../../store/useStore";
 import { dashBoardInfo } from "../../features/Ticket/ticketSlice";
+import { MdOutlineSubscriptions } from "react-icons/md";
 
 
-const SideNav = () => {
+const SuperSideNav = () => {
   const dispatch = useAppDispatch()
   const { dashBoardInfodata } = useAppSelector((state: any) => state.ticket);
 
@@ -63,7 +65,7 @@ const SideNav = () => {
         <h2>Eazy Desk</h2>
       </div>
       <nav  >
-        <NavLink to="/admindashboard" className={({ isActive }) =>
+        <NavLink to="/superdashboard" className={({ isActive }) =>
           [
             "nav-link",
             isActive ? "active" : null,
@@ -124,7 +126,7 @@ const SideNav = () => {
             }>
               <div className="nav_dropdown_sub">
                 <PiCalendarCheckDuotone size={22} />
-                <span>Closed</span>
+                <span>Closed ticket</span>
               </div>
               <div className="side_number_two">{!closed ? 0 : closed}</div>
             </NavLink>
@@ -165,10 +167,22 @@ const SideNav = () => {
           </div>
         )}
       </nav>
-
+      {isSuperAdmin && <nav>
+        <NavLink to="/supercompany" className={({ isActive }) =>
+          [
+            "nav-link",
+            isActive ? "active" : null,
+          ]
+            .filter(Boolean)
+            .join(" ")
+        }>
+          <LuTag size={15} />
+          <span>Company</span>
+        </NavLink>
+      </nav>}
 
       <nav>
-        <NavLink to="/register" className={({ isActive }) =>
+        <NavLink to="/superregister" className={({ isActive }) =>
           [
             "nav-link",
             isActive ? "active" : null,
@@ -181,7 +195,20 @@ const SideNav = () => {
         </NavLink>
       </nav>
       <nav>
-        <NavLink to="/report" className={({ isActive }) =>
+        <NavLink to="/supersubscription" className={({ isActive }) =>
+          [
+            "nav-link",
+            isActive ? "active" : null,
+          ]
+            .filter(Boolean)
+            .join(" ")
+        }>
+          <MdOutlineSubscriptions size={15} />
+          <span>Subscription</span>
+        </NavLink>
+      </nav>
+      <nav>
+        <NavLink to="/superticketreport" className={({ isActive }) =>
           [
             "nav-link",
             isActive ? "active" : null,
@@ -194,7 +221,7 @@ const SideNav = () => {
         </NavLink>
       </nav>
       <nav>
-        <NavLink to="/settings" className={({ isActive }) =>
+        <NavLink to="/supersettings" className={({ isActive }) =>
           [
             "nav-link",
             isActive ? "active" : null,
@@ -211,7 +238,7 @@ const SideNav = () => {
   )
 }
 
-export default SideNav;
+export default SuperSideNav;
 
 
 
