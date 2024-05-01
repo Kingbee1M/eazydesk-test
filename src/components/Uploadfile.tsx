@@ -8,7 +8,7 @@ import ModalHeader from './Modals/ModalHeader';
 
 const Uploadfile = () => {
 
-	const customId = "custom-id-yes";
+
 	const shortid = require('shortid');
 	const [selectedfile, SetSelectedFile] = useState<any>([]);
 	const [Files, SetFiles] = useState<any>([]);

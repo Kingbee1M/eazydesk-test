@@ -238,6 +238,7 @@ color: var(--accent-blue);
   align-items: center;
   gap: 10px;  
   padding: 5px 15px;
+  cursor: pointer !important;
 }
 .notification-card:active{
   display: flex;
@@ -251,6 +252,7 @@ color: var(--accent-blue);
 background-color: var(--accent-blue-light);
 padding: 5px 15px;
 border-radius: 10px;
+
 }
 .notification-card-profile{
   display: flex;

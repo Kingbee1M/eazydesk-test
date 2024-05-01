@@ -10,10 +10,10 @@ border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   background: #FFFFFF;
   font-style: normal;
-font-weight: 400;
+font-weight: 500 !important;
 font-size: 16px;
 line-height: 24px;
-color: rgba(0, 0, 0, 0.5);
+color: var(--black);
 padding: 12px 20px;
 }
 

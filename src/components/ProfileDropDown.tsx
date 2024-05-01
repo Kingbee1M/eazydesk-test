@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { SVGLoader } from "./SVGLoader";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
-import { customId } from "./Options";
+import { customId, userInfo } from "./Options";
 import { logout, reset } from "../features/Auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../store/useStore";
 import { logoutUserAction } from "../features/Auth/authService";
@@ -25,8 +25,7 @@ const ProfileDropDown = () => {
 	const dataService = DataService();
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
-	// @ts-ignore  
-	const userInfo = JSON.parse(localStorage.getItem("service_desk"));
+
 
 	const handleLogout = () => {
 		dispatch(logout());
@@ -37,7 +36,7 @@ const ProfileDropDown = () => {
 			navigate("/");
 			dispatch(reset());
 		}
-	}, [dispatch, navigate, userInfo]);
+	}, [dispatch, navigate]);
 
 	useEffect(() => {
 		if (isSuccesslogout) {
@@ -53,7 +52,7 @@ const ProfileDropDown = () => {
 			dataService.clearData()
 		}
 		dispatch(reset());
-	}, [dispatch, isErrorlogout, isSuccesslogout, messagelogout, navigate])
+	}, [dataService, dispatch, isErrorlogout, isSuccesslogout, messagelogout, navigate])
 
 
 
@@ -88,7 +87,8 @@ const ProfileDropDown = () => {
 					<MdLogout size={25} />
 				</div>
 				<div>
-					{isLoadinglogout ? <SVGLoader width={"30px"} height={"30px"} color={"#000"} /> : <p className='notification-text-profile'>Logout</p>}
+					{isLoadinglogout ? <SVGLoader width={"30px"} height={"30px"} color={"#000"} /> :
+						<p className='notification-text-profile'>Logout</p>}
 
 				</div>
 			</div>

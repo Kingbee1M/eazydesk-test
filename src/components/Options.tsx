@@ -326,7 +326,8 @@ const ticketMenu = [
   },
 ]
 
-
+// @ts-ignore  
+const userInfo = JSON.parse(localStorage.getItem("service_desk"));
 export {
   TableFetch,
   EntriesPerPage,
@@ -349,5 +350,6 @@ export {
   svgPaths,
   tokenKey,
   menu, ticketMenu,
-  EntriesLimit
+  EntriesLimit,
+  userInfo
 };
