@@ -90,13 +90,14 @@ const SuperChangeRequest = () => {
 				// handleCustomFilters={handleCustomFilters}
 				/>
 
-				<div  >
+				<div className='mt-4'>
 					<TicketTableComponent
 						TYPE={true}
 						pagination={admingetticketdata}
 						data={admingetticketdata?.tickets}
 						isLoading={admingetticketisLoading}
 						handlePagination={handlePagination}
+						colSpan={8}
 					/>
 				</div>
 			</main>

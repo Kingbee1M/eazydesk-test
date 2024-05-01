@@ -24,6 +24,7 @@ const Login = () => {
 			setTitle("Eazy Desk | Login ");
 		}
 	}, [title]);
+
 	function getToken() {
 		try {
 			// Attempt to retrieve the token from the dataService object
@@ -33,7 +34,6 @@ const Login = () => {
 		} catch (error) {
 			// Log any errors that occur during token retrieval
 			console.error('Error processing data:', error);
-
 			// Handle the error case by returning null or throwing a custom error
 			return null;
 		}
@@ -96,7 +96,7 @@ const Login = () => {
 		<div id="login-wrapper">
 			<Carousels />
 			<div className="login-container">
-				<ToastContainer position="top-right" containerId={"custom1"} />
+				<ToastContainer position="top-right" />
 				<div className="login-content-layout">
 					{/* Login Header */}
 					<LoginHeader />

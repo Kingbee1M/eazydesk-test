@@ -79,7 +79,7 @@ const UserProfile = ({ userInfo, userId, lgShow, setLgShow }: any) => {
     e.preventDefault();
     // @ts-ignore
     // dispatch(edituser(value));
-    // console.log(value);
+
   };
 
   // const profilesubmitHandler = (e: any) => {

@@ -46,7 +46,7 @@ const ITTicketProgress = () => {
 				const pageNumber = parseInt(type);
 				if (!isNaN(pageNumber)) {
 					// @ts-ignore
-					dispatch(getItTicketParameter({ page: pageNumber, limit: limit }));
+					dispatch(getItTicketParameter({ page: pageNumber, limit: limit, status: "INPROGRESS" }));
 				}
 				break;
 		}
@@ -88,12 +88,14 @@ const ITTicketProgress = () => {
 				// handleCustomFilters={handleCustomFilters}
 				/>
 
-				<div  >
+				<div className='mt-4'>
 					<TicketTableComponent
 						pagination={itticketparameterdata}
 						handlePagination={handlePagination}
 						data={itticketparameterdata?.tickets}
-						TYPE={"SERVICE"} />
+						TYPE={false}
+						colSpan={8}
+					/>
 				</div>
 			</main>
 		</div>

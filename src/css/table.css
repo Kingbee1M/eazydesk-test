@@ -1,7 +1,5 @@
  .table-container{
- overflow: auto !important;
- margin-top: 1.5rem !important;
- /* border: 2px solid green; */
+ overflow: auto !important;  
 }
 
   .shadow-z-1 {

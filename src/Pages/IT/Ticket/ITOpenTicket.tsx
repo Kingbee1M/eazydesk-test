@@ -53,10 +53,8 @@ const ITOpenTicket = () => {
 	}
 	useEffect(() => {
 		const datas = { status: "COMPLETED" };
-
 		// @ts-ignore 
 		dispatch(getItTicketParameter(datas))
-
 	}, [dispatch, endDate1])
 
 
@@ -88,12 +86,14 @@ const ITOpenTicket = () => {
 				// handleCustomFilters={handleCustomFilters}
 				/>
 
-				<div  >
+				<div className='mt-4'>
 					<TicketTableComponent
 						pagination={itticketparameterdata}
 						handlePagination={handlePagination}
 						data={itticketparameterdata?.tickets}
-						TYPE={"SERVICE"} />
+						TYPE={false}
+						colSpan={8}
+					/>
 				</div>
 			</main>
 		</div>

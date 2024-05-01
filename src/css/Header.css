@@ -344,9 +344,9 @@ border-radius: 10px;
  width: 100%;
 }
 
-.TeamsPerformanceUL li {
+  .TeamsPerformanceUL li {
   width:100%;
-}
+}  
 .header-pageTitle {
  
   display: none;

@@ -87,12 +87,14 @@ const ITClosedTicket = () => {
 				// handleCustomFilters={handleCustomFilters}
 				/>
 
-				<div  >
+				<div className='mt-4'>
 					<TicketTableComponent
+						TYPE={false}
 						pagination={itticketparameterdata}
 						handlePagination={handlePagination}
 						data={itticketparameterdata?.tickets}
-						TYPE={"SERVICE"} />
+						colSpan={8}
+					/>
 				</div>
 			</main>
 		</div>

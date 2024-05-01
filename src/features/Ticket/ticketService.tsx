@@ -3,7 +3,11 @@ import createHttpService from "../../helpers/HttpService";
 import { baseUrl, buildDynamicURL } from "../../shared/baseUrl";
 
 
-
+// Destructure parameters from datas object
+// const { endDate, startDate, limit, page, ticketType, ticketId, status } = datas;
+// const base = baseUrl + `/api/v2/ticket`;
+// const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType, ticketId, status);
+// const { data } = await axios.get(url)
 
 const getTicket = async () => {
 	const HttpService = createHttpService();

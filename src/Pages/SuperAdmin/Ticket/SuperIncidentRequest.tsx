@@ -98,12 +98,14 @@ const SuperIncidentRequest = () => {
 				// handleCustomFilters={handleCustomFilters}
 				/>
 
-				<div  >
+				<div className='mt-4'>
 					<TicketTableComponent
+						TYPE={false}
 						pagination={admingetticketdata}
 						data={admingetticketdata?.tickets}
 						isLoading={admingetticketisLoading}
-						handlePagination={handlePagination} />
+						handlePagination={handlePagination}
+						colSpan={8} />
 				</div>
 			</main>
 		</div>

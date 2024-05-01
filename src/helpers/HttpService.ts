@@ -9,12 +9,10 @@ import DataService from "../features/Auth/dataService";
 
 
  // Create an instance of DataService
-const dataService = DataService();
- 
+const dataService = DataService(); 
 const createHttpService = () => {   
  // Retrieve the token from the data service
-const token = dataService.getToken();
-
+const token = dataService.getToken(); 
 // Set the token in the data service if it exists
 if (token) {
   dataService.setToken(token);

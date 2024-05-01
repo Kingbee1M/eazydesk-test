@@ -107,10 +107,12 @@ const SuperServiceRequest = () => {
 
 				<div  >
 					<TicketTableComponent
+						TYPE={false}
 						pagination={admingetticketdata}
 						data={admingetticketdata?.tickets}
 						isLoading={admingetticketisLoading}
 						handlePagination={handlePagination}
+						colSpan={8}
 					/>
 				</div>
 			</main>

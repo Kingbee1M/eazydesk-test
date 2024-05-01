@@ -20,7 +20,6 @@ root.render(
     <Provider store={store}>
       <SocketProvider>
         <UserProvider>
-          <ToastContainer />
           <App />
         </UserProvider>
       </SocketProvider>

@@ -26,6 +26,7 @@ const SuperSideNav = () => {
   useEffect(() => {
     dispatch(dashBoardInfo())
   }, [dispatch])
+
   const { isSuperAdmin } = getUserPrivileges();
   const [dropdownOpen, setDropdownOpen] = useState(
     localStorage.getItem('dropdownOpen') === 'true'

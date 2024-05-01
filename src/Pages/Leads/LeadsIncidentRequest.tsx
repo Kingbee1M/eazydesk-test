@@ -14,7 +14,6 @@ import { EntriesPerPage } from '../../components/Options';
 import IncidentRequestModal from '../../components/TicketModals/IncidentRequestModal';
 import { useAppDispatch, useAppSelector } from '../../store/useStore';
 import { getTicket } from '../../features/Ticket/ticketSlice';
-import LeadTicketTableComponent from '../../components/Table/LeadTicketTableComponent';
 
 
 const LeadsIncidentRequest = () => {
@@ -85,12 +84,11 @@ const LeadsIncidentRequest = () => {
 						<IncidentRequestModal headerTitle={"Raise a Ticket - Incident Request"} />
 					</div>
 					<div  >
-						<LeadTicketTableComponent
-							pageheader={"Incident Request"}
-							Request={"Incident Request"}
-							TYPE={"INCIDENT"}
+						<TicketTableComponent
+							TYPE={false}
 							data={data}
-							isLoading={isLoading} />
+							isLoading={isLoading}
+							colSpan={8} />
 					</div>
 				</div>
 			</main>

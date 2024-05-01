@@ -17,9 +17,7 @@ const AdminTicketTable = ({
  pagination
 }: any) => {
 
- //  console.log('data', data)
- //  console.log('pagination', pagination)
- //  console.log('pagination?.totalPages', pagination?.pagination?.totalTickets)
+
 
  return (
   <div id="table-container">
@@ -139,7 +137,11 @@ const AdminTicketTable = ({
            {user?.status === "CLOSED" ? (
             <button className="ticket-Closed">Closed</button>
            ) : (
-            <AssignTask id={user?.id} Assigned={"Assigned"} needsApproval={user?.needsApproval} data={user} />
+             <AssignTask
+              id={user?.id}
+              Assigned={"Assigned"}
+              needsApproval={user?.needsApproval}
+              data={user} />
            )}
           </td>
           <td>

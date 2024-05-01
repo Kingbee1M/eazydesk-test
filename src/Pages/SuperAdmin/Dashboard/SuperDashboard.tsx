@@ -9,7 +9,7 @@ import { GoDotFill } from "react-icons/go";
 import ThreeinOneBarChart from '../../../components/ThreeinOneBarChart';
 import DoughnutChat from '../../../components/DoughnutChat';
 import { PiDotsSixVerticalBold } from 'react-icons/pi';
-import LinePerformanceChart from '../../../components/LinePerformanceChart';
+import LinePerformanceChart from '../../../components/Charts/LinePerformanceChart';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/useStore';
 import { dashBoardInfo } from '../../../features/Ticket/ticketSlice';
@@ -20,7 +20,7 @@ const SuperDashboard = () => {
 	const dispatch = useAppDispatch()
 	const { dashBoardInfodata } = useAppSelector((state: any) => state.ticket);
 
- 
+
 
 	useEffect(() => {
 		dispatch(dashBoardInfo())
@@ -105,7 +105,7 @@ const SuperDashboard = () => {
 						<div>
 							<div className='total_card_flex_icon_source'>
 								<div className='total_card_ArrowUpSFill'>	<p>70%</p> <RiArrowUpSFill size={20} /> </div>
-								<h3>2477 tickets </h3>
+								<h3>2477 tickets</h3>
 							</div>
 						</div>
 					</div>
@@ -174,7 +174,7 @@ const SuperDashboard = () => {
 								<li>Fair Money</li>
 							</ul>
 						</div>
-						<LinePerformanceChart />
+						{/* <LinePerformanceChart /> */}
 					</div>
 				</div>
 			</main>

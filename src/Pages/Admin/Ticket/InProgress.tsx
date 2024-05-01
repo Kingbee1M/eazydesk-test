@@ -29,15 +29,6 @@ const InProgress = () => {
 	const [endDate1] = useState(formattedEndDate);
 
 
-	const currentDate = moment().format("YYYY-MM-DD");
-	const sevenDays = moment().subtract(7, "days").format("YYYY-MM-DD");
-	const yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
-	const [data, setData] = useState<any>([]);
-
-	useEffect(() => {
-		setData(admingetticketdata);
-	}, [admingetticketdata]);
-
 
 	useEffect(() => {
 		const datas = { status: "INPROGRESS" };
@@ -46,7 +37,7 @@ const InProgress = () => {
 
 	}, [dispatch, endDate1, startDate1, itassignisSuccess])
 
-	console.log('itassignisSuccess', admingetticketdata)
+
 
 	return (
 		<div id="page-wrapper">
@@ -74,10 +65,12 @@ const InProgress = () => {
 				// handleCustomFilters={handleCustomFilters}
 				/>
 
-				<div  >
+				<div className='mt-4'>
 					<TicketTableComponent
+						TYPE={false}
 						data={admingetticketdata?.tickets}
 						isLoading={admingetticketisLoading}
+						colSpan={8}
 					/>
 				</div>
 			</main>

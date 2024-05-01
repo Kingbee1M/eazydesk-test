@@ -260,6 +260,9 @@ padding: .5rem;
 	gap: .1rem;
 	color: #616467;
 font-size: 14px;
+overflow-y: scroll;
+max-height: 230px;
+ height: 100%;
 }
 
 .TeamsPerformanceUL li { 

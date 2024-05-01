@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { SVGLoader } from "./SVGLoader";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
-import { customId, userInfo } from "./Options";
+import { customId } from "./Options";
 import { logout, reset } from "../features/Auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../store/useStore";
 import { logoutUserAction } from "../features/Auth/authService";
@@ -20,7 +20,9 @@ const ProfileDropDown = () => {
 		isSuccesslogout
 	} = useAppSelector((state: { auth: any; }) => state.auth)
 
-	// @ts-ignore
+
+	// @ts-ignore  
+	const userInfo = JSON.parse(localStorage.getItem("service_desk"));
 	// Create an instance of DataService
 	const dataService = DataService();
 	const dispatch = useAppDispatch();
@@ -36,7 +38,7 @@ const ProfileDropDown = () => {
 			navigate("/");
 			dispatch(reset());
 		}
-	}, [dispatch, navigate]);
+	}, [dispatch, navigate, userInfo]);
 
 	useEffect(() => {
 		if (isSuccesslogout) {

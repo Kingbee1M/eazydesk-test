@@ -11,7 +11,6 @@ import { LuUsers } from "react-icons/lu";
 import logo from '../../assets/img/logo.svg'
 import { RiAlarmWarningLine } from "react-icons/ri";
 import { TbExchange } from "react-icons/tb";
-import { getUserPrivileges } from "../../hooks/auth";
 import { IoMdOpen } from "react-icons/io";
 import { useAppDispatch, useAppSelector } from "../../store/useStore";
 import { dashBoardInfo } from "../../features/Ticket/ticketSlice";
@@ -24,7 +23,7 @@ const SideNav = () => {
   useEffect(() => {
     dispatch(dashBoardInfo())
   }, [dispatch])
-  const { isSuperAdmin } = getUserPrivileges();
+
   const [dropdownOpen, setDropdownOpen] = useState(
     localStorage.getItem('dropdownOpen') === 'true'
   );

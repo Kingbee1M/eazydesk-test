@@ -1,5 +1,5 @@
 import { MdOutlineDashboard, MdOutlineMiscellaneousServices } from "react-icons/md";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { BsFileEarmarkCheck } from "react-icons/bs";
 import { MdOutlineSettings } from "react-icons/md";
 import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
@@ -13,7 +13,6 @@ import { PiCalendarCheckDuotone } from "react-icons/pi";
 
 
 const ITSideNav = () => {
-	const navigate = useNavigate();
 	const [dropdownOpen, setDropdownOpen] = useState(
 		localStorage.getItem('dropdownOpen') === 'true'
 	);
@@ -31,11 +30,6 @@ const ITSideNav = () => {
 		}
 	}, [dropdownOpen]);
 
-	const handleLogout = () => {
-		localStorage.removeItem('email');
-		localStorage.removeItem('password');
-		navigate("/");
-	};
 
 
 

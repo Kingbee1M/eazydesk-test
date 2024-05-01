@@ -24,7 +24,6 @@ const ForgotPassword = () => {
 	useEffect(() => {
 		if (forgetisError) {
 			falseIt()
-			toast.error(forgetmessage);
 		} else if (forgetisSuccess) {
 			trueIt()
 		}
@@ -76,7 +75,7 @@ const ForgotPassword = () => {
 		<div id="login-wrapper">
 			<Carousels />
 			<div className="login-container">
-				<ToastContainer position="top-right" containerId={"custom1"} />
+				<ToastContainer position="top-right" />
 				<div className="login-content-layout">
 					<LoginHeader />
 					<div className="login-content-grid">
@@ -108,7 +107,7 @@ const ForgotPassword = () => {
 														type="submit"
 														disabled={forgetisLoading}
 													>
-														{forgetisLoading ? <Spinner size="sm" /> : "Sign-in"}
+														{forgetisLoading ? <Spinner size="sm" /> : "Enter"}
 													</button>
 
 												</form>

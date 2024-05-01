@@ -61,8 +61,7 @@ const edituser = async (value: any) => {
   const { data } = await HttpService.put(
     `/api/v2/auth/admin-update-user/${id}`,
     input
-  );
-  console.log(data);
+  ); 
   return data;
 };
 

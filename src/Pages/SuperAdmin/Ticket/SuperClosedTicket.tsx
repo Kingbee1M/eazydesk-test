@@ -100,10 +100,12 @@ const ClosedTicket = () => {
 				// handleCustomFilters={handleCustomFilters}
 				/>
 
-				<div  >
+				<div className='mt-4'>
 					<TicketTableComponent
+						TYPE={false}
 						data={admingetticketdata?.tickets}
 						isLoading={admingetticketisLoading}
+						colSpan={8}
 					/>
 				</div>
 			</main>
