@@ -132,4 +132,5 @@ const GeneralInformation = () => {
   );
 };
 
-export default GeneralInformation;
+ 
+export default GeneralInformation; 
