@@ -30,7 +30,7 @@ const AdminDashboard = () => {
 	}, [dispatch])
 
 
-	const ticketTotal = dashBoardInfodata?.pagination?.totalTickets
+	const ticketTotal = dashBoardInfodata?.totalTickets
 	const changeRequest = dashBoardInfodata?.totals?.ticketType?.changeRequest
 	const incidentRequest = dashBoardInfodata?.totals?.ticketType?.incidentRequest
 	const serviceRequest = dashBoardInfodata?.totals?.ticketType?.serviceRequest
@@ -49,7 +49,7 @@ const AdminDashboard = () => {
 	const service = !dashBoardInfodata ? [] : dashBoardInfodata?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("SERVICE"));
 	const change = !dashBoardInfodata ? [] : dashBoardInfodata?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("CHANGE"));
 
-
+	console.log('incident', incident)
 
 	const statusList = [
 		'Inprogress',
@@ -57,21 +57,19 @@ const AdminDashboard = () => {
 		'Change',
 		'Approved',
 		'Closed',
-		'Completed',
-		'Dissaproved',
-		'Invalid',
-		'Open',
+		// 'Completed',
+		// 'Dissaproved',
 		'Pending',
-		'Reopen'
+		// 'Reopen'
 	];
 
 	const types = !dashBoardInfodata ? [] :
 		dashBoardInfodata?.tickets?.filter((ticket: any) => {
-			return ticket?.status === activeIndex?.toUpperCase();
+			return ticket?.status === activeIndex?.toUpperCase() || ticket?.ticketType === activeIndex?.toUpperCase();
 		}) || [];
 
 
-	console.log('includes-types', types)
+	console.log('dashBoardInfodata', dashBoardInfodata)
 
 
 

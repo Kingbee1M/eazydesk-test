@@ -31,49 +31,49 @@ const ThreeinOneBarChart = ({ threeinone, incident, service, change }: any) => {
 
 
 	// Initialize incidents with empty arrays for each month
-	const incidents: any = months.reduce((acc: any, month) => {
+	const incidents: any = months?.reduce((acc: any, month) => {
 		acc[month] = [];
 		return acc;
 	}, {});
 	// Initialize incidents with empty arrays for each month
-	const services: any = months.reduce((acc: any, month) => {
+	const services: any = months?.reduce((acc: any, month) => {
 		acc[month] = [];
 		return acc;
 	}, {});
 	// Initialize incidents with empty arrays for each month
-	const changes: any = months.reduce((acc: any, month) => {
+	const changes: any = months?.reduce((acc: any, month) => {
 		acc[month] = [];
 		return acc;
 	}, {});
 
 	// Populate incidents with data
-	incident?.forEach((ticket: { updatedAt: string | number | Date; }) => {
-		const updatedDate = new Date(ticket?.updatedAt);
-		const month = months[updatedDate.getMonth()]; // Get the month component (0-indexed)
+	incident?.forEach((ticket: { createdAt: string | number | Date; }) => {
+		const updatedDate = new Date(ticket?.createdAt);
+		const month = months[updatedDate?.getMonth()]; // Get the month component (0-indexed)
 
 		incidents[month].push(ticket);
 	});
 	// Populate incidents with data
-	service?.forEach((ticket: { updatedAt: string | number | Date; }) => {
-		const updatedDate = new Date(ticket?.updatedAt);
-		const month = months[updatedDate.getMonth()]; // Get the month component (0-indexed)
+	service?.forEach((ticket: { createdAt: string | number | Date; }) => {
+		const updatedDate = new Date(ticket?.createdAt);
+		const month = months[updatedDate?.getMonth()]; // Get the month component (0-indexed)
 
 		services[month].push(ticket);
 	});
 	// Populate incidents with data
-	change?.forEach((ticket: { updatedAt: string | number | Date; }) => {
-		const updatedDate = new Date(ticket?.updatedAt);
-		const month = months[updatedDate.getMonth()]; // Get the month component (0-indexed)
+	change?.forEach((ticket: { createdAt: string | number | Date; }) => {
+		const updatedDate = new Date(ticket?.createdAt);
+		const month = months[updatedDate?.getMonth()]; // Get the month component (0-indexed)
 
 		changes[month].push(ticket);
 	});
 
- 
+
 	const data = {
 		labels: months,
 		datasets: [
 			{
-				label: 'Incidents',
+				label: 'Incidents Request',
 				backgroundColor: '#0240BC',
 				borderColor: '#0240BC',
 				borderWidth: 1,
@@ -81,7 +81,7 @@ const ThreeinOneBarChart = ({ threeinone, incident, service, change }: any) => {
 				data: months.map(month => incidents[month].length),
 			},
 			{
-				label: 'Inprogress',
+				label: 'Services Request',
 				backgroundColor: '#0240bc90',
 				borderColor: '#0240bc90',
 				borderWidth: 1,
@@ -89,7 +89,7 @@ const ThreeinOneBarChart = ({ threeinone, incident, service, change }: any) => {
 				data: months.map(month => services[month].length),
 			},
 			{
-				label: 'New',
+				label: 'Change Request',
 				backgroundColor: '#E5ECFB',
 				borderColor: '#E5ECFB',
 				borderWidth: 1,
