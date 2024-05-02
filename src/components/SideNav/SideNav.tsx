@@ -5,18 +5,15 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import { PiCalendarCheckDuotone } from "react-icons/pi";
 import { MdOutlineSettings } from "react-icons/md";
 import { BsFileText } from "react-icons/bs";
-import { LuTag } from "react-icons/lu";
 import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
 import { useEffect, useState } from "react";
 import { LuUsers } from "react-icons/lu";
 import logo from '../../assets/img/logo.svg'
 import { RiAlarmWarningLine } from "react-icons/ri";
 import { TbExchange } from "react-icons/tb";
-import { getUserPrivileges } from "../../hooks/auth";
 import { IoMdOpen } from "react-icons/io";
 import { useAppDispatch, useAppSelector } from "../../store/useStore";
 import { dashBoardInfo } from "../../features/Ticket/ticketSlice";
-import { MdOutlineSubscriptions } from "react-icons/md";
 
 
 const SideNav = () => {
@@ -26,7 +23,7 @@ const SideNav = () => {
   useEffect(() => {
     dispatch(dashBoardInfo())
   }, [dispatch])
-  const { isSuperAdmin } = getUserPrivileges();
+
   const [dropdownOpen, setDropdownOpen] = useState(
     localStorage.getItem('dropdownOpen') === 'true'
   );
@@ -126,7 +123,7 @@ const SideNav = () => {
             }>
               <div className="nav_dropdown_sub">
                 <PiCalendarCheckDuotone size={22} />
-                <span>Closed ticket</span>
+                <span>Closed</span>
               </div>
               <div className="side_number_two">{!closed ? 0 : closed}</div>
             </NavLink>
@@ -149,7 +146,7 @@ const SideNav = () => {
             }>
               <div className="nav_dropdown_sub">
                 <MdOutlineMiscellaneousServices size={15} />
-                <span>Service request</span>
+                <span>Service Request</span>
               </div>
               <div className="side_number_five">{!serviceRequest ? 0 : serviceRequest}</div>
             </NavLink>
@@ -160,26 +157,14 @@ const SideNav = () => {
             }>
               <div className="nav_dropdown_sub">
                 <TbExchange size={15} />
-                <span>Change request</span>
+                <span>Change Request</span>
               </div>
               <div className="side_number_two">{!changeRequest ? 0 : changeRequest}</div>
             </NavLink>
           </div>
         )}
       </nav>
-      {isSuperAdmin && <nav>
-        <NavLink to="/company" className={({ isActive }) =>
-          [
-            "nav-link",
-            isActive ? "active" : null,
-          ]
-            .filter(Boolean)
-            .join(" ")
-        }>
-          <LuTag size={15} />
-          <span>Company</span>
-        </NavLink>
-      </nav>}
+
 
       <nav>
         <NavLink to="/register" className={({ isActive }) =>
@@ -192,19 +177,6 @@ const SideNav = () => {
         }>
           <LuUsers size={15} />
           <span>Register</span>
-        </NavLink>
-      </nav>
-      <nav>
-        <NavLink to="/subscription" className={({ isActive }) =>
-          [
-            "nav-link",
-            isActive ? "active" : null,
-          ]
-            .filter(Boolean)
-            .join(" ")
-        }>
-          <MdOutlineSubscriptions size={15} />
-          <span>Subscription</span>
         </NavLink>
       </nav>
       <nav>

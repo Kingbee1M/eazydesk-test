@@ -2,7 +2,7 @@ import { EntriesLimit } from './Options';
 import FilterModal from './FilterModal';
 // import { useIsMobile } from '../hooks/resize';
 import Search from './Search';
-import SubscriptionModal from '../Pages/Admin/Subscription/SubscriptionModal';
+import SubscriptionModal from '../Pages/SuperAdmin/Subscription/SubscriptionModal';
 
 
 const SearchConponent = ({ ID, handleCustomFilters, setEndDates, setStartDates, searchItem, setSearchItem, placeholder, data, filter, show, setShow, limit, handlePagination, subscription }: any) => {

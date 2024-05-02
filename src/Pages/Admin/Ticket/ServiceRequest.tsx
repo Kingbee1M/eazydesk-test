@@ -4,10 +4,10 @@ import Header from '../../../components/Header'
 import SideNav from '../../../components/SideNav/SideNav'
 import SearchConponent from '../../../components/SearchConponent'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
-import { data } from '../../../components/StateData'
+
 import moment from 'moment'
 import { admingetTicket } from '../../../features/Ticket/ticketSlice'
-import AdminTicketTable from './AdminTicketTable'
+
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 
 const ServiceRequest = () => {
@@ -24,7 +24,7 @@ const ServiceRequest = () => {
 	const [datas, setDatas] = useState([]);
 	const [searchItem, setSearchItem] = useState("");
 
-	const { admingetticketdata } = useAppSelector((state: any) => state.ticket)
+	const { admingetticketdata, admingetticketisLoading } = useAppSelector((state: any) => state.ticket)
 	endDates = new Date();
 	const formattedEndDate = endDates.toISOString().split('T')[0]; // Extracting date part and removing time
 	const [startDate1] = useState(formattedEndDate);
@@ -79,11 +79,12 @@ const ServiceRequest = () => {
 				// handleCustomFilters={handleCustomFilters}
 				/>
 
-				<div  >
+				<div className='mt-4'>
 					<TicketTableComponent
-						pageheader={"SERVICE REQUEST"}
-						Request={"Service Request"}
-						data={admingetticketdata?.tickets} />
+						TYPE={false}
+						isLoading={admingetticketisLoading}
+						data={admingetticketdata?.tickets}
+						colSpan={8} />
 				</div>
 			</main>
 		</div>

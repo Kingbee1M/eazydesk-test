@@ -25,17 +25,59 @@ ChartJS.register(
 
 
 
-const LeadsThreeinOneBarChart = () => {
+const LeadsThreeinOneBarChart = ({ threeinone, incident, service, change }: any) => {
+
+
+
+	// Initialize incidents with empty arrays for each month
+	const incidents: any = months.reduce((acc: any, month) => {
+		acc[month] = [];
+		return acc;
+	}, {});
+	// Initialize incidents with empty arrays for each month
+	const services: any = months.reduce((acc: any, month) => {
+		acc[month] = [];
+		return acc;
+	}, {});
+	// Initialize incidents with empty arrays for each month
+	const changes: any = months.reduce((acc: any, month) => {
+		acc[month] = [];
+		return acc;
+	}, {});
+
+	// Populate incidents with data
+	incident?.forEach((ticket: { updatedAt: string | number | Date; }) => {
+		const updatedDate = new Date(ticket?.updatedAt);
+		const month = months[updatedDate.getMonth()]; // Get the month component (0-indexed)
+
+		incidents[month].push(ticket);
+	});
+	// Populate incidents with data
+	service?.forEach((ticket: { updatedAt: string | number | Date; }) => {
+		const updatedDate = new Date(ticket?.updatedAt);
+		const month = months[updatedDate.getMonth()]; // Get the month component (0-indexed)
+
+		services[month].push(ticket);
+	});
+	// Populate incidents with data
+	change?.forEach((ticket: { updatedAt: string | number | Date; }) => {
+		const updatedDate = new Date(ticket?.updatedAt);
+		const month = months[updatedDate.getMonth()]; // Get the month component (0-indexed)
+
+		changes[month].push(ticket);
+	});
+
+
 	const data = {
 		labels: months,
 		datasets: [
 			{
-				label: 'Completed',
+				label: 'Incidents',
 				backgroundColor: '#0240BC',
 				borderColor: '#0240BC',
 				borderWidth: 1,
 				barThickness: 20,
-				data: [33, 42, 55, 12, 55, 86, 77, 13.41, 98, 99, 66, 44],
+				data: months.map(month => incidents[month].length),
 			},
 			{
 				label: 'Inprogress',
@@ -43,7 +85,7 @@ const LeadsThreeinOneBarChart = () => {
 				borderColor: '#0240bc90',
 				borderWidth: 1,
 				barThickness: 20,
-				data: [42, 44, 55, 12, 55, 86, 77, 13.41, 98, 99, 66, 33],
+				data: months.map(month => services[month].length),
 			},
 			{
 				label: 'New',
@@ -51,7 +93,7 @@ const LeadsThreeinOneBarChart = () => {
 				borderColor: '#E5ECFB',
 				borderWidth: 1,
 				barThickness: 20,
-				data: [33, 42, 44, 55, 12, 55, 86, 77, 13.41, 98, 99, 66],
+				data: months.map(month => changes[month].length),
 			},
 		],
 	};
@@ -76,7 +118,7 @@ const LeadsThreeinOneBarChart = () => {
 	};
 
 	return (
-		<div className='three-in-one' style={{ height: '400px' }}>
+		<div className={threeinone}>
 			<Bar data={data} options={options} height={"100%"} width={"100%"} />
 		</div>
 	);

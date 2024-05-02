@@ -20,13 +20,14 @@ const ProfileDropDown = () => {
 		isSuccesslogout
 	} = useAppSelector((state: { auth: any; }) => state.auth)
 
-	// @ts-ignore
+
+	// @ts-ignore  
+	const userInfo = JSON.parse(localStorage.getItem("service_desk"));
 	// Create an instance of DataService
 	const dataService = DataService();
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
-	// @ts-ignore  
-	const userInfo = JSON.parse(localStorage.getItem("service_desk"));
+
 
 	const handleLogout = () => {
 		dispatch(logout());
@@ -53,7 +54,7 @@ const ProfileDropDown = () => {
 			dataService.clearData()
 		}
 		dispatch(reset());
-	}, [dispatch, isErrorlogout, isSuccesslogout, messagelogout, navigate])
+	}, [dataService, dispatch, isErrorlogout, isSuccesslogout, messagelogout, navigate])
 
 
 
@@ -88,7 +89,8 @@ const ProfileDropDown = () => {
 					<MdLogout size={25} />
 				</div>
 				<div>
-					{isLoadinglogout ? <SVGLoader width={"30px"} height={"30px"} color={"#000"} /> : <p className='notification-text-profile'>Logout</p>}
+					{isLoadinglogout ? <SVGLoader width={"30px"} height={"30px"} color={"#000"} /> :
+						<p className='notification-text-profile'>Logout</p>}
 
 				</div>
 			</div>

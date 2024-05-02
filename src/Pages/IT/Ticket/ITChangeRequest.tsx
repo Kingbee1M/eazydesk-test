@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import { getItTicketParameter } from '../../../features/Ticket/ticketSlice'
 import ITTicketTable from './ITTicketTable'
 import moment from 'moment'
+import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 
 const ITChangeRequest = () => {
 	const dispatch = useAppDispatch();
@@ -94,13 +95,15 @@ const ITChangeRequest = () => {
 				// handleCustomFilters={handleCustomFilters}
 				/>
 
-				<div  >
-					<ITTicketTable
+				<div className='mt-4'>
+					<TicketTableComponent
 						TYPE={true}
 						pagination={itticketparameterdata}
 						handlePagination={handlePagination}
 						data={itticketparameterdata?.tickets}
-						isLoading={itticketparameterisLoading} />
+						isLoading={itticketparameterisLoading}
+						colSpan={8}
+					/>
 				</div>
 			</main>
 		</div>

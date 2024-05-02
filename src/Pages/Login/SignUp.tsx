@@ -144,10 +144,13 @@ export default function GeekStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
   const {
-    createdata: { id },
+    createdata,
     createisLoading,
     createisSuccess,
   } = useAppSelector((state: any) => state.company);
+
+  const id = createdata?.id
+
   const { signUpisLoading, signUpisSuccess } = useAppSelector(
     (state: any) => state.reg
   );

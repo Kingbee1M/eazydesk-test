@@ -35,7 +35,20 @@ import ResetPassword from "./Pages/Login/ResetPassword";
 import TicketProgress from "./components/Chat/TicketProgress";
 import InProgress from "./Pages/Admin/Ticket/InProgress";
 import Support from "./Pages/Support/Support";
-import Subscription from "./Pages/Admin/Subscription/Subscription";
+import SuperDashboard from "./Pages/SuperAdmin/Dashboard/SuperDashboard";
+import SuperCompany from "./Pages/SuperAdmin/Company/SuperCompany";
+import SuperCompanysMembers from "./Pages/SuperAdmin/Company/SuperCompanysMembers";
+import SuperRegister from "./Pages/SuperAdmin/ Register/SuperRegister";
+import Subscription from "./Pages/SuperAdmin/Subscription/Subscription";
+import SuperTicketReport from "./Pages/SuperAdmin/Report/SuperTicketReport";
+import SuperOpenTicket from "./Pages/SuperAdmin/Ticket/SuperOpenTicket";
+import SuperClosedTicket from "./Pages/SuperAdmin/Ticket/SuperClosedTicket";
+import SuperIncidentRequest from "./Pages/SuperAdmin/Ticket/SuperIncidentRequest";
+import SuperServiceRequest from "./Pages/SuperAdmin/Ticket/SuperServiceRequest";
+import SuperChangeRequest from "./Pages/SuperAdmin/Ticket/SuperChangeRequest";
+import SuperInProgress from "./Pages/SuperAdmin/Ticket/SuperInProgress";
+import SuperSettings from "./Pages/SuperAdmin/Settings/SuperSettings";
+import PageNotFound from "./Pages/Login/PageNotFound";
 
 
 function App() {
@@ -50,9 +63,14 @@ function App() {
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/help" element={<Help />} />
         <Route path="/support" element={<Support />} />
+        <Route path="/successpage/:email" element={<SuccessPage />} />
+        <Route path="/verifyemail/:id/:token" element={<VerifyEmail />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/passwordreset/:id" element={<ResetPassword />} />
+        <Route path="/ticket-progress/:id" element={<TicketProgress />} />
         <Route path="/dashboard" element={<DashboardHUB />} />
+
+
         <Route path="/admindashboard" element={<AdminDashboard />} />
         <Route path="/openticket" element={<OpenTicket />} />
         <Route path="/closedticket" element={<ClosedTicket />} />
@@ -65,7 +83,23 @@ function App() {
         <Route path="/settings" element={<Settings />} />
         <Route path="/report" element={<TicketReport />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/ticket-progress/:id" element={<TicketProgress />} />
+
+
+        <Route path="/superopenticket" element={<SuperOpenTicket />} />
+        <Route path="/superclosedticket" element={<SuperClosedTicket />} />
+        <Route path="/superincidentrequest" element={<SuperIncidentRequest />} />
+        <Route path="/superservicerequest" element={<SuperServiceRequest />} />
+        <Route path="/superchangerequest" element={<SuperChangeRequest />} />
+        <Route path="/superticketprogress" element={<SuperInProgress />} />
+        <Route path="/superdashboard" element={<SuperDashboard />} />
+        <Route path="/supercompany" element={<SuperCompany />} />
+        <Route path="/supercompanymembers/:id" element={<SuperCompanysMembers />} />
+        <Route path="/superregister" element={<SuperRegister />} />
+        <Route path="/supersubscription" element={<Subscription />} />
+        <Route path="/superticketreport" element={<SuperTicketReport />} />
+        <Route path="/supersettings" element={<SuperSettings />} />
+
+
         {/* IT Screens */}
         <Route path="/itdashboard" element={<ITDashboard />} />
         <Route path="/itopenticket" element={<ITOpenTicket />} />
@@ -75,17 +109,19 @@ function App() {
         <Route path="/itservicerequest" element={<ITServiceRequest />} />
         <Route path="/itchangerequest" element={<ITChangeRequest />} />
         <Route path="/itsettings" element={<ITSettings />} />
-        <Route path="/supervisorsettings" element={<ITSettings />} />
+
+
         {/* IT Screens */}
+        <Route path="/supervisorsettings" element={<ITSettings />} />
         <Route path="/supervisordashboard" element={<SupervisorDashboard />} />
+
+
         {/* Leads Screen */}
         <Route path="/leadsdashboard" element={<LeadsDashboard />} />
         <Route path="/incident-request" element={<LeadsIncidentRequest />} />
         <Route path="/service-request" element={<LeadsServiceRequest />} />
         <Route path="/change-request" element={<LeadsChangeRequest />} />
-        <Route path="/successpage/:email" element={<SuccessPage />} />
-        <Route path="/verifyemail/:id/:token" element={<VerifyEmail />} />
-        <Route path="/subscription" element={<Subscription />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );

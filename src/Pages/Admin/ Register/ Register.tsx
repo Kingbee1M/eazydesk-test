@@ -91,7 +91,7 @@ const Register = ({ switchs }: any) => {
             <tbody className='data-table-content'>
               {isLoadingAll ? (
                 <TableFetch colSpan={7} />
-              ) : displayData?.length === 0 || dataAll?.length === 0 ? (
+              ) : displayData?.length === 0 || dataAll.length === 0 ? (
                 <NoRecordFound colSpan={7} />
               ) : (
                 displayData?.map((item: any, i: any) => (

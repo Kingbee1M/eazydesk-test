@@ -3,7 +3,6 @@ import SideNav from '../../../components/SideNav/SideNav'
 import Header from '../../../components/Header'
 import BottomNavigation from '../../../components/BottomNavigation'
 import SearchConponent from '../../../components/SearchConponent'
-import moment from 'moment'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import { admingetTicket } from '../../../features/Ticket/ticketSlice'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
@@ -18,21 +17,13 @@ const OpenTicket = () => {
 	const [datas, setDatas] = useState([]);
 	const [searchItem, setSearchItem] = useState("");
 
-	const { admingetticketdata, admingetticketdataisLoading } = useAppSelector((state: any) => state.ticket)
+	const { admingetticketdata, admingetticketisLoading } = useAppSelector((state: any) => state.ticket)
 	endDates = new Date();
 	const formattedEndDate = endDates.toISOString().split('T')[0]; // Extracting date part and removing time
 	const [startDate1] = useState(formattedEndDate);
 	const [endDate1] = useState(formattedEndDate);
 
 
-	const currentDate = moment().format("YYYY-MM-DD");
-	const sevenDays = moment().subtract(7, "days").format("YYYY-MM-DD");
-	const yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
-	const [data, setData] = useState<any>([]);
-
-	useEffect(() => {
-		setData(admingetticketdata);
-	}, [admingetticketdata]);
 
 
 	useEffect(() => {
@@ -93,10 +84,12 @@ const OpenTicket = () => {
 				// handleCustomFilters={handleCustomFilters}
 				/>
 
-				<div  >
+				<div className='mt-4'>
 					<TicketTableComponent
+						TYPE={false}
+						isLoading={admingetticketisLoading}
 						data={admingetticketdata?.tickets}
-						isLoading={admingetticketdataisLoading}
+						colSpan={8}
 					/>
 				</div>
 			</main>

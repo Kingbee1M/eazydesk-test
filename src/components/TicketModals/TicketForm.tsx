@@ -176,13 +176,13 @@ const TicketForm = ({ type, setShow, currentState, proposedChange }: any) => {
     <div>
       <form id="ticket-form" onSubmit={handleCreateTicket} ref={form}>
         <div className="form-grp">
-          <label htmlFor="contact-details">To</label>
+          <label htmlFor="contact-details">To Email</label>
           <ToSelect user={user} isLoading={ITgetallReguserisLoading} handleOnChange={handleOnChange} input={input} />
         </div>
-        <div className="form-grp">
+        {/* <div className="form-grp">
           <label htmlFor="contact-details">Cc</label>
           <CcSelect user={user} isLoading={ITgetallReguserisLoading} />
-        </div>
+        </div> */}
         <div className="form-grp">
           <label htmlFor="contact-details">Ticket Type</label>
           <input

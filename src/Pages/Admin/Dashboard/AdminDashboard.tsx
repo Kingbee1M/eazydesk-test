@@ -10,17 +10,20 @@ import { GoDotFill } from "react-icons/go";
 import ThreeinOneBarChart from '../../../components/ThreeinOneBarChart';
 import DoughnutChat from '../../../components/DoughnutChat';
 import { PiDotsSixVerticalBold } from 'react-icons/pi';
-import LinePerformanceChart from '../../../components/LinePerformanceChart';
-import { useEffect } from 'react';
+import LinePerformanceChart from '../../../components/Charts/LinePerformanceChart';
+import { SetStateAction, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/useStore';
 import { dashBoardInfo } from '../../../features/Ticket/ticketSlice';
 
 
 const AdminDashboard = () => {
+	const [activeIndex, setActiveIndex] = useState<any>('Inprogress'); // Initially set the first item as active
+
+
 	const dispatch = useAppDispatch()
 	const { dashBoardInfodata } = useAppSelector((state: any) => state.ticket);
 
-	console.log('dashBoardInfodata', dashBoardInfodata)
+
 
 	useEffect(() => {
 		dispatch(dashBoardInfo())
@@ -42,10 +45,59 @@ const AdminDashboard = () => {
 	const reopen = dashBoardInfodata?.totals?.status?.reopen
 
 
+	const incident = !dashBoardInfodata ? [] : dashBoardInfodata?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("INCIDENT"));
+	const service = !dashBoardInfodata ? [] : dashBoardInfodata?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("SERVICE"));
+	const change = !dashBoardInfodata ? [] : dashBoardInfodata?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("CHANGE"));
+
+
+
+	const statusList = [
+		'Inprogress',
+		'Service',
+		'Change',
+		'Approved',
+		'Closed',
+		'Completed',
+		'Dissaproved',
+		'Invalid',
+		'Open',
+		'Pending',
+		'Reopen'
+	];
+
+	const types = !dashBoardInfodata ? [] :
+		dashBoardInfodata?.tickets?.filter((ticket: any) => {
+			return ticket?.status === activeIndex?.toUpperCase();
+		}) || [];
+
+
+	console.log('includes-types', types)
+
+
+
+
+	const TeamsPerformanceUL = () => {
+		const handleClick = (index: SetStateAction<string>) => {
+			setActiveIndex(index);
+		};
+
+
+		return (
+			<ul className='TeamsPerformanceUL'>
+				{statusList.map((status: string, index: any) => (
+					<li key={index} onClick={() => handleClick(status)} className={status === activeIndex ? 'TeamsPerformanceUL_active' : ''}>
+						{status}
+					</li>
+				))}
+			</ul>
+		);
+	};
+
+
+
 	return (
 		<div id="page-wrapper">
-			<SideNav
-			/>
+			<SideNav />
 			<Header />
 			<BottomNavigation />
 			<main>
@@ -150,10 +202,9 @@ const AdminDashboard = () => {
 						</div>
 						<ThreeinOneBarChart
 							threeinone={"threeinone"}
-							ticketTotal={ticketTotal}
-							inprogress={inprogress}
-							completed={completed}
-							pending={pending}
+							incident={incident}
+							service={service}
+							change={change}
 						/>
 					</div>
 				</div>
@@ -161,21 +212,19 @@ const AdminDashboard = () => {
 				<div className='dashboard-bottom-item-container'>
 					<div className='dashboard-first-card2 mb-2'>
 						<div>
-							<h5 className='dashboard-first-card-h'>Vendor Tickets</h5>
+							<h5 className='dashboard-first-card-h'>Ticket Status & Types</h5>
 							{/* <p className='dashboard-first-card-p'>Teams with leads graph analysis</p> */}
 						</div>
 						<div className='dashboard-first-card-second-icon'>	<PiDotsSixVerticalBold size={20} /></div>
 					</div>
 					<div className='TeamsPerformancechart'>
 						<div className='TeamsPerformancechartsub1'>
-							<ul className='TeamsPerformanceUL'>
-								<li className='TeamsPerformanceUL_active'>Vodacom</li>
-								<li>Branch</li>
-								<li>UBA</li>
-								<li>Fair Money</li>
-							</ul>
+
+							<TeamsPerformanceUL />
 						</div>
-						<LinePerformanceChart />
+						<LinePerformanceChart
+							types={types}
+						/>
 					</div>
 				</div>
 			</main>
@@ -184,6 +233,7 @@ const AdminDashboard = () => {
 }
 
 export default AdminDashboard
+
 
 
 

@@ -1,22 +1,20 @@
 import { useEffect, useState } from 'react'
 import BottomNavigation from '../../../components/BottomNavigation'
 import Header from '../../../components/Header'
-import SideNav from '../../../components/SideNav/SideNav'
 import SearchConponent from '../../../components/SearchConponent'
 import { admingetTicket } from '../../../features/Ticket/ticketSlice'
-import AdminTicketTable from "../Ticket/AdminTicketTable"
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import moment from 'moment'
-import SubscriptionTable from './SubscriptionTable'
+import TicketTableComponent from '../../../components/Table/TicketTableComponent'
+import SuperSideNav from '../../../components/SideNav/SuperSideNav'
 
 
 
 
-const Subscription = () => {
+const SuperIncidentRequest = () => {
 	const dispatch = useAppDispatch();
 	const { itassignisSuccess } = useAppSelector((state: any) => state.ticket);
 	const { admingetticketdata, admingetticketisLoading } = useAppSelector((state: any) => state.ticket)
-
 	const [entriesPerPage, setEntriesPerPage] = useState(() => {
 		return "6";
 	});
@@ -25,7 +23,7 @@ const Subscription = () => {
 	let [endDates, setEndDates] = useState<any>([]);
 	const [show, setShow] = useState(false);
 	const [searchItem, setSearchItem] = useState("");
-
+	const [limit, setLimit] = useState<any>(8);
 	endDates = new Date();
 	const formattedEndDate = endDates.toISOString().split('T')[0]; // Extracting date part and removing time
 	const [startDate1] = useState(formattedEndDate);
@@ -47,23 +45,48 @@ const Subscription = () => {
 
 	}, [dispatch, endDate1, startDate1, itassignisSuccess])
 
+	const handlePagination = (type: string, data?: React.ChangeEvent<HTMLSelectElement> | undefined) => {
+		switch (type) {
+			// @ts-ignore
+			case 'prev': dispatch(admingetTicket({ page: pagination?.page - 1, limit: limit }));
+				break;
+			// @ts-ignore
+			case 'next': dispatch(admingetTicket({ page: pagination?.page + 1, limit: limit }));
+				break;
+			case 'limit':
+				if (data) {
+					setLimit(data.target.value);
+					// @ts-ignore
+					dispatch(admingetTicket({ limit: data.target.value }));
+				}
+				break;
+			default:
+				// For page numbers or any other custom actions
+				const pageNumber = parseInt(type);
+				if (!isNaN(pageNumber)) {
+					// @ts-ignore
+					dispatch(admingetTicket({ page: pageNumber, limit: limit }));
+				}
+				break;
+		}
+	}
 
 	return (
 		<div id="page-wrapper">
-			<SideNav />
+			<SuperSideNav />
 			<Header />
 			<BottomNavigation />
 			<main>
 				<div className='dashboard-first-card-boards '>
 					<div>
-						<h5 className='dashboard-first-card-h'>Subscription History</h5>
+						<h5 className='dashboard-first-card-h'>Incident Request</h5>
 					</div>
 				</div>
 				<SearchConponent
 					placeholder={"search ticket"}
 					setSearchItem={setSearchItem}
 					searchItem={searchItem}
-					data={data}
+					data={admingetticketdata?.tickets}
 					entriesPerPage={entriesPerPage}
 					setEntriesPerPage={setEntriesPerPage}
 					filter={true}
@@ -71,18 +94,22 @@ const Subscription = () => {
 					setEndDates={setEndDates}
 					setShow={setShow}
 					show={show}
-					subscription={Subscription}
+					handlePagination={handlePagination}
 				// handleCustomFilters={handleCustomFilters}
 				/>
 
-				<div  >
-					<SubscriptionTable
+				<div className='mt-4'>
+					<TicketTableComponent
+						TYPE={false}
+						pagination={admingetticketdata}
 						data={admingetticketdata?.tickets}
-						isLoading={admingetticketisLoading} />
+						isLoading={admingetticketisLoading}
+						handlePagination={handlePagination}
+						colSpan={8} />
 				</div>
 			</main>
 		</div>
 	)
 }
 
-export default Subscription
+export default SuperIncidentRequest

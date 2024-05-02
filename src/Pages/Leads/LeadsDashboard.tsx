@@ -9,6 +9,8 @@ import DoughnutChat from "../../components/DoughnutChat";
 import ThreeinOneBarChart from "../../components/ThreeinOneBarChart";
 import { getTicket } from "../../features/Ticket/ticketSlice";
 import { useAppDispatch, useAppSelector } from "../../store/useStore";
+import LeadsThreeinOneBarChart from "../../components/Charts/LeadsThreeinOneBarChart";
+import { getMonth } from "../../components/Options";
 
 
 const LeadsDashboard = () => {
@@ -22,22 +24,22 @@ const LeadsDashboard = () => {
 		}
 	}, [dispatch, isSuccess])
 
-	const INCIDENT = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("INCIDENT"));
-	const SERVICE = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("SERVICE"));
-	const CHANGE = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("CHANGE"));
 
-	// @ts-ignore
-	// const loginSuccess = JSON.parse(localStorage.getItem("loginToast"));
+	// Count the number of tickets with status "COMPLETED" and "INPROGRESS"
+	const completed = ticket?.tickets?.filter((ticket: { status: string; }) => ticket?.status === 'COMPLETED').length;
+	const inProgress = ticket?.tickets?.filter((ticket: { status: string; }) => ticket?.status === 'INPROGRESS').length;
+	const pending = ticket?.tickets?.filter((ticket: { status: string; }) => ticket?.status === 'PENDING')?.length;
 
-	// useEffect(() => {
-	// 	if (loginSuccess) {
-	// 		// toast.success("Login Successfully!");
-	// 		setTimeout(() => {
-	// 			localStorage.setItem("loginToast", JSON.stringify(false));
-	// 		}, 1000);
-	// 	}
-	// }, [dispatch, loginSuccess]);
-	// const [entriesPerPage, setEntriesPerPage] = useState<any>(5);
+
+	const incident = !ticket ? [] : ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("INCIDENT"));
+	const service = !ticket ? [] : ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("SERVICE"));
+	const change = !ticket ? [] : ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("CHANGE"));
+
+
+
+
+
+
 
 	return (
 		<div id="dashboard">
@@ -51,7 +53,7 @@ const LeadsDashboard = () => {
 									<RiAlarmWarningFill size={25} />
 								</div>
 								<h4>
-									{INCIDENT?.length}
+									{incident?.length}
 								</h4>
 							</div>
 							<h5>Incident Request</h5>
@@ -65,7 +67,7 @@ const LeadsDashboard = () => {
 									<AiTwotoneSetting size={25} />
 								</div>
 								<h4>
-									{SERVICE?.length}
+									{service?.length}
 								</h4>
 							</div>
 							<h5>Service Request</h5>
@@ -79,7 +81,7 @@ const LeadsDashboard = () => {
 									<FaExchangeAlt size={25} />
 								</div>
 								<h4>
-									{CHANGE?.length}
+									{change?.length}
 								</h4>
 							</div>
 							<h5>Change Request</h5>
@@ -87,79 +89,7 @@ const LeadsDashboard = () => {
 					</div>
 				</div>
 			</div>
-
 			<main  >
-				{/* <div className="container-items">
-					<div>
-						<h5 className="page-title">Requests</h5>
-					</div>
-					<div>
-						<div className="dashboard-search">
-							<input
-								type="text"
-								value={result}
-								onChange={(e) => setResult(e.target.value)}
-							/>
-							<span>
-								<HiOutlineSearch size={20} color="#9b9b9b" />
-							</span>
-						</div>
-					</div>
-					<div>
-						<div className="entries-perpage">
-							{data?.length > 1 && (
-								<>
-									Show
-									<select
-										value={entriesPerPage}
-										onChange={(e) => setEntriesPerPage(e.target.value)}>
-										<option value="5">5</option>
-										<option value="10">10</option>
-										<option value="25">25</option>
-										<option value="50">50</option>
-										<option value="100">100</option>
-									</select>
-									entries
-								</>
-							)}
-						</div>
-					</div>
-				</div> */}
-
-				{/* <Table
-					ticketType="HOME"
-					setData={setData}
-					result={result}
-					entriesPerPage={entriesPerPage}
-				/> */}
-				{/* My Teams Performance */}
-				{/* <div className='dashboard-bottom-item-container2'>
-					<div className='dashboard-first-card2  '>
-						<div>
-							<h5 className='dashboard-first-card-h'>Tickets</h5>
-						</div>
-						<div className='dashboard-first-card-second-icon'>
-							<div className='sta_color_container_main'>
-								<div className='sta_color_container'>
-									<GoDotFill color='#883DCF' />
-									<small>New</small>
-								</div>
-								<div className='sta_color_container'>
-									<GoDotFill color='#F2994A' />
-									<small>Inprogress</small>
-								</div>
-								<div className='sta_color_container'>
-									<GoDotFill color='#22CAAD' />
-									<small>Completed</small>
-								</div>
-							</div>	<PiDotsSixVerticalBold size={20} />
-						</div>
-					</div>
-					<div  >
-
-						<LeadsThreeinOneBarChart />
-					</div>
-				</div> */}
 				<div className='dash_statistics_container'>
 					<div className='dash_statistics_sub1'>
 						<div>
@@ -167,14 +97,18 @@ const LeadsDashboard = () => {
 							{/* <p>Summary</p> */}
 						</div>
 						<div>
-							<DoughnutChat />
+							<DoughnutChat
+								ticketTotal={ticket?.tickets?.length}
+								inprogress={inProgress}
+								completed={completed}
+								pending={pending}
+							/>
 						</div>
 					</div>
 					<div className='dash_statistics_sub2'>
 						<div className='dash_statistics_sub2_text'>
 							<div>
-								<h3>Statistics</h3>
-								{/* <p>Revenue and Sales</p> */}
+								<h3>Ticket per month</h3>
 							</div>
 							<div className='sta_color_container_main'>
 								<div className='sta_color_container'>
@@ -191,7 +125,12 @@ const LeadsDashboard = () => {
 								</div>
 							</div>
 						</div>
-						<ThreeinOneBarChart />
+						<LeadsThreeinOneBarChart
+							threeinone={"threeinone"}
+							incident={incident}
+							service={service}
+							change={change}
+						/>
 					</div>
 				</div>
 			</main>

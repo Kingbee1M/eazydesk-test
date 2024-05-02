@@ -79,7 +79,6 @@ const UserProfile = ({ userInfo, userId, lgShow, setLgShow }: any) => {
     e.preventDefault();
     // @ts-ignore
     // dispatch(edituser(value));
-    // console.log(value);
   };
 
   // const profilesubmitHandler = (e: any) => {
@@ -226,7 +225,7 @@ const UserProfile = ({ userInfo, userId, lgShow, setLgShow }: any) => {
                         />
                       </div>
                     </div>
-                    <div className='row'>
+                    {/* <div className='row'>
                       <div className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
                         <input
                           className='TextField-Outline'
@@ -239,7 +238,7 @@ const UserProfile = ({ userInfo, userId, lgShow, setLgShow }: any) => {
                           }
                         />
                       </div>
-                    </div>
+                    </div> */}
                     <div className='row'>
                       <div className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
                         <input

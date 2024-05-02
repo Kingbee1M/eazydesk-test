@@ -13,8 +13,7 @@ const dataService = DataService();
    if (data) { 
      try {    
        dataService?.setToken(data?.data?.token)  
-       localStorage.setItem('service_desk', JSON.stringify(data?.data?.user));  
-       localStorage.setItem("loginToast", JSON.stringify(data?.message));    
+       localStorage.setItem('service_desk', JSON.stringify(data?.data?.user));     
   } catch (e) {
      console.log(`isLoggedIn in error ${e}`)
   }

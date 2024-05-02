@@ -5,7 +5,7 @@ import { EntriesPerPage } from "../../components/Options";
 import ChangeRequestModal from "../../components/TicketModals/ChangeRequestModal";
 import { useAppDispatch, useAppSelector } from "../../store/useStore";
 import { getTicket } from "../../features/Ticket/ticketSlice";
-import LeadTicketTableComponent from "../../components/Table/LeadTicketTableComponent";
+import TicketTableComponent from "../../components/Table/TicketTableComponent";
 
 
 
@@ -71,10 +71,12 @@ const LeadsChangeRequest = () => {
 						/>
 					</div>
 					<div  >
-						<LeadTicketTableComponent
-							TYPE={"CHANGE"}
+						<TicketTableComponent
+							TYPE={false}
 							data={data}
-							isLoading={isLoading} />
+							isLoading={isLoading}
+							colSpan={8}
+						/>
 					</div>
 				</div>
 			</main>

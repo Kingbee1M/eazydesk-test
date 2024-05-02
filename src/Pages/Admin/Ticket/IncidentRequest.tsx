@@ -4,9 +4,7 @@ import Header from '../../../components/Header'
 import SideNav from '../../../components/SideNav/SideNav'
 import SearchConponent from '../../../components/SearchConponent'
 import { admingetTicket } from '../../../features/Ticket/ticketSlice'
-import AdminTicketTable from './AdminTicketTable'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
-import moment from 'moment'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 
 
@@ -30,14 +28,7 @@ const IncidentRequest = () => {
 	const formattedEndDate = endDates.toISOString().split('T')[0]; // Extracting date part and removing time
 	const [startDate1] = useState(formattedEndDate);
 	const [endDate1] = useState(formattedEndDate);
-	const currentDate = moment().format("YYYY-MM-DD");
-	const sevenDays = moment().subtract(7, "days").format("YYYY-MM-DD");
-	const yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
-	const [data, setData] = useState<any>([]);
 
-	useEffect(() => {
-		setData(admingetticketdata);
-	}, [admingetticketdata]);
 
 
 	useEffect(() => {
@@ -63,7 +54,7 @@ const IncidentRequest = () => {
 					placeholder={"search ticket"}
 					setSearchItem={setSearchItem}
 					searchItem={searchItem}
-					data={data}
+					data={admingetticketdata?.tickets}
 					entriesPerPage={entriesPerPage}
 					setEntriesPerPage={setEntriesPerPage}
 					filter={true}
@@ -74,11 +65,14 @@ const IncidentRequest = () => {
 				// handleCustomFilters={handleCustomFilters}
 				/>
 
-				<div  >
+				<div className='mt-4'>
 					<TicketTableComponent
+						TYPE={false}
 						data={admingetticketdata?.tickets}
 						isLoading={admingetticketisLoading}
-						pagination={admingetticketdata} />
+						pagination={admingetticketdata}
+						colSpan={8}
+					/>
 				</div>
 			</main>
 		</div>

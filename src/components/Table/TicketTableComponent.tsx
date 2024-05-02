@@ -2,11 +2,12 @@ import moment from "moment";
 import { OverlayTrigger, Image, Tooltip, Button } from "react-bootstrap";
 import { NoRecordFound, TableFetch } from "../Options";
 import ViewTicketDetailsModal from "../Modals/ViewTicketDetailsModal";
-import { baseUrl } from "../../shared/baseUrl";
 import GiveApproval from "../Modals/GiveApproval";
 import AssignTask from "../Modals/AssignTask";
 import TicketStatusCell from "../../Pages/Admin/Ticket/TicketStatusCell";
 import RealPagination from "../RealPagination";
+import { ToastContainer } from "react-toastify";
+import TableLoader from "../TableLoader";
 
 
 const TicketTableComponent = ({
@@ -15,74 +16,73 @@ const TicketTableComponent = ({
   switchs,
   isLoading,
   handlePagination,
-  pagination
+  pagination,
+  colSpan
 }: any) => {
 
-  //  console.log('data', data)
-  //  console.log('pagination', pagination)
-  //  console.log('pagination?.totalPages', pagination?.pagination?.totalTickets)
+
 
   return (
-    <div id="table-container">
-      <div className="table-responsive-vertical">
-        <div className="table-container">
-          <table id="table" className={switchs ? "table" : " table-hover table-mc-light-blue"}>
-            <thead>
-              <tr>
-                <th>Ticket Type</th>
-                <th>Severity</th>
-                <th>Issue Description</th>
-                <th>Affected Users</th>
-                <th>Requester</th>
-                <th>Time Stamp</th>
-                {TYPE && <th>Approval</th>}
-                <th>Assign To</th>
-                <th>Ticket Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {isLoading ? (
-                <TableFetch colSpan={9} />
-              ) : data?.length === 0 || data?.length === undefined ? (
-                <NoRecordFound
-                  colSpan={9}
-                  children={"No Tickets record found!"}
-                />
-              ) : (
-                data?.map((user: any) => (
-                  <tr key={user?._id}>
+    <>
+      <TableLoader isLoading={isLoading} />
+      <div id="table-container">
+        <ToastContainer />
+        <div className="table-responsive-vertical">
+          <div className="table-container">
+            <table id="table" className={switchs ? "table" : " table-hover table-mc-light-blue"}>
+              <thead>
+                <tr>
+                  <th>Ticket Type</th>
+                  <th>Severity</th>
+                  <th>Issue Description</th>
+                  <th>Affected Users</th>
+                  <th>Requester</th>
+                  <th>Time Stamp</th>
+                  {TYPE && <th>Approval</th>}
+                  <th>Assign To</th>
+                  <th>Ticket Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {isLoading ? (
+                  <TableFetch colSpan={colSpan} />
+                ) : data?.length === 0 || data?.length === undefined ? (
+                  <NoRecordFound colSpan={colSpan} />
+                ) : (
+                  data?.map((user: any) => (
+                    <tr key={user?._id}>
 
-                    <td data-title="ticket type">{user?.ticketType}</td>
-                    <td data-title="severity">
-                      {user?.severity === "High" ? (
-                        <button className="severity-high">
-                          {user?.severity}
-                        </button>
-                      ) : user?.severity === "Medium" ? (
-                        <button className="severity-medium">
-                          {user?.severity}
-                        </button>
-                      ) : user?.severity === "Critical" ? (
-                        <button className="severity-Critical">
-                          {user?.severity}
-                        </button>
-                      ) : user?.severity === "Low" ? (
-                        <button className="severity-low">
-                          {user?.severity}
-                        </button>
-                      ) : (
-                        <button className="severity-low">Low</button>
-                      )}
-                    </td>
-                    <td data-title="description">
-                      <ViewTicketDetailsModal text={"View"} data={user} />
-                    </td>
-                    <td data-title="affected users">
-                      {user?.affectedUsers === null ? 0 : user?.affectedUsers}
-                    </td>
-                    <td data-title="Requester">
+                      <td data-title="ticket type">{user?.ticketType}</td>
+                      <td data-title="severity">
+                        {user?.severity === "High" ? (
+                          <button className="severity-high">
+                            {user?.severity}
+                          </button>
+                        ) : user?.severity === "Medium" ? (
+                          <button className="severity-medium">
+                            {user?.severity}
+                          </button>
+                        ) : user?.severity === "Critical" ? (
+                          <button className="severity-Critical">
+                            {user?.severity}
+                          </button>
+                        ) : user?.severity === "Low" ? (
+                          <button className="severity-low">
+                            {user?.severity}
+                          </button>
+                        ) : (
+                          <button className="severity-low">Low</button>
+                        )}
+                      </td>
+                      <td data-title="description">
+                        <ViewTicketDetailsModal text={"View"} data={user} />
+                      </td>
+                      <td data-title="affected users">
+                        {user?.affectedUsers === null ? 0 : user?.affectedUsers}
+                      </td>
+                      <td data-title="Requester">
 
-                      {/* <Image
+                        {/* <Image
                         key={user?._id}
                         crossOrigin="anonymous"
                         style={{ width: "25px", height: "25px" }}
@@ -91,43 +91,44 @@ const TicketTableComponent = ({
                         src={baseUrl + "/" + user?.createdBy?.profilePic
                         }
                       /> */}
-                      {user?.createdBy?.firstname}
-                    </td>
-                    <td data-title="createdAt">
-                      {moment(user?.createdAt)?.format("DD-MMM-YY H:mm:ss")}
-                    </td>
-                    {TYPE &&
-                      <td data-title="createdAt">
-                        {
-                          TYPE && user?.status === "DISAPPROVED" ? "" :
-                            TYPE && user?.status === "APPROVED" ? "" :
-                              TYPE && user?.status === "INPROGRESS" ? "" :
-                                TYPE && <GiveApproval id={user?.id} />
-                        }
+                        {user?.createdBy?.firstname}
                       </td>
-                    }
-                    <td data-title="Assign To">
-                      {user?.status === "CLOSED" ? (
-                        <button className="ticket-Closed">Closed</button>
-                      ) : (
-                        <AssignTask id={user?.id} Assigned={"Assigned"} needsApproval={user?.needsApproval} data={user} />
-                      )}
-                    </td>
-                    <td>
-                      <TicketStatusCell user={user} customId={user?.id} />
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+                      <td data-title="createdAt">
+                        {moment(user?.createdAt)?.format("DD-MMM-YY H:mm:ss")}
+                      </td>
+                      {TYPE &&
+                        <td data-title="createdAt">
+                          {
+                            TYPE && user?.status === "DISAPPROVED" ? "" :
+                              TYPE && user?.status === "APPROVED" ? "" :
+                                TYPE && user?.status === "INPROGRESS" ? "" :
+                                  TYPE && <GiveApproval id={user?.id} />
+                          }
+                        </td>
+                      }
+                      <td data-title="Assign To">
+                        {user?.status === "CLOSED" ? (
+                          <button className="ticket-Closed">Closed</button>
+                        ) : (
+                          <AssignTask id={user?.id} Assigned={"Assigned"} needsApproval={user?.needsApproval} data={user} />
+                        )}
+                      </td>
+                      <td>
+                        <TicketStatusCell user={user} customId={user?.id} />
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+          {pagination?.pagination?.totalTickets > 1 && <div className="totalResponses">
+            <h3>Total of {pagination?.pagination?.totalTickets} Tickets - <span>Page {pagination?.pagination?.page} of {pagination?.pagination?.totalPages}</span></h3>
+            <RealPagination handlePagination={handlePagination} pagination={pagination?.pagination} />
+          </div>}
         </div>
-        {pagination?.pagination?.totalTickets > 1 && <div className="totalResponses">
-          <h3>Total of {pagination?.pagination?.totalTickets} Tickets - <span>Page {pagination?.pagination?.page} of {pagination?.pagination?.totalPages}</span></h3>
-          <RealPagination handlePagination={handlePagination} pagination={pagination?.pagination} />
-        </div>}
       </div>
-    </div>
+    </>
   );
 };
 

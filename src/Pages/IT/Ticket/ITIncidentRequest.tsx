@@ -49,7 +49,7 @@ const ITIncidentRequest = () => {
 				const pageNumber = parseInt(type);
 				if (!isNaN(pageNumber)) {
 					// @ts-ignore
-					dispatch(getItTicketParameter({ page: pageNumber, limit: limit }));
+					dispatch(getItTicketParameter({ page: pageNumber, limit: limit, ticketType: "INCIDENT" }));
 				}
 				break;
 		}
@@ -57,12 +57,12 @@ const ITIncidentRequest = () => {
 
 
 	useEffect(() => {
-		const datas = { ticketType: "INCIDENT" };
+		const datas = { limit: limit, ticketType: "INCIDENT" };
 
 		// @ts-ignore 
 		dispatch(getItTicketParameter(datas))
 
-	}, [dispatch, endDate1])
+	}, [dispatch, endDate1, limit])
 
 
 
@@ -95,7 +95,7 @@ const ITIncidentRequest = () => {
 
 				<div  >
 					<TicketTableComponent
-						TYPE={"INCIDENT"}
+						TYPE={false}
 						pagination={itticketparameterdata}
 						data={itticketparameterdata?.tickets}
 						isLoading={itticketparameterisLoading}

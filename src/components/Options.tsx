@@ -348,6 +348,7 @@ export {
   getInputColorClass,
   svgPaths,
   tokenKey,
-  menu, ticketMenu,
-  EntriesLimit
+  menu,
+  ticketMenu,
+  EntriesLimit,
 };

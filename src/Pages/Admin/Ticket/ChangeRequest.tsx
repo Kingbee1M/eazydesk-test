@@ -5,7 +5,6 @@ import SideNav from '../../../components/SideNav/SideNav'
 import SearchConponent from '../../../components/SearchConponent'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import { admingetTicket } from '../../../features/Ticket/ticketSlice'
-
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 
 const ChangeRequest = () => {
@@ -92,13 +91,14 @@ const ChangeRequest = () => {
 				// handleCustomFilters={handleCustomFilters}
 				/>
 
-				<div  >
+				<div className='mt-4'>
 					<TicketTableComponent
 						TYPE={true}
 						pagination={admingetticketdata}
 						data={admingetticketdata?.tickets}
 						isLoading={admingetticketisLoading}
-						handlePagination={handlePagination} />
+						handlePagination={handlePagination}
+						colSpan={8} />
 				</div>
 			</main>
 		</div>

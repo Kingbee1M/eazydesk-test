@@ -18,7 +18,7 @@ const NotificationPopUp = ({ setRefresh, setNotification }: any) => {
 
 
 	socket.on(userInfo?.email?.toString() + ":newTicket", (org: any) => {
-		console.log("New Ticket", org);
+ 
 		if (org) {
 			toast.success(org?.ticketType, { toastId: customId });
 			setRefresh(true)
@@ -30,7 +30,7 @@ const NotificationPopUp = ({ setRefresh, setNotification }: any) => {
 	});
 
 	socket.on(`${userInfo?.companyId}:comment`, (org: any) => {
-		console.log("New Comment", org);
+ 
 		if (org) {
 			setRefresh(true)
 			toast.success(org?.comment, { toastId: customId });

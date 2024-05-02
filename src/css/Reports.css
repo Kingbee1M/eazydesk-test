@@ -1,6 +1,5 @@
  .table-container{
- overflow: auto !important;
- margin-top: 1.5rem !important;
+ overflow: auto !important; 
 }
 
 #reports .nav-tabs {
