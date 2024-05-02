@@ -65,14 +65,14 @@ const GeneralInformation = () => {
 							<span className="details">Firstname</span>
 							<input type="text" placeholder="E.g: John "
 								value={input.firstname}
-								onChange={(e) => handleChange("Firstname", e.target.value)}
+								onChange={(e) => handleChange("firstname", e.target.value)}
 								required />
 						</div>
 						<div className="input__box">
 							<span className="details">Lastname</span>
 							<input type="text" placeholder="E.g:  Smith"
 								value={input.lastname}
-								onChange={(e) => handleChange("Lastname", e.target.value)}
+								onChange={(e) => handleChange("lastname", e.target.value)}
 								required />
 						</div>
 						<div className="input__box">
