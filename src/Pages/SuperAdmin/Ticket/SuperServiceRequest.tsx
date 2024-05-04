@@ -85,7 +85,7 @@ const SuperServiceRequest = () => {
 			<main>
 				<div className='dashboard-first-card-boards '>
 					<div>
-						<h5 className='dashboard-first-card-h'>Incident Request</h5>
+						<h5 className='dashboard-first-card-h'>Service Request</h5>
 						{/* <p className='dashboard-first-card-p'>15 incident request ticket</p> */}
 					</div>
 				</div>
@@ -113,6 +113,7 @@ const SuperServiceRequest = () => {
 						isLoading={admingetticketisLoading}
 						handlePagination={handlePagination}
 						colSpan={8}
+						assignto={true}
 					/>
 				</div>
 			</main>

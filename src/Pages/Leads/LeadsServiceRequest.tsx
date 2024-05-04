@@ -13,16 +13,22 @@ import TableLoader from '../../components/TableLoader';
 const LeadsServiceRequest = () => {
 	const [limit, setLimit] = useState<any>(10);
 	const dispatch = useAppDispatch();
-	const { data: ticket, isLoading } = useAppSelector((state: any) => state.ticket)
+	const { data, isLoading } = useAppSelector((state: any) => state.ticket)
 	const { createisSuccess } = useAppSelector((state: any) => state.ticket)
-	const data = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("SERVICE"));
+	// const data = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("SERVICE"));
+
+	console.log('ticket', data)
 
 	useEffect(() => {
-		dispatch(getTicket())
+		const datas = { limit: limit, ticketType: "SERVICE" };
+		// @ts-ignore 
+		dispatch(getTicket(datas))
 		if (createisSuccess) {
-			dispatch(getTicket())
+			const datas = { limit: limit, ticketType: "SERVICE" };
+			// @ts-ignore 
+			dispatch(getTicket(datas))
 		}
-	}, [dispatch, createisSuccess])
+	}, [dispatch, createisSuccess, limit])
 
 
 	const [result, setResult] = useState("")
@@ -89,7 +95,7 @@ const LeadsServiceRequest = () => {
 				</div>
 			</div>
 			<main  >
-				<div className='request-container'>
+				<div className='request-container  table_margin'>
 					<div className="container-items">
 						<h5 className='dashboard-first-card-h'>Service Request </h5>
 						<div className="entries-perpage">
@@ -106,19 +112,18 @@ const LeadsServiceRequest = () => {
 					</div>
 
 					<div  >
-
 						<TicketTableComponent
 							TYPE={false}
-							data={ticket?.ticket}
+							data={data?.tickets}
 							isLoading={isLoading}
-							pagination={ticket?.pagination}
+							pagination={data?.pagination}
 							colSpan={8}
+							Requester={false}
+							assignto={false}
 						/>
 					</div>
 				</div>
 			</main>
-
-
 		</div>
 	)
 }

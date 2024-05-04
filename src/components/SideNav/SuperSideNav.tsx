@@ -48,15 +48,9 @@ const SuperSideNav = () => {
   const changeRequest = dashBoardInfodata?.totals?.ticketType?.changeRequest
   const incidentRequest = dashBoardInfodata?.totals?.ticketType?.incidentRequest
   const serviceRequest = dashBoardInfodata?.totals?.ticketType?.serviceRequest
-  // const approved = dashBoardInfodata?.ticketType?.approved
   const closed = dashBoardInfodata?.totals?.status?.closed
-  // const completed = dashBoardInfodata?.totals?.status?.completed
-  // const dissaproved = dashBoardInfodata?.totals?.status?.dissaproved
+  const completed = dashBoardInfodata?.totals?.status?.completed
   const inprogress = dashBoardInfodata?.totals?.status?.inprogress
-  // const invalid = dashBoardInfodata?.totals?.status?.invalid
-  const open = dashBoardInfodata?.totals?.status?.open
-  // const pending = dashBoardInfodata?.totals?.status?.pending
-  // const reopen = dashBoardInfodata?.totals?.status?.reopen
 
 
   return (
@@ -96,7 +90,7 @@ const SuperSideNav = () => {
 
         {dropdownOpen && (
           <div>
-            <NavLink to="/ticketprogress" className={({ isActive }) =>
+            <NavLink to="/superticketprogress" className={({ isActive }) =>
               ["nav-link_sup", isActive ? "active_sup" : null,]
                 .filter(Boolean)
                 .join(" ")
@@ -108,7 +102,7 @@ const SuperSideNav = () => {
               <div className="side_number">{!inprogress ? 0 : inprogress}</div>
             </NavLink>
 
-            <NavLink to="/openticket" className={({ isActive }) =>
+            <NavLink to="/superopenticket" className={({ isActive }) =>
               ["nav-link_sup", isActive ? "active_sup" : null,]
                 .filter(Boolean)
                 .join(" ")
@@ -117,10 +111,10 @@ const SuperSideNav = () => {
                 <AiOutlineCloseCircle size={21} />
                 <span>Completed </span>
               </div>
-              <div className="side_number_one" >{!open ? 0 : open}</div>
+              <div className="side_number_one" >{!completed ? 0 : completed}</div>
             </NavLink>
 
-            <NavLink to="/closedticket" className={({ isActive }) =>
+            <NavLink to="/superclosedticket" className={({ isActive }) =>
               ["nav-link_sup", isActive ? "active_sup" : null,]
                 .filter(Boolean)
                 .join(" ")
@@ -132,7 +126,7 @@ const SuperSideNav = () => {
               <div className="side_number_two">{!closed ? 0 : closed}</div>
             </NavLink>
 
-            <NavLink to="/incidentrequest" className={({ isActive }) =>
+            <NavLink to="/superincidentrequest" className={({ isActive }) =>
               ["nav-link_sup", isActive ? "active_sup" : null,]
                 .filter(Boolean)
                 .join(" ")
@@ -143,7 +137,7 @@ const SuperSideNav = () => {
               </div>
               <div className="side_number_three">{!incidentRequest ? 0 : incidentRequest}</div>
             </NavLink>
-            <NavLink to="/servicerequest" className={({ isActive }) =>
+            <NavLink to="/superservicerequest" className={({ isActive }) =>
               ["nav-link_sup", isActive ? "active_sup" : null,]
                 .filter(Boolean)
                 .join(" ")
@@ -154,7 +148,7 @@ const SuperSideNav = () => {
               </div>
               <div className="side_number_five">{!serviceRequest ? 0 : serviceRequest}</div>
             </NavLink>
-            <NavLink to="/changerequest" className={({ isActive }) =>
+            <NavLink to="/superchangerequest" className={({ isActive }) =>
               ["nav-link_sup", isActive ? "active_sup" : null,]
                 .filter(Boolean)
                 .join(" ")

@@ -10,36 +10,83 @@ import ThreeinOneBarChart from '../../../components/ThreeinOneBarChart';
 import DoughnutChat from '../../../components/DoughnutChat';
 import { PiDotsSixVerticalBold } from 'react-icons/pi';
 import LinePerformanceChart from '../../../components/Charts/LinePerformanceChart';
-import { useEffect } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/useStore';
-import { dashBoardInfo } from '../../../features/Ticket/ticketSlice';
+import { dashBoardInfo, superAdminDashboard } from '../../../features/Ticket/ticketSlice';
 import SuperSideNav from '../../../components/SideNav/SuperSideNav';
 
 
 const SuperDashboard = () => {
 	const dispatch = useAppDispatch()
+	const [activeIndex, setActiveIndex] = useState<any>('OUTCESS SOLUTION'); // Initially set the first item as active
+
+
+
 	const { dashBoardInfodata } = useAppSelector((state: any) => state.ticket);
+	const { superAdminDashboarddata } = useAppSelector((state: any) => state.ticket);
+
+	// console.log('superAdminDashboarddata', superAdminDashboarddata)
+	// console.log('dashBoardInfodata', dashBoardInfodata)
 
 
+	const type = !superAdminDashboarddata ? [] :
+		superAdminDashboarddata?.filter((company: any) => {
+			return company?.companyInfo?.company_name === activeIndex?.toUpperCase()
+		}) || [];
+
+
+
+	const types = !superAdminDashboarddata
+		? []
+		: superAdminDashboarddata
+			.filter((company: any) => company?.companyInfo?.company_name === activeIndex?.toUpperCase())
+			.map((company: any) => company?.companyInfo?.tickets) || [];
+	const flattenedTypes = types?.flat();
+
+
+
+	// console.log('types', types)
 
 	useEffect(() => {
 		dispatch(dashBoardInfo())
+		dispatch(superAdminDashboard())
 	}, [dispatch])
 
+	console.log('type', type)
 
-	const ticketTotal = dashBoardInfodata?.pagination?.totalTickets
-	const changeRequest = dashBoardInfodata?.totals?.ticketType?.changeRequest
-	const incidentRequest = dashBoardInfodata?.totals?.ticketType?.incidentRequest
-	const serviceRequest = dashBoardInfodata?.totals?.ticketType?.serviceRequest
-	const approved = dashBoardInfodata?.ticketType?.approved
-	const closed = dashBoardInfodata?.totals?.status?.closed
-	const completed = dashBoardInfodata?.totals?.status?.completed
-	const dissaproved = dashBoardInfodata?.totals?.status?.dissaproved
-	const inprogress = dashBoardInfodata?.totals?.status?.inprogress
-	const invalid = dashBoardInfodata?.totals?.status?.invalid
-	const open = dashBoardInfodata?.totals?.status?.open
-	const pending = dashBoardInfodata?.totals?.status?.pending
-	const reopen = dashBoardInfodata?.totals?.status?.reopen
+	const ticketTotal = type.length > 0 ? type[0].companyInfo.ticketsInfo.totalTickets : 0;
+	const changeRequest = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.ticketType.changeRequest : 0;
+	const incidentRequest = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.ticketType.incidentRequest : 0;
+	const serviceRequest = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.ticketType.serviceRequest : 0;
+	const approved = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.approved : 0; // corrected spelling of "dissapproved"
+	const closed = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.closed : 0;
+	const completed = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.completed : 0;
+	const dissapproved = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.dissapproved : 0;
+	const inprogress = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.inprogress : 0;
+	const invalid = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.invalid : 0;
+	const open = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.open : 0;
+	const pending = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.pending : 0;
+	const reopen = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.reopen : 0;
+
+
+
+
+	const TeamsPerformanceUL = () => {
+		const handleClick = (index: SetStateAction<string>) => {
+			setActiveIndex(index);
+		};
+
+		const statusList = superAdminDashboarddata?.map((company: { companyInfo: { company_name: any; }; }) => company?.companyInfo?.company_name);
+		return (
+			<ul className='TeamsPerformanceUL'>
+				{statusList?.map((status: string, index: any) => (
+					<li key={index} onClick={() => handleClick(status)} className={status === activeIndex ? 'TeamsPerformanceUL_active' : ''}>
+						{status}
+					</li>
+				))}
+			</ul>
+		);
+	};
 
 
 	return (
@@ -167,14 +214,11 @@ const SuperDashboard = () => {
 					</div>
 					<div className='TeamsPerformancechart'>
 						<div className='TeamsPerformancechartsub1'>
-							<ul className='TeamsPerformanceUL'>
-								<li className='TeamsPerformanceUL_active'>Vodacom</li>
-								<li>Branch</li>
-								<li>UBA</li>
-								<li>Fair Money</li>
-							</ul>
+							<TeamsPerformanceUL />
 						</div>
-						{/* <LinePerformanceChart /> */}
+						<LinePerformanceChart
+							types={flattenedTypes}
+						/>
 					</div>
 				</div>
 			</main>

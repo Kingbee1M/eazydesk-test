@@ -105,7 +105,9 @@ const SuperIncidentRequest = () => {
 						data={admingetticketdata?.tickets}
 						isLoading={admingetticketisLoading}
 						handlePagination={handlePagination}
-						colSpan={8} />
+						colSpan={8}
+						assignto={true}
+					/>
 				</div>
 			</main>
 		</div>

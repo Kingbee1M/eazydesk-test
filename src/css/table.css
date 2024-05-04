@@ -342,4 +342,20 @@ border: 1px solid var(--accent-blue);
   .pageEntries {
     display: none;
   }
+  
+
 }
+@media (max-width: 1200px) {
+  
+  .table_margin{
+  margin: 0px  0px !important;
+}
+
+}
+
+.table_margin{
+  margin: 0px 10rem;
+}
+
+
+ 

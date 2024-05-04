@@ -1,20 +1,14 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import moment from "moment";
-import axios from "axios";
 import { FaRegUserCircle, FaCamera } from "react-icons/fa";
-import { IoMdSend } from "react-icons/io";
 import { baseUrl } from "../../shared/baseUrl";
 import { useAppDispatch, useAppSelector } from "../../store/useStore";
-import { getTicket, viewTicket } from "../../features/Ticket/ticketSlice";
-import { useParams } from "react-router-dom";
 import { createComment } from "../../features/Comment/commentSlice";
 import { SVGLoader } from "../SVGLoader";
 import { RiMailSendLine } from "react-icons/ri";
 import { ToastContainer } from "react-toastify";
-import TableLoader from "../TableLoader";
 import { BsChatRightText } from "react-icons/bs";
 import Skelenton from "../Skelenton/Skelenton";
-import { customId } from "../Options";
 
 const ProgressChat = ({ viewdata, id, input, setInputs }: any) => {
 
@@ -97,9 +91,6 @@ const ProgressChat = ({ viewdata, id, input, setInputs }: any) => {
  //     );
  //   }
  // };
-
-
-
 
 
 

@@ -1,9 +1,8 @@
 import axios from "axios";  
 import { baseUrl } from "../shared/baseUrl";
-import { fireAlert } from "../components/Alert";
-import { toast } from "react-toastify";
-import { customId } from "../components/Options"; 
 import DataService from "../features/Auth/dataService";
+import { getUserAuthorizationConfig } from "../hooks/config";
+import { handleError } from "../components/handleError/handleError";
  
  
 
@@ -19,17 +18,27 @@ if (token) {
 }
 
 
+ 
 
-  const get = async (url: string) => {  
-    const endpoint = baseUrl + url;
-    try {
-      const data = await axios.get(endpoint);
-      return data;
-    } catch (e) {
-      handleError(e);
-      throw e;
+const get = async (url: string) => {   
+  const endpoint = baseUrl + url;
+  try {
+     // Retrieve the authorization config
+    const config = await getUserAuthorizationConfig();
+    if (!config) {
+      // Handle the case where config is null
+      return;
     }
-  };
+
+    // Make the GET request with the specified content type
+    const data = await axios.get(endpoint, config);
+    return data;
+  } catch (e) {
+    handleError(e);
+    throw e;
+  }
+};
+
 
   const search = async (url: string, params: any) => {
     const endpoint = baseUrl + url + objectToQueryString(params);
@@ -117,21 +126,6 @@ const uploadFile = (url: string, data: Record<string, any>, files: Record<string
   });
 };
 
-const handleError = (error: any) => {
-  // Extract error message from response 
-  const message = error?.response?.data?.message ||
-    (error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
- 
-  // Handle unauthorized error
-  if (error?.response?.status === 401 && error?.response?.statusText === "Unauthorized") {
-    fireAlert("Session Expired", "Please log in again", "error", "/");
-  } else if(error?.response?.status === undefined || error?.response?.statusText === null){
-
-  }else {
-    // Display error message using toast
-    toast.error(message, {  toastId: customId });
-  }
-};
 
 
  const objectToQueryString = (obj: { [key: string]: string | number | boolean }) => {

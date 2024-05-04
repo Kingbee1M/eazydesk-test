@@ -1,6 +1,6 @@
  
-export const baseUrl: any = "http://localhost:5000";
-// export const baseUrl: any = "https://2f44-41-76-198-41.ngrok-free.app"; 
+ export const baseUrl: any = "http://localhost:5000";
+  // export const baseUrl: any = "https://835a-41-76-198-41.ngrok-free.app"; 
  
 
 export const buildDynamicURL = (

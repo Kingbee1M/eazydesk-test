@@ -9,6 +9,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import { NoRecordFound } from './Options';
 
 
 ChartJS.register(
@@ -49,7 +50,8 @@ const DoughnutChat = ({ ticketTotal, completed, inprogress, pending }: any) => {
   return (
 
     <div className='Doughnutcontainer'>
-      <Doughnut data={doughnutData} options={chartOptions} />
+      {!ticketTotal ? <NoRecordFound /> :
+        <Doughnut data={doughnutData} options={chartOptions} />}
     </div>
   )
 }

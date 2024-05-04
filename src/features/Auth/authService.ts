@@ -20,13 +20,12 @@ const dataService = DataService();
   }
   return data
 }
-
  
  
   // logout  
 const logout = async () => { 
    const HttpService = createHttpService();
-  const { data } = await HttpService.get( '/api/v2/auth/signout')  
+  const { data }: any = await HttpService.get( '/api/v2/auth/signout')  
    return data
 };
 
@@ -34,7 +33,7 @@ const logout = async () => {
   // View user by ID
 const ViewUserByID = async (id: any) => {
   const HttpService = createHttpService(); 
-  const { data } = await HttpService.get( `/api/v2/auth/users/user/${id}`)  
+  const { data }: any = await HttpService.get( `/api/v2/auth/users/user/${id}`)  
    return data
 };
 
@@ -64,13 +63,13 @@ const updateProfile = async (value: any) => {
   // Current User
 const currentUser = async () => {  
     const HttpService = createHttpService(); 
-  const { data } = await HttpService.get( `/api/v2/auth/current-user`)  
+  const { data }: any = await HttpService.get( `/api/v2/auth/current-user`)  
    return data
 };
   // Supervisor User
 const supervisorUser = async (id:any) => {  
     const HttpService = createHttpService(); 
-  const { data } = await HttpService.get( `/api/v2/auth/users/supervisor/${id}`)  
+  const { data }: any = await HttpService.get( `/api/v2/auth/users/supervisor/${id}`)  
    return data
 };
 

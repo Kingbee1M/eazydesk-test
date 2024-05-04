@@ -37,6 +37,8 @@ const SuperInProgress = () => {
 		setData(admingetticketdata);
 	}, [admingetticketdata]);
 
+	console.log('admingetticketdata', admingetticketdata)
+
 
 	useEffect(() => {
 		const datas = { status: "INPROGRESS" };
@@ -79,7 +81,7 @@ const SuperInProgress = () => {
 			<main>
 				<div className='dashboard-first-card-boards  mt-2'>
 					<div>
-						<h5 className='dashboard-first-card-h'>Ticket Progress</h5>
+						<h5 className='dashboard-first-card-h'>InProgress</h5>
 					</div>
 				</div>
 				<SearchConponent
@@ -104,6 +106,7 @@ const SuperInProgress = () => {
 						data={admingetticketdata?.tickets}
 						isLoading={admingetticketisLoading}
 						colSpan={8}
+						assignto={true}
 					/>
 				</div>
 			</main>

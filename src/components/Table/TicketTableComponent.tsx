@@ -8,6 +8,7 @@ import TicketStatusCell from "../../Pages/Admin/Ticket/TicketStatusCell";
 import RealPagination from "../RealPagination";
 import { ToastContainer } from "react-toastify";
 import TableLoader from "../TableLoader";
+import { Key } from "react";
 
 
 const TicketTableComponent = ({
@@ -17,7 +18,9 @@ const TicketTableComponent = ({
   isLoading,
   handlePagination,
   pagination,
-  colSpan
+  colSpan,
+  Requester,
+  assignto
 }: any) => {
 
 
@@ -36,10 +39,10 @@ const TicketTableComponent = ({
                   <th>Severity</th>
                   <th>Issue Description</th>
                   <th>Affected Users</th>
-                  <th>Requester</th>
+                  {Requester && <th>Requester</th>}
                   <th>Time Stamp</th>
                   {TYPE && <th>Approval</th>}
-                  <th>Assign To</th>
+                  {assignto && <th>Assign To</th>}
                   <th>Ticket Status</th>
                 </tr>
               </thead>
@@ -49,8 +52,8 @@ const TicketTableComponent = ({
                 ) : data?.length === 0 || data?.length === undefined ? (
                   <NoRecordFound colSpan={colSpan} />
                 ) : (
-                  data?.map((user: any) => (
-                    <tr key={user?._id}>
+                  data?.map((user: any, i: Key | null | undefined) => (
+                    <tr key={i}>
 
                       <td data-title="ticket type">{user?.ticketType}</td>
                       <td data-title="severity">
@@ -80,9 +83,9 @@ const TicketTableComponent = ({
                       <td data-title="affected users">
                         {user?.affectedUsers === null ? 0 : user?.affectedUsers}
                       </td>
-                      <td data-title="Requester">
-
-                        {/* <Image
+                      {Requester &&
+                        <td data-title="Requester">
+                          {/* <Image
                         key={user?._id}
                         crossOrigin="anonymous"
                         style={{ width: "25px", height: "25px" }}
@@ -91,8 +94,8 @@ const TicketTableComponent = ({
                         src={baseUrl + "/" + user?.createdBy?.profilePic
                         }
                       /> */}
-                        {user?.createdBy?.firstname}
-                      </td>
+                          {user?.createdBy?.firstname}
+                        </td>}
                       <td data-title="createdAt">
                         {moment(user?.createdAt)?.format("DD-MMM-YY H:mm:ss")}
                       </td>
@@ -106,13 +109,16 @@ const TicketTableComponent = ({
                           }
                         </td>
                       }
-                      <td data-title="Assign To">
-                        {user?.status === "CLOSED" ? (
-                          <button className="ticket-Closed">Closed</button>
-                        ) : (
-                          <AssignTask id={user?.id} Assigned={"Assigned"} needsApproval={user?.needsApproval} data={user} />
-                        )}
-                      </td>
+                      {assignto &&
+                        <td data-title="Assign To">
+                          {user?.status === "CLOSED" ? (
+                            <button className="ticket-Closed">Closed</button>
+                          ) : (
+
+                            <AssignTask id={user?.id} Assigned={"Assigned"} needsApproval={user?.needsApproval} data={user} />
+
+                          )}
+                        </td>}
                       <td>
                         <TicketStatusCell user={user} customId={user?.id} />
                       </td>

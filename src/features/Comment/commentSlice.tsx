@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import commentService from './commentService'
+import { handleMessageError } from '../../components/handleError/handleError'
 
 
 const initialState = {
@@ -24,8 +25,8 @@ export const getComment = createAsyncThunk('comment/getComment', async (data, th
 	try {
 		return await commentService.getComment(data)
 	} catch (error: any) {
-		const message = error?.response?.data?.message ||
-			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		// Handle error using handleMessageError function
+		const message = handleMessageError(error, thunkAPI);
 		return thunkAPI.rejectWithValue(message)
 	}
 })
@@ -35,8 +36,8 @@ export const createComment = createAsyncThunk('ticket/createComment', async (dat
 	try {
 		return await commentService.createComment(data)
 	} catch (error: any) {
-		const message = error?.response?.data?.message ||
-			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		// Handle error using handleMessageError function
+		const message = handleMessageError(error, thunkAPI);
 		return thunkAPI.rejectWithValue(message)
 	}
 })
