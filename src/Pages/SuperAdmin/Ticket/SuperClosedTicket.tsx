@@ -11,7 +11,6 @@ import SuperSideNav from '../../../components/SideNav/SuperSideNav'
 const ClosedTicket = () => {
 	const dispatch = useAppDispatch();
 	const { itassignisSuccess } = useAppSelector((state: any) => state.ticket);
-
 	const [entriesPerPage, setEntriesPerPage] = useState(() => {
 		return "6";
 	});
@@ -39,6 +38,7 @@ const ClosedTicket = () => {
 		setData(admingetticketdata);
 	}, [admingetticketdata]);
 
+	console.log('admingetticketdata', admingetticketdata)
 
 	useEffect(() => {
 		const datas = { status: "CLOSED" };
@@ -106,6 +106,7 @@ const ClosedTicket = () => {
 						data={admingetticketdata?.tickets}
 						isLoading={admingetticketisLoading}
 						colSpan={8}
+						assignto={true}
 					/>
 				</div>
 			</main>

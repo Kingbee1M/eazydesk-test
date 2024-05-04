@@ -56,6 +56,12 @@ const initialState = {
   ITgetallReguserisSuccess: false,
   ITgetallReguserisLoading: false, 
   ITgetallRegusermessage: '', 
+
+  superallReguserdata:   [],
+  superallReguserisError: false,
+  superallReguserisSuccess: false,
+  superallReguserisLoading: false, 
+  superallRegusermessage: '', 
 }
 
  
@@ -166,6 +172,17 @@ export const ITgetallReguser = createAsyncThunk('register/ITgetallReguser', asyn
     return thunkAPI.rejectWithValue(message)
   }
 })
+//Super Admin get all Register users
+export const superallReguser = createAsyncThunk('register/superallReguser', async (  data,thunkAPI) => {
+  try { 
+    return await registrationService.superallReguser()
+  } catch (error:any) {
+      const message = error?.response?.data?.message ||
+    (error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+    
+    return thunkAPI.rejectWithValue(message)
+  }
+})
  
 
 
@@ -218,7 +235,12 @@ export const registrationSlice = createSlice({
       state.ITgetallReguserisLoading = false
       state.ITgetallReguserisSuccess = false  
       state.ITgetallReguserisError = false
-      state.ITgetallRegusermessage= ''
+      state.ITgetallRegusermessage = ''
+      
+      state.superallReguserisLoading = false
+      state.superallReguserisSuccess = false  
+      state.superallReguserisError = false
+      state.superallRegusermessage= ''
       
     },
     
@@ -360,6 +382,21 @@ export const registrationSlice = createSlice({
         state.ITgetallReguserisError = true
         state.ITgetallRegusermessage = action.payload
         state.ITgetallReguserdata = [] 
+      })
+
+    .addCase(superallReguser.pending, (state) => {
+        state.superallReguserisLoading = true 
+      })
+      .addCase(superallReguser.fulfilled, (state:any, action) => {
+        state.superallReguserisLoading = false
+        state.superallReguserisSuccess = true
+        state.superallReguserdata = action.payload 
+      })
+      .addCase(superallReguser.rejected, (state:any, action) => {
+        state.superallReguserisLoading = false
+        state.superallReguserisError = true
+        state.superallRegusermessage = action.payload
+        state.superallReguserdata = [] 
       })
       
   },

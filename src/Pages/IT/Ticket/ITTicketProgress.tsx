@@ -69,7 +69,7 @@ const ITTicketProgress = () => {
 			<main>
 				<div className='dashboard-first-card-boards  mt-2'>
 					<div>
-						<h5 className='dashboard-first-card-h'>Ticket Progress</h5>
+						<h5 className='dashboard-first-card-h'>In Progress</h5>
 					</div>
 				</div>
 				<SearchConponent
@@ -93,8 +93,10 @@ const ITTicketProgress = () => {
 						pagination={itticketparameterdata}
 						handlePagination={handlePagination}
 						data={itticketparameterdata?.tickets}
+						isLoading={itticketparameterisLoading}
 						TYPE={false}
 						colSpan={8}
+						assignto={true}
 					/>
 				</div>
 			</main>

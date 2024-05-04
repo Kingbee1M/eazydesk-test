@@ -4,8 +4,11 @@ import FilterModal from './FilterModal';
 import Search from './Search';
 import SubscriptionModal from '../Pages/SuperAdmin/Subscription/SubscriptionModal';
 
+import { ToastContainer } from 'react-toastify';
+import RegisterModal from '../Pages/SuperAdmin/ Register/RegisterModal';
 
-const SearchConponent = ({ ID, handleCustomFilters, setEndDates, setStartDates, searchItem, setSearchItem, placeholder, data, filter, show, setShow, limit, handlePagination, subscription }: any) => {
+
+const SearchConponent = ({ ID, handleCustomFilters, setEndDates, setStartDates, searchItem, setSearchItem, placeholder, data, filter, show, setShow, limit, handlePagination, subscription, RegModal }: any) => {
 
 
 	// const handleChangeFilter = (e: { target: { value: React.SetStateAction<string>; }; }) => {
@@ -17,7 +20,7 @@ const SearchConponent = ({ ID, handleCustomFilters, setEndDates, setStartDates, 
 	return (
 		<div id='reports'  >
 			<div className="search-area">
-
+				<ToastContainer position="top-right" containerId={"custom1345"} />
 				<Search
 					placeholder={placeholder}
 					setSearchItem={setSearchItem}
@@ -45,6 +48,7 @@ const SearchConponent = ({ ID, handleCustomFilters, setEndDates, setStartDates, 
 				</form>
 
 				{subscription && <SubscriptionModal />}
+				{RegModal && <RegisterModal />}
 
 			</div>
 		</div>

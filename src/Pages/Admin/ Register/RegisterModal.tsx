@@ -3,19 +3,15 @@ import { Modal } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import ModalHeader from '../../../components/Modals/ModalHeader';
 import { SVGLoader } from '../../../components/SVGLoader';
-import { getCompany } from '../../../features/Company/companySlice';
 import { useAppDispatch, useAppSelector } from '../../../store/useStore';
 import { reset, userRegistration } from '../../../features/Registration/registrationSlice';
 import { FiPlus } from 'react-icons/fi';
 import { customId } from '../../../components/Options';
-import { getUserPrivileges } from '../../../hooks/auth';
+
 
 
 const RegisterModal = () => {
-	const {
-		isSuperAdmin,
-		isAdmin
-	} = getUserPrivileges();
+
 	// @ts-ignore  
 	const userInfo = JSON.parse(localStorage.getItem("service_desk"));
 
@@ -23,9 +19,10 @@ const RegisterModal = () => {
 
 	const [show, setShow] = useState(false);
 	const dispatch = useAppDispatch();
-	const { data } = useAppSelector((state: any) => state.company)
 	const { isError, message, isLoading, isSuccess } = useAppSelector(
 		(state) => state.reg)
+
+	console.log('isError-isError', isError)
 
 	const [input, setInput] = useState<any>({
 		firstname: "",
@@ -37,23 +34,17 @@ const RegisterModal = () => {
 	})
 
 	useEffect(() => {
-		if (isAdmin) {
-			setInput((prevState: any) => {
-				return ({
-					...prevState,
-					companyId: userInfo?.companyId,
-				});
+		setInput((prevState: any) => {
+			return ({
+				...prevState,
+				companyId: userInfo?.companyId,
 			});
-		}
+		});
 
-	}, [isAdmin, userInfo?.companyId]);
+	}, [userInfo?.companyId]);
 
 
-	useEffect(() => {
-		if (isSuperAdmin) {
-			dispatch(getCompany());
-		}
-	}, [dispatch, isSuperAdmin])
+
 
 	useEffect(() => {
 		if (isSuccess) {
@@ -90,7 +81,7 @@ const RegisterModal = () => {
 
 	return (
 		<div>
-			<ToastContainer position="top-right" containerId={"custom1"} />
+			<ToastContainer position="top-right" containerId={"custom123"} />
 			<button className='btn' onClick={() => setShow(true)}>
 				<FiPlus size={18} /> <span>Register users</span>
 			</button>
@@ -134,7 +125,6 @@ const RegisterModal = () => {
 										onChange={(e) => handleOnChange("role", e.target.value)}
 									>
 										<option value="">Select Role</option>
-										<option value="SUPER_ADMIN">Super Admin</option>
 										<option value="ADMIN">Admin</option>
 										<option value="SUPERVISOR">Supervisor</option>
 										<option value="IT_SUPPORT">IT Support</option>
@@ -147,19 +137,6 @@ const RegisterModal = () => {
 										value={input?.password}
 										onChange={(e) => handleOnChange("password", e.target.value)} required />
 								</div>
-								{isSuperAdmin && <div className="input__box">
-									<span className="details">Company</span>
-									<select name="country" id="register-select"
-										value={input?.companyId}
-										onChange={(e) => handleOnChange("companyId", e.target.value)}>
-										<option value="">Select a company</option>
-										{data?.companies?.map((option: any, index: any) => (
-											<option key={index} value={option?.id}>
-												{`${option?.name}`}
-											</option>
-										))}
-									</select>
-								</div>}
 
 							</div>
 							<div className="Register-button-container">

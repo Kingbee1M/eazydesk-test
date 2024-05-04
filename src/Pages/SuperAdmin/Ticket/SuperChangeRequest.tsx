@@ -71,7 +71,7 @@ const SuperChangeRequest = () => {
 			<main>
 				<div className='dashboard-first-card-boards '>
 					<div>
-						<h5 className='dashboard-first-card-h'>Incident Request</h5>
+						<h5 className='dashboard-first-card-h'>Change Request</h5>
 					</div>
 				</div>
 				<SearchConponent
@@ -97,7 +97,8 @@ const SuperChangeRequest = () => {
 						data={admingetticketdata?.tickets}
 						isLoading={admingetticketisLoading}
 						handlePagination={handlePagination}
-						colSpan={8}
+						colSpan={9}
+						assignto={true}
 					/>
 				</div>
 			</main>

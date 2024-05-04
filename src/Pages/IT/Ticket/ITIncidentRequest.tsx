@@ -93,13 +93,15 @@ const ITIncidentRequest = () => {
 				// handleCustomFilters={handleCustomFilters}
 				/>
 
-				<div  >
+				<div className='mt-4'>
 					<TicketTableComponent
 						TYPE={false}
 						pagination={itticketparameterdata}
 						data={itticketparameterdata?.tickets}
 						isLoading={itticketparameterisLoading}
 						handlePagination={handlePagination}
+						colSpan={8}
+						assignto={true}
 					/>
 				</div>
 			</main>

@@ -14,7 +14,11 @@ import { getUserPrivileges } from '../../../hooks/auth';
 const RegisterModal = () => {
 	const {
 		isSuperAdmin,
-		isAdmin
+		isAdmin,
+		isSupervisor,
+		isITSupport,
+		isTeamLead,
+
 	} = getUserPrivileges();
 	// @ts-ignore  
 	const userInfo = JSON.parse(localStorage.getItem("service_desk"));
@@ -134,7 +138,8 @@ const RegisterModal = () => {
 										onChange={(e) => handleOnChange("role", e.target.value)}
 									>
 										<option value="">Select Role</option>
-										<option value="SUPER_ADMIN">Super Admin</option>
+										{isSuperAdmin &&
+											<option value="SUPER_ADMIN">Super Admin</option>}
 										<option value="ADMIN">Admin</option>
 										<option value="SUPERVISOR">Supervisor</option>
 										<option value="IT_SUPPORT">IT Support</option>

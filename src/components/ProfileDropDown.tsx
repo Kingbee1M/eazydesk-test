@@ -10,9 +10,13 @@ import { useAppDispatch, useAppSelector } from "../store/useStore";
 import { logoutUserAction } from "../features/Auth/authService";
 import axios from "axios";
 import DataService from "../features/Auth/dataService";
+import { baseUrl } from "../shared/baseUrl";
+import { io } from "socket.io-client";
 
 
 const ProfileDropDown = () => {
+	const socket = io(baseUrl);
+
 	const {
 		isLoadinglogout,
 		isErrorlogout,
@@ -28,6 +32,7 @@ const ProfileDropDown = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
+	console.log('userInfo', userInfo)
 
 	const handleLogout = () => {
 		dispatch(logout());
@@ -37,14 +42,16 @@ const ProfileDropDown = () => {
 		if (!userInfo || userInfo == null) {
 			navigate("/");
 			dispatch(reset());
+			socket.disconnect()
 		}
-	}, [dispatch, navigate, userInfo]);
+	}, [dispatch, navigate, socket, userInfo]);
 
 	useEffect(() => {
 		if (isSuccesslogout) {
 			// localStorage.removeItem("service_desk");
 			delete axios.defaults.headers.common['Authorization'];
 			dispatch(logoutUserAction());
+			socket.disconnect()
 			dataService.clearData()
 		} else if (isErrorlogout) {
 			toast.error(messagelogout, {
@@ -54,21 +61,21 @@ const ProfileDropDown = () => {
 			dataService.clearData()
 		}
 		dispatch(reset());
-	}, [dataService, dispatch, isErrorlogout, isSuccesslogout, messagelogout, navigate])
+	}, [dataService, dispatch, isErrorlogout, isSuccesslogout, messagelogout, navigate, socket])
 
 
 
 	return (
 		<div className='notification-profile'>
-			<div className='notification-card' onClick={() => navigate("/settings")}>
+			<div className='notification-card' onClick={() => navigate("/itsettings")}>
 				<div className='notification-icon-profile'>
-					{userInfo?.user?.firstName?.charAt(0)}
+					{userInfo?.firstname?.charAt(0)}
 				</div>
 				<div>
 					<p className='notification-text-profile'>My profile</p>
 				</div>
 			</div>
-			<div className='notification-card' onClick={() => navigate("/support")}>
+			<div className='notification-card' onClick={() => navigate("/itsettings")}>
 				<div className='notification-icon-profile-sup'>
 					<BiHelpCircle size={25} />
 				</div>

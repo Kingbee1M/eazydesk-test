@@ -69,7 +69,7 @@ const SuperCompany = () => {
 							{data?.companies?.map((item: any) => (
 								<div key={item?.id} className='team-card-container'>
 									<div className='team-card-container-sup'>
-										<div className='team-card-container-sup-image' onClick={() => navigate(`/companymembers/${item?.id}`)}>
+										<div className='team-card-container-sup-image' onClick={() => navigate(`/supercompanymembers/${item?.id}`)}>
 											<HiOutlineBuildingOffice2 size={30} />
 										</div>
 										<div>

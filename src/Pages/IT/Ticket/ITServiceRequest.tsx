@@ -23,8 +23,9 @@ const ITServiceRequest = () => {
 	const formattedEndDate = endDates.toISOString().split('T')[0]; // Extracting date part and removing time
 	const [startDate1] = useState(formattedEndDate);
 	const [endDate1] = useState(formattedEndDate);
-	const [data] = useState<any>([]);
 
+
+	console.log('itticketparameterdata', itticketparameterdata)
 
 
 
@@ -105,6 +106,7 @@ const ITServiceRequest = () => {
 						data={itticketparameterdata?.tickets}
 						isLoading={itticketparameterisLoading}
 						colSpan={8}
+						assignto={true}
 					/>
 				</div>
 			</main>

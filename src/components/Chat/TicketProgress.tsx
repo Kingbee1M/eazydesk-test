@@ -11,14 +11,22 @@ import { toast, ToastContainer } from "react-toastify";
 import { customId } from "../Options";
 import NotificationPopUp from "../Scoket/NotificationPopUp";
 import { SocketContext } from "../Scoket/SocketContext";
+import { getUserPrivileges } from "../../hooks/auth";
 
 const TicketProgress = () => {
+	const {
+		isSuperAdmin,
+		isAdmin,
+		isSupervisor,
+		isITSupport,
+		isTeamLead,
+
+	} = getUserPrivileges();
 
 	const { id }: any = useParams();
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const form: any = useRef();
-	const [notification, setNotification] = useState<any>();
 	const [refresh, setRefresh] = useState(false);
 	const [ticket, setTicket] = useState<any>({});
 	const [inputs, setinputs] = useState("")
@@ -69,7 +77,7 @@ const TicketProgress = () => {
 
 	return (
 		<div>
-			<NotificationPopUp setNotification={setNotification} setRefresh={setRefresh} />
+			<NotificationPopUp setRefresh={setRefresh} />
 			<ToastContainer position="top-right" containerId={"custom1"} />
 			<header className="ChatProgressView-header">
 				<div>
@@ -165,20 +173,31 @@ const TicketProgress = () => {
 
 								{viewdata?.status === "CLOSED" ? (
 									""
-								) : (
+								) : (isTeamLead ?
 									<form className="tp-update" ref={form}>
 										<select
 											id="js-select"
 											value={inputs}
 											onChange={(e) => setinputs(e.target.value)}>
 											<option value=""> </option>
+											<option value="CLOSED">Closed</option>
+											<option value="REOPENED">Reopen</option>
+										</select>
+										<button type="submit" id="custom-btn" disabled={false} onClick={handleUpdateTicketStatus}>
+											{updateTicketisLoading ? <SVGLoader width={"35px"} height={"35px"} color={"#fff"} /> : "Update"}
+										</button>
+									</form> : <form className="tp-update" ref={form}>
+										<select
+											id="js-select"
+											value={inputs}
+											onChange={(e) => setinputs(e.target.value)}>
+											<option value="">
+											</option>
 											{ticket?.status === "COMPLETED" ? (
 												""
 											) : (
 												<option value="COMPLETED">Resolved</option>
 											)}
-											<option value="CLOSED">Closed</option>
-											<option value="REOPENED">Reopen</option>
 										</select>
 										<button type="submit" id="custom-btn" disabled={false} onClick={handleUpdateTicketStatus}>
 											{updateTicketisLoading ? <SVGLoader width={"35px"} height={"35px"} color={"#fff"} /> : "Update"}

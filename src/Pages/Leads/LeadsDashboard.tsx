@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaExchangeAlt } from "react-icons/fa";
 import { RiAlarmWarningFill } from "react-icons/ri";
@@ -14,15 +14,20 @@ import { getMonth } from "../../components/Options";
 
 
 const LeadsDashboard = () => {
+	const [limit, setLimit] = useState<any>(10);
 	const dispatch = useAppDispatch();
 	const { data: ticket, isSuccess } = useAppSelector((state: any) => state.ticket)
 
 	useEffect(() => {
-		dispatch(getTicket())
+		const datas = { limit: limit };
+		// @ts-ignore 
+		dispatch(getTicket(datas))
 		if (isSuccess) {
-			dispatch(getTicket())
+			const datas = { limit: limit };
+			// @ts-ignore 
+			dispatch(getTicket(datas))
 		}
-	}, [dispatch, isSuccess])
+	}, [dispatch, isSuccess, limit])
 
 
 	// Count the number of tickets with status "COMPLETED" and "INPROGRESS"
@@ -130,6 +135,7 @@ const LeadsDashboard = () => {
 							incident={incident}
 							service={service}
 							change={change}
+							assignto={false}
 						/>
 					</div>
 				</div>

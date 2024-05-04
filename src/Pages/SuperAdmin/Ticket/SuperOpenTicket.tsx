@@ -106,6 +106,7 @@ const SuperOpenTicket = () => {
 						isLoading={admingetticketisLoading}
 						handlePagination={handlePagination}
 						colSpan={8}
+						assignto={true}
 					/>
 				</div>
 			</main>

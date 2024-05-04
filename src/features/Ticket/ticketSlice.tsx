@@ -1,5 +1,6 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, SerializedError } from '@reduxjs/toolkit'
 import ticketService from './ticketService'
+import { handleMessageError } from '../../components/handleError/handleError'
 
 
 const initialState = {
@@ -76,17 +77,23 @@ const initialState = {
 	giveApprovalisLoading: false,
 	giveApprovalmessage: '',
 
-
+	superAdminDashboarddata: [],
+	superAdminDashboardisError: false,
+	superAdminDashboardisSuccess: false,
+	superAdminDashboardisLoading: false,
+	superAdminDashboardmessage: '',
 }
+
+
 
 
 // Get getTicket
 export const getTicket = createAsyncThunk('ticket/getTicket', async (data, thunkAPI) => {
 	try {
-		return await ticketService.getTicket()
+		return await ticketService.getTicket(data)
 	} catch (error: any) {
-		const message = error?.response?.data?.message ||
-			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		// Handle error using handleMessageError function
+		const message = handleMessageError(error, thunkAPI);
 		return thunkAPI.rejectWithValue(message)
 	}
 })
@@ -94,10 +101,10 @@ export const getTicket = createAsyncThunk('ticket/getTicket', async (data, thunk
 // Get IT Ticket
 export const getItTicket = createAsyncThunk('ticket/getItTicket', async (data, thunkAPI) => {
 	try {
-		return await ticketService.getItTicket()
+		return await ticketService.getItTicket(data)
 	} catch (error: any) {
-		const message = error?.response?.data?.message ||
-			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		// Handle error using handleMessageError function
+		const message = handleMessageError(error, thunkAPI);
 		return thunkAPI.rejectWithValue(message)
 	}
 })
@@ -105,8 +112,8 @@ export const getItTicketParameter = createAsyncThunk('ticket/getItTicketParamete
 	try {
 		return await ticketService.getItTicketParameter(data)
 	} catch (error: any) {
-		const message = error?.response?.data?.message ||
-			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		// Handle error using handleMessageError function
+		const message = handleMessageError(error, thunkAPI);
 		return thunkAPI.rejectWithValue(message)
 	}
 })
@@ -117,8 +124,8 @@ export const createTicket = createAsyncThunk('ticket/createTicket', async (data,
 	try {
 		return await ticketService.createTicket(data)
 	} catch (error: any) {
-		const message = error?.response?.data?.message ||
-			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		// Handle error using handleMessageError function
+		const message = handleMessageError(error, thunkAPI);
 		return thunkAPI.rejectWithValue(message)
 	}
 })
@@ -128,8 +135,8 @@ export const admingetTicket = createAsyncThunk('ticket/admingetTicket', async (d
 	try {
 		return await ticketService.admingetTicket(data)
 	} catch (error: any) {
-		const message = error?.response?.data?.message ||
-			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		// Handle error using handleMessageError function
+		const message = handleMessageError(error, thunkAPI);
 		return thunkAPI.rejectWithValue(message)
 	}
 })
@@ -139,8 +146,8 @@ export const getTicketID = createAsyncThunk('ticket/getTicketID', async (data, t
 	try {
 		return await ticketService.getTicketID(data)
 	} catch (error: any) {
-		const message = error?.response?.data?.message ||
-			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		// Handle error using handleMessageError function
+		const message = handleMessageError(error, thunkAPI);
 		return thunkAPI.rejectWithValue(message)
 	}
 })
@@ -150,8 +157,8 @@ export const viewTicket = createAsyncThunk('ticket/viewTicket', async (data, thu
 	try {
 		return await ticketService.viewTicket(data)
 	} catch (error: any) {
-		const message = error?.response?.data?.message ||
-			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		// Handle error using handleMessageError function
+		const message = handleMessageError(error, thunkAPI);
 		return thunkAPI.rejectWithValue(message)
 	}
 })
@@ -161,8 +168,8 @@ export const itAssignTicket = createAsyncThunk('ticket/itAssignTicket', async (d
 	try {
 		return await ticketService.itAssignTicket(data)
 	} catch (error: any) {
-		const message = error?.response?.data?.message ||
-			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		// Handle error using handleMessageError function
+		const message = handleMessageError(error, thunkAPI);
 		return thunkAPI.rejectWithValue(message)
 	}
 })
@@ -173,8 +180,8 @@ export const getTicketAssignTicket = createAsyncThunk('ticket/getTicketAssignTic
 	try {
 		return await ticketService.getTicketAssignTicket(data)
 	} catch (error: any) {
-		const message = error?.response?.data?.message ||
-			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		// Handle error using handleMessageError function
+		const message = handleMessageError(error, thunkAPI);
 		return thunkAPI.rejectWithValue(message)
 	}
 })
@@ -184,8 +191,8 @@ export const dashBoardInfo = createAsyncThunk('ticket/dashBoardInfo', async (dat
 	try {
 		return await ticketService.dashBoardInfo()
 	} catch (error: any) {
-		const message = error?.response?.data?.message ||
-			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		// Handle error using handleMessageError function
+		const message = handleMessageError(error, thunkAPI);
 		return thunkAPI.rejectWithValue(message)
 	}
 })
@@ -194,9 +201,10 @@ export const updateTicket = createAsyncThunk('ticket/updateTicket', async (data,
 	try {
 		return await ticketService.updateTicket(data)
 	} catch (error: any) {
-		const message = error?.response?.data?.message ||
-			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
-		return thunkAPI.rejectWithValue(message)
+		// Handle error using handleMessageError function
+		const message = handleMessageError(error, thunkAPI);
+		// Return the rejected promise with the error message
+		return thunkAPI.rejectWithValue(message);
 	}
 })
 // Give Approval
@@ -204,8 +212,18 @@ export const giveApproval = createAsyncThunk('ticket/giveApproval', async (data,
 	try {
 		return await ticketService.giveApproval(data)
 	} catch (error: any) {
-		const message = error?.response?.data?.message ||
-			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+		// Handle error using handleMessageError function
+		const message = handleMessageError(error, thunkAPI);
+		return thunkAPI.rejectWithValue(message)
+	}
+})
+// Give Approval
+export const superAdminDashboard = createAsyncThunk('ticket/superAdminDashboard', async (data, thunkAPI) => {
+	try {
+		return await ticketService.superAdminDashboard()
+	} catch (error: any) {
+		// Handle error using handleMessageError function
+		const message = handleMessageError(error, thunkAPI);
 		return thunkAPI.rejectWithValue(message)
 	}
 })
@@ -280,6 +298,11 @@ export const ticketSlice = createSlice({
 			state.giveApprovalisSuccess = false
 			state.giveApprovalisError = false
 			state.giveApprovalmessage = ''
+
+			state.superAdminDashboardisLoading = false
+			state.superAdminDashboardisSuccess = false
+			state.superAdminDashboardisError = false
+			state.superAdminDashboardmessage = ''
 
 		},
 	},
@@ -468,6 +491,21 @@ export const ticketSlice = createSlice({
 				state.giveApprovalisError = true
 				state.giveApprovalmessage = action.payload
 				state.giveApprovaldata = null
+			})
+
+			.addCase(superAdminDashboard.pending, (state) => {
+				state.superAdminDashboardisLoading = true
+			})
+			.addCase(superAdminDashboard.fulfilled, (state: any, action) => {
+				state.superAdminDashboardisLoading = false
+				state.superAdminDashboardisSuccess = true
+				state.superAdminDashboarddata = action.payload?.data
+			})
+			.addCase(superAdminDashboard.rejected, (state: any, action) => {
+				state.superAdminDashboardisLoading = false
+				state.superAdminDashboardisError = true
+				state.superAdminDashboardmessage = action.payload
+				state.superAdminDashboarddata = null
 			})
 
 	},

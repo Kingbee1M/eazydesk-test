@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import Header from '../components/Header';
-// import Table from '../components/Table';
 import { HiOutlineSearch } from 'react-icons/hi';
 import { RiAlarmWarningFill } from 'react-icons/ri';
 import { Modal } from 'react-bootstrap';
@@ -17,6 +15,7 @@ import { getTicket } from '../../features/Ticket/ticketSlice';
 
 
 const LeadsIncidentRequest = () => {
+	const [limit, setLimit] = useState<any>(10);
 	const dispatch = useAppDispatch();
 	const { data: ticket, isLoading } = useAppSelector((state: any) => state.ticket)
 	const { createisSuccess } = useAppSelector((state: any) => state.ticket)
@@ -25,11 +24,15 @@ const LeadsIncidentRequest = () => {
 
 
 	useEffect(() => {
-		dispatch(getTicket())
+		const datas = { limit: limit, ticketType: "INCIDENT" };
+		// @ts-ignore 
+		dispatch(getTicket(datas))
 		if (createisSuccess) {
-			dispatch(getTicket())
+			const datas = { limit: limit, ticketType: "INCIDENT" };
+			// @ts-ignore 
+			dispatch(getTicket(datas))
 		}
-	}, [dispatch, createisSuccess])
+	}, [dispatch, createisSuccess, limit])
 
 
 
@@ -69,7 +72,7 @@ const LeadsIncidentRequest = () => {
 				</div>
 			</div>
 			<main  >
-				<div className='request-container'>
+				<div className='request-container table_margin'>
 					<div className="container-items">
 						<h5 className='dashboard-first-card-h'>Incident Request</h5>
 						<div className="entries-perpage">
@@ -88,7 +91,9 @@ const LeadsIncidentRequest = () => {
 							TYPE={false}
 							data={data}
 							isLoading={isLoading}
-							colSpan={8} />
+							colSpan={8}
+							assignto={false}
+						/>
 					</div>
 				</div>
 			</main>

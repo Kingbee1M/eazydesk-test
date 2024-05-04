@@ -103,6 +103,7 @@ const ITChangeRequest = () => {
 						data={itticketparameterdata?.tickets}
 						isLoading={itticketparameterisLoading}
 						colSpan={8}
+						assignto={true}
 					/>
 				</div>
 			</main>

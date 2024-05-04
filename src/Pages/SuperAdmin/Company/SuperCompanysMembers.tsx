@@ -20,6 +20,8 @@ const SuperCompanysMembers = () => {
 	const [displayData, setDisplayData] = useState([]);
 	const { viewdata, viewisLoading } = useAppSelector((state: any) => state.company);
 
+
+
 	useEffect(() => {
 		// @ts-ignore
 		dispatch(viewCompany(id))
@@ -57,7 +59,6 @@ const SuperCompanysMembers = () => {
 								<th>Email</th>
 								<th>Phone Number</th>
 								<th>Role</th>
-								<th>isActive</th>
 								<th>Edit User</th>
 							</tr>
 						</thead>
@@ -72,13 +73,8 @@ const SuperCompanysMembers = () => {
 										<td >{item.firstname}</td>
 										<td >{item.lastname}</td>
 										<td >{item.email}</td>
-										<td >{item.phoneNumber}</td>
+										<td >{item.mobileNumber}</td>
 										<td >{item?.role}</td>
-										<td >
-											<button className={item.isEnabled ? "table-link-active" : "de-active"}>
-												{item.isEnabled === true ? "Active" : "Deactivated"}
-											</button>
-										</td>
 										<td >
 											<EditCustomerModal data={item} id={item.id} showEditUser={showEditUser} setShowEditUser={setShowEditUser} />
 										</td>

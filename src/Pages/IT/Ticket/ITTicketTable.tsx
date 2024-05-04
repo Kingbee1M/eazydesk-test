@@ -45,18 +45,15 @@ const ITTicketTable = ({
       <tbody>
        {isLoading ? (
         <TableFetch colSpan={9} />
-       ) : data?.length === 0 || data?.length === undefined ? (
-        <NoRecordFound
-         colSpan={9}
-         children={"No Tickets record found!"}
-        />
+       ) : data?.length === 0 || !data === undefined ? (
+        <NoRecordFound colSpan={9} />
        ) : (
         data?.map((user: any) => (
          <tr key={user?._id}>
           <td className="Reference" data-title="Reference">
-           {user?.ticketType === "INCIDENT REQUEST"
+           {user?.ticketType === "INCIDENT"
             ? "INC"
-            : user?.ticketType === "SERVICE REQUEST"
+            : user?.ticketType === "SERVICE"
              ? "SRV"
              : "CHG"}
           </td>
@@ -141,7 +138,12 @@ const ITTicketTable = ({
            {user?.status === "CLOSED" ? (
             <button className="ticket-Closed">Closed</button>
            ) : (
-            <AssignTask id={user?.id} Assigned={"Assigned"} needsApproval={user?.needsApproval} data={user} />
+            <AssignTask
+             id={user?.id}
+             Assigned={"Assigned"}
+             needsApproval={user?.needsApproval}
+             data={user}
+            />
            )}
           </td>
           <td>

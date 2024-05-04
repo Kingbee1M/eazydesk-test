@@ -40,6 +40,7 @@ const EditCompany = ({ id, name }: any) => {
 			});
 		});
 	}, [name]);
+
 	useEffect(() => {
 		if (updateisSuccess) {
 			toast.success("Company Updated!", { toastId: customId });

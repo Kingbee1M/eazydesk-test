@@ -102,13 +102,13 @@ const TicketForm = ({ type, setShow, currentState, proposedChange }: any) => {
         background: "yellow",
         width: "50%",
       }));
-    } else if (input.affectedUsers >= 11) {
+    } else if (input.affectedUsers >= 11 && input.affectedUsers <= 19) {
       handleOnChange("severity", "High");
       setSeverityStyle(() => ({
-        background: "red",
-        width: "100%",
+        background: "#E48888",
+        width: "75%",
       }));
-    } else if (input.issueCategory === "Total DOWNTIME") {
+    } else if (input.affectedUsers >= 20) {
       handleOnChange("severity", "Critical");
       setSeverityStyle(() => ({
         background: "red",
@@ -121,7 +121,7 @@ const TicketForm = ({ type, setShow, currentState, proposedChange }: any) => {
         width: "0%",
       }));
     }
-  }, [input.affectedUsers, input.issueCategory]);
+  }, [input.affectedUsers]);
 
   const handleOnChange = (input: string, value: string) => {
     setInput((prevState: any) => ({

@@ -1,18 +1,17 @@
 import { useContext, useEffect, useState } from 'react';
 import { IoCalendarOutline } from "react-icons/io5";
-import Badge from './Badge/Badge';
-import pro_img from '../assets/img/pro_img.svg'
-import { pageTitles } from './StateData';
-import NetworkConnetion from './NetworkConnetion';
-import Notification from './Notification/Notification';
-import HeaderDate from './HeaderDate';
-import ProfileDropDown from './ProfileDropDown';
-import { SocketContext } from './Scoket/SocketContext';
-import NotificationPopUp from './Scoket/NotificationPopUp';
 import { HiUserCircle } from "react-icons/hi2";
+import { pageTitles } from '../StateData';
+import { SocketContext } from '../Scoket/SocketContext';
+import ProfileDropDown from '../ProfileDropDown';
+import HeaderDate from '../HeaderDate';
+import NotificationPopUp from '../Scoket/NotificationPopUp';
+import NetworkConnetion from '../NetworkConnetion';
+import Badge from '../Badge/Badge';
+import Notification from '../Notification/Notification';
 
 
-const Header = () => {
+const ITHeader = () => {
   const socket = useContext(SocketContext);
   const [notification, setNotification] = useState<any>();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -46,7 +45,7 @@ const Header = () => {
           <Badge setIsDrawerOpen={setIsDrawerOpen} isDrawerOpen={isDrawerOpen} />
           <div className='profiledropdown_container'>
             <div>
-              <h5 className='profiledropdown_container_h5'>	{userInfo?.firstname}</h5>
+              <h5 className='profiledropdown_container_h5'>{userInfo?.firstname}</h5>
               <p className='profiledropdown_container_p'>{userInfo?.role}</p>
             </div>
             {/* <span className='FaPlus-name' onClick={() => navigate("/settings")}>
@@ -65,7 +64,7 @@ const Header = () => {
   )
 }
 
-export default Header;
+export default ITHeader;
 
 
 

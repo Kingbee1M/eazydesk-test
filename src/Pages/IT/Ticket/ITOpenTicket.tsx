@@ -91,8 +91,10 @@ const ITOpenTicket = () => {
 						pagination={itticketparameterdata}
 						handlePagination={handlePagination}
 						data={itticketparameterdata?.tickets}
+						isLoading={itticketparameterisLoading}
 						TYPE={false}
 						colSpan={8}
+						assignto={true}
 					/>
 				</div>
 			</main>

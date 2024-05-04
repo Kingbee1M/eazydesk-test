@@ -5,11 +5,15 @@ import RegisterModal from './RegisterModal';
 import BottomNavigation from '../../../components/BottomNavigation';
 import { useAppDispatch, useAppSelector } from '../../../store/useStore';
 import { ToastContainer } from 'react-toastify';
-import { getallReguser } from '../../../features/Registration/registrationSlice';
+import { getallReguser, superallReguser } from '../../../features/Registration/registrationSlice';
 import Pagination from '../../../components/Pagination';
 import TableLoader from '../../../components/TableLoader';
 import { NoRecordFound, TableFetch } from '../../../components/Options';
 import SuperSideNav from '../../../components/SideNav/SuperSideNav';
+import RealPagination from '../../../components/RealPagination';
+import Search from '../../../components/Search';
+import SearchConponent from '../../../components/SearchConponent';
+import moment from 'moment';
 
 
 
@@ -17,12 +21,15 @@ import SuperSideNav from '../../../components/SideNav/SuperSideNav';
 const SuperRegister = ({ switchs }: any) => {
 	// @ts-ignore 
 	const userInfo = JSON.parse(localStorage.getItem("service_desk"));
-
+	const [limit, setLimit] = useState<any>(8);
 	const [showEditUser, setShowEditUser] = useState(false)
 	const dispatch = useAppDispatch();
-	const { dataAll, isLoadingAll } = useAppSelector((state: any) => state.reg);
+	const { superallReguserdata, superallReguserisLoading } = useAppSelector((state: any) => state.reg);
 	const { isSuccess } = useAppSelector((state) => state.reg)
 	const { edituserisSuccess } = useAppSelector((state: any) => state.reg);
+
+	const pagination = superallReguserdata?.data?.pagination
+	const users = superallReguserdata?.data?.users
 
 
 
@@ -31,23 +38,33 @@ const SuperRegister = ({ switchs }: any) => {
 	const [entriesPerPage, setEntriesPerPage] = useState(() => {
 		return localStorage.getItem("reportsPerPages") || "8";
 	});
-	const [realData, setRealData] = useState<any>([]);
+	const [data, setRealData] = useState<any>([]);
 	const [searchItem, setSearchItem] = useState("");
+	const [startDates, setStartDates] = useState([]);
+	let [endDates, setEndDates] = useState<any>([]);
+	const [show, setShow] = useState(false);
+	const [datas, setDatas] = useState([]);
+
+
+	endDates = new Date();
+	const formattedEndDate = endDates.toISOString().split('T')[0]; // Extracting date part and removing time
+	const [startDate1] = useState(formattedEndDate);
+	const [endDate1] = useState(formattedEndDate);
+
+
+
 
 
 
 	// Data Fetching (Conditional) Effect
 	useEffect(() => {
-
 		if (isSuccess || edituserisSuccess) {
 			// If success is true, fetch data again
-
-			dispatch(getallReguser());
+			dispatch(superallReguser());
 		} else {
 			// Fetch data when the component is mounted or dispatch changes 
-			dispatch(getallReguser());
+			dispatch(superallReguser());
 		}
-
 	}, [dispatch, edituserisSuccess, isSuccess]);
 
 	// Local Storage Effect
@@ -56,22 +73,51 @@ const SuperRegister = ({ switchs }: any) => {
 		localStorage.setItem("reportsPerPages", entriesPerPage);
 	}, [entriesPerPage]);
 
-	const [displayData, setDisplayData] = useState([]);
+
 
 
 	useEffect(() => {
-		const result = dataAll?.users?.filter((item: any) =>
+		const result = superallReguserdata?.data?.users?.filter((item: any) =>
 			item?.firstname?.toLowerCase()?.includes(searchItem)
 		);
 		setRealData(result);
-	}, [dataAll, searchItem]);
+	}, [superallReguserdata, searchItem]);
 
 
+	useEffect(() => {
+		dispatch(superallReguser())
+	}, [dispatch])
+
+	const handlePagination = (type: string, data?: React.ChangeEvent<HTMLSelectElement> | undefined) => {
+		switch (type) {
+			// @ts-ignore
+			case 'prev': dispatch(superallReguser({ page: pagination?.page - 1, limit: limit }));
+				break;
+			// @ts-ignore
+			case 'next': dispatch(superallReguser({ page: pagination?.page + 1, limit: limit }));
+				break;
+			case 'limit':
+				if (data) {
+					setLimit(data.target.value);
+					// @ts-ignore
+					// dispatch(superallReguser({ limit: data.target.value }));
+				}
+				break;
+			default:
+				// For page numbers or any other custom actions
+				const pageNumber = parseInt(type);
+				if (!isNaN(pageNumber)) {
+					// @ts-ignore
+					// dispatch(superallReguser({ page: pageNumber, limit: limit }));
+				}
+				break;
+		}
+	}
 
 
 	return (
 		<div id="page-wrapper">
-			<ToastContainer position="top-right" containerId={"custom1"} />
+			<ToastContainer position="top-right" containerId={"custom111221"} />
 			<SuperSideNav />
 			<Header />
 			<BottomNavigation />
@@ -79,12 +125,26 @@ const SuperRegister = ({ switchs }: any) => {
 				<div className='dashboard-first-card-boards mb-2 mt-2'>
 					<div>
 						<h5 className='dashboard-first-card-h'>Register</h5>
-						<p className='dashboard-first-card-p'>{displayData?.length} Total Registered Users</p>
 					</div>
-					<RegisterModal />
 				</div>
-				<div className='table-container'>
-					{isLoadingAll && <TableLoader isLoading={isLoadingAll} />}
+				<SearchConponent
+					placeholder={"Search registered users"}
+					setSearchItem={setSearchItem}
+					searchItem={searchItem}
+					data={superallReguserdata?.users}
+					entriesPerPage={entriesPerPage}
+					setEntriesPerPage={setEntriesPerPage}
+					filter={true}
+					setStartDates={setStartDates}
+					setEndDates={setEndDates}
+					setShow={setShow}
+					show={show}
+					handlePagination={handlePagination}
+					RegModal={true}
+				// handleCustomFilters={handleCustomFilters}
+				/>
+				<div className='table-container mt-4'>
+					{superallReguserisLoading && <TableLoader isLoading={superallReguserisLoading} />}
 					<table id="table" className={switchs ? "table" : " table-hover table-mc-light-blue"}>
 						<thead>
 							<tr>
@@ -98,12 +158,12 @@ const SuperRegister = ({ switchs }: any) => {
 							</tr>
 						</thead>
 						<tbody className="data-table-content">
-							{isLoadingAll ? (
+							{superallReguserisLoading ? (
 								<TableFetch colSpan={7} />
-							) : displayData?.length === 0 || dataAll.length === 0 ? (
+							) : data?.length === 0 || data === undefined ? (
 								<NoRecordFound colSpan={7} />
 							) : (
-								displayData?.map((item: any, i: any) => (
+								data?.map((item: any, i: any) => (
 									<tr key={i}>
 										<td >{item?.firstname}</td>
 										<td >{item?.lastname}</td>
@@ -124,12 +184,10 @@ const SuperRegister = ({ switchs }: any) => {
 					</table>
 				</div>
 				<footer className="main-table-footer">
-					<Pagination
-						setDisplayData={setDisplayData}
-						data={realData}
-						entriesPerPage={entriesPerPage}
-						Total={"Registered User"}
-					/>
+					{pagination?.pagination?.totalTickets > 1 && <div className="totalResponses">
+						<h3>Total of {pagination?.totalUsers} Tickets - <span>Page {pagination?.page} of {pagination?.totalPages}</span></h3>
+						<RealPagination handlePagination={handlePagination} pagination={pagination} />
+					</div>}
 				</footer>
 			</main>
 		</div>

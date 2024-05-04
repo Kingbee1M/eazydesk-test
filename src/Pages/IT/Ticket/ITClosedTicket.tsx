@@ -93,6 +93,7 @@ const ITClosedTicket = () => {
 						pagination={itticketparameterdata}
 						handlePagination={handlePagination}
 						data={itticketparameterdata?.tickets}
+						isLoading={itticketparameterisLoading}
 						colSpan={8}
 					/>
 				</div>

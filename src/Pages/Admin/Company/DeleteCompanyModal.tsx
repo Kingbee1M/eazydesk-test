@@ -19,7 +19,6 @@ const DeleteCompanyModal = ({ id, }: any) => {
 			toast.success("Company Deleted!", { toastId: customId });
 			setShow(false)
 		}
-
 	}, [dispatch, deleteisError, deleteisSuccess, deletemessage]);
 
 

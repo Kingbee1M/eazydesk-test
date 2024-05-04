@@ -20,7 +20,7 @@ const Search = ({ placeholder, setSearchItem, searchItem }: any) => {
 				placeholder={placeholder}
 				value={searchItem}
 				onChange={(e) => setSearchItem(e.target.value)}
-				className='header_Search'
+				className='header_Search '
 				onFocus={handleFocus}
 				onBlur={handleBlur}
 			/>
