@@ -26,7 +26,7 @@ ChartJS.register(
 
 const LinePerformanceChart = ({ types }: any) => {
 
-	console.log('types--tp', types)
+
 	// Initialize incidents with empty arrays for each month
 	const type: any = months.reduce((acc: any, month) => {
 		acc[month] = [];

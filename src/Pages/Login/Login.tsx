@@ -78,7 +78,7 @@ const Login = () => {
 		dispatch(reset())
 	}, [isError, message, dispatch, isSuccess, navigate, email])
 
-
+	console.log('isError', isError)
 
 	const loginValidationSchema = yup.object().shape({
 		email: yup

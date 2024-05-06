@@ -1,4 +1,3 @@
-import Header from '../../../components/Header'
 import BottomNavigation from '../../../components/BottomNavigation';
 import { RiArrowUpSFill } from "react-icons/ri";
 import dIcon1 from "../../../assets/DashboardIcons/Dicon1.svg"
@@ -7,9 +6,7 @@ import dIcon3 from "../../../assets/DashboardIcons/Dicon3.svg"
 import dIcon4 from "../../../assets/DashboardIcons/Dicon4.svg"
 import ITSideNav from '../../../components/SideNav/ITSideNav';
 import { AiOutlineEye } from 'react-icons/ai';
-import { MdOutlineErrorOutline } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
-import { VscCloudDownload } from 'react-icons/vsc';
 import AssignTask from '../../../components/Modals/AssignTask';
 import { useAppDispatch, useAppSelector } from '../../../store/useStore';
 import { dashBoardInfo, getItTicket } from '../../../features/Ticket/ticketSlice'
@@ -17,6 +14,9 @@ import { useEffect, useState } from 'react';
 import TicketStatusCell from '../../Admin/Ticket/TicketStatusCell';
 import { NoRecordFound, TableFetch } from '../../../components/Options';
 import ITHeader from '../../../components/Headers/ITHeader';
+import LeadsThreeinOneBarChart from '../../../components/Charts/LeadsThreeinOneBarChart';
+import { GoDotFill } from 'react-icons/go';
+import DoughnutChat from '../../../components/DoughnutChat';
 
 
 const ITDashboard = () => {
@@ -31,7 +31,8 @@ const ITDashboard = () => {
 		dispatch(getItTicket(datas))
 		dispatch(dashBoardInfo())
 		if (itassignisSuccess) {
-			dispatch(getItTicket())
+			// @ts-ignore
+			dispatch(getItTicket(datas))
 			dispatch(dashBoardInfo())
 		}
 	}, [dispatch, itassignisSuccess])
@@ -39,26 +40,25 @@ const ITDashboard = () => {
 
 
 
-	const [result] = useState(itdata?.tickets)
 
 
-	// const result = itdata?.filter((data: any) =>
-	// 	data?.assignedTo?._id?.toString()?.includes(ID)
-	// );
 
-	const ticketTotal = dashBoardInfodata?.pagination?.totalTickets
-	const changeRequest = dashBoardInfodata?.totals?.ticketType?.changeRequest
-	const incidentRequest = dashBoardInfodata?.totals?.ticketType?.incidentRequest
-	const serviceRequest = dashBoardInfodata?.totals?.ticketType?.serviceRequest
+
+	const ticketTotal = dashBoardInfodata?.totalTickets
 	const approved = dashBoardInfodata?.ticketType?.approved
 	const closed = dashBoardInfodata?.totals?.status?.closed
 	const completed = dashBoardInfodata?.totals?.status?.completed
-	const dissaproved = dashBoardInfodata?.totals?.status?.dissaproved
+	const disapproved = dashBoardInfodata?.totals?.status?.dissaproved
 	const inprogress = dashBoardInfodata?.totals?.status?.inprogress
 	const invalid = dashBoardInfodata?.totals?.status?.invalid
 	const open = dashBoardInfodata?.totals?.status?.open
 	const pending = dashBoardInfodata?.totals?.status?.pending
 	const reopen = dashBoardInfodata?.totals?.status?.reopen
+
+
+	const incident = !dashBoardInfodata ? [] : dashBoardInfodata?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("INCIDENT"));
+	const service = !dashBoardInfodata ? [] : dashBoardInfodata?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("SERVICE"));
+	const change = !dashBoardInfodata ? [] : dashBoardInfodata?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("CHANGE"));
 
 
 
@@ -80,8 +80,8 @@ const ITDashboard = () => {
 						<h1 className='total_card_flex_icon_h1'>{!ticketTotal ? 0 : ticketTotal}</h1>
 						<div>
 							<div className='total_card_flex_icon_source'>
-								<div className='total_card_ArrowUpSFill'>	<p>10%</p> <RiArrowUpSFill size={20} /> </div>
-								<h3>+$150 today</h3>
+								<div className='total_card_ArrowUpSFill'>	<p>Approved</p> </div>
+								<h3>{!approved ? 0 : approved}</h3>
 							</div>
 						</div>
 					</div>
@@ -95,8 +95,8 @@ const ITDashboard = () => {
 						<h1 className='total_card_flex_icon_h1'>{!inprogress ? 0 : inprogress}</h1>
 						<div>
 							<div className='total_card_flex_icon_source'>
-								<div className='total_card_ArrowUpSFill'>	<p>50%</p> <RiArrowUpSFill size={20} /> </div>
-								<h3>View orders</h3>
+								<div className='total_card_ArrowUpSFill'>	<p>Disapproved</p></div>
+								<h3>{!disapproved ? 0 : disapproved}</h3>
 							</div>
 						</div>
 					</div>
@@ -110,8 +110,8 @@ const ITDashboard = () => {
 						<h1 className='total_card_flex_icon_h1'>{!completed ? 0 : completed}</h1>
 						<div>
 							<div className='total_card_flex_icon_source'>
-								<div className='total_card_ArrowUpSFill'>	<p>30%</p> <RiArrowUpSFill size={20} /> </div>
-								<h3>In last week</h3>
+								<div className='total_card_ArrowUpSFill'>	<p>Reopen</p>  </div>
+								<h3>{!reopen ? 0 : reopen}</h3>
 							</div>
 						</div>
 					</div>
@@ -125,115 +125,55 @@ const ITDashboard = () => {
 						<h1 className='total_card_flex_icon_h1'>{!pending ? 0 : pending}</h1>
 						<div>
 							<div className='total_card_flex_icon_source'>
-								<div className='total_card_ArrowUpSFill'>	<p>70%</p> <RiArrowUpSFill size={20} /> </div>
-								<h3>2477 tickets automated</h3>
+								<div className='total_card_ArrowUpSFill'>	<p>Closed</p>  </div>
+								<h3>{!closed ? 0 : closed}</h3>
 							</div>
 						</div>
 					</div>
 				</div>
 
+
 				<div className='dash_statistics_container'>
-					{/* <div className='dash_statistics_sub1'>
+					<div className='dash_statistics_sub1'>
 						<div>
 							<h3>Ticket</h3>
-							<p>Summary</p>
 						</div>
 						<div>
-							<DoughnutChat />
+							<DoughnutChat
+								ticketTotal={ticketTotal}
+								inprogress={inprogress}
+								completed={completed}
+								pending={pending}
+							/>
 						</div>
-					</div> */}
-					<div className='dash_statistics_sub_it'>
+					</div>
+					<div className='dash_statistics_sub2'>
 						<div className='dash_statistics_sub2_text'>
 							<div>
-								<h3>Pending Tickets</h3>
-
+								<h3>Ticket per month</h3>
+							</div>
+							<div className='sta_color_container_main'>
+								<div className='sta_color_container'>
+									<GoDotFill color='#883DCF' />
+									<small>New</small>
+								</div>
+								<div className='sta_color_container'>
+									<GoDotFill color='#F2994A' />
+									<small>Inprogress</small>
+								</div>
+								<div className='sta_color_container'>
+									<GoDotFill color='#22CAAD' />
+									<small>Completed</small>
+								</div>
 							</div>
 						</div>
-						<div className='statistics_sub2_table_container'>
-							<table id="table" className="table">
-								<thead>
-									<tr>
-										<th>Reference</th>
-										<th>Ticket Type</th>
-										<th>Severity</th>
-										<th>Affected Users</th>
-										<th>Time Stamp</th>
-										<th>Assign To</th>
-										<th>Ticket Status</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									{itisLoading ? (
-										<TableFetch colSpan={8} />
-									) : result?.length === undefined ? (
-										<NoRecordFound
-											colSpan={8}
-											children={"No record found!"}
-										/>
-									) : (
-										result?.map((item: any) => (
-											<tr key={item?.id}>
-
-												<td data-title="Reference">
-													{item.ticketType === "INCIDENT"
-														? "INC"
-														: item.ticketType === "SERVICE"
-															? "SRV"
-															: "CHG"}
-												</td>
-												<td data-title="ticket type">{item?.ticketType}</td>
-												<td data-title="severity">
-													{item?.severity === "High" ? (
-														<span className="severity-high">{item?.severity}</span>
-													) : item?.severity === "Medium" ? (
-														<span className="severity-medium">
-															{item?.severity}
-														</span>
-													) : (
-														<span className="severity-low">{item?.severity}</span>
-													)}
-												</td>
-												<td data-title="affected users">{item?.affectedUsers}</td>
-												<td data-title="Assign To">
-													{item?.finalStatus === "Closed" ? (
-														<button className="ticket-Closed">Closed</button>
-													) : (
-														<AssignTask id={item?.id} />
-													)}
-												</td>
-												<td data-title="affected users">{item?.affectedUsers}</td>
-												<td data-title="progresss">
-													<TicketStatusCell user={item} customId={item?.id} />
-												</td>
-												<td data-title="View">
-													{item?.ticketType === "INCIDENT" ? (
-														<NavLink
-															to={`/itincidentrequest`}
-															className="admin-btn-View">
-															<AiOutlineEye size={20} />
-														</NavLink>
-													) : item?.ticketType === "SERVICE" ? (
-														<NavLink
-															to={`/itservicerequest`}
-															className="admin-btn-View">
-															<AiOutlineEye size={20} />
-														</NavLink>
-													) : (
-														<NavLink
-															to={`/itchangerequest`}
-															className="admin-btn-View">
-															<AiOutlineEye size={20} />
-														</NavLink>
-													)}
-												</td>
-											</tr>
-										))
-									)}
-								</tbody>
-							</table>
-						</div>
-						{/* <ThreeinOneBarChart /> */}
+						<LeadsThreeinOneBarChart
+							threeinone={"threeinone"}
+							incident={incident}
+							service={service}
+							change={change}
+							assignto={false}
+						/>
 					</div>
 				</div>
 

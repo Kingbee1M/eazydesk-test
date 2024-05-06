@@ -20,21 +20,12 @@ const SuperDashboard = () => {
 	const dispatch = useAppDispatch()
 	const [activeIndex, setActiveIndex] = useState<any>('OUTCESS SOLUTION'); // Initially set the first item as active
 
-
-
-	const { dashBoardInfodata } = useAppSelector((state: any) => state.ticket);
 	const { superAdminDashboarddata } = useAppSelector((state: any) => state.ticket);
-
-	// console.log('superAdminDashboarddata', superAdminDashboarddata)
-	// console.log('dashBoardInfodata', dashBoardInfodata)
-
 
 	const type = !superAdminDashboarddata ? [] :
 		superAdminDashboarddata?.filter((company: any) => {
 			return company?.companyInfo?.company_name === activeIndex?.toUpperCase()
 		}) || [];
-
-
 
 	const types = !superAdminDashboarddata
 		? []
@@ -44,30 +35,24 @@ const SuperDashboard = () => {
 	const flattenedTypes = types?.flat();
 
 
-
-	// console.log('types', types)
-
 	useEffect(() => {
-		dispatch(dashBoardInfo())
 		dispatch(superAdminDashboard())
 	}, [dispatch])
 
-	console.log('type', type)
 
 	const ticketTotal = type.length > 0 ? type[0].companyInfo.ticketsInfo.totalTickets : 0;
-	const changeRequest = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.ticketType.changeRequest : 0;
-	const incidentRequest = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.ticketType.incidentRequest : 0;
-	const serviceRequest = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.ticketType.serviceRequest : 0;
 	const approved = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.approved : 0; // corrected spelling of "dissapproved"
 	const closed = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.closed : 0;
 	const completed = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.completed : 0;
 	const dissapproved = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.dissapproved : 0;
 	const inprogress = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.inprogress : 0;
 	const invalid = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.invalid : 0;
-	const open = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.open : 0;
 	const pending = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.pending : 0;
 	const reopen = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.reopen : 0;
 
+	const incident = !flattenedTypes ? [] : flattenedTypes?.filter((ticket: any) => ticket?.ticketType?.includes("INCIDENT"));
+	const service = !flattenedTypes ? [] : flattenedTypes?.filter((ticket: any) => ticket?.ticketType?.includes("SERVICE"));
+	const change = !flattenedTypes ? [] : flattenedTypes?.filter((ticket: any) => ticket?.ticketType?.includes("CHANGE"));
 
 
 
@@ -106,8 +91,8 @@ const SuperDashboard = () => {
 						<h1 className='total_card_flex_icon_h1'>{!ticketTotal ? 0 : ticketTotal}</h1>
 						<div>
 							<div className='total_card_flex_icon_source'>
-								<div className='total_card_ArrowUpSFill'>	<p>10%</p> <RiArrowUpSFill size={20} /> </div>
-								<h3>+$150 today</h3>
+								<div className='total_card_ArrowUpSFill'>	<p>Approved</p> </div>
+								<h3>{!approved ? 0 : approved}</h3>
 							</div>
 						</div>
 					</div>
@@ -121,8 +106,8 @@ const SuperDashboard = () => {
 						<h1 className='total_card_flex_icon_h1'>{!inprogress ? 0 : inprogress}</h1>
 						<div>
 							<div className='total_card_flex_icon_source'>
-								<div className='total_card_ArrowUpSFill'>	<p>50%</p> <RiArrowUpSFill size={20} /> </div>
-								<h3>View orders</h3>
+								<div className='total_card_ArrowUpSFill'>	<p>Dissapproved</p></div>
+								<h3>{!dissapproved ? 0 : dissapproved}</h3>
 							</div>
 						</div>
 					</div>
@@ -136,8 +121,8 @@ const SuperDashboard = () => {
 						<h1 className='total_card_flex_icon_h1'>{!completed ? 0 : completed}</h1>
 						<div>
 							<div className='total_card_flex_icon_source'>
-								<div className='total_card_ArrowUpSFill'>	<p>30%</p> <RiArrowUpSFill size={20} /> </div>
-								<h3>In last week</h3>
+								<div className='total_card_ArrowUpSFill'>	<p>Reopen</p>  </div>
+								<h3>{!reopen ? 0 : reopen}</h3>
 							</div>
 						</div>
 					</div>
@@ -151,8 +136,8 @@ const SuperDashboard = () => {
 						<h1 className='total_card_flex_icon_h1'>{!pending ? 0 : pending}</h1>
 						<div>
 							<div className='total_card_flex_icon_source'>
-								<div className='total_card_ArrowUpSFill'>	<p>70%</p> <RiArrowUpSFill size={20} /> </div>
-								<h3>2477 tickets</h3>
+								<div className='total_card_ArrowUpSFill'>	<p>Closed</p>  </div>
+								<h3>{!closed ? 0 : closed}</h3>
 							</div>
 						</div>
 					</div>
@@ -170,6 +155,7 @@ const SuperDashboard = () => {
 								inprogress={inprogress}
 								completed={completed}
 								pending={pending}
+
 							/>
 						</div>
 					</div>
@@ -196,10 +182,9 @@ const SuperDashboard = () => {
 						</div>
 						<ThreeinOneBarChart
 							threeinone={"threeinone"}
-							ticketTotal={ticketTotal}
-							inprogress={inprogress}
-							completed={completed}
-							pending={pending}
+							incident={incident}
+							service={service}
+							change={change}
 						/>
 					</div>
 				</div>

@@ -11,12 +11,8 @@ const dataService = DataService();
  const login = async (value: any) => { 
    const { data } = await axios.post(baseUrl + '/api/v2/auth/login-user', value) 
    if (data) { 
-     try {    
-       dataService?.setToken(data?.data?.token)  
+    dataService?.setToken(data?.data?.token)  
        localStorage.setItem('service_desk', JSON.stringify(data?.data?.user));     
-  } catch (e) {
-     console.log(`isLoggedIn in error ${e}`)
-  }
   }
   return data
 }
