@@ -121,6 +121,7 @@ const uploadFile = (url: string, data: Record<string, any>, files: Record<string
       })
       .catch((e) => {
         handleError(e);
+        console.log('errorMessage-errorMessage',e)
         reject(e);
       });
   });

@@ -99,7 +99,6 @@ const LeadsDashboard = () => {
 					<div className='dash_statistics_sub1'>
 						<div>
 							<h3>Ticket</h3>
-							{/* <p>Summary</p> */}
 						</div>
 						<div>
 							<DoughnutChat

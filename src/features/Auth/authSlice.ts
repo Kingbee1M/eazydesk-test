@@ -78,7 +78,9 @@ export const login = createAsyncThunk('auth/login', async (data, thunkAPI) => {
 
   } catch (error: any) {  
   		// Handle error using handleMessageError function
-		const message = handleMessageError(error, thunkAPI);
+		// const message = handleMessageError(error, thunkAPI);
+			const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
     return thunkAPI.rejectWithValue(message)
   }
 })

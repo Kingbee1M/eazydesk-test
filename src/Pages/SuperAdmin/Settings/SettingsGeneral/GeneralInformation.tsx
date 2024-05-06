@@ -59,9 +59,9 @@ const GeneralInformation = () => {
         </div>
         <div className='settings_profile_title_text'>
           <h6>
-            {input.firstname} {input.lastname}
+            {input?.firstname} {input?.lastname}
           </h6>
-          <p>{input.role}</p>
+          <p>{input?.role}</p>
         </div>
         <div className='settings_container_title_btn'>
           <button className='btn'>Change</button>
@@ -78,7 +78,7 @@ const GeneralInformation = () => {
               <input
                 type='text'
                 placeholder='E.g: John '
-                value={input.firstname}
+                value={input?.firstname}
                 onChange={(e) => handleChange("firstname", e.target.value)}
                 required
               />
@@ -88,7 +88,7 @@ const GeneralInformation = () => {
               <input
                 type='text'
                 placeholder='E.g:  Smith'
-                value={input.lastname}
+                value={input?.lastname}
                 onChange={(e) => handleChange("lastname", e.target.value)}
                 required
               />
@@ -98,7 +98,7 @@ const GeneralInformation = () => {
               <input
                 type='text'
                 placeholder='xyz@gmail.com'
-                value={input.emailaddress}
+                value={input?.emailaddress}
                 onChange={(e) => handleChange("emailaddress", e.target.value)}
                 required
                 readOnly
@@ -109,7 +109,7 @@ const GeneralInformation = () => {
               <input
                 type='phonenumber'
                 placeholder='123-098-345-09'
-                value={input.phonenumber}
+                value={input?.phonenumber}
                 onChange={(e) => handleChange("phonenumber", e.target.value)}
                 required
               />
@@ -119,7 +119,7 @@ const GeneralInformation = () => {
               <input
                 type='text'
                 placeholder='012-345-6789'
-                value={input.role}
+                value={input?.role}
                 onChange={(e) => handleChange("role", e.target.value)}
                 required
                 readOnly
@@ -132,5 +132,5 @@ const GeneralInformation = () => {
   );
 };
 
- 
+
 export default GeneralInformation; 

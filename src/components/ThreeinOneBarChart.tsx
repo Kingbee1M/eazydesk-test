@@ -51,21 +51,21 @@ const ThreeinOneBarChart = ({ threeinone, incident, service, change }: any) => {
 		const updatedDate = new Date(ticket?.createdAt);
 		const month = months[updatedDate?.getMonth()]; // Get the month component (0-indexed)
 
-		incidents[month].push(ticket);
+		incidents[month]?.push(ticket);
 	});
 	// Populate incidents with data
 	service?.forEach((ticket: { createdAt: string | number | Date; }) => {
 		const updatedDate = new Date(ticket?.createdAt);
 		const month = months[updatedDate?.getMonth()]; // Get the month component (0-indexed)
 
-		services[month].push(ticket);
+		services[month]?.push(ticket);
 	});
 	// Populate incidents with data
 	change?.forEach((ticket: { createdAt: string | number | Date; }) => {
 		const updatedDate = new Date(ticket?.createdAt);
 		const month = months[updatedDate?.getMonth()]; // Get the month component (0-indexed)
 
-		changes[month].push(ticket);
+		changes[month]?.push(ticket);
 	});
 
 

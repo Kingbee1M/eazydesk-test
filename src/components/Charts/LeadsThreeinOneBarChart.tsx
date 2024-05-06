@@ -46,25 +46,25 @@ const LeadsThreeinOneBarChart = ({ threeinone, incident, service, change }: any)
 	}, {});
 
 	// Populate incidents with data
-	incident?.forEach((ticket: { updatedAt: string | number | Date; }) => {
-		const updatedDate = new Date(ticket?.updatedAt);
+	incident?.forEach((ticket: { createdAt: string | number | Date; }) => {
+		const updatedDate = new Date(ticket?.createdAt);
 		const month = months[updatedDate.getMonth()]; // Get the month component (0-indexed)
 
-		incidents[month].push(ticket);
+		incidents[month]?.push(ticket);
 	});
 	// Populate incidents with data
-	service?.forEach((ticket: { updatedAt: string | number | Date; }) => {
-		const updatedDate = new Date(ticket?.updatedAt);
+	service?.forEach((ticket: { createdAt: string | number | Date; }) => {
+		const updatedDate = new Date(ticket?.createdAt);
 		const month = months[updatedDate.getMonth()]; // Get the month component (0-indexed)
 
-		services[month].push(ticket);
+		services[month]?.push(ticket);
 	});
 	// Populate incidents with data
-	change?.forEach((ticket: { updatedAt: string | number | Date; }) => {
-		const updatedDate = new Date(ticket?.updatedAt);
+	change?.forEach((ticket: { createdAt: string | number | Date; }) => {
+		const updatedDate = new Date(ticket?.createdAt);
 		const month = months[updatedDate.getMonth()]; // Get the month component (0-indexed)
 
-		changes[month].push(ticket);
+		changes[month]?.push(ticket);
 	});
 
 

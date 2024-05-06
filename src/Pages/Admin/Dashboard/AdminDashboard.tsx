@@ -37,7 +37,7 @@ const AdminDashboard = () => {
 	const approved = dashBoardInfodata?.ticketType?.approved
 	const closed = dashBoardInfodata?.totals?.status?.closed
 	const completed = dashBoardInfodata?.totals?.status?.completed
-	const dissaproved = dashBoardInfodata?.totals?.status?.dissaproved
+	const disapproved = dashBoardInfodata?.totals?.status?.dissaproved
 	const inprogress = dashBoardInfodata?.totals?.status?.inprogress
 	const invalid = dashBoardInfodata?.totals?.status?.invalid
 	const open = dashBoardInfodata?.totals?.status?.open
@@ -49,7 +49,7 @@ const AdminDashboard = () => {
 	const service = !dashBoardInfodata ? [] : dashBoardInfodata?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("SERVICE"));
 	const change = !dashBoardInfodata ? [] : dashBoardInfodata?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("CHANGE"));
 
-	console.log('incident', incident)
+	console.log('incident', dashBoardInfodata)
 
 	const statusList = [
 		'Inprogress',
@@ -110,8 +110,8 @@ const AdminDashboard = () => {
 						<h1 className='total_card_flex_icon_h1'>{!ticketTotal ? 0 : ticketTotal}</h1>
 						<div>
 							<div className='total_card_flex_icon_source'>
-								<div className='total_card_ArrowUpSFill'>	<p>10%</p> <RiArrowUpSFill size={20} /> </div>
-								<h3>+$150 today</h3>
+								<div className='total_card_ArrowUpSFill'>	<p>Approved</p> </div>
+								<h3>{!approved ? 0 : approved}</h3>
 							</div>
 						</div>
 					</div>
@@ -125,8 +125,8 @@ const AdminDashboard = () => {
 						<h1 className='total_card_flex_icon_h1'>{!inprogress ? 0 : inprogress}</h1>
 						<div>
 							<div className='total_card_flex_icon_source'>
-								<div className='total_card_ArrowUpSFill'>	<p>50%</p> <RiArrowUpSFill size={20} /> </div>
-								<h3>View orders</h3>
+								<div className='total_card_ArrowUpSFill'>	<p>Dissapproved</p></div>
+								<h3>{!disapproved ? 0 : disapproved}</h3>
 							</div>
 						</div>
 					</div>
@@ -140,8 +140,8 @@ const AdminDashboard = () => {
 						<h1 className='total_card_flex_icon_h1'>{!completed ? 0 : completed}</h1>
 						<div>
 							<div className='total_card_flex_icon_source'>
-								<div className='total_card_ArrowUpSFill'>	<p>30%</p> <RiArrowUpSFill size={20} /> </div>
-								<h3>In last week</h3>
+								<div className='total_card_ArrowUpSFill'>	<p>Reopen</p>  </div>
+								<h3>{!reopen ? 0 : reopen}</h3>
 							</div>
 						</div>
 					</div>
@@ -155,8 +155,8 @@ const AdminDashboard = () => {
 						<h1 className='total_card_flex_icon_h1'>{!pending ? 0 : pending}</h1>
 						<div>
 							<div className='total_card_flex_icon_source'>
-								<div className='total_card_ArrowUpSFill'>	<p>70%</p> <RiArrowUpSFill size={20} /> </div>
-								<h3>2477 tickets </h3>
+								<div className='total_card_ArrowUpSFill'>	<p>Closed</p>  </div>
+								<h3>{!closed ? 0 : closed}</h3>
 							</div>
 						</div>
 					</div>
