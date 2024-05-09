@@ -66,7 +66,7 @@ const ProfileDropDown = () => {
 
 
 	return (
-		<form className='notification-profile'>
+		<div className='notification-profile'>
 			<div className='notification-card' onClick={() => navigate("/itsettings")}>
 				<div className='notification-icon-profile'>
 					{userInfo?.firstname?.charAt(0)}
@@ -101,7 +101,7 @@ const ProfileDropDown = () => {
 
 				</div>
 			</div>
-		</form>
+		</div>
 	)
 }
 
