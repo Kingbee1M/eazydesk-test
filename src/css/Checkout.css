@@ -1,0 +1,119 @@
+.main-body {
+  width: full;
+  height: 100vh;
+  font-family: "Times New Roman", Times, serif;
+}
+.body-container {
+  display: flex;
+  width: full;
+  margin: 0%;
+  padding: 0%;
+  gap: 3;
+  border-top: solid 1px black;
+}
+.first-container-div {
+  height: 500px;
+  width: full;
+  padding: 30px 16px 0 60px;
+  display: flex;
+}
+.first-div {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+}
+.first-div h1 {
+  font-size: 40px;
+  font-weight: 400;
+}
+.first-div h2 {
+  font-size: 20px;
+  font: bold;
+  margin-top: 30px;
+}
+.first-div .country {
+  width: 200px;
+}
+.first-div .country p {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font: bold;
+  color: black;
+}
+.first-div .country .required {
+  color: #808080;
+  font: normal;
+}
+.drop-down-box {
+  margin-top: -10px;
+}
+.dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font: bold;
+  color: black;
+}
+.checkout-text {
+  font-size: 13px;
+  color: #808080;
+}
+.payment-method {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.payment-method h2 {
+  font-size: 20px;
+  font: bold;
+  margin: auto;
+}
+.payment-method .secured {
+  color: #808080;
+  font: normal;
+  font-size: 11px;
+  gap: 10px;
+  display: flex;
+  margin: auto;
+}
+.falock-icon {
+  color: black;
+  font-size: 15px;
+}
+.payment-input {
+  background-color: #e5e4e280;
+  width: 100%;
+}
+.payment-input2 {
+  background-color: #e5e4e280;
+  width: 100%;
+  border-top: solid 1px #808080;
+}
+.radio-form {
+  margin-top: 10px;
+}
+/* Right side */
+.second-container-div {
+  height: 100%;
+  width: full;
+  padding: 100px 40px;
+  background-color: #e5e4e280;
+}
+.second-container-div h2 {
+  font-size: 40px;
+  font-weight: 400;
+}
+.price-summary {
+  color: black;
+}
+.total-summary {
+  font-weight: bold;
+}
+.terms-and-conditions {
+  color: var(--accent-blue);
+}
+.price-agreement {
+  font-size: 12px;
+  font: normal;
+}

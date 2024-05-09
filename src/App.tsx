@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AdminDashboard from './Pages/Admin/Dashboard/AdminDashboard';
+import AdminDashboard from "./Pages/Admin/Dashboard/AdminDashboard";
 import OpenTicket from "./Pages/Admin/Ticket/OpenTicket";
 import ClosedTicket from "./Pages/Admin/Ticket/ClosedTicket";
 import Settings from "./Pages/Admin/Settings/Settings";
@@ -50,79 +50,78 @@ import SuperInProgress from "./Pages/SuperAdmin/Ticket/SuperInProgress";
 import SuperSettings from "./Pages/SuperAdmin/Settings/SuperSettings";
 import PageNotFound from "./Pages/Login/PageNotFound";
 import ITHeader from "./components/Headers/ITHeader";
-
+import Checkout from "./components/Checkout";
 
 function App() {
-
-
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/pricing" element={<Pricing />} />
-        <Route path="/help" element={<Help />} />
-        <Route path="/support" element={<Support />} />
-        <Route path="/successpage/:email" element={<SuccessPage />} />
-        <Route path="/verifyemail/:id/:token" element={<VerifyEmail />} />
-        <Route path="/forgotpassword" element={<ForgotPassword />} />
-        <Route path="/passwordreset/:id" element={<ResetPassword />} />
-        <Route path="/ticket-progress/:id" element={<TicketProgress />} />
-        <Route path="/dashboard" element={<DashboardHUB />} />
+        <Route path='/' element={<Login />} />
+        <Route path='/signup' element={<SignUp />} />
+        <Route path='/pricing' element={<Pricing />} />
+        <Route path='/help' element={<Help />} />
+        <Route path='/support' element={<Support />} />
+        <Route path='/checkout' element={<Checkout />} />
+        <Route path='/successpage/:email' element={<SuccessPage />} />
+        <Route path='/verifyemail/:id/:token' element={<VerifyEmail />} />
+        <Route path='/forgotpassword' element={<ForgotPassword />} />
+        <Route path='/passwordreset/:id' element={<ResetPassword />} />
+        <Route path='/ticket-progress/:id' element={<TicketProgress />} />
+        <Route path='/dashboard' element={<DashboardHUB />} />
 
+        <Route path='/admindashboard' element={<AdminDashboard />} />
+        <Route path='/openticket' element={<OpenTicket />} />
+        <Route path='/closedticket' element={<ClosedTicket />} />
+        <Route path='/incidentrequest' element={<IncidentRequest />} />
+        <Route path='/servicerequest' element={<ServiceRequest />} />
+        <Route path='/changerequest' element={<ChangeRequest />} />
+        <Route path='/ticketprogress' element={<InProgress />} />
+        <Route path='/company' element={<Company />} />
+        <Route path='/companymembers/:id' element={<CompanyMembers />} />
+        <Route path='/settings' element={<Settings />} />
+        <Route path='/report' element={<TicketReport />} />
+        <Route path='/register' element={<Register />} />
 
-        <Route path="/admindashboard" element={<AdminDashboard />} />
-        <Route path="/openticket" element={<OpenTicket />} />
-        <Route path="/closedticket" element={<ClosedTicket />} />
-        <Route path="/incidentrequest" element={<IncidentRequest />} />
-        <Route path="/servicerequest" element={<ServiceRequest />} />
-        <Route path="/changerequest" element={<ChangeRequest />} />
-        <Route path="/ticketprogress" element={<InProgress />} />
-        <Route path="/company" element={<Company />} />
-        <Route path="/companymembers/:id" element={<CompanyMembers />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/report" element={<TicketReport />} />
-        <Route path="/register" element={<Register />} />
-
-
-        <Route path="/superopenticket" element={<SuperOpenTicket />} />
-        <Route path="/superclosedticket" element={<SuperClosedTicket />} />
-        <Route path="/superincidentrequest" element={<SuperIncidentRequest />} />
-        <Route path="/superservicerequest" element={<SuperServiceRequest />} />
-        <Route path="/superchangerequest" element={<SuperChangeRequest />} />
-        <Route path="/superticketprogress" element={<SuperInProgress />} />
-        <Route path="/superdashboard" element={<SuperDashboard />} />
-        <Route path="/supercompany" element={<SuperCompany />} />
-        <Route path="/supercompanymembers/:id" element={<SuperCompanysMembers />} />
-        <Route path="/superregister" element={<SuperRegister />} />
-        <Route path="/supersubscription" element={<Subscription />} />
-        <Route path="/superticketreport" element={<SuperTicketReport />} />
-        <Route path="/supersettings" element={<SuperSettings />} />
-
-
-        {/* IT Screens */}
-        <Route path="/itdashboard" element={<ITDashboard />} />
-        <Route path="/itopenticket" element={<ITOpenTicket />} />
-        <Route path="/itticketprogress" element={<ITTicketProgress />} />
-        <Route path="/itclosedticket" element={<ITClosedTicket />} />
-        <Route path="/itincidentrequest" element={<ITIncidentRequest />} />
-        <Route path="/itservicerequest" element={<ITServiceRequest />} />
-        <Route path="/itchangerequest" element={<ITChangeRequest />} />
-        <Route path="/itsettings" element={<ITSettings />} />
-
+        <Route path='/superopenticket' element={<SuperOpenTicket />} />
+        <Route path='/superclosedticket' element={<SuperClosedTicket />} />
+        <Route
+          path='/superincidentrequest'
+          element={<SuperIncidentRequest />}
+        />
+        <Route path='/superservicerequest' element={<SuperServiceRequest />} />
+        <Route path='/superchangerequest' element={<SuperChangeRequest />} />
+        <Route path='/superticketprogress' element={<SuperInProgress />} />
+        <Route path='/superdashboard' element={<SuperDashboard />} />
+        <Route path='/supercompany' element={<SuperCompany />} />
+        <Route
+          path='/supercompanymembers/:id'
+          element={<SuperCompanysMembers />}
+        />
+        <Route path='/superregister' element={<SuperRegister />} />
+        <Route path='/supersubscription' element={<Subscription />} />
+        <Route path='/superticketreport' element={<SuperTicketReport />} />
+        <Route path='/supersettings' element={<SuperSettings />} />
 
         {/* IT Screens */}
-        <Route path="/supervisorsettings" element={<ITSettings />} />
-        <Route path="/supervisordashboard" element={<SupervisorDashboard />} />
+        <Route path='/itdashboard' element={<ITDashboard />} />
+        <Route path='/itopenticket' element={<ITOpenTicket />} />
+        <Route path='/itticketprogress' element={<ITTicketProgress />} />
+        <Route path='/itclosedticket' element={<ITClosedTicket />} />
+        <Route path='/itincidentrequest' element={<ITIncidentRequest />} />
+        <Route path='/itservicerequest' element={<ITServiceRequest />} />
+        <Route path='/itchangerequest' element={<ITChangeRequest />} />
+        <Route path='/itsettings' element={<ITSettings />} />
 
+        {/* IT Screens */}
+        <Route path='/supervisorsettings' element={<ITSettings />} />
+        <Route path='/supervisordashboard' element={<SupervisorDashboard />} />
 
         {/* Leads Screen */}
-        <Route path="/leadsdashboard" element={<LeadsDashboard />} />
-        <Route path="/incident-request" element={<LeadsIncidentRequest />} />
-        <Route path="/service-request" element={<LeadsServiceRequest />} />
-        <Route path="/change-request" element={<LeadsChangeRequest />} />
-        <Route path="*" element={<PageNotFound />} />
+        <Route path='/leadsdashboard' element={<LeadsDashboard />} />
+        <Route path='/incident-request' element={<LeadsIncidentRequest />} />
+        <Route path='/service-request' element={<LeadsServiceRequest />} />
+        <Route path='/change-request' element={<LeadsChangeRequest />} />
+        <Route path='*' element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );
