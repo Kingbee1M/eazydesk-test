@@ -115,6 +115,7 @@ const SuperRegister = ({ switchs }: any) => {
 	}
 
 
+
 	return (
 		<div id="page-wrapper">
 			<ToastContainer position="top-right" containerId={"custom111221"} />
@@ -150,6 +151,7 @@ const SuperRegister = ({ switchs }: any) => {
 							<tr>
 								<th>First Name</th>
 								<th>Last Name</th>
+								<th>Company</th>
 								<th>Email</th>
 								<th>Phone Number</th>
 								<th>Role</th>
@@ -167,6 +169,7 @@ const SuperRegister = ({ switchs }: any) => {
 									<tr key={i}>
 										<td >{item?.firstname}</td>
 										<td >{item?.lastname}</td>
+										<td >{item?.Company?.name}</td>
 										<td >{item?.email}</td>
 										<td >{item?.mobileNumber}</td>
 										<td >{item?.role}</td>

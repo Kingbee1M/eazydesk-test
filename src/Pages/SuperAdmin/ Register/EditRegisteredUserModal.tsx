@@ -28,6 +28,10 @@ const EditRegisteredUserModal = ({ data, id }: any) => {
 		role: "",
 		activated: "",
 	})
+	const [input2, setInput2] = useState<any>({
+		email: "",
+		payload: [],
+	})
 
 
 
@@ -54,6 +58,15 @@ const EditRegisteredUserModal = ({ data, id }: any) => {
 			});
 		});
 	}, [data?.lastname, data?.email, data?.firstname, data?.activated, data?.mobileNumber, data?.role, setInput]);
+	useEffect(() => {
+		setInput2((prevState: any) => {
+			return ({
+				...prevState,
+				email: data?.email,
+				payload: input,
+			});
+		});
+	}, [data?.email, input]);
 
 
 	const handleOnChange = (input: any, value: any) => {
@@ -65,7 +78,7 @@ const EditRegisteredUserModal = ({ data, id }: any) => {
 
 
 	const handleUpdateUser = (e: { preventDefault: () => void; }) => {
-		const value = { id, input }
+		const value = { id, input2 }
 		e.preventDefault()
 		// @ts-ignore 
 		dispatch(edituser(value))

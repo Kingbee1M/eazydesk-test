@@ -64,9 +64,9 @@ const resetPassword = async (value: any) => {
 
 // Edit User
 const edituser = async (value: any) => {
-  const { id, input } = value;
+  const { id, input2 } = value;
   const HttpService = createHttpService();
-  const { data } = await HttpService.put(`/api/v2/auth/admin-update-user/${id}`, input); 
+  const { data } = await HttpService.put(`/api/v2/auth/admin-update-user/${id}`, input2); 
   return data;
 };
 

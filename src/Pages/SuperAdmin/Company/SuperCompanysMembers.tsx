@@ -20,7 +20,7 @@ const SuperCompanysMembers = () => {
 	const [displayData, setDisplayData] = useState([]);
 	const { viewdata, viewisLoading } = useAppSelector((state: any) => state.company);
 
-
+	console.log('viewdata', viewdata)
 
 	useEffect(() => {
 		// @ts-ignore
@@ -59,7 +59,6 @@ const SuperCompanysMembers = () => {
 								<th>Email</th>
 								<th>Phone Number</th>
 								<th>Role</th>
-								<th>Edit User</th>
 							</tr>
 						</thead>
 						<tbody className="data-table-content">
@@ -75,9 +74,6 @@ const SuperCompanysMembers = () => {
 										<td >{item.email}</td>
 										<td >{item.mobileNumber}</td>
 										<td >{item?.role}</td>
-										<td >
-											<EditCustomerModal data={item} id={item.id} showEditUser={showEditUser} setShowEditUser={setShowEditUser} />
-										</td>
 									</tr>
 								)))}
 						</tbody>
