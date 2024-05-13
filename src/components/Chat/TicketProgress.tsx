@@ -5,7 +5,7 @@ import { MdOutlineClose } from "react-icons/md";
 import ProgressChat from "./ProgressChat";
 import { useAppDispatch, useAppSelector } from "../../store/useStore";
 import { reset } from "../../features/Comment/commentSlice";
-import { updateTicket, viewTicket } from "../../features/Ticket/ticketSlice";
+import { updateLeadTicket, updateTicket, viewTicket } from "../../features/Ticket/ticketSlice";
 import { SVGLoader } from "../SVGLoader";
 import { toast, ToastContainer } from "react-toastify";
 import { customId } from "../Options";
@@ -31,7 +31,8 @@ const TicketProgress = () => {
 	const [ticket, setTicket] = useState<any>({});
 	const [inputs, setinputs] = useState("")
 	const { viewdata, viewisLoading } = useAppSelector((state: any) => state.ticket)
-	const { updateTicketisLoading, updateTicketisSuccess } = useAppSelector((state: any) => state.ticket)
+	const { updateTicketisLoading, updateTicketisSuccess, updateTicketisError, updateTicketmessage } = useAppSelector((state: any) => state.ticket)
+	const { updateLeadTicketisLoading, updateLeadTicketisSuccess, updateLeadTicketisError, updateLeadTicketmessage } = useAppSelector((state: any) => state.ticket)
 	const { createisSuccess } = useAppSelector((state: any) => state.comment)
 	const [input, setInputs] = useState({
 		comment: "",
@@ -39,18 +40,26 @@ const TicketProgress = () => {
 	});
 
 
+	console.log('updateTicketmessage', updateTicketmessage)
+
+
 
 
 	useEffect(() => {
-		if (updateTicketisSuccess) {
+		if (updateTicketisSuccess || updateLeadTicketisSuccess) {
 			toast.success("Ticket Updated!", { toastId: customId });
+		} else if (updateLeadTicketisError) {
+			toast.error(updateLeadTicketmessage, { toastId: customId });
+		} else if (updateTicketisError) {
+			toast.error(updateTicketmessage, { toastId: customId });
 		}
-	}, [updateTicketisSuccess])
+		dispatch(reset())
+	}, [dispatch, updateLeadTicketisError, updateLeadTicketisSuccess, updateLeadTicketmessage, updateTicketisError, updateTicketisSuccess, updateTicketmessage])
 
 	useEffect(() => {
 		// @ts-ignore 
 		dispatch(viewTicket(id))
-		if (createisSuccess || updateTicketisSuccess) {
+		if (createisSuccess || updateTicketisSuccess || updateLeadTicketisSuccess) {
 			// @ts-ignore 
 			dispatch(viewTicket(id))
 			setInputs({
@@ -61,17 +70,21 @@ const TicketProgress = () => {
 		// @ts-ignore 
 		dispatch(reset())
 
-	}, [dispatch, id, createisSuccess, updateTicketisSuccess, refresh])
+	}, [dispatch, id, createisSuccess, updateTicketisSuccess, refresh, updateLeadTicketisSuccess])
 
 
 	const handleUpdateTicketStatus = (e: any) => {
 		const datas = { id, inputs }
 		e.preventDefault();
-		if (inputs) {
+		if (inputs === "CLOSED" || inputs === "REOPENED") {
+			// @ts-ignore 
+			dispatch(updateLeadTicket(datas));
+		} else {
 			// @ts-ignore 
 			dispatch(updateTicket(datas));
 		}
 	};
+
 
 
 
@@ -107,7 +120,7 @@ const TicketProgress = () => {
 						<div className="tp-status-area">
 							{[viewdata]?.map((item: any, i: any) => (
 								<p key={i}>
-									Request status changed to <strong>{item?.status}</strong> on{" "}
+									Request status changed to <strong>{item?.status}</strong> on
 									<span>{moment(item?.createdAt).format("MMM Do YYYY, h:mm A")}</span>
 								</p>
 							))}
@@ -181,7 +194,8 @@ const TicketProgress = () => {
 											onChange={(e) => setinputs(e.target.value)}>
 											<option value=""> </option>
 											<option value="CLOSED">Closed</option>
-											<option value="REOPENED">Reopen</option>
+											{viewdata?.status === "COMPLETED" && <option value="REOPENED">Reopen</option>}
+
 										</select>
 										<button type="submit" id="custom-btn" disabled={false} onClick={handleUpdateTicketStatus}>
 											{updateTicketisLoading ? <SVGLoader width={"35px"} height={"35px"} color={"#fff"} /> : "Update"}
@@ -200,7 +214,7 @@ const TicketProgress = () => {
 											)}
 										</select>
 										<button type="submit" id="custom-btn" disabled={false} onClick={handleUpdateTicketStatus}>
-											{updateTicketisLoading ? <SVGLoader width={"35px"} height={"35px"} color={"#fff"} /> : "Update"}
+											{updateTicketisLoading || updateLeadTicketisLoading ? <SVGLoader width={"35px"} height={"35px"} color={"#fff"} /> : "Update"}
 										</button>
 									</form>
 								)}

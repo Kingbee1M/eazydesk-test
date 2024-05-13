@@ -71,6 +71,12 @@ const initialState = {
 	updateTicketisLoading: false,
 	updateTicketmessage: '',
 
+	updateLeadTicketdata: [],
+	updateLeadTicketisError: false,
+	updateLeadTicketisSuccess: false,
+	updateLeadTicketisLoading: false,
+	updateLeadTicketmessage: '',
+
 	giveApprovaldata: [],
 	giveApprovalisError: false,
 	giveApprovalisSuccess: false,
@@ -207,6 +213,17 @@ export const updateTicket = createAsyncThunk('ticket/updateTicket', async (data,
 		return thunkAPI.rejectWithValue(message);
 	}
 })
+// Update Ticket
+export const updateLeadTicket = createAsyncThunk('ticket/updateLeadTicket', async (data, thunkAPI) => {
+	try {
+		return await ticketService.updateLeadTicket(data)
+	} catch (error: any) {
+		// Handle error using handleMessageError function
+		const message = handleMessageError(error, thunkAPI);
+		// Return the rejected promise with the error message
+		return thunkAPI.rejectWithValue(message);
+	}
+})
 // Give Approval
 export const giveApproval = createAsyncThunk('ticket/giveApproval', async (data, thunkAPI) => {
 	try {
@@ -293,6 +310,11 @@ export const ticketSlice = createSlice({
 			state.updateTicketisSuccess = false
 			state.updateTicketisError = false
 			state.updateTicketmessage = ''
+
+			state.updateLeadTicketisLoading = false
+			state.updateLeadTicketisSuccess = false
+			state.updateLeadTicketisError = false
+			state.updateLeadTicketmessage = ''
 
 			state.giveApprovalisLoading = false
 			state.giveApprovalisSuccess = false
@@ -476,6 +498,20 @@ export const ticketSlice = createSlice({
 				state.updateTicketisError = true
 				state.updateTicketmessage = action.payload
 				state.updateTicketdata = null
+			})
+			.addCase(updateLeadTicket.pending, (state) => {
+				state.updateLeadTicketisLoading = true
+			})
+			.addCase(updateLeadTicket.fulfilled, (state: any, action) => {
+				state.updateLeadTicketisLoading = false
+				state.updateLeadTicketisSuccess = true
+				state.updateLeadTicketdata = action.payload?.data
+			})
+			.addCase(updateLeadTicket.rejected, (state: any, action) => {
+				state.updateLeadTicketisLoading = false
+				state.updateLeadTicketisError = true
+				state.updateLeadTicketmessage = action.payload
+				state.updateLeadTicketdata = null
 			})
 
 			.addCase(giveApproval.pending, (state) => {
