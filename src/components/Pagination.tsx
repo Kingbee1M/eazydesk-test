@@ -11,8 +11,6 @@ const Pagination = ({ data, setDisplayData, entriesPerPage, Total }: any) => {
     setPageNumber(selected);
   };
 
-
-
   useEffect(() => {
     setDisplayData(data?.slice(pagesVisited, pagesVisited + usersPerPage));
     localStorage.setItem("rowsPerPage", entriesPerPage);
@@ -20,11 +18,11 @@ const Pagination = ({ data, setDisplayData, entriesPerPage, Total }: any) => {
   }, [setDisplayData, entriesPerPage, pageNumber, data]);
 
   return (
-    <div id="tfoot-ReactPaginate">
+    <div id='tfoot-ReactPaginate'>
       {data?.length === 0 ? (
         ""
       ) : (
-        <div className="pageEntries">
+        <div className='pageEntries'>
           Total of {data?.length} {Total}
         </div>
       )}
