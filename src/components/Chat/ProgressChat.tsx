@@ -17,7 +17,7 @@ const ProgressChat = ({ viewdata, id, input, setInputs }: any) => {
   const { createdata, createisLoading, createisSuccess } = useAppSelector((state: any) => state.comment)
 
 
-  console.log('viewdatas', viewdata)
+  // console.log('viewdatas', viewdata)
 
   const formData = new FormData();
   const form: any = useRef();

@@ -93,6 +93,13 @@ const updateTicket = async (datas: any) => {
 	})
 	return data
 }
+const updateLeadTicket = async (datas: any) => {
+	const { id, inputs } = datas
+	const { data }: any = await HttpService.patch(`/api/v2/ticket/${id}`, {
+		"status": inputs
+	})
+	return data
+}
 const giveApproval = async (datas: any) => {
 	const { id, value } = datas
 	const { data }: any = await HttpService.patch(`/api/v2/ticket/${id}/admin`, value)
@@ -114,6 +121,7 @@ const ticketService = {
 	getItTicketParameter,
 	dashBoardInfo,
 	updateTicket,
+	updateLeadTicket,
 	giveApproval,
 	superAdminDashboard
 }

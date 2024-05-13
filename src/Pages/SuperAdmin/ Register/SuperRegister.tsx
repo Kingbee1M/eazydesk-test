@@ -161,7 +161,7 @@ const SuperRegister = ({ switchs }: any) => {
 						</thead>
 						<tbody className="data-table-content">
 							{superallReguserisLoading ? (
-								<TableFetch colSpan={7} />
+								<TableFetch colSpan={8} />
 							) : data?.length === 0 || data === undefined ? (
 								<NoRecordFound colSpan={7} />
 							) : (
