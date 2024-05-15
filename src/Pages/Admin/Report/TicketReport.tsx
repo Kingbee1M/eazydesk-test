@@ -14,27 +14,25 @@ import ImageLightbox from "../../../components/ImageLightbox";
 import ViewTicketDetailsModal from "../../../components/Modals/ViewTicketDetailsModal";
 import { useAppDispatch, useAppSelector } from "../../../store/useStore";
 import { admingetTicket } from "../../../features/Ticket/ticketSlice";
-import TicketTableComponent from "../../../components/Table/TicketTableComponent";
+import { dashBoardInfo } from "../../../features/Ticket/ticketSlice";
 
 const TicketReport = ({ switchs }: any) => {
   const dispatch = useAppDispatch();
-  const { giveApprovalisSuccess } = useAppSelector(
-    (state: any) => state.ticket
-  );
-
   const [startDates, setStartDates] = useState([]);
   let [endDates, setEndDates] = useState<any>([]);
   const [show, setShow] = useState(false);
   const [searchItem, setSearchItem] = useState("");
   const [datas, setDatas] = useState([]);
-  const { admingetticketdata, admingetticketisLoading } = useAppSelector(
-    (state: any) => state.ticket
-  );
   const [limit, setLimit] = useState<any>(10);
+
   endDates = new Date();
   const formattedEndDate = endDates.toISOString().split("T")[0]; // Extracting date part and removing time
   const [startDate1] = useState(formattedEndDate);
   const [endDate1] = useState(formattedEndDate);
+  const { giveApprovalisSuccess } = useAppSelector(
+    (state: any) => state.ticket
+  );
+  const { admingetticketdata } = useAppSelector((state: any) => state.ticket);
 
   useEffect(() => {
     const result: any = data?.filter(
@@ -47,63 +45,31 @@ const TicketReport = ({ switchs }: any) => {
         data?.createdBy?.firstname?.toLowerCase().includes(searchItem)
     );
     setDatas(result);
-  }, [data, searchItem]);
+  }, [setDatas, searchItem]);
 
-  const [displayData, setDisplayData] = useState([]);
+  // const handleCustomFilters = (e: { preventDefault: () => void }) => {
+  //   e.preventDefault();
+  //   const datas = { startDates, endDates };
+  //   setShow(false);
+  // };
 
-  const handleCustomFilters = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    const datas = { startDates, endDates };
-    setShow(false);
-  };
   const [entriesPerPage, setEntriesPerPage] = useState(() => {
     return "6";
   });
 
   useEffect(() => {
-    const datas = { status: "" };
+    const dispatchDatas = { ticketType: "CHANGE" };
     // @ts-ignore
-    dispatch(admingetTicket(datas));
+    dispatch(admingetTicket(dispatchDatas));
     if (giveApprovalisSuccess) {
       // @ts-ignore
-      dispatch(admingetTicket(datas));
+      dispatch(admingetTicket(dispatchDatas));
     }
   }, [dispatch, endDate1, giveApprovalisSuccess, startDate1]);
-
   console.log(admingetticketdata);
+  // const totalTickets = admingetticketdata?.tickets.length;
+  // console.log(totalTickets);
 
-  //   const handlePagination = (
-  //     type: string,
-  //     data?: React.ChangeEvent<HTMLSelectElement> | undefined
-  //   ) => {
-  //     switch (type) {
-  //       // @ts-ignore
-  //       case "prev":
-  //         // @ts-ignore
-  //         dispatch(admingetTicket({ page: pagination?.page - 1, limit: limit }));
-  //         break;
-  //       // @ts-ignore
-  //       case "next":
-  //         // @ts-ignore
-  //         dispatch(admingetTicket({ page: pagination?.page + 1, limit: limit }));
-  //         break;
-  //       case "limit":
-  //         if (data) {
-  //           setLimit(data.target.value);
-  //           // @ts-ignore
-  //           dispatch(admingetTicket({ limit: data.target.value }));
-  //         }
-  //         break;
-  //       default:
-  //         // For page numbers or any other custom actions
-  //         const pageNumber = parseInt(type);
-  //         if (!isNaN(pageNumber)) {
-  //           // @ts-ignore
-  //           dispatch(admingetTicket({ page: pageNumber, limit: limit }));
-  //         }
-  //         break;
-  //     }
-  //   };
   return (
     <div id='page-wrapper'>
       <SideNav />
@@ -112,14 +78,16 @@ const TicketReport = ({ switchs }: any) => {
         <div className='dashboard-first-card-boards  mt-2'>
           <div>
             <h5 className='dashboard-first-card-h'>Report</h5>
-            <p className='dashboard-first-card-p'>102 Total Report are added</p>
+            <p className='dashboard-first-card-p'>
+              {admingetticketdata?.tickets?.length} Total Report are added
+            </p>
           </div>
         </div>
         <SearchConponent
           placeholder={"search ticket report"}
           setSearchItem={setSearchItem}
           searchItem={searchItem}
-          data={datas}
+          data={admingetticketdata?.tickets}
           entriesPerPage={entriesPerPage}
           setEntriesPerPage={setEntriesPerPage}
           filter={true}
@@ -127,10 +95,10 @@ const TicketReport = ({ switchs }: any) => {
           setEndDates={setEndDates}
           setShow={setShow}
           show={show}
-          handleCustomFilters={handleCustomFilters}
+          // handleCustomFilters={handleCustomFilters}
         />
 
-        {/* <div id='table-container'>
+        <div id='table-container'>
           <div className='table-responsive-vertical '>
             <div className='table-container'>
               <table
@@ -158,13 +126,13 @@ const TicketReport = ({ switchs }: any) => {
                 <tbody>
                   {false && data?.length === 0 ? (
                     <TableFetch colSpan={20} />
-                  ) : displayData?.length === 0 ? (
+                  ) : admingetticketdata?.tickets?.length === 0 ? (
                     <NoRecordFound
                       colSpan={20}
                       children={"No Tickets record found!"}
                     />
                   ) : (
-                    displayData?.map((user: any, i) => (
+                    admingetticketdata?.tickets?.map((user: any, i: any) => (
                       <tr key={i}>
                         <td data-title='Reference'>
                           {user?.ticketType === "INCIDENT"
@@ -235,25 +203,14 @@ const TicketReport = ({ switchs }: any) => {
                 </tbody>
               </table>
             </div>
-            <Pagination
+            {/* <Pagination
               setDisplayData={setDisplayData}
-              data={datas}
+              data={admingetticketdata?.tickets}
               entriesPerPage={entriesPerPage}
               Total={"Ticket Report"}
-            />
+            /> */}
           </div>
-        </div> */}
-
-        {/* <div className='mt-4'>
-          <TicketTableComponent
-            TYPE={true}
-            pagination={admingetticketdata}
-            data={admingetticketdata?.tickets}
-            isLoading={admingetticketisLoading}
-            handlePagination={handlePagination}
-            colSpan={8}
-          />
-        </div> */}
+        </div>
       </main>
     </div>
   );
