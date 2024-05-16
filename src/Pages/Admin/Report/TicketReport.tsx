@@ -111,14 +111,15 @@ const TicketReport = ({ switchs }: any) => {
                   <tr>
                     <th>Reference</th>
                     <th>Affected Users</th>
-                    <th>Location</th>
-                    <th>Created By</th>
+                    {/* <th>Location</th> */}
+                    {/* <th>Created By</th> */}
                     <th className='red_effect'>Created At</th>
                     <th className='green_effect'>Closed At</th>
                     <th>Email</th>
-                    <th>Phone Number</th>
+                    {/* <th>Phone Number</th> */}
                     <th>Issue Description</th>
-                    <th>Issue Category</th>
+                    {/* <th>Issue Category</th> */}
+                    <th>Status</th>
                     <th>Severity</th>
                     <th>Ticket Type</th>
                   </tr>
@@ -136,10 +137,10 @@ const TicketReport = ({ switchs }: any) => {
                       <tr key={i}>
                         <td data-title='Reference'>
                           {user?.ticketType === "INCIDENT"
-                            ? "INC - " + user?.ticketId
+                            ? "INC - " + user?.id
                             : user?.ticketType === "SERVICE"
-                            ? "SRV - " + user?.ticketId
-                            : "CHG - " + user?.ticketId}
+                            ? "SRV - " + user?.id
+                            : "CHG - " + user?.id}
                         </td>
                         <td data-title='affected Users'>
                           {!user?.affectedUsers ? (
@@ -148,11 +149,11 @@ const TicketReport = ({ switchs }: any) => {
                             user?.affectedUsers
                           )}
                         </td>
-                        <td data-title='firstName'>{user?.location}</td>
-                        <td data-title='firstName'>
+                        {/* <td data-title='firstName'>{user?.location}</td> */}
+                        {/* <td data-title='firstName'>
                           {user?.createdBy?.firstname}
                           {user?.createdBy?.lastname}
-                        </td>
+                        </td> */}
                         <td data-title='created at' className='red_effect'>
                           {moment(user?.createdAt).format(
                             "YYYY-MM-DD HH:mm:ss"
@@ -165,16 +166,20 @@ const TicketReport = ({ switchs }: any) => {
                             moment(user?.closedAt).format("YYYY-MM-DD HH:mm:ss")
                           )}
                         </td>
-                        <td data-title='email'>{user?.createdBy?.email}</td>
-                        <td data-title='phone number'>
-                          {user?.createdBy?.phoneNumber}
-                        </td>
-                        <td data-title='issue description'>
+                        {/* <td data-title='email'>{user?.createdBy?.email}</td> */}
+                        <td data-title='email'>
                           <ViewTicketDetailsModal text={"View"} data={user} />
                         </td>
-                        <td data-title='issue Category'>
-                          {user?.issueCategory}
+                        {/* <td data-title='phone number'>
+                          {user?.createdBy?.phoneNumber}
+                        </td> */}
+                        <td data-title='issue description'>
+                          <ViewTicketDetailsModal  data={user} />
                         </td>
+                        {/* <td data-title='Issue Category'>
+                          {user?.issueCategory}
+                        </td> */}
+                        <td data-title='Status'>{user?.status}</td>
                         <td data-title='severity'>
                           {user?.severity === "High" ? (
                             <button className='severity-high'>
