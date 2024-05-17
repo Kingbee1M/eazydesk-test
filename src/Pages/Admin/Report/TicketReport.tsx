@@ -15,6 +15,7 @@ import ViewTicketDetailsModal from "../../../components/Modals/ViewTicketDetails
 import { useAppDispatch, useAppSelector } from "../../../store/useStore";
 import { admingetTicket } from "../../../features/Ticket/ticketSlice";
 import { dashBoardInfo } from "../../../features/Ticket/ticketSlice";
+import ViewEmailDetailsModal from "../../../components/Modals/ViewEmailDetailsModal";
 
 const TicketReport = ({ switchs }: any) => {
   const dispatch = useAppDispatch();
@@ -168,13 +169,13 @@ const TicketReport = ({ switchs }: any) => {
                         </td>
                         {/* <td data-title='email'>{user?.createdBy?.email}</td> */}
                         <td data-title='email'>
-                          <ViewTicketDetailsModal text={"View"} data={user} />
+                          <ViewEmailDetailsModal text={"View"} data={user} />
                         </td>
                         {/* <td data-title='phone number'>
                           {user?.createdBy?.phoneNumber}
                         </td> */}
                         <td data-title='issue description'>
-                          <ViewTicketDetailsModal  data={user} />
+                          <ViewTicketDetailsModal data={user} />
                         </td>
                         {/* <td data-title='Issue Category'>
                           {user?.issueCategory}
