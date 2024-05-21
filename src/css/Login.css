@@ -194,7 +194,7 @@ font-size: 22px;
 .login-form-container {
   margin-top: 150px;
   margin-left: 80px;
-width: 20rem;
+  width: 20rem;
 	position: relative; 
 	background-color: var(--white);
 	padding: 30px;  
@@ -304,15 +304,23 @@ width: 20rem;
 
 
 @media only screen and (max-width: 980px) {
-	.logo-section {
+	/* .logo-section {
 		display: none;
-	}
+	} */
 	 
 
 	 .login-form-container {
-    grid-column: 1 / -1;  
-    margin: 0 auto;  
-				width: 100%;
+  margin-top: 150px;
+  margin-left: 80px;
+  width: 20rem;
+	position: relative; 
+	background-color: var(--white);
+	padding: 30px;  
+	border-radius: 10px;
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0.15), 0 0 2px rgba(0, 0, 0, 0.15),
+    0 0 16px rgba(218, 209, 209, 0.15);
+    /* margin: 0 auto;  
+		 width: 100%;  */
   }
 }
 
@@ -374,9 +382,10 @@ width: 20rem;
      text-shadow: 0 1px hsla(0,0%,100%,.1);  
     bottom: 2rem;
     display: flex; 
-    align-items: center; 
-		margin-left: 130px; 
+    /* justify-content: center;  */
+    align-items: center;  
 		margin-top: 20px;
+    width: 100%;
 }
 .cp-text1 footer{ 
 	font-size: 8px;
@@ -461,6 +470,21 @@ width: 20rem;
    
 
 		@media screen and (max-width: 768px) {
+
+      	 .login-form-container {
+  /* margin-top: 150px;
+  margin-left: 80px; */
+  margin: 0 auto;
+  width: 20rem;
+	position: relative; 
+	background-color: var(--white);
+	padding: 30px;  
+	border-radius: 10px;
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0.15), 0 0 2px rgba(0, 0, 0, 0.15),
+    0 0 16px rgba(218, 209, 209, 0.15);
+    /* margin: 0 auto;  
+		 width: 100%;  */
+  }
   .cp-text1 {
    display: flex;
    flex-direction: column;

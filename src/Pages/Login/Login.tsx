@@ -97,67 +97,67 @@ const Login = () => {
 			<Carousels />
 			<div className="login-container">
 				<ToastContainer position="top-right" />
-				<div className="login-content-layout">
-					{/* Login Header */}
-					<LoginHeader />
-					<div className="login-content-grid">
-						<div className="logo-section">
-							<div className="copyright_login_container">
-								<div className="login-form-container">
-									<p >Sign in</p>
-									{<Formik
-										validationSchema={loginValidationSchema}
-										initialValues={{
-											email: '',
-											password: ''
-										}}
-										onSubmit={onSubmitFormlogin} >
-										{({ handleChange, handleSubmit, errors, values,
-										}) => (
-											<form className="form" onSubmit={handleSubmit} >
-												<div className="form-ctrl">
-													<label>Agent ID</label>
-													<input
-														type="text"
-														placeholder="Enter your Agent ID"
-														value={values?.email}
-														onChange={handleChange('email')}
-													/>
-													{errors?.email && <p className="formik-errors">{errors?.email}</p>}
-												</div>
-												<div className="form-ctrl">
-													<label>Password</label>
-													<input
-														type={showPassword ? "text" : "password"}
-														placeholder="Enter your password"
-														value={values?.password}
-														onChange={handleChange('password')}
-													/>
-
-													<span id="i-FaEye" onClick={() => setShowPassword(!showPassword)}>
-														{showPassword ? <FaEye /> : <FaEyeSlash />}
-													</span>
-													{errors?.password && <p className="formik-errors" id="password">{errors?.password}</p>}
-												</div>
-												<button
-													type="submit"
-													disabled={isLoading}
-												>
-													{isLoading ? <Spinner size="sm" /> : "Sign-in"}
-												</button>
-												<div className="forgot_password_container" onClick={() => navigate("/forgotpassword")}>
-													<h6>Forgot password?</h6>
-												</div>
-											</form>
-										)}
-									</Formik>}
+				{/* <div className="login-content-layout"> */}
+				{/* Login Header */}
+				<LoginHeader />
+				{/* <div className="login-content-grid"> */}
+				{/* <div className="logo-section"> */}
+				{/* <div className="copyright_login_container"> */}
+				<div className="login-form-container">
+					<p >Sign in</p>
+					{<Formik
+						validationSchema={loginValidationSchema}
+						initialValues={{
+							email: '',
+							password: ''
+						}}
+						onSubmit={onSubmitFormlogin} >
+						{({ handleChange, handleSubmit, errors, values,
+						}) => (
+							<form className="form" onSubmit={handleSubmit} >
+								<div className="form-ctrl">
+									<label>Agent ID</label>
+									<input
+										type="text"
+										placeholder="Enter your Agent ID"
+										value={values?.email}
+										onChange={handleChange('email')}
+									/>
+									{errors?.email && <p className="formik-errors">{errors?.email}</p>}
 								</div>
-								<Copyright />
-							</div>
-						</div>
+								<div className="form-ctrl">
+									<label>Password</label>
+									<input
+										type={showPassword ? "text" : "password"}
+										placeholder="Enter your password"
+										value={values?.password}
+										onChange={handleChange('password')}
+									/>
 
-					</div>
+									<span id="i-FaEye" onClick={() => setShowPassword(!showPassword)}>
+										{showPassword ? <FaEye /> : <FaEyeSlash />}
+									</span>
+									{errors?.password && <p className="formik-errors" id="password">{errors?.password}</p>}
+								</div>
+								<button
+									type="submit"
+									disabled={isLoading}
+								>
+									{isLoading ? <Spinner size="sm" /> : "Sign-in"}
+								</button>
+								<div className="forgot_password_container" onClick={() => navigate("/forgotpassword")}>
+									<h6>Forgot password?</h6>
+								</div>
+							</form>
+						)}
+					</Formik>}
 				</div>
+				<Copyright />
+				{/* </div> */}
+				{/* </div> */}
+
+				{/* </div> */}
+				{/* </div> */}
 			</div>
 		</div>
 	);
