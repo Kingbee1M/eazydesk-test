@@ -97,15 +97,10 @@ const Login = () => {
 			<Carousels />
 			<div className="login-container">
 				<ToastContainer position="top-right" />
-				{/* <div className="login-content-layout"> */}
-				{/* Login Header */}
 				<LoginHeader />
-				{/* <div className="login-content-grid"> */}
-				{/* <div className="logo-section"> */}
-				{/* <div className="copyright_login_container"> */}
 				<div className="login-form-container_main">
 					<div className="login-form-container">
-						<p >Sign in</p>
+						<p>Sign in</p>
 						{<Formik
 							validationSchema={loginValidationSchema}
 							initialValues={{
@@ -155,11 +150,6 @@ const Login = () => {
 					</div>
 					<Copyright />
 				</div>
-				{/* </div> */}
-				{/* </div> */}
-
-				{/* </div> */}
-				{/* </div> */}
 			</div>
 		</div>
 	);

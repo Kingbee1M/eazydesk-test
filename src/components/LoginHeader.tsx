@@ -1,9 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/img/logo.svg'
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { HiMenuAlt3 } from "react-icons/hi";
-import { BsPencil } from 'react-icons/bs';
 import { IoPricetag, IoHelpCircle, IoLogIn } from "react-icons/io5";
 import { FaBuilding } from "react-icons/fa6";
 import { IoIosLock } from "react-icons/io";
