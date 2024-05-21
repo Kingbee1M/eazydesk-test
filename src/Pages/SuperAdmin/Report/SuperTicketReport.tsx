@@ -1,20 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import moment from "moment";
-import { EntriesPerPage, NoRecordFound, TableFetch } from "../../../components/Options";
+import { NoRecordFound, TableFetch } from "../../../components/Options";
 import Pagination from "../../../components/Pagination";
 import { data } from "../../../components/StateData";
 import Header from "../../../components/Header";
 import SearchConponent from "../../../components/SearchConponent";
-import ImageLightbox from "../../../components/ImageLightbox";
+// import ImageLightbox from "../../../components/ImageLightbox";
 import ViewTicketDetailsModal from "../../../components/Modals/ViewTicketDetailsModal";
 import SuperSideNav from "../../../components/SideNav/SuperSideNav";
 
 const SuperTicketReport = ({ switchs }: any) => {
-	const [startDates, setStartDates] = useState([]);
-	const [endDates, setEndDates] = useState([]);
+	// const [startDates, setStartDates] = useState([]);
+	// const [endDates, setEndDates] = useState([]);
 	const [show, setShow] = useState(false);
 	const [searchItem, setSearchItem] = useState("");
-	const [datas, setDatas] = useState([]);
 
 
 
@@ -22,18 +21,18 @@ const SuperTicketReport = ({ switchs }: any) => {
 
 
 
-	useEffect(() => {
-		const result: any = data?.filter(
-			(data: any) =>
-				data?.ticketId?.toLowerCase().includes(searchItem) ||
-				data?.location?.toLowerCase().includes(searchItem) ||
-				data?.ticketType?.toLowerCase().includes(searchItem) ||
-				data?.severity?.toLowerCase().includes(searchItem) ||
-				data?.createdBy?.email?.toLowerCase().includes(searchItem) ||
-				data?.createdBy?.firstname?.toLowerCase().includes(searchItem)
-		);
-		setDatas(result);
-	}, [data, searchItem]);
+
+	// useEffect(() => {
+	// 	const result: any = data?.filter(
+	// 		(data: any) =>
+	// 			data?.ticketId?.toLowerCase().includes(searchItem) ||
+	// 			data?.location?.toLowerCase().includes(searchItem) ||
+	// 			data?.ticketType?.toLowerCase().includes(searchItem) ||
+	// 			data?.severity?.toLowerCase().includes(searchItem) ||
+	// 			data?.createdBy?.email?.toLowerCase().includes(searchItem) ||
+	// 			data?.createdBy?.firstname?.toLowerCase().includes(searchItem)
+	// 	); 
+	// }, [data, searchItem]);
 
 	const [displayData, setDisplayData] = useState([]);
 
@@ -41,7 +40,7 @@ const SuperTicketReport = ({ switchs }: any) => {
 
 	const handleCustomFilters = (e: { preventDefault: () => void; }) => {
 		e.preventDefault();
-		const datas = { startDates, endDates }
+		// const datas = { startDates, endDates }
 		setShow(false)
 	}
 	const [entriesPerPage, setEntriesPerPage] = useState(() => {
@@ -63,12 +62,12 @@ const SuperTicketReport = ({ switchs }: any) => {
 					placeholder={"search ticket report"}
 					setSearchItem={setSearchItem}
 					searchItem={searchItem}
-					data={datas}
+					data={data}
 					entriesPerPage={entriesPerPage}
 					setEntriesPerPage={setEntriesPerPage}
 					filter={true}
-					setStartDates={setStartDates}
-					setEndDates={setEndDates}
+					// setStartDates={setStartDates}
+					// setEndDates={setEndDates}
 					setShow={setShow}
 					show={show}
 					handleCustomFilters={handleCustomFilters}
@@ -189,7 +188,7 @@ const SuperTicketReport = ({ switchs }: any) => {
 						</div>
 						<Pagination
 							setDisplayData={setDisplayData}
-							data={datas}
+							data={data}
 							entriesPerPage={entriesPerPage}
 							Total={"Ticket Report"}
 						/>

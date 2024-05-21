@@ -3,7 +3,7 @@ import Header from '../../../components/Header'
 import BottomNavigation from '../../../components/BottomNavigation'
 import SearchConponent from '../../../components/SearchConponent'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
-import moment from 'moment'
+// import moment from 'moment'
 import { admingetTicket } from '../../../features/Ticket/ticketSlice'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 import SuperSideNav from '../../../components/SideNav/SuperSideNav'
@@ -15,10 +15,9 @@ const SuperInProgress = () => {
 		return "6";
 	});
 	const [limit, setLimit] = useState<any>(8);
-	const [startDates, setStartDates] = useState([]);
+	// const [startDates, setStartDates] = useState([]);
 	let [endDates, setEndDates] = useState<any>([]);
 	const [show, setShow] = useState(false);
-	const [datas, setDatas] = useState([]);
 	const [searchItem, setSearchItem] = useState("");
 
 	const { admingetticketdata, admingetticketisLoading } = useAppSelector((state: any) => state.ticket)
@@ -28,16 +27,16 @@ const SuperInProgress = () => {
 	const [endDate1] = useState(formattedEndDate);
 
 
-	const currentDate = moment().format("YYYY-MM-DD");
-	const sevenDays = moment().subtract(7, "days").format("YYYY-MM-DD");
-	const yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
-	const [data, setData] = useState<any>([]);
+	// const currentDate = moment().format("YYYY-MM-DD");
+	// const sevenDays = moment().subtract(7, "days").format("YYYY-MM-DD");
+	// const yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
+	// const [data, setData] = useState<any>([]);
 
-	useEffect(() => {
-		setData(admingetticketdata);
-	}, [admingetticketdata]);
+	// useEffect(() => {
+	// 	setData(admingetticketdata);
+	// }, [admingetticketdata]);
 
-	console.log('admingetticketdata', admingetticketdata)
+
 
 
 	useEffect(() => {
@@ -92,7 +91,7 @@ const SuperInProgress = () => {
 					entriesPerPage={entriesPerPage}
 					setEntriesPerPage={setEntriesPerPage}
 					filter={true}
-					setStartDates={setStartDates}
+					// setStartDates={setStartDates}
 					setEndDates={setEndDates}
 					setShow={setShow}
 					show={show}

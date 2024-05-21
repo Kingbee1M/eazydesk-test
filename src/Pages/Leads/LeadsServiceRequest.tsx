@@ -6,18 +6,19 @@ import ServiceRequestModal from '../../components/TicketModals/ServiceRequestMod
 import { useAppDispatch, useAppSelector } from '../../store/useStore';
 import { getTicket } from '../../features/Ticket/ticketSlice';
 import TicketTableComponent from '../../components/Table/TicketTableComponent';
-import TableLoader from '../../components/TableLoader';
+// import TableLoader from '../../components/TableLoader';
 
 
 
 const LeadsServiceRequest = () => {
-	const [limit, setLimit] = useState<any>(10);
+	// setLimit
+	const [limit,] = useState<any>(10);
 	const dispatch = useAppDispatch();
 	const { data, isLoading } = useAppSelector((state: any) => state.ticket)
 	const { createisSuccess } = useAppSelector((state: any) => state.ticket)
 	// const data = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("SERVICE"));
 
-	console.log('ticket', data)
+
 
 	useEffect(() => {
 		const datas = { limit: limit, ticketType: "SERVICE" };

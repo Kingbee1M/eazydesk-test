@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useContext } from "react";
+import { useState, useRef, useEffect } from "react";
 import moment from "moment";
 import { useNavigate, useParams } from "react-router-dom";
 import { MdOutlineClose } from "react-icons/md";
@@ -10,15 +10,14 @@ import { SVGLoader } from "../SVGLoader";
 import { toast, ToastContainer } from "react-toastify";
 import { customId } from "../Options";
 import NotificationPopUp from "../Scoket/NotificationPopUp";
-import { SocketContext } from "../Scoket/SocketContext";
 import { getUserPrivileges } from "../../hooks/auth";
 
 const TicketProgress = () => {
 	const {
-		isSuperAdmin,
-		isAdmin,
-		isSupervisor,
-		isITSupport,
+		// isSuperAdmin,
+		// isAdmin,
+		// isSupervisor,
+		// isITSupport,
 		isTeamLead,
 
 	} = getUserPrivileges();
@@ -28,9 +27,9 @@ const TicketProgress = () => {
 	const navigate = useNavigate();
 	const form: any = useRef();
 	const [refresh, setRefresh] = useState(false);
-	const [ticket, setTicket] = useState<any>({});
+	const [ticket] = useState<any>({});
 	const [inputs, setinputs] = useState("")
-	const { viewdata, viewisLoading } = useAppSelector((state: any) => state.ticket)
+	const { viewdata } = useAppSelector((state: any) => state.ticket)
 	const { updateTicketisLoading, updateTicketisSuccess, updateTicketisError, updateTicketmessage } = useAppSelector((state: any) => state.ticket)
 	const { updateLeadTicketisLoading, updateLeadTicketisSuccess, updateLeadTicketisError, updateLeadTicketmessage } = useAppSelector((state: any) => state.ticket)
 	const { createisSuccess } = useAppSelector((state: any) => state.comment)
@@ -40,7 +39,7 @@ const TicketProgress = () => {
 	});
 
 
-	console.log('updateTicketmessage', updateTicketmessage)
+
 
 
 

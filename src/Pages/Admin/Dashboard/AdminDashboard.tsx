@@ -1,7 +1,6 @@
 import Header from "../../../components/Header";
 import SideNav from "../../../components/SideNav/SideNav";
 import BottomNavigation from "../../../components/BottomNavigation";
-import { RiArrowUpSFill } from "react-icons/ri";
 import dIcon1 from "../../../assets/DashboardIcons/Dicon1.svg";
 import dIcon2 from "../../../assets/DashboardIcons/Dicon2.svg";
 import dIcon3 from "../../../assets/DashboardIcons/Dicon3.svg";
@@ -26,37 +25,37 @@ const AdminDashboard = () => {
   }, [dispatch]);
 
   const ticketTotal = dashBoardInfodata?.totalTickets;
-  const changeRequest = dashBoardInfodata?.totals?.ticketType?.changeRequest;
-  const incidentRequest =
-    dashBoardInfodata?.totals?.ticketType?.incidentRequest;
-  const serviceRequest = dashBoardInfodata?.totals?.ticketType?.serviceRequest;
+  // const changeRequest = dashBoardInfodata?.totals?.ticketType?.changeRequest;
+  // const incidentRequest =
+  //   dashBoardInfodata?.totals?.ticketType?.incidentRequest;
+  // const serviceRequest = dashBoardInfodata?.totals?.ticketType?.serviceRequest;
   const approved = dashBoardInfodata?.ticketType?.approved;
   const closed = dashBoardInfodata?.totals?.status?.closed;
   const completed = dashBoardInfodata?.totals?.status?.completed;
   const disapproved = dashBoardInfodata?.totals?.status?.dissaproved;
   const inprogress = dashBoardInfodata?.totals?.status?.inprogress;
-  const invalid = dashBoardInfodata?.totals?.status?.invalid;
-  const open = dashBoardInfodata?.totals?.status?.open;
+  // const invalid = dashBoardInfodata?.totals?.status?.invalid;
+  // const open = dashBoardInfodata?.totals?.status?.open;
   const pending = dashBoardInfodata?.totals?.status?.pending;
   const reopen = dashBoardInfodata?.totals?.status?.reopen;
 
   const incident = !dashBoardInfodata
     ? []
     : dashBoardInfodata?.tickets?.filter((ticket: any) =>
-        ticket?.ticketType?.includes("INCIDENT")
-      );
+      ticket?.ticketType?.includes("INCIDENT")
+    );
   const service = !dashBoardInfodata
     ? []
     : dashBoardInfodata?.tickets?.filter((ticket: any) =>
-        ticket?.ticketType?.includes("SERVICE")
-      );
+      ticket?.ticketType?.includes("SERVICE")
+    );
   const change = !dashBoardInfodata
     ? []
     : dashBoardInfodata?.tickets?.filter((ticket: any) =>
-        ticket?.ticketType?.includes("CHANGE")
-      );
+      ticket?.ticketType?.includes("CHANGE")
+    );
 
-  console.log("incident", dashBoardInfodata);
+
 
   const statusList = [
     "Inprogress",
@@ -73,13 +72,13 @@ const AdminDashboard = () => {
   const types = !dashBoardInfodata
     ? []
     : dashBoardInfodata?.tickets?.filter((ticket: any) => {
-        return (
-          ticket?.status === activeIndex?.toUpperCase() ||
-          ticket?.ticketType === activeIndex?.toUpperCase()
-        );
-      }) || [];
+      return (
+        ticket?.status === activeIndex?.toUpperCase() ||
+        ticket?.ticketType === activeIndex?.toUpperCase()
+      );
+    }) || [];
 
-  console.log("dashBoardInfodata", dashBoardInfodata);
+
 
   const TeamsPerformanceUL = () => {
     const handleClick = (index: SetStateAction<string>) => {

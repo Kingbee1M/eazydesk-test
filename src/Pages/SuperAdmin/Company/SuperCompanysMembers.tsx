@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import Header from '../../../components/Header';
-import EditCustomerModal from './EditCustomerModal';
 import TableLoader from '../../../components/TableLoader';
 import { useAppDispatch, useAppSelector } from '../../../store/useStore';
 import { useParams } from 'react-router-dom';
@@ -16,11 +15,11 @@ import SuperSideNav from '../../../components/SideNav/SuperSideNav';
 const SuperCompanysMembers = () => {
 	const { id } = useParams()
 	const dispatch = useAppDispatch();
-	const [showEditUser, setShowEditUser] = useState(false)
+	// const [showEditUser, setShowEditUser] = useState(false)
 	const [displayData, setDisplayData] = useState([]);
 	const { viewdata, viewisLoading } = useAppSelector((state: any) => state.company);
 
-	console.log('viewdata', viewdata)
+
 
 	useEffect(() => {
 		// @ts-ignore

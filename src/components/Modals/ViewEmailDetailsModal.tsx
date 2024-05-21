@@ -1,14 +1,11 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
-// import { NoRecordFound } from '../Options';
-// import ImageLightbox from '../ImageLightbox';
 import ModalHeader from "./ModalHeader";
-import ReactQuillWrapper from "../TicketModals/ReactQuillWrapper";
+
 
 const ViewEmailDetailsModal = ({ data }: any) => {
   const [showModal, setLgShow] = useState(false);
-  const [value, setValue] = useState("");
-  console.log(data);
+
 
   return (
     <>

@@ -12,7 +12,7 @@ const SuperChangeRequest = () => {
 	const { giveApprovalisSuccess } = useAppSelector((state: any) => state.ticket);
 	const { admingetticketdata, admingetticketisLoading } = useAppSelector((state: any) => state.ticket)
 	const [entriesPerPage, setEntriesPerPage] = useState(() => { return "6" });
-	const [startDates, setStartDates] = useState([]);
+	// const [setStartDates] = useState([]);
 	let [endDates, setEndDates] = useState<any>([]);
 	const [show, setShow] = useState(false);
 	const [searchItem, setSearchItem] = useState("");
@@ -82,7 +82,7 @@ const SuperChangeRequest = () => {
 					entriesPerPage={entriesPerPage}
 					setEntriesPerPage={setEntriesPerPage}
 					filter={true}
-					setStartDates={setStartDates}
+					// setStartDates={setStartDates}
 					setEndDates={setEndDates}
 					setShow={setShow}
 					show={show}

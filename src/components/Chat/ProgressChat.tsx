@@ -1,11 +1,11 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import moment from "moment";
 import { FaRegUserCircle, FaCamera } from "react-icons/fa";
 import { baseUrl } from "../../shared/baseUrl";
-import { useAppDispatch, useAppSelector } from "../../store/useStore";
+import { useAppDispatch } from "../../store/useStore";
 import { createComment } from "../../features/Comment/commentSlice";
-import { SVGLoader } from "../SVGLoader";
-import { RiMailSendLine } from "react-icons/ri";
+// import { SVGLoader } from "../SVGLoader";
+// import { RiMailSendLine } from "react-icons/ri";
 import { ToastContainer } from "react-toastify";
 import { BsChatRightText } from "react-icons/bs";
 import Skelenton from "../Skelenton/Skelenton";
@@ -13,11 +13,11 @@ import Skelenton from "../Skelenton/Skelenton";
 const ProgressChat = ({ viewdata, id, input, setInputs }: any) => {
 
   const dispatch = useAppDispatch();
-  const { data, isLoading, isSuccess, getTicketID } = useAppSelector((state: any) => state.comment)
-  const { createdata, createisLoading, createisSuccess } = useAppSelector((state: any) => state.comment)
+  // const { data, isLoading, isSuccess, getTicketID } = useAppSelector((state: any) => state.comment)
+  // const { createdata, createisLoading, createisSuccess } = useAppSelector((state: any) => state.comment)
 
 
-  // console.log('viewdatas', viewdata)
+
 
   const formData = new FormData();
   const form: any = useRef();
@@ -35,8 +35,8 @@ const ProgressChat = ({ viewdata, id, input, setInputs }: any) => {
     formData.append(field.key, field.value);
   });
 
-  const [imgsLocalURL, setImgsLocalURL] = useState<any>([]);
-  const [isLoadingImg, setIsLoadingImg] = useState(false);
+  // const [imgsLocalURL, setImgsLocalURL] = useState<any>([]);
+  // const [isLoadingImg, setIsLoadingImg] = useState(false);
 
 
   const handleChangeInput = (input: any, value: any) => {
@@ -100,7 +100,7 @@ const ProgressChat = ({ viewdata, id, input, setInputs }: any) => {
       <div>
         <ToastContainer position="top-right" containerId={"custom1"} />
 
-        <div className="img-preview">
+        {/* <div className="img-preview">
           {imgsLocalURL?.length > 0 && isLoadingImg ? (
             <p style={{ color: "red" }}>Please wait...</p>
           ) : (
@@ -108,7 +108,7 @@ const ProgressChat = ({ viewdata, id, input, setInputs }: any) => {
               <img key={i} src={item} alt={`PhotoIMG-${i}`} />
             ))
           )}
-        </div>
+        </div> */}
         <h5 className="page-title">CHAT</h5>
         <div className="chat-container">
           {false ? <Skelenton count={5} /> : viewdata?.Comment?.length === 0 ? (
@@ -160,9 +160,9 @@ const ProgressChat = ({ viewdata, id, input, setInputs }: any) => {
               value={input?.comment}
               onChange={(e) => handleChangeInput("comment", e.target.value)}
             />
-            <button type="submit" disabled={createisLoading}>
+            {/* <button type="submit" disabled={createisLoading}>
               {createisLoading ? <SVGLoader width={"30px"} height={"30px"} color={"#fff"} /> : <RiMailSendLine size={20} color="#0240BC" />}
-            </button>
+            </button> */}
           </form>
           <div className="btn-area">
             <label className="img-pckr">

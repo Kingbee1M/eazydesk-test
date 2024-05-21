@@ -5,16 +5,15 @@ import SearchConponent from '../../../components/SearchConponent'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 import ITSideNav from '../../../components/SideNav/ITSideNav'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
-import { getItTicket } from '../../../features/Ticket/ticketSlice'
+// import { getItTicket } from '../../../features/Ticket/ticketSlice'
 import { getItTicketParameter } from '../../../features/Ticket/ticketSlice'
-import ITTicketTable from './ITTicketTable'
-import moment from 'moment'
+// import ITTicketTable from './ITTicketTable'
+// import moment from 'moment'
 
 const ITServiceRequest = () => {
 	const dispatch = useAppDispatch();
 	const { itticketparameterdata, itticketparameterisLoading } = useAppSelector((state: any) => state.ticket)
 	const [entriesPerPage, setEntriesPerPage] = useState(() => { return "6" });
-	const [startDates, setStartDates] = useState([]);
 	let [endDates, setEndDates] = useState<any>([]);
 	const [show, setShow] = useState(false);
 	const [searchItem, setSearchItem] = useState("");
@@ -25,7 +24,7 @@ const ITServiceRequest = () => {
 	const [endDate1] = useState(formattedEndDate);
 
 
-	console.log('itticketparameterdata', itticketparameterdata)
+
 
 
 
@@ -90,7 +89,7 @@ const ITServiceRequest = () => {
 					entriesPerPage={entriesPerPage}
 					setEntriesPerPage={setEntriesPerPage}
 					filter={true}
-					setStartDates={setStartDates}
+					// setStartDates={setStartDates}
 					setEndDates={setEndDates}
 					setShow={setShow}
 					show={show}

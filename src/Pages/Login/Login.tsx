@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -78,7 +78,7 @@ const Login = () => {
 		dispatch(reset())
 	}, [isError, message, dispatch, isSuccess, navigate, email])
 
-	console.log('isError', isError)
+
 
 	const loginValidationSchema = yup.object().shape({
 		email: yup
