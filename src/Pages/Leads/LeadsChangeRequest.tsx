@@ -10,7 +10,8 @@ import TicketTableComponent from "../../components/Table/TicketTableComponent";
 
 
 const LeadsChangeRequest = () => {
-	const [limit, setLimit] = useState<any>(10);
+	// setLimit
+	const [limit,] = useState<any>(10);
 	const dispatch = useAppDispatch();
 	const { data: ticket, isLoading } = useAppSelector((state: any) => state.ticket)
 	const { createisSuccess } = useAppSelector((state: any) => state.ticket)

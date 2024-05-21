@@ -1,18 +1,12 @@
 import BottomNavigation from '../../../components/BottomNavigation';
-import { RiArrowUpSFill } from "react-icons/ri";
 import dIcon1 from "../../../assets/DashboardIcons/Dicon1.svg"
 import dIcon2 from "../../../assets/DashboardIcons/Dicon2.svg"
 import dIcon3 from "../../../assets/DashboardIcons/Dicon3.svg"
 import dIcon4 from "../../../assets/DashboardIcons/Dicon4.svg"
 import ITSideNav from '../../../components/SideNav/ITSideNav';
-import { AiOutlineEye } from 'react-icons/ai';
-import { NavLink } from 'react-router-dom';
-import AssignTask from '../../../components/Modals/AssignTask';
 import { useAppDispatch, useAppSelector } from '../../../store/useStore';
 import { dashBoardInfo, getItTicket } from '../../../features/Ticket/ticketSlice'
-import { useEffect, useState } from 'react';
-import TicketStatusCell from '../../Admin/Ticket/TicketStatusCell';
-import { NoRecordFound, TableFetch } from '../../../components/Options';
+import { useEffect } from 'react';
 import ITHeader from '../../../components/Headers/ITHeader';
 import LeadsThreeinOneBarChart from '../../../components/Charts/LeadsThreeinOneBarChart';
 import { GoDotFill } from 'react-icons/go';
@@ -22,7 +16,7 @@ import DoughnutChat from '../../../components/DoughnutChat';
 const ITDashboard = () => {
 	const dispatch = useAppDispatch();
 	const { dashBoardInfodata } = useAppSelector((state: any) => state.ticket);
-	const { itdata, itisLoading } = useAppSelector((state: any) => state.ticket)
+	// const { itdata, itisLoading } = useAppSelector((state: any) => state.ticket)
 	const { itassignisSuccess } = useAppSelector((state: any) => state.ticket);
 
 	useEffect(() => {
@@ -50,8 +44,8 @@ const ITDashboard = () => {
 	const completed = dashBoardInfodata?.totals?.status?.completed
 	const disapproved = dashBoardInfodata?.totals?.status?.dissaproved
 	const inprogress = dashBoardInfodata?.totals?.status?.inprogress
-	const invalid = dashBoardInfodata?.totals?.status?.invalid
-	const open = dashBoardInfodata?.totals?.status?.open
+	// const invalid = dashBoardInfodata?.totals?.status?.invalid
+	// const open = dashBoardInfodata?.totals?.status?.open
 	const pending = dashBoardInfodata?.totals?.status?.pending
 	const reopen = dashBoardInfodata?.totals?.status?.reopen
 

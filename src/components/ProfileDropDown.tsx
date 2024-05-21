@@ -32,19 +32,24 @@ const ProfileDropDown = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
-	console.log('userInfo', userInfo)
+
 
 	const handleLogout = () => {
 		dispatch(logout());
+		navigate("/");
+		dataService.clearData()
+		dispatch(reset());
+		socket.disconnect()
 	};
 
 	useEffect(() => {
 		if (!userInfo || userInfo == null) {
 			navigate("/");
+			socket.disconnect()
 			dispatch(reset());
 			socket.disconnect()
 		}
-	}, [dispatch, navigate, socket, userInfo]);
+	}, [dataService, dispatch, navigate, socket, userInfo]);
 
 	useEffect(() => {
 		if (isSuccesslogout) {
@@ -59,6 +64,9 @@ const ProfileDropDown = () => {
 			});
 			dispatch(logoutUserAction());
 			dataService.clearData()
+			navigate("/");
+			dispatch(reset());
+			socket.disconnect()
 		}
 		dispatch(reset());
 	}, [dataService, dispatch, isErrorlogout, isSuccesslogout, messagelogout, navigate, socket])

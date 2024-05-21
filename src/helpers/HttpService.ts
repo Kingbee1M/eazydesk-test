@@ -120,8 +120,7 @@ const uploadFile = (url: string, data: Record<string, any>, files: Record<string
         resolve(data);
       })
       .catch((e) => {
-        handleError(e);
-        console.log('errorMessage-errorMessage',e)
+        handleError(e); 
         reject(e);
       });
   });

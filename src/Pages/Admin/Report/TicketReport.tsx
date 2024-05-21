@@ -1,30 +1,29 @@
 import { useState, useEffect } from "react";
 import moment from "moment";
 import {
-  EntriesPerPage,
+  // EntriesPerPage,
   NoRecordFound,
   TableFetch,
 } from "../../../components/Options";
-import Pagination from "../../../components/Pagination";
+// import Pagination from "../../../components/Pagination";
 import { data } from "../../../components/StateData";
 import SideNav from "../../../components/SideNav/SideNav";
 import Header from "../../../components/Header";
 import SearchConponent from "../../../components/SearchConponent";
-import ImageLightbox from "../../../components/ImageLightbox";
+// import ImageLightbox from "../../../components/ImageLightbox";
 import ViewTicketDetailsModal from "../../../components/Modals/ViewTicketDetailsModal";
 import { useAppDispatch, useAppSelector } from "../../../store/useStore";
 import { admingetTicket } from "../../../features/Ticket/ticketSlice";
-import { dashBoardInfo } from "../../../features/Ticket/ticketSlice";
+// import { dashBoardInfo } from "../../../features/Ticket/ticketSlice";
 import ViewEmailDetailsModal from "../../../components/Modals/ViewEmailDetailsModal";
 
 const TicketReport = ({ switchs }: any) => {
   const dispatch = useAppDispatch();
-  const [startDates, setStartDates] = useState([]);
   let [endDates, setEndDates] = useState<any>([]);
   const [show, setShow] = useState(false);
   const [searchItem, setSearchItem] = useState("");
-  const [datas, setDatas] = useState([]);
-  const [limit, setLimit] = useState<any>(10);
+  // const [datas, setDatas] = useState([]);
+  // const [limit, setLimit] = useState<any>(10);
 
   endDates = new Date();
   const formattedEndDate = endDates.toISOString().split("T")[0]; // Extracting date part and removing time
@@ -35,18 +34,18 @@ const TicketReport = ({ switchs }: any) => {
   );
   const { admingetticketdata } = useAppSelector((state: any) => state.ticket);
 
-  useEffect(() => {
-    const result: any = data?.filter(
-      (data: any) =>
-        data?.ticketId?.toLowerCase().includes(searchItem) ||
-        data?.location?.toLowerCase().includes(searchItem) ||
-        data?.ticketType?.toLowerCase().includes(searchItem) ||
-        data?.severity?.toLowerCase().includes(searchItem) ||
-        data?.createdBy?.email?.toLowerCase().includes(searchItem) ||
-        data?.createdBy?.firstname?.toLowerCase().includes(searchItem)
-    );
-    setDatas(result);
-  }, [setDatas, searchItem]);
+  // useEffect(() => {
+  //   const result: any = data?.filter(
+  //     (data: any) =>
+  //       data?.ticketId?.toLowerCase().includes(searchItem) ||
+  //       data?.location?.toLowerCase().includes(searchItem) ||
+  //       data?.ticketType?.toLowerCase().includes(searchItem) ||
+  //       data?.severity?.toLowerCase().includes(searchItem) ||
+  //       data?.createdBy?.email?.toLowerCase().includes(searchItem) ||
+  //       data?.createdBy?.firstname?.toLowerCase().includes(searchItem)
+  //   );
+  //   setDatas(result);
+  // }, [setDatas, searchItem]);
 
   // const handleCustomFilters = (e: { preventDefault: () => void }) => {
   //   e.preventDefault();
@@ -67,9 +66,8 @@ const TicketReport = ({ switchs }: any) => {
       dispatch(admingetTicket(dispatchDatas));
     }
   }, [dispatch, endDate1, giveApprovalisSuccess, startDate1]);
-  console.log(admingetticketdata);
+
   // const totalTickets = admingetticketdata?.tickets.length;
-  // console.log(totalTickets);
 
   return (
     <div id='page-wrapper'>
@@ -92,11 +90,11 @@ const TicketReport = ({ switchs }: any) => {
           entriesPerPage={entriesPerPage}
           setEntriesPerPage={setEntriesPerPage}
           filter={true}
-          setStartDates={setStartDates}
+          // setStartDates={setStartDates}
           setEndDates={setEndDates}
           setShow={setShow}
           show={show}
-          // handleCustomFilters={handleCustomFilters}
+        // handleCustomFilters={handleCustomFilters}
         />
 
         <div id='table-container'>
@@ -140,8 +138,8 @@ const TicketReport = ({ switchs }: any) => {
                           {user?.ticketType === "INCIDENT"
                             ? "INC - " + user?.id
                             : user?.ticketType === "SERVICE"
-                            ? "SRV - " + user?.id
-                            : "CHG - " + user?.id}
+                              ? "SRV - " + user?.id
+                              : "CHG - " + user?.id}
                         </td>
                         <td data-title='affected Users'>
                           {!user?.affectedUsers ? (

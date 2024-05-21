@@ -27,7 +27,7 @@ export const handleMessageError = (error: SerializedError, thunkAPI: any) => {
 			// @ts-ignore
 		(error?.response?.data?.errors?.map((error: { message: any }) => error.message) || []).join(', ') ||
     'An error occurred.'; 
-  console.log('errorMessage',errorMessage)
+ 
   toast.error(errorMessage, {  toastId: customId });
 	return thunkAPI.rejectWithValue(errorMessage);
 };

@@ -1,6 +1,5 @@
 import Header from '../../../components/Header'
 import BottomNavigation from '../../../components/BottomNavigation';
-import { RiArrowUpSFill } from "react-icons/ri";
 import dIcon1 from "../../../assets/DashboardIcons/Dicon1.svg"
 import dIcon2 from "../../../assets/DashboardIcons/Dicon2.svg"
 import dIcon3 from "../../../assets/DashboardIcons/Dicon3.svg"
@@ -12,7 +11,7 @@ import { PiDotsSixVerticalBold } from 'react-icons/pi';
 import LinePerformanceChart from '../../../components/Charts/LinePerformanceChart';
 import { SetStateAction, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/useStore';
-import { dashBoardInfo, superAdminDashboard } from '../../../features/Ticket/ticketSlice';
+import { superAdminDashboard } from '../../../features/Ticket/ticketSlice';
 import SuperSideNav from '../../../components/SideNav/SuperSideNav';
 
 
@@ -46,7 +45,7 @@ const SuperDashboard = () => {
 	const completed = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.completed : 0;
 	const dissapproved = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.dissapproved : 0;
 	const inprogress = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.inprogress : 0;
-	const invalid = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.invalid : 0;
+	// const invalid = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.invalid : 0;
 	const pending = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.pending : 0;
 	const reopen = type.length > 0 ? type[0].companyInfo.ticketsInfo.totals.status.reopen : 0;
 

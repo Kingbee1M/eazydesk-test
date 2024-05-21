@@ -22,7 +22,7 @@ const RegisterModal = () => {
 	const { isError, message, isLoading, isSuccess } = useAppSelector(
 		(state) => state.reg)
 
-	console.log('isError-isError', isError)
+
 
 	const [input, setInput] = useState<any>({
 		firstname: "",
