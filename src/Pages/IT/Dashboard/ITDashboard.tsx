@@ -1,4 +1,3 @@
-import BottomNavigation from '../../../components/BottomNavigation';
 import dIcon1 from "../../../assets/DashboardIcons/Dicon1.svg"
 import dIcon2 from "../../../assets/DashboardIcons/Dicon2.svg"
 import dIcon3 from "../../../assets/DashboardIcons/Dicon3.svg"
@@ -11,12 +10,12 @@ import ITHeader from '../../../components/Headers/ITHeader';
 import LeadsThreeinOneBarChart from '../../../components/Charts/LeadsThreeinOneBarChart';
 import { GoDotFill } from 'react-icons/go';
 import DoughnutChat from '../../../components/DoughnutChat';
+import ITBottomNavigation from '../../../components/BottomNavigation/ITBottomNavigation';
 
 
 const ITDashboard = () => {
 	const dispatch = useAppDispatch();
 	const { dashBoardInfodata } = useAppSelector((state: any) => state.ticket);
-	// const { itdata, itisLoading } = useAppSelector((state: any) => state.ticket)
 	const { itassignisSuccess } = useAppSelector((state: any) => state.ticket);
 
 	useEffect(() => {
@@ -34,18 +33,12 @@ const ITDashboard = () => {
 
 
 
-
-
-
-
 	const ticketTotal = dashBoardInfodata?.totalTickets
 	const approved = dashBoardInfodata?.ticketType?.approved
 	const closed = dashBoardInfodata?.totals?.status?.closed
 	const completed = dashBoardInfodata?.totals?.status?.completed
 	const disapproved = dashBoardInfodata?.totals?.status?.dissaproved
 	const inprogress = dashBoardInfodata?.totals?.status?.inprogress
-	// const invalid = dashBoardInfodata?.totals?.status?.invalid
-	// const open = dashBoardInfodata?.totals?.status?.open
 	const pending = dashBoardInfodata?.totals?.status?.pending
 	const reopen = dashBoardInfodata?.totals?.status?.reopen
 
@@ -61,7 +54,7 @@ const ITDashboard = () => {
 		<div id="page-wrapper">
 			<ITSideNav />
 			<ITHeader />
-			<BottomNavigation />
+			<ITBottomNavigation />
 			<main>
 				<div className='dashboard_container_grid'>
 					<div className='total_card'>

@@ -13,6 +13,8 @@ import LinePerformanceChart from "../../../components/Charts/LinePerformanceChar
 import { SetStateAction, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/useStore";
 import { dashBoardInfo } from "../../../features/Ticket/ticketSlice";
+import AdminHeader from "../../../components/Headers/AdminHeader";
+import AdminBottomNavigation from "../../../components/BottomNavigation/AdminBottomNavigation";
 
 const AdminDashboard = () => {
   const [activeIndex, setActiveIndex] = useState<any>("Inprogress"); // Initially set the first item as active
@@ -105,8 +107,8 @@ const AdminDashboard = () => {
   return (
     <div id='page-wrapper'>
       <SideNav />
-      <Header />
-      <BottomNavigation />
+      <AdminHeader />
+      <AdminBottomNavigation />
       <main>
         <div className='dashboard_container_grid'>
           <div className='total_card'>

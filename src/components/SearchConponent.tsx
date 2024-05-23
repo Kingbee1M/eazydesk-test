@@ -19,8 +19,8 @@ const SearchConponent = ({ ID, handleCustomFilters, setEndDates, setStartDates, 
 
 	return (
 		<div id='reports'  >
+			<ToastContainer position="top-right" containerId={"custom1345"} />
 			<div className="search-area">
-				<ToastContainer position="top-right" containerId={"custom1345"} />
 				<Search
 					placeholder={placeholder}
 					setSearchItem={setSearchItem}
@@ -28,7 +28,7 @@ const SearchConponent = ({ ID, handleCustomFilters, setEndDates, setStartDates, 
 
 				/>
 
-				<form >
+				<form>
 					{ID && <div className="form-grp">
 						<input id="input-search-colunm-two" type="text" placeholder={placeholder}
 							value={searchItem}

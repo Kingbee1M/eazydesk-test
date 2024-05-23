@@ -8,6 +8,8 @@ import LinkedShops from './SettingsGeneral/LinkedShops';
 import Plans from './SettingsGeneral/Plans';
 import Security from './SettingsGeneral/Security';
 import ITSideNav from '../../../components/SideNav/ITSideNav';
+import ITHeader from '../../../components/Headers/ITHeader';
+import ITBottomNavigation from '../../../components/BottomNavigation/ITBottomNavigation';
 
 const Settings = () => {
 	const [activeIndex, setActiveIndex] = useState<any>(0);
@@ -17,8 +19,8 @@ const Settings = () => {
 	return (
 		<div id="page-wrapper">
 			<ITSideNav />
-			<Header />
-			<BottomNavigation />
+			<ITHeader />
+			<ITBottomNavigation />
 			<main>
 				<div className='settings_container_title'>
 					<div>

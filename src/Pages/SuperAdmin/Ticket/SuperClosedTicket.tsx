@@ -7,6 +7,8 @@ import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 
 import { admingetTicket } from '../../../features/Ticket/ticketSlice'
 import SuperSideNav from '../../../components/SideNav/SuperSideNav'
+import TicketHeader from '../../../components/TicketHeaders/TicketHeader'
+import SuperHeader from '../../../components/Headers/SuperHeader'
 
 const ClosedTicket = () => {
 	const dispatch = useAppDispatch();
@@ -18,7 +20,7 @@ const ClosedTicket = () => {
 
 	let [endDates, setEndDates] = useState<any>([]);
 	const [show, setShow] = useState(false);
-
+	const [startDates, setStartDates] = useState([]);
 	const [searchItem, setSearchItem] = useState("");
 	const [limit, setLimit] = useState<any>(8);
 	const { admingetticketdata, admingetticketisLoading } = useAppSelector((state: any) => state.ticket)
@@ -72,13 +74,13 @@ const ClosedTicket = () => {
 	return (
 		<div id="page-wrapper">
 			<SuperSideNav />
-			<Header />
+			<SuperHeader />
 			<BottomNavigation />
 			<main>
-				<div className='dashboard-first-card-boards  mt-2'>
-					<div>
-						<h5 className='dashboard-first-card-h'>Closed Ticket</h5>
-					</div>
+				<div className='dashboard-first-card-boards  '>
+					{/* Ticket Links */}
+					<TicketHeader text={"Closed Ticket"} />
+
 				</div>
 				<SearchConponent
 					placeholder={"search ticket"}
@@ -88,6 +90,7 @@ const ClosedTicket = () => {
 					entriesPerPage={entriesPerPage}
 					setEntriesPerPage={setEntriesPerPage}
 					filter={true}
+					setStartDates={setStartDates}
 					setEndDates={setEndDates}
 					setShow={setShow}
 					show={show}
@@ -95,7 +98,7 @@ const ClosedTicket = () => {
 				// handleCustomFilters={handleCustomFilters}
 				/>
 
-				<div className='mt-4'>
+				<div  >
 					<TicketTableComponent
 						TYPE={false}
 						data={admingetticketdata?.tickets}

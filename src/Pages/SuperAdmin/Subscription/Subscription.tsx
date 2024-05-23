@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import moment from 'moment'
 import SubscriptionTable from './SubscriptionTable'
 import SuperSideNav from '../../../components/SideNav/SuperSideNav'
+import SuperHeader from '../../../components/Headers/SuperHeader'
 
 
 
@@ -50,7 +51,7 @@ const Subscription = () => {
 	return (
 		<div id="page-wrapper">
 			<SuperSideNav />
-			<Header />
+			<SuperHeader />
 			<BottomNavigation />
 			<main>
 				<div className='dashboard-first-card-boards '>

@@ -8,7 +8,6 @@ import {
 // import Pagination from "../../../components/Pagination";
 import { data } from "../../../components/StateData";
 import SideNav from "../../../components/SideNav/SideNav";
-import Header from "../../../components/Header";
 import SearchConponent from "../../../components/SearchConponent";
 // import ImageLightbox from "../../../components/ImageLightbox";
 import ViewTicketDetailsModal from "../../../components/Modals/ViewTicketDetailsModal";
@@ -16,12 +15,15 @@ import { useAppDispatch, useAppSelector } from "../../../store/useStore";
 import { admingetTicket } from "../../../features/Ticket/ticketSlice";
 // import { dashBoardInfo } from "../../../features/Ticket/ticketSlice";
 import ViewEmailDetailsModal from "../../../components/Modals/ViewEmailDetailsModal";
+import AdminHeader from "../../../components/Headers/AdminHeader";
+import AdminBottomNavigation from "../../../components/BottomNavigation/AdminBottomNavigation";
 
 const TicketReport = ({ switchs }: any) => {
   const dispatch = useAppDispatch();
   let [endDates, setEndDates] = useState<any>([]);
   const [show, setShow] = useState(false);
   const [searchItem, setSearchItem] = useState("");
+  const [startDates, setStartDates] = useState([]);
   // const [datas, setDatas] = useState([]);
   // const [limit, setLimit] = useState<any>(10);
 
@@ -72,7 +74,8 @@ const TicketReport = ({ switchs }: any) => {
   return (
     <div id='page-wrapper'>
       <SideNav />
-      <Header />
+      <AdminHeader />
+      <AdminBottomNavigation />
       <main>
         <div className='dashboard-first-card-boards  mt-2'>
           <div>
@@ -90,7 +93,7 @@ const TicketReport = ({ switchs }: any) => {
           entriesPerPage={entriesPerPage}
           setEntriesPerPage={setEntriesPerPage}
           filter={true}
-          // setStartDates={setStartDates}
+          setStartDates={setStartDates}
           setEndDates={setEndDates}
           setShow={setShow}
           show={show}
@@ -136,10 +139,10 @@ const TicketReport = ({ switchs }: any) => {
                       <tr key={i}>
                         <td data-title='Reference'>
                           {user?.ticketType === "INCIDENT"
-                            ? "INC - " + user?.id
+                            ? "INC"
                             : user?.ticketType === "SERVICE"
-                              ? "SRV - " + user?.id
-                              : "CHG - " + user?.id}
+                              ? "SRV"
+                              : "CHG"}
                         </td>
                         <td data-title='affected Users'>
                           {!user?.affectedUsers ? (

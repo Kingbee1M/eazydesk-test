@@ -10,6 +10,8 @@ import { getCompany } from '../../../features/Company/companySlice';
 import DeleteCompanyModal from './DeleteCompanyModal';
 import EditCompany from './EditCompany';
 import SuperSideNav from '../../../components/SideNav/SuperSideNav';
+import BottomNavigation from '../../../components/BottomNavigation';
+import SuperHeader from '../../../components/Headers/SuperHeader';
 
 
 
@@ -44,7 +46,8 @@ const SuperCompany = () => {
 	return (
 		<div id="page-wrapper">
 			<SuperSideNav />
-			<Header />
+			<BottomNavigation />
+			<SuperHeader />
 			<main >
 				<div className='dashboard-first-card-boards mb-2 mt-2'>
 					<div>

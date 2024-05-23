@@ -6,13 +6,15 @@ import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import { admingetTicket } from '../../../features/Ticket/ticketSlice'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 import SuperSideNav from '../../../components/SideNav/SuperSideNav'
+import TicketHeader from '../../../components/TicketHeaders/TicketHeader'
+import SuperHeader from '../../../components/Headers/SuperHeader'
 
 const SuperChangeRequest = () => {
 	const dispatch = useAppDispatch();
 	const { giveApprovalisSuccess } = useAppSelector((state: any) => state.ticket);
 	const { admingetticketdata, admingetticketisLoading } = useAppSelector((state: any) => state.ticket)
 	const [entriesPerPage, setEntriesPerPage] = useState(() => { return "6" });
-	// const [setStartDates] = useState([]);
+	const [startDates, setStartDates] = useState([]);
 	let [endDates, setEndDates] = useState<any>([]);
 	const [show, setShow] = useState(false);
 	const [searchItem, setSearchItem] = useState("");
@@ -66,13 +68,12 @@ const SuperChangeRequest = () => {
 	return (
 		<div id="page-wrapper">
 			<SuperSideNav />
-			<Header />
+			<SuperHeader />
 			<BottomNavigation />
 			<main>
 				<div className='dashboard-first-card-boards '>
-					<div>
-						<h5 className='dashboard-first-card-h'>Change Request</h5>
-					</div>
+					{/* Ticket Links */}
+					<TicketHeader text={"Change Request"} />
 				</div>
 				<SearchConponent
 					placeholder={"search ticket"}
@@ -82,7 +83,7 @@ const SuperChangeRequest = () => {
 					entriesPerPage={entriesPerPage}
 					setEntriesPerPage={setEntriesPerPage}
 					filter={true}
-					// setStartDates={setStartDates}
+					setStartDates={setStartDates}
 					setEndDates={setEndDates}
 					setShow={setShow}
 					show={show}
@@ -90,17 +91,16 @@ const SuperChangeRequest = () => {
 				// handleCustomFilters={handleCustomFilters}
 				/>
 
-				<div className='mt-4'>
-					<TicketTableComponent
-						TYPE={true}
-						pagination={admingetticketdata}
-						data={admingetticketdata?.tickets}
-						isLoading={admingetticketisLoading}
-						handlePagination={handlePagination}
-						colSpan={9}
-						assignto={true}
-					/>
-				</div>
+
+				<TicketTableComponent
+					TYPE={true}
+					pagination={admingetticketdata}
+					data={admingetticketdata?.tickets}
+					isLoading={admingetticketisLoading}
+					handlePagination={handlePagination}
+					colSpan={9}
+					assignto={true}
+				/>
 			</main>
 		</div>
 	)

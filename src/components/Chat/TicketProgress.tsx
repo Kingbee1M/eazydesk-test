@@ -13,15 +13,7 @@ import NotificationPopUp from "../Scoket/NotificationPopUp";
 import { getUserPrivileges } from "../../hooks/auth";
 
 const TicketProgress = () => {
-	const {
-		// isSuperAdmin,
-		// isAdmin,
-		// isSupervisor,
-		// isITSupport,
-		isTeamLead,
-
-	} = getUserPrivileges();
-
+	const { isTeamLead } = getUserPrivileges();
 	const { id }: any = useParams();
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
@@ -37,10 +29,6 @@ const TicketProgress = () => {
 		comment: "",
 		images: [],
 	});
-
-
-
-
 
 
 
@@ -85,8 +73,6 @@ const TicketProgress = () => {
 	};
 
 
-
-
 	return (
 		<div>
 			<NotificationPopUp setRefresh={setRefresh} />
@@ -115,7 +101,6 @@ const TicketProgress = () => {
 			<main className="container">
 				<div className="tp-main-grid">
 					<div className="tp-activity-section">
-						{/* <h5 className="page-title">STATUS</h5> */}
 						<div className="tp-status-area">
 							{[viewdata]?.map((item: any, i: any) => (
 								<p key={i}>
@@ -156,11 +141,12 @@ const TicketProgress = () => {
 							<div className="tp-shared-with">
 								<div className="affectedUsers_chat">
 									<h4>Created By:</h4>
-									<p> 	{viewdata?.createdBy?.firstname} {viewdata?.createdBy?.lastname} </p>
+									<p>{viewdata?.createdBy?.firstname} {viewdata?.createdBy?.lastname} </p>
 								</div>
 								<div className="affectedUsers_chat">
 									<h4>Assigned to:</h4>
-									<p> 	{viewdata?.assignedUser?.assignedTo?.firstname} {viewdata?.assignedUser?.assignedTo?.lastname} </p>
+									<p>{viewdata?.assignedUser?.assignedTo?.firstname}
+										{viewdata?.assignedUser?.assignedTo?.lastname} </p>
 								</div>
 								<div className="affectedUsers_chat">
 									<h4>Ticke Type:</h4>
@@ -212,8 +198,11 @@ const TicketProgress = () => {
 												<option value="COMPLETED">Resolved</option>
 											)}
 										</select>
-										<button type="submit" id="custom-btn" disabled={false} onClick={handleUpdateTicketStatus}>
-											{updateTicketisLoading || updateLeadTicketisLoading ? <SVGLoader width={"35px"} height={"35px"} color={"#fff"} /> : "Update"}
+										<button type="submit" id="custom-btn" disabled={false}
+											onClick={handleUpdateTicketStatus}>
+											{updateTicketisLoading || updateLeadTicketisLoading ?
+												<SVGLoader width={"35px"} height={"35px"} color={"#fff"} /> :
+												"Update"}
 										</button>
 									</form>
 								)}

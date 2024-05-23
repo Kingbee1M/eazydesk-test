@@ -14,6 +14,7 @@ import RealPagination from '../../../components/RealPagination';
 import Search from '../../../components/Search';
 import SearchConponent from '../../../components/SearchConponent';
 import moment from 'moment';
+import SuperHeader from '../../../components/Headers/SuperHeader';
 
 
 
@@ -120,7 +121,7 @@ const SuperRegister = ({ switchs }: any) => {
 		<div id="page-wrapper">
 			<ToastContainer position="top-right" containerId={"custom111221"} />
 			<SuperSideNav />
-			<Header />
+			<SuperHeader />
 			<BottomNavigation />
 			<main >
 				<div className='dashboard-first-card-boards mb-2 mt-2'>

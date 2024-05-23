@@ -9,6 +9,9 @@ import moment from 'moment'
 import { admingetTicket } from '../../../features/Ticket/ticketSlice'
 
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
+import AdminHeader from '../../../components/Headers/AdminHeader'
+import AdminBottomNavigation from '../../../components/BottomNavigation/AdminBottomNavigation'
+import AdminTicketHeader from '../../../components/TicketHeaders/AdminTicketHeader'
 
 const ServiceRequest = () => {
 	const dispatch = useAppDispatch();
@@ -55,14 +58,12 @@ const ServiceRequest = () => {
 	return (
 		<div id="page-wrapper">
 			<SideNav />
-			<Header />
-			<BottomNavigation />
+			<AdminHeader />
+			<AdminBottomNavigation />
 			<main>
 				<div className='dashboard-first-card-boards '>
-					<div>
-						<h5 className='dashboard-first-card-h'>Incident Request</h5>
-						{/* <p className='dashboard-first-card-p'>15 incident request ticket</p> */}
-					</div>
+					<AdminTicketHeader text="Service Request" />
+
 				</div>
 				<SearchConponent
 					placeholder={"search ticket"}

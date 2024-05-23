@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import { IoCalendarOutline } from "react-icons/io5";
-import Badge from './Badge/Badge';
-import { pageTitles } from './StateData';
-import NetworkConnetion from './NetworkConnetion';
-import Notification from './Notification/Notification';
-import HeaderDate from './HeaderDate';
-import NotificationPopUp from './Scoket/NotificationPopUp';
 import { HiUserCircle } from "react-icons/hi2";
-import AdminProfileDropDown from './Headers/AdminProfileDropDown';
+import { pageTitles } from '../StateData';
+import HeaderDate from '../HeaderDate';
+import NotificationPopUp from '../Scoket/NotificationPopUp';
+import NetworkConnetion from '../NetworkConnetion';
+import Badge from '../Badge/Badge';
+import Notification from '../Notification/Notification';
+import AdminProfileDropDown from './AdminProfileDropDown';
 
 
-const Header = () => {
+const AdminHeader = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [profile, setProfile] = useState(false)
   // @ts-ignore  
@@ -40,7 +40,7 @@ const Header = () => {
           <Badge setIsDrawerOpen={setIsDrawerOpen} isDrawerOpen={isDrawerOpen} />
           <div className='profiledropdown_container'>
             <div>
-              <h5 className='profiledropdown_container_h5'>	{userInfo?.firstname}</h5>
+              <h5 className='profiledropdown_container_h5'>{userInfo?.firstname}</h5>
               <p className='profiledropdown_container_p'>{userInfo?.role}</p>
             </div>
             <span className='FaPlus-name' onMouseEnter={() => setProfile(true)} onMouseLeave={() => setProfile(false)}>
@@ -55,7 +55,7 @@ const Header = () => {
   )
 }
 
-export default Header;
+export default AdminHeader;
 
 
 

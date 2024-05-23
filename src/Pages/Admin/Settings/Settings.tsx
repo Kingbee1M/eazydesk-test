@@ -8,6 +8,8 @@ import BillingandTax from './SettingsGeneral/BillingandTax';
 import LinkedShops from './SettingsGeneral/LinkedShops';
 import Plans from './SettingsGeneral/Plans';
 import Security from './SettingsGeneral/Security';
+import AdminHeader from '../../../components/Headers/AdminHeader';
+import AdminBottomNavigation from '../../../components/BottomNavigation/AdminBottomNavigation';
 
 const Settings = () => {
 	const [activeIndex, setActiveIndex] = useState<any>(0);
@@ -17,8 +19,8 @@ const Settings = () => {
 	return (
 		<div id="page-wrapper">
 			<SideNav />
-			<Header />
-			<BottomNavigation />
+			<AdminHeader />
+			<AdminBottomNavigation />
 			<main>
 				<div className='settings_container_title'>
 					<div>

@@ -14,10 +14,6 @@ const Notification = ({ isOpen, onClose }: any) => {
 	const { itdata, itisLoading } = useAppSelector((state: any) => state.ticket)
 	const { itassignisSuccess } = useAppSelector((state: any) => state.ticket);
 
-
-
-
-
 	useEffect(() => {
 		const datas = ""
 		// @ts-ignore
@@ -27,10 +23,6 @@ const Notification = ({ isOpen, onClose }: any) => {
 			dispatch(getItTicket(datas))
 		}
 	}, [dispatch, itassignisSuccess])
-
-
-
-
 
 
 
@@ -76,13 +68,14 @@ const Notification = ({ isOpen, onClose }: any) => {
 				<div>
 					<div className="side-wrapper">
 						<div className='dashboard_stack_right_container_main'>
-							<div className='stack_right_container_sub'>
-								<div>Reference</div>
-								<div>Ticket Type</div>
-								<div>Severity</div>
-								<div>Time Stamp</div>
-								<div>Ticket Status</div>
-							</div>
+							{itdata?.tickets?.length === undefined ? "" :
+								<div className='stack_right_container_sub'>
+									<div>Reference</div>
+									<div>Ticket Type</div>
+									<div>Severity</div>
+									<div>Time Stamp</div>
+									<div>Status</div>
+								</div>}
 							<div className="inner_border_two_container">
 								{itisLoading ? (
 									<div className='Doughnutcontainer'>

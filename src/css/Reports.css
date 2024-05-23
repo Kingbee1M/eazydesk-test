@@ -1,5 +1,6 @@
  .table-container{
  overflow: auto !important; 
+ margin-top: 2rem;
 }
 
 #reports .nav-tabs {
@@ -162,4 +163,18 @@ padding-left: 0px !important;
 
   }
 
+
+  @media screen and (max-width: 768px) {
+#reports .search-area {
+  background-color: var(--white) !important;
+  padding: 1.5rem 1.5rem !important;
+  margin-top: 1rem !important;
+  box-shadow: 0 0 4px rgba(0, 0, 0, .05) !important;
+  border: 1px solid #d8d8d8 !important;  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+  }
    

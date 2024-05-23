@@ -175,7 +175,7 @@ table th {
  }  
 
 
- .hero-section1 {
+ /* .hero-section1 {
   background: linear-gradient(
       rgba(0, 0, 0, 0.455) 100%,
       rgba(0, 0, 0, 0.455) 100%
@@ -214,7 +214,7 @@ table th {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-}
+} */
 
 .hero-search {
   display: flex;

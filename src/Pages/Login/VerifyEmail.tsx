@@ -103,53 +103,48 @@ const VerifyEmail = () => {
 				<div className="login-content-layout">
 					{/* Login Header */}
 					<LoginHeader />
-					<div className="login-content-grid">
-						<div className="logo-section">
-							<div className="copyright_login_container">
-								<div className="login-form-container">
-									<p>
-										{isLoading ? "Verifying..." : isSuccess ? "Verified!" : isError ? "Verification Failed!" : "Verify Email!"}
-									</p>
+					<div className="login-form-container_main">
+						<div className="login-form-container">
+							<p>
+								{isLoading ? "Verifying..." : isSuccess ? "Verified!" : isError ? "Verification Failed!" : "Verify Email!"}
+							</p>
 
-									{isLoading || isSuccess || isError ? <VerifyLoader spinning={spinning} setSpinning={setSpinning} setState={setState} svgPaths={svgPaths} state={state} /> :
-										<form className="form" onSubmit={handleResetEmail} >
-											<div className="form-ctrl">
-												<label>User ID</label>
-												<input
-													disabled
-													type="text"
-													placeholder="user ID"
-													value={input.userId}
-												/>
-											</div>
-											<div className="form-ctrl">
-												<label>Token</label>
-												<input
-													disabled
-													type="text"
-													placeholder="token"
-													value={input.token}
-												/>
-											</div>
-											<button
-												type="submit"
-												disabled={isLoading}
-											>
-												{isLoading ? <Spinner size="sm" /> : "Verify"}
-											</button>
-										</form>
-									}
-									{isError && <button type="submit" onClick={handleReset}>
-										Try Again
-									</button>}
-									{isSuccess && <button type="submit" onClick={() => navigate("/")}>
-										Login
-									</button>}
-								</div>
-								<Copyright />
-							</div>
+							{isLoading || isSuccess || isError ? <VerifyLoader spinning={spinning} setSpinning={setSpinning} setState={setState} svgPaths={svgPaths} state={state} /> :
+								<form className="form" onSubmit={handleResetEmail} >
+									<div className="form-ctrl">
+										<label>User ID</label>
+										<input
+											disabled
+											type="text"
+											placeholder="user ID"
+											value={input.userId}
+										/>
+									</div>
+									<div className="form-ctrl">
+										<label>Token</label>
+										<input
+											disabled
+											type="text"
+											placeholder="token"
+											value={input.token}
+										/>
+									</div>
+									<button
+										type="submit"
+										disabled={isLoading}
+									>
+										{isLoading ? <Spinner size="sm" /> : "Verify"}
+									</button>
+								</form>
+							}
+							{isError && <button type="submit" onClick={handleReset}>
+								Try Again
+							</button>}
+							{isSuccess && <button type="submit" onClick={() => navigate("/")}>
+								Login
+							</button>}
 						</div>
-
+						<Copyright />
 					</div>
 				</div>
 			</div>

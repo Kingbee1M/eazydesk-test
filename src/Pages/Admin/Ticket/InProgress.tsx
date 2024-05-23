@@ -8,6 +8,9 @@ import { useAppDispatch, useAppSelector } from "../../../store/useStore";
 import moment from "moment";
 import { admingetTicket } from "../../../features/Ticket/ticketSlice";
 import TicketTableComponent from "../../../components/Table/TicketTableComponent";
+import AdminHeader from "../../../components/Headers/AdminHeader";
+import AdminBottomNavigation from "../../../components/BottomNavigation/AdminBottomNavigation";
+import AdminTicketHeader from "../../../components/TicketHeaders/AdminTicketHeader";
 
 const InProgress = () => {
   const dispatch = useAppDispatch();
@@ -38,13 +41,11 @@ const InProgress = () => {
   return (
     <div id='page-wrapper'>
       <SideNav />
-      <Header />
-      <BottomNavigation />
+      <AdminHeader />
+      <AdminBottomNavigation />
       <main>
-        <div className='dashboard-first-card-boards  mt-2'>
-          <div>
-            <h5 className='dashboard-first-card-h'>Ticket Progress</h5>
-          </div>
+        <div className='dashboard-first-card-boards'>
+          <AdminTicketHeader text="Ticket Progress" />
         </div>
         <SearchConponent
           placeholder={"search ticket report"}
@@ -58,7 +59,7 @@ const InProgress = () => {
           setEndDates={setEndDates}
           setShow={setShow}
           show={show}
-          // handleCustomFilters={handleCustomFilters}
+        // handleCustomFilters={handleCustomFilters}
         />
 
         <div className='mt-4'>

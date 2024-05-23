@@ -7,6 +7,8 @@ import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import moment from 'moment'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 import SuperSideNav from '../../../components/SideNav/SuperSideNav'
+import TicketHeader from '../../../components/TicketHeaders/TicketHeader'
+import SuperHeader from '../../../components/Headers/SuperHeader'
 
 
 
@@ -74,13 +76,13 @@ const SuperIncidentRequest = () => {
 	return (
 		<div id="page-wrapper">
 			<SuperSideNav />
-			<Header />
+			<SuperHeader />
 			<BottomNavigation />
 			<main>
 				<div className='dashboard-first-card-boards '>
-					<div>
-						<h5 className='dashboard-first-card-h'>Incident Request</h5>
-					</div>
+					{/* Ticket Links */}
+					<TicketHeader text={"Incident Request"} />
+
 				</div>
 				<SearchConponent
 					placeholder={"search ticket"}

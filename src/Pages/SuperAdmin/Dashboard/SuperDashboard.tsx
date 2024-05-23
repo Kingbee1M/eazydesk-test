@@ -13,6 +13,7 @@ import { SetStateAction, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/useStore';
 import { superAdminDashboard } from '../../../features/Ticket/ticketSlice';
 import SuperSideNav from '../../../components/SideNav/SuperSideNav';
+import SuperHeader from '../../../components/Headers/SuperHeader';
 
 
 const SuperDashboard = () => {
@@ -76,7 +77,7 @@ const SuperDashboard = () => {
 	return (
 		<div id="page-wrapper">
 			<SuperSideNav />
-			<Header />
+			<SuperHeader />
 			<BottomNavigation />
 			<main>
 				<div className='dashboard_container_grid'>

@@ -10,6 +10,8 @@ import { useAppDispatch, useAppSelector } from '../../../store/useStore';
 import { getCompany } from '../../../features/Company/companySlice';
 import DeleteCompanyModal from './DeleteCompanyModal';
 import EditCompany from './EditCompany';
+import AdminHeader from '../../../components/Headers/AdminHeader';
+import AdminBottomNavigation from '../../../components/BottomNavigation/AdminBottomNavigation';
 
 
 
@@ -44,7 +46,8 @@ const Company = () => {
 	return (
 		<div id="page-wrapper">
 			<SideNav />
-			<Header />
+			<AdminHeader />
+			<AdminBottomNavigation />
 			<main >
 				<div className='dashboard-first-card-boards mb-2 mt-2'>
 					<div>

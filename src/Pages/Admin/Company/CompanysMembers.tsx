@@ -9,6 +9,8 @@ import { viewCompany } from '../../../features/Company/companySlice';
 import { NoRecordFound, TableFetch } from '../../../components/Options';
 import Pagination from '../../../components/Pagination';
 import { ToastContainer } from 'react-toastify';
+import AdminBottomNavigation from '../../../components/BottomNavigation/AdminBottomNavigation';
+import AdminHeader from '../../../components/Headers/AdminHeader';
 
 
 
@@ -38,8 +40,9 @@ const CompanysMembers = () => {
 	return (
 		<div id="page-wrapper">
 			<SideNav />
-			<Header />
+			<AdminHeader />
 			<ToastContainer />
+			<AdminBottomNavigation />
 			<main >
 				<div className='dashboard-first-card-boards mb-2 mt-2'>
 					<div>

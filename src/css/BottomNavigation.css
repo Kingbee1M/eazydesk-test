@@ -23,8 +23,8 @@
   flex-direction: column;
   align-items: center;
   margin: 10px;
-  color: #6F47EB;
-  border-top:1px solid #6F47EB;
+  color: var(--accent-blue);
+  border-top:1px solid var(--accent-blue);
   cursor: pointer;
   transition: 500ms ease;
   padding-top: 0.5rem;
@@ -32,7 +32,7 @@
 
  
 .footerOption-top .active {
-  border-top: 1px solid #6F47EB; 
+  border-top: 1px solid var(--accent-blue); 
 }
 
 .footerOption:hover {
@@ -48,7 +48,7 @@
   font-size: 8px !important;
   font-weight: 300;
   text-align: center;
-  color:#6F47EB;
+  color:var(--accent-blue);
 }
 .footerOption_icon {
   object-fit: contain;
@@ -57,13 +57,13 @@
 }
 
 .nav-link .active {
-  border-bottom: 2px solid #6F47EB !important;
+  border-bottom: 2px solid var(--accent-blue) !important;
 }
 
 
 .nav-link .active svg,
 .nav-link nav a.active span {
-  color:#6F47EB !important;
+  color:var(--accent-blue) !important;
 }
 
 
@@ -119,8 +119,8 @@
   flex-direction: column;
   align-items: center;
   margin: 10px;
-  color: #6F47EB;
-  border-top:1px solid #6F47EB;
+  color: var(--accent-blue);
+  border-top:1px solid var(--accent-blue);
   cursor: pointer;
   transition: 500ms ease;
   padding-top: 0.5rem;
@@ -129,7 +129,7 @@
 
 /* icon button */
 .footerOption-top .active {
-  border-top: 1px solid #6F47EB;
+  border-top: 1px solid var(--accent-blue);
     background-color: #fff !important;
 }
 
@@ -146,7 +146,7 @@
   font-size: 8px !important;
   font-weight: 300;
   text-align: center;
-  color: #6F47EB;
+  color: var(--accent-blue);
     background-color: #fff !important;
 }
 .footerOption_icon {
@@ -157,17 +157,17 @@
 }
 
 /* .nav-link   {
-  color: #6F47EB !important;
+  color: var(--accent-blue) !important;
 } */
 
 .footer .nav-link .active {
-  border-bottom: 2px solid #6F47EB !important;
+  border-bottom: 2px solid var(--accent-blue) !important;
    background-color: #fff !important;
 }
 
 .footer .nav-link .active svg,
 .nav-link nav a.active span {
-  color: #6F47EB !important;
+  color: var(--accent-blue) !important;
    background-color: #fff !important;
 }
 

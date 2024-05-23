@@ -102,6 +102,9 @@ gap: 20px;
 }
  .entries-perpage {
   color: #5c5c5c; 
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 .entries-perpage select {
   color: #5c5c5c; 

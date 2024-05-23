@@ -15,8 +15,6 @@ const RegisterModal = () => {
 	// @ts-ignore  
 	const userInfo = JSON.parse(localStorage.getItem("service_desk"));
 
-
-
 	const [show, setShow] = useState(false);
 	const dispatch = useAppDispatch();
 	const { isError, message, isLoading, isSuccess } = useAppSelector(
@@ -59,9 +57,8 @@ const RegisterModal = () => {
 				companyId: ""
 			})
 		}
-		// setTimeout(() => {
+
 		dispatch(reset())
-		// }, 5000);
 	}, [isError, message, dispatch, isSuccess])
 
 

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import BottomNavigation from "../../../components/BottomNavigation";
-import Header from "../../../components/Header";
 import SideNav from "../../../components/SideNav/SideNav";
 import SearchConponent from "../../../components/SearchConponent";
 import { useAppDispatch, useAppSelector } from "../../../store/useStore";
 import { admingetTicket } from "../../../features/Ticket/ticketSlice";
 import TicketTableComponent from "../../../components/Table/TicketTableComponent";
+import AdminBottomNavigation from "../../../components/BottomNavigation/AdminBottomNavigation";
+import AdminHeader from "../../../components/Headers/AdminHeader";
+import AdminTicketHeader from "../../../components/TicketHeaders/AdminTicketHeader";
 
 const ChangeRequest = () => {
   const dispatch = useAppDispatch();
@@ -74,13 +75,11 @@ const ChangeRequest = () => {
   return (
     <div id='page-wrapper'>
       <SideNav />
-      <Header />
-      <BottomNavigation />
+      <AdminHeader />
+      <AdminBottomNavigation />
       <main>
         <div className='dashboard-first-card-boards '>
-          <div>
-            <h5 className='dashboard-first-card-h'>Incident Request</h5>
-          </div>
+          <AdminTicketHeader text="Change Request<" />
         </div>
         <SearchConponent
           placeholder={"search ticket"}
@@ -96,7 +95,7 @@ const ChangeRequest = () => {
           setShow={setShow}
           show={show}
           handlePagination={handlePagination}
-          // handleCustomFilters={handleCustomFilters}
+        // handleCustomFilters={handleCustomFilters}
         />
 
         <div className='mt-4'>

@@ -1,20 +1,19 @@
-import { BiHelpCircle } from "react-icons/bi";
 import { MdLogout } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { SVGLoader } from "./SVGLoader";
+import { SVGLoader } from "../SVGLoader";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
-import { customId } from "./Options";
-import { logout, reset } from "../features/Auth/authSlice";
-import { useAppDispatch, useAppSelector } from "../store/useStore";
-import { logoutUserAction } from "../features/Auth/authService";
+import { customId } from "../Options";
+import { logout, reset } from "../../features/Auth/authSlice";
+import { useAppDispatch, useAppSelector } from "../../store/useStore";
+import { logoutUserAction } from "../../features/Auth/authService";
 import axios from "axios";
-import DataService from "../features/Auth/dataService";
-import { baseUrl } from "../shared/baseUrl";
 import { io } from "socket.io-client";
+import DataService from "../../features/Auth/dataService";
+import { baseUrl } from "../../shared/baseUrl";
 
 
-const ProfileDropDown = () => {
+const AdminProfileDropDown = () => {
 	const socket = io(baseUrl);
 
 	const {
@@ -75,7 +74,7 @@ const ProfileDropDown = () => {
 
 	return (
 		<div className='notification-profile'>
-			<div className='notification-card' onClick={() => navigate("/itsettings")}>
+			<div className='notification-card' onClick={() => navigate("/settings")}>
 				<div className='notification-icon-profile'>
 					{userInfo?.firstname?.charAt(0)}
 				</div>
@@ -83,22 +82,8 @@ const ProfileDropDown = () => {
 					<p className='notification-text-profile'>My profile</p>
 				</div>
 			</div>
-			<div className='notification-card' onClick={() => navigate("/settings")}>
-				<div className='notification-icon-profile-sup'>
-					<BiHelpCircle size={25} />
-				</div>
-				<div>
-					<p className='notification-text-profile'>Help and Support</p>
-				</div>
-			</div>
-			{/* <div className='notification-card'>
-				<div className='notification-icon-profile-sup'>
-					<TiUserAddOutline size={25} />
-				</div>
-				<div>
-					<p className='notification-text-profile'>Invite Friends</p>
-				</div>
-			</div> */}
+
+
 			<div className='notification-card' onClick={handleLogout} >
 				<div className='notification-icon-profile-sup'>
 					<MdLogout size={25} />
@@ -113,4 +98,4 @@ const ProfileDropDown = () => {
 	)
 }
 
-export default ProfileDropDown
+export default AdminProfileDropDown

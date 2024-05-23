@@ -8,6 +8,7 @@ import LinkedShops from "./SettingsGeneral/LinkedShops";
 import Plans from "./SettingsGeneral/Plans";
 import Security from "./SettingsGeneral/Security";
 import SuperSideNav from "../../../components/SideNav/SuperSideNav";
+import SuperHeader from "../../../components/Headers/SuperHeader";
 
 const SuperSettings = () => {
   const [activeIndex, setActiveIndex] = useState<any>(0);
@@ -15,7 +16,7 @@ const SuperSettings = () => {
   return (
     <div id='page-wrapper'>
       <SuperSideNav />
-      <Header />
+      <SuperHeader />
       <BottomNavigation />
       <main>
         <div className='settings_container_title'>
