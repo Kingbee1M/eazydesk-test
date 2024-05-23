@@ -90,8 +90,9 @@
 }
 
 .accordion-body {
-  padding: 10px 20px !important;
-  white-space: wrap !important;
+  padding: 10px 20px !important; 
+    flex-wrap: wrap !important;
+    white-space: normal !important;
 }
 
 #accordion-body-form {
@@ -103,7 +104,7 @@
 }
  .accordion-button h4{
     flex-wrap: wrap !important;
-    white-space: wrap !important;
+    white-space: normal !important;
       padding-right: 1rem !important;
   }
 
@@ -128,7 +129,7 @@
 
 @media screen and (max-width: 768px) {
   .support-page-top h1 {
-    font-size: 30px;
+    font-size: 30px !important;
     font: bold;
 }
   
@@ -137,12 +138,12 @@
   }
   .accordion-button h4{
     flex-wrap: wrap !important;
-    white-space: wrap !important;
+    white-space: normal !important;
     font-size: 14px;
     padding-right: 1rem !important;
   }
 .support-page {
-    background-color: white;
+    background-color: var(--white);
     width: 100%;
     min-height: 100vh;
     text-align: center;
@@ -160,7 +161,7 @@
 }
 @media screen and (max-width: 400px) {
   .support-page-top h1 {
-    font-size: 30px;
+    font-size: 30px !important;
     font: bold;
 }
   
@@ -169,12 +170,12 @@
   }
   .accordion-button h4{
     flex-wrap: wrap !important;
-    white-space: wrap !important;
+    white-space: normal !important;
     font-size: 14px;
     padding-right: 1rem !important;
   }
 .support-page {
-    background-color: white;
+    background-color: var(--white);
     width: 100%;
     min-height: 100vh;
     text-align: center;

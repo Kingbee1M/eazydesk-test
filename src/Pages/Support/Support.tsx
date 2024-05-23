@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "../../css/Support.css";
-import { Accordion } from "react-bootstrap";
+import { Accordion, Card } from "react-bootstrap";
 
 const Support = () => {
   const [activeKey, setActiveKey] = useState<any>(null);
@@ -27,7 +27,7 @@ const Support = () => {
 
       <div className='support-page-accordion_container'>
         <div className='half-background'>
-          <Accordion activeKey={activeKey} onSelect={handleAccordionClick}>
+          <Accordion activeKey={activeKey} onSelect={handleAccordionClick} as={Card.Header} >
             <div>
               <Accordion.Item eventKey='0'>
                 <div id='accordion-body-form'>
