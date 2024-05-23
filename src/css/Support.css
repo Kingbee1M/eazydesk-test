@@ -157,3 +157,35 @@
 
  
 }
+@media screen and (max-width: 400px) {
+  .support-page-top h1 {
+    font-size: 30px;
+    font: bold;
+}
+  
+     .support-page_center{
+    width: 100%;
+  }
+  .accordion-button h4{
+    flex-wrap: wrap !important;
+    white-space: wrap !important;
+    font-size: 14px;
+    padding-right: 1rem !important;
+  }
+.support-page {
+    background-color: white;
+    width: 100%;
+    min-height: 100vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column; 
+    padding: 0px 10px; 
+}
+
+.half-background { 
+  width: 100%;   
+  font-size: 14px;
+}
+
+ 
+}
