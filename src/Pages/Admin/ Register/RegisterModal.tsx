@@ -122,8 +122,8 @@ const RegisterModal = () => {
 										onChange={(e) => handleOnChange("role", e.target.value)}
 									>
 										<option value="">Select Role</option>
-										<option value="ADMIN">Admin</option>
-										<option value="SUPERVISOR">Supervisor</option>
+										{/* <option value="ADMIN">Admin</option>
+										<option value="SUPERVISOR">Supervisor</option> */}
 										<option value="IT_SUPPORT">IT Support</option>
 										<option value="TEAM_LEAD">Team Lead</option>
 									</select>

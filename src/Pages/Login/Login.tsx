@@ -112,7 +112,7 @@ const Login = () => {
 							}) => (
 								<form className="form" onSubmit={handleSubmit} >
 									<div className="form-ctrl">
-										<label>Agent ID</label>
+										<label>Email</label>
 										<input
 											type="text"
 											placeholder="Enter your Agent ID"

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import LoginHeader from "../../components/LoginHeader";
 import Copyright from "../../components/Copyright";
 import Carousels from "../../components/Carousels";
@@ -78,55 +78,51 @@ const ForgotPassword = () => {
 				<ToastContainer position="top-right" />
 				<div className="login-content-layout">
 					<LoginHeader />
-					<div className="login-content-grid">
-						<div className="logo-section">
-							<div className="copyright_login_container">
-								<div className="login-form-container">
-									<p >Forgot Password!</p>
-									{forgetisLoading || forgetisSuccess || forgetisError ? <VerifyLoader spinning={spinning} setSpinning={setSpinning} setState={setState} svgPaths={svgPaths} state={state} /> :
-										<Formik
-											validationSchema={loginValidationSchema}
-											initialValues={{ email: '' }}
-											onSubmit={handleForgotEmail} >
-											{({ handleChange, handleSubmit, errors, values,
-											}) => (
+					<div className="login-form-container_main">
+						<div className="login-form-container">
+							<p >Forgot Password!</p>
+							{forgetisLoading || forgetisSuccess || forgetisError ? <VerifyLoader spinning={spinning} setSpinning={setSpinning} setState={setState} svgPaths={svgPaths} state={state} /> :
+								<Formik
+									validationSchema={loginValidationSchema}
+									initialValues={{ email: '' }}
+									onSubmit={handleForgotEmail} >
+									{({ handleChange, handleSubmit, errors, values,
+									}) => (
 
-												<form className="form" onSubmit={handleSubmit} >
-													<div className="form-ctrl">
-														<label>Enter email</label>
-														<input
-															type="text"
-															placeholder="Enter email address"
-															value={values.email}
-															onChange={handleChange('email')}
-														/>
-														{errors.email && <p className="formik-errors">{errors.email}</p>}
-													</div>
+										<form className="form" onSubmit={handleSubmit} >
+											<div className="form-ctrl">
+												<label>Enter email</label>
+												<input
+													type="text"
+													placeholder="Enter email address"
+													value={values.email}
+													onChange={handleChange('email')}
+												/>
+												{errors.email && <p className="formik-errors">{errors.email}</p>}
+											</div>
 
-													<button
-														type="submit"
-														disabled={forgetisLoading}
-													>
-														{forgetisLoading ? <Spinner size="sm" /> : "Enter"}
-													</button>
+											<button
+												type="submit"
+												disabled={forgetisLoading}
+											>
+												{forgetisLoading ? <Spinner size="sm" /> : "Enter"}
+											</button>
 
-												</form>
+										</form>
 
-											)}
-										</Formik>}
-									{forgetisSuccess && <button type="submit" onClick={() => navigate("/")}>
-										Login
-									</button>}
-									{forgetisError && <button type="submit" onClick={handleReset}>
-										Retry
-									</button>}
-								</div>
-								<Copyright />
-							</div>
+									)}
+								</Formik>}
+							{forgetisSuccess && <button type="submit" onClick={() => navigate("/")}>
+								Login
+							</button>}
+							{forgetisError && <button type="submit" onClick={handleReset}>
+								Retry
+							</button>}
 						</div>
-
+						<Copyright />
 					</div>
 				</div>
+
 			</div>
 		</div>
 	);
