@@ -37,7 +37,7 @@ const SearchConponent = ({ ID, handleCustomFilters, setEndDates, setStartDates, 
 					</div>}
 
 
-					{filter && <FilterModal handleCustomFilters={handleCustomFilters} setStartDates={setStartDates} setEndDates={setEndDates} setShow={setShow} show={show} />}
+					{filter && <FilterModal handleCustomFilters={handleCustomFilters} setStartDates={setStartDates} setEndDates={setEndDates} setShow={setShow} show={show} handlePagination={handlePagination} />}
 
 					<EntriesLimit
 						limit={limit}

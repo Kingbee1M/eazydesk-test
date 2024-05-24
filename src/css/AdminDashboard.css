@@ -329,18 +329,7 @@ align-items: center;
 	gap: 10px;
 }
 
-/* @media only screen and (max-width:1600px){
-	 
-.dashboard-bottom-item-container {
-	height: auto;
-}
-
-.TeamsPerformancechartsub1 ul {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-}
-  */
+ 
 
 
 @media only screen and (max-width:1600px){
@@ -412,7 +401,37 @@ align-items: center;
     grid-template-columns: 1fr; /* Adjust for small screens */
     gap: 12px; /* Adjust gap for small screens */
   }
+
+		.dash_statistics_sub2_text h3 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 28px;
+    letter-spacing: 0.01em;
+    color: var(--black);
 }
+.dash_statistics_sub1 h3 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 28px;
+    letter-spacing: 0.01em;
+    color: var(--black);
+}
+
+  .dash_statistics_sub2_text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+				overflow: auto !important;
+}
+
+.sta_color_container_main { 
+	display: none !important;
+}
+}
+ 
+ 
 
 
  

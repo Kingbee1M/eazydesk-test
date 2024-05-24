@@ -175,12 +175,12 @@ table th {
  }  
 
 
- /* .hero-section1 {
+ .hero-section1 {
   background: linear-gradient(
       rgba(0, 0, 0, 0.455) 100%,
       rgba(0, 0, 0, 0.455) 100%
     ),
-    url(./assets/img/bg6.jpeg);
+    url(./assets/img/bg4.jpeg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -210,11 +210,11 @@ table th {
       rgba(0, 0, 0, 0.455) 100%,
       rgba(0, 0, 0, 0.455) 100%
     ),
-    url(./assets/img/bg4.jpeg);
+    url(./assets/img/bg6.jpeg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-} */
+}
 
 .hero-search {
   display: flex;

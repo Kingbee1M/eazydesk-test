@@ -85,7 +85,8 @@ const ServiceRequest = () => {
 						TYPE={false}
 						isLoading={admingetticketisLoading}
 						data={admingetticketdata?.tickets}
-						colSpan={8} />
+						colSpan={8}
+						assignto={true} />
 				</div>
 			</main>
 		</div>

@@ -12,17 +12,21 @@ import logo from '../../assets/img/logo.svg'
 import { RiAlarmWarningLine } from "react-icons/ri";
 import { TbExchange } from "react-icons/tb";
 import { IoMdOpen } from "react-icons/io";
-import { useAppDispatch, useAppSelector } from "../../store/useStore";
-import { dashBoardInfo } from "../../features/Ticket/ticketSlice";
+
 
 
 const SideNav = () => {
-  const dispatch = useAppDispatch()
-  const { dashBoardInfodata } = useAppSelector((state: any) => state.ticket);
+  const [dashBoardInfodata, setDashboardData] = useState<any>(null);
 
+  // Load data from local storage on component mount
   useEffect(() => {
-    dispatch(dashBoardInfo())
-  }, [dispatch])
+    const storedData = localStorage.getItem('dashBoardInfo');
+    if (storedData) {
+      setDashboardData(JSON.parse(storedData));
+    }
+  }, []);
+
+
 
   const [dropdownOpen, setDropdownOpen] = useState(
     localStorage.getItem('dropdownOpen') === 'true'

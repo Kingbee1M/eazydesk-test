@@ -104,7 +104,6 @@ const ClosedTicket = () => {
 						data={admingetticketdata?.tickets}
 						isLoading={admingetticketisLoading}
 						colSpan={8}
-						assignto={true}
 					/>
 				</div>
 			</main>

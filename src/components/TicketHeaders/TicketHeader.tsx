@@ -1,10 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import logo from '../assets/img/logo.svg'
 import { HiMenuAlt3 } from "react-icons/hi";
-import { IoPricetag, IoHelpCircle, IoLogIn } from "react-icons/io5";
-import { FaBuilding } from "react-icons/fa6";
-import { IoIosLock, IoMdOpen } from "react-icons/io";
+import { IoMdOpen } from "react-icons/io";
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { PiCalendarCheckDuotone } from 'react-icons/pi';
 import { RiAlarmWarningLine } from 'react-icons/ri';
@@ -62,10 +59,7 @@ const TicketHeader = ({ text }: any) => {
 
 			<h5 className='dashboard-first-card-h'>{text}</h5>
 
-			{/* <div className="login-logo-container">
-				<img src={logo} alt='logo' crossOrigin="anonymous" className="logo-area-img" />
-				<h2>Eazy Desk</h2>
-			</div> */}
+
 
 			<div className='mobile_login_text_container' onClick={toggleDropdown}>
 				<HiMenuAlt3 />

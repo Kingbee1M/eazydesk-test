@@ -22,22 +22,22 @@ const AdminDashboard = () => {
   const dispatch = useAppDispatch();
   const { dashBoardInfodata } = useAppSelector((state: any) => state.ticket);
 
+
+
   useEffect(() => {
-    dispatch(dashBoardInfo());
-  }, [dispatch]);
+    dispatch(dashBoardInfo())
+    if (dashBoardInfodata) {
+      localStorage.setItem('dashBoardInfo', JSON.stringify(dashBoardInfodata));
+    }
+  }, [dispatch])
+
 
   const ticketTotal = dashBoardInfodata?.totalTickets;
-  // const changeRequest = dashBoardInfodata?.totals?.ticketType?.changeRequest;
-  // const incidentRequest =
-  //   dashBoardInfodata?.totals?.ticketType?.incidentRequest;
-  // const serviceRequest = dashBoardInfodata?.totals?.ticketType?.serviceRequest;
   const approved = dashBoardInfodata?.ticketType?.approved;
   const closed = dashBoardInfodata?.totals?.status?.closed;
   const completed = dashBoardInfodata?.totals?.status?.completed;
   const disapproved = dashBoardInfodata?.totals?.status?.dissaproved;
   const inprogress = dashBoardInfodata?.totals?.status?.inprogress;
-  // const invalid = dashBoardInfodata?.totals?.status?.invalid;
-  // const open = dashBoardInfodata?.totals?.status?.open;
   const pending = dashBoardInfodata?.totals?.status?.pending;
   const reopen = dashBoardInfodata?.totals?.status?.reopen;
 

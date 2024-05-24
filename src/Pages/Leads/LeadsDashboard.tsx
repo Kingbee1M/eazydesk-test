@@ -1,16 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { FaExchangeAlt } from "react-icons/fa";
-import { RiAlarmWarningFill } from "react-icons/ri";
-import { AiTwotoneSetting } from "react-icons/ai";
 import LeadsHeader from "../../components/LeadsHeader";
 import { GoDotFill } from "react-icons/go";
 import DoughnutChat from "../../components/DoughnutChat";
-import ThreeinOneBarChart from "../../components/ThreeinOneBarChart";
 import { getTicket } from "../../features/Ticket/ticketSlice";
 import { useAppDispatch, useAppSelector } from "../../store/useStore";
 import LeadsThreeinOneBarChart from "../../components/Charts/LeadsThreeinOneBarChart";
-import { getMonth } from "../../components/Options";
+
+import ServiceCards from "./ServiceCards";
 
 
 const LeadsDashboard = () => {
@@ -50,49 +46,8 @@ const LeadsDashboard = () => {
 		<div id="dashboard">
 			<div className="hero-section1">
 				<LeadsHeader />
-				<div className="service-cards container">
-					<div className="service-card">
-						<Link to="/incident-request">
-							<div className="card-top">
-								<div className="card-icon un">
-									<RiAlarmWarningFill size={25} />
-								</div>
-								<h4>
-									{incident?.length}
-								</h4>
-							</div>
-							<h5>Incident Request</h5>
-						</Link>
-					</div>
+				<ServiceCards incident={incident} service={service} change={change} />
 
-					<div className="service-card">
-						<Link to="/service-request">
-							<div className="card-top">
-								<div className="card-icon duo">
-									<AiTwotoneSetting size={25} />
-								</div>
-								<h4>
-									{service?.length}
-								</h4>
-							</div>
-							<h5>Service Request</h5>
-						</Link>
-					</div>
-
-					<div className="service-card">
-						<Link to="/change-request">
-							<div className="card-top">
-								<div className="card-icon trio">
-									<FaExchangeAlt size={25} />
-								</div>
-								<h4>
-									{change?.length}
-								</h4>
-							</div>
-							<h5>Change Request</h5>
-						</Link>
-					</div>
-				</div>
 			</div>
 			<main  >
 				<div className='dash_statistics_container'>
@@ -114,17 +69,18 @@ const LeadsDashboard = () => {
 							<div>
 								<h3>Ticket per month</h3>
 							</div>
+
 							<div className='sta_color_container_main'>
 								<div className='sta_color_container'>
-									<GoDotFill color='#883DCF' />
+									<GoDotFill color='#E5ECFB' />
 									<small>New</small>
 								</div>
 								<div className='sta_color_container'>
-									<GoDotFill color='#F2994A' />
+									<GoDotFill color='#0240bc90' />
 									<small>Inprogress</small>
 								</div>
 								<div className='sta_color_container'>
-									<GoDotFill color='#22CAAD' />
+									<GoDotFill color='#0240BC' />
 									<small>Completed</small>
 								</div>
 							</div>

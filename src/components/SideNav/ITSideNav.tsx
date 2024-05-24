@@ -10,20 +10,18 @@ import { TbExchange } from "react-icons/tb";
 import { IoMdOpen } from "react-icons/io";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { PiCalendarCheckDuotone } from "react-icons/pi";
-import { useAppDispatch, useAppSelector } from "../../store/useStore";
-import { getItTicket } from "../../features/Ticket/ticketSlice";
 
 
 const ITSideNav = () => {
-	const dispatch = useAppDispatch();
-	const { dashBoardInfodata } = useAppSelector((state: any) => state.ticket);
+	const [dashBoardInfodata, setDashboardData] = useState<any>(null);
 
-
+	// Load data from local storage on component mount
 	useEffect(() => {
-		const datas = ""
-		// @ts-ignore
-		dispatch(getItTicket(datas))
-	}, [dispatch])
+		const storedData = localStorage.getItem('dashBoardInfo');
+		if (storedData) {
+			setDashboardData(JSON.parse(storedData));
+		}
+	}, []);
 
 
 
@@ -100,7 +98,7 @@ const ITSideNav = () => {
 						}>
 							<div className="nav_dropdown_sub">
 								<IoMdOpen size={21} />
-								<span>In Progress </span>
+								<span>In Progress</span>
 							</div>
 							<div className="side_number">{!inprogress ? 0 : inprogress}</div>
 						</NavLink>

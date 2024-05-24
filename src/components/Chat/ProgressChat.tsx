@@ -2,10 +2,10 @@ import { useRef } from "react";
 import moment from "moment";
 import { FaRegUserCircle, FaCamera } from "react-icons/fa";
 import { baseUrl } from "../../shared/baseUrl";
-import { useAppDispatch } from "../../store/useStore";
+import { useAppDispatch, useAppSelector } from "../../store/useStore";
 import { createComment } from "../../features/Comment/commentSlice";
-// import { SVGLoader } from "../SVGLoader";
-// import { RiMailSendLine } from "react-icons/ri";
+import { SVGLoader } from "../SVGLoader";
+import { RiMailSendLine } from "react-icons/ri";
 import { ToastContainer } from "react-toastify";
 import { BsChatRightText } from "react-icons/bs";
 import Skelenton from "../Skelenton/Skelenton";
@@ -13,8 +13,8 @@ import Skelenton from "../Skelenton/Skelenton";
 const ProgressChat = ({ viewdata, id, input, setInputs }: any) => {
 
   const dispatch = useAppDispatch();
-  // const { data, isLoading, isSuccess, getTicketID } = useAppSelector((state: any) => state.comment)
-  // const { createdata, createisLoading, createisSuccess } = useAppSelector((state: any) => state.comment)
+  const { isLoading, isSuccess, getTicketID } = useAppSelector((state: any) => state.comment)
+  const { createdata, createisLoading, createisSuccess } = useAppSelector((state: any) => state.comment)
 
 
 
@@ -160,9 +160,9 @@ const ProgressChat = ({ viewdata, id, input, setInputs }: any) => {
               value={input?.comment}
               onChange={(e) => handleChangeInput("comment", e.target.value)}
             />
-            {/* <button type="submit" disabled={createisLoading}>
+            <button type="submit" disabled={createisLoading}>
               {createisLoading ? <SVGLoader width={"30px"} height={"30px"} color={"#fff"} /> : <RiMailSendLine size={20} color="#0240BC" />}
-            </button> */}
+            </button>
           </form>
           <div className="btn-area">
             <label className="img-pckr">

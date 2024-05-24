@@ -79,7 +79,7 @@ const ChangeRequest = () => {
       <AdminBottomNavigation />
       <main>
         <div className='dashboard-first-card-boards '>
-          <AdminTicketHeader text="Change Request<" />
+          <AdminTicketHeader text="Change Request" />
         </div>
         <SearchConponent
           placeholder={"search ticket"}
@@ -101,6 +101,7 @@ const ChangeRequest = () => {
         <div className='mt-4'>
           <TicketTableComponent
             TYPE={true}
+            assignto={true}
             pagination={admingetticketdata}
             data={admingetticketdata?.tickets}
             isLoading={admingetticketisLoading}

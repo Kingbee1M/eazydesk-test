@@ -1,7 +1,7 @@
 .support-page {
   background-color: var(--white);
   width: 100%;
-  min-height: 100vh;
+  min-height: 93vh;
   text-align: center;
   display: flex;
   flex-direction: column; 
@@ -35,6 +35,12 @@
   margin-top: 3rem;
   display: flex;
   justify-content: center;  
+}
+
+.half-background-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .support-page-accordion_container{
@@ -113,9 +119,8 @@
   }
 
  
-  @media screen and (max-width: 1080px) {
-
-     .support-page_center{
+  @media screen and (max-width: 1080px) { 
+  .support-page_center{
     width: 90%;
   }
 

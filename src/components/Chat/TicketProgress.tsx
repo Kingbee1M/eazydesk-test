@@ -18,7 +18,6 @@ const TicketProgress = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const form: any = useRef();
-	const [refresh, setRefresh] = useState(false);
 	const [ticket] = useState<any>({});
 	const [inputs, setinputs] = useState("")
 	const { viewdata } = useAppSelector((state: any) => state.ticket)
@@ -57,7 +56,7 @@ const TicketProgress = () => {
 		// @ts-ignore 
 		dispatch(reset())
 
-	}, [dispatch, id, createisSuccess, updateTicketisSuccess, refresh, updateLeadTicketisSuccess])
+	}, [dispatch, id, createisSuccess, updateTicketisSuccess, updateLeadTicketisSuccess])
 
 
 	const handleUpdateTicketStatus = (e: any) => {
@@ -75,7 +74,7 @@ const TicketProgress = () => {
 
 	return (
 		<div>
-			<NotificationPopUp setRefresh={setRefresh} />
+			<NotificationPopUp />
 			<ToastContainer position="top-right" containerId={"custom1"} />
 			<header className="ChatProgressView-header">
 				<div>

@@ -51,6 +51,25 @@ outline: none ;
 padding: 9px   20px;
 cursor: pointer; 
 }
+.btn_long{
+background-color: var(--accent-blue);
+border: 2px solid var(--accent-blue) !important;  
+color: var(--white) !important; 
+border-radius: 7.70833px !important;  
+font-style: normal !important;
+font-weight: 500 !important;
+font-size: 12px !important;
+line-height: 17px !important; 
+display: flex !important;
+justify-content: center !important;
+align-items: center;
+text-align: center !important; 
+white-space: nowrap; 
+border: none ;
+outline: none ;
+padding: 9px   20px;
+cursor: pointer;  
+}
 
  .swal2-confirm{
   background-color: var(--accent-blue);

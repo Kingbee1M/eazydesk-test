@@ -11,18 +11,22 @@ import TicketStatusCell from '../../Pages/Admin/Ticket/TicketStatusCell';
 const Notification = ({ isOpen, onClose }: any) => {
 	const dispatch = useAppDispatch();
 	const drawerclassNameName = `drawer-container ${isOpen ? 'drawer-open' : ''}`;
-	const { itdata, itisLoading } = useAppSelector((state: any) => state.ticket)
-	const { itassignisSuccess } = useAppSelector((state: any) => state.ticket);
+	const { itdata, itisLoading, itassignisSuccess } = useAppSelector((state: any) => state.ticket)
+
 
 	useEffect(() => {
 		const datas = ""
-		// @ts-ignore
-		dispatch(getItTicket(datas))
-		if (itassignisSuccess) {
+		if (isOpen) {
 			// @ts-ignore
 			dispatch(getItTicket(datas))
 		}
-	}, [dispatch, itassignisSuccess])
+		if (itassignisSuccess) {
+			if (isOpen) {
+				// @ts-ignore
+				dispatch(getItTicket(datas))
+			}
+		}
+	}, [dispatch, itassignisSuccess, isOpen])
 
 
 

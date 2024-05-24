@@ -54,13 +54,13 @@ const ITClosedTicket = () => {
 		}
 	}
 
-	useEffect(() => {
-		const datas = { status: "CLOSED" };
+	// useEffect(() => {
+	// 	const datas = { status: "CLOSED" };
 
-		// @ts-ignore 
-		dispatch(getItTicketParameter(datas))
+	// 	// @ts-ignore 
+	// 	dispatch(getItTicketParameter(datas))
 
-	}, [dispatch])
+	// }, [dispatch])
 
 	return (
 		<div id="page-wrapper">

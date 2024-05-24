@@ -64,7 +64,7 @@ const ITIncidentRequest = () => {
 		// @ts-ignore 
 		dispatch(getItTicketParameter(datas))
 
-	}, [dispatch, endDate1, limit])
+	}, [dispatch, limit])
 
 
 

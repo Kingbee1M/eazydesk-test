@@ -8,7 +8,7 @@ import ModalHeader from './Modals/ModalHeader';
 import { customStyles } from './Options';
 import { ticketstatus, tickettype } from './Data';
 
-const FilterModal = ({ setEndDates, setStartDates, handleCustomFilters, show, setShow }: any) => {
+const FilterModal = ({ setEndDates, setStartDates, handleCustomFilters, show, setShow, handlePagination }: any) => {
 
 	const handleClose = () => setShow(false);
 	const handleShow = (e: { preventDefault: () => void; }) => {

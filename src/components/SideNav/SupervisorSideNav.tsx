@@ -155,12 +155,7 @@ const SupervisorSideNav = () => {
 					<span>Settings</span>
 				</NavLink>
 			</nav>
-			{/* <nav>
-				<div className="nav-link" onClick={handleLogout}>
-					<FiLogOut size={22} />
-					<span>Log out</span>
-				</div>
-			</nav> */}
+
 		</div>
 	)
 }

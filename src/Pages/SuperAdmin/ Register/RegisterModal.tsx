@@ -14,11 +14,7 @@ import { getUserPrivileges } from '../../../hooks/auth';
 const RegisterModal = () => {
 	const {
 		isSuperAdmin,
-		isAdmin,
-		isSupervisor,
-		isITSupport,
-		isTeamLead,
-
+		isAdmin
 	} = getUserPrivileges();
 	// @ts-ignore  
 	const userInfo = JSON.parse(localStorage.getItem("service_desk"));

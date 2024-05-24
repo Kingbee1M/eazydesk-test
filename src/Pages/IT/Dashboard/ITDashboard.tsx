@@ -4,7 +4,7 @@ import dIcon3 from "../../../assets/DashboardIcons/Dicon3.svg"
 import dIcon4 from "../../../assets/DashboardIcons/Dicon4.svg"
 import ITSideNav from '../../../components/SideNav/ITSideNav';
 import { useAppDispatch, useAppSelector } from '../../../store/useStore';
-import { dashBoardInfo, getItTicket } from '../../../features/Ticket/ticketSlice'
+import { dashBoardInfo } from '../../../features/Ticket/ticketSlice'
 import { useEffect } from 'react';
 import ITHeader from '../../../components/Headers/ITHeader';
 import LeadsThreeinOneBarChart from '../../../components/Charts/LeadsThreeinOneBarChart';
@@ -15,18 +15,19 @@ import ITBottomNavigation from '../../../components/BottomNavigation/ITBottomNav
 
 const ITDashboard = () => {
 	const dispatch = useAppDispatch();
-	const { dashBoardInfodata } = useAppSelector((state: any) => state.ticket);
-	const { itassignisSuccess } = useAppSelector((state: any) => state.ticket);
+	const { dashBoardInfodata, itassignisSuccess } = useAppSelector((state: any) => state.ticket);
+
+
+
 
 	useEffect(() => {
-		const datas = ""
-		// @ts-ignore
-		dispatch(getItTicket(datas))
 		dispatch(dashBoardInfo())
+		if (dashBoardInfodata) {
+			localStorage.setItem('dashBoardInfo', JSON.stringify(dashBoardInfodata));
+		}
 		if (itassignisSuccess) {
-			// @ts-ignore
-			dispatch(getItTicket(datas))
 			dispatch(dashBoardInfo())
+			localStorage.setItem('dashBoardInfo', JSON.stringify(dashBoardInfodata));
 		}
 	}, [dispatch, itassignisSuccess])
 
@@ -141,15 +142,15 @@ const ITDashboard = () => {
 							</div>
 							<div className='sta_color_container_main'>
 								<div className='sta_color_container'>
-									<GoDotFill color='#883DCF' />
+									<GoDotFill color='#E5ECFB' />
 									<small>New</small>
 								</div>
 								<div className='sta_color_container'>
-									<GoDotFill color='#F2994A' />
+									<GoDotFill color='#0240bc90' />
 									<small>Inprogress</small>
 								</div>
 								<div className='sta_color_container'>
-									<GoDotFill color='#22CAAD' />
+									<GoDotFill color='#0240BC' />
 									<small>Completed</small>
 								</div>
 							</div>
