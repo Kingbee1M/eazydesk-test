@@ -1,5 +1,5 @@
  
-    //  export const baseUrl: any = "http://localhost:5000";
+      //export const baseUrl: any = "http://localhost:5000";
     export const baseUrl: any = "https://105.112.129.222"; 
  
 

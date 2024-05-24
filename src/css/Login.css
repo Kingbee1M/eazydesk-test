@@ -466,6 +466,7 @@ font-size: 22px;
     display: none;
   }
   .mobile_login_text_container{
+    border: .5px solid #ccc;
     display: block !important;
     width: 40px;
     height: 40px;
@@ -480,6 +481,20 @@ font-size: 22px;
 @media screen and (max-width: 400px) {
   .cp-text1 {
    display: none; 
+  }
+	}
+@media screen and (max-width: 1080px) {
+.mobile_login_text_container{
+    border: .5px solid #ccc;
+    display: block !important;
+    width: 40px;
+    height: 40px;
+    background-color: var(--white);
+    border-radius: 50%;
+    display: flex !important; 
+    justify-content: center !important; 
+    align-items: center !important; 
+    position: relative;
   }
 	}
 

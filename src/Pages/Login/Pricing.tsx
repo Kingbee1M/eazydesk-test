@@ -1,7 +1,6 @@
 import Carousels from '../../components/Carousels'
 import { ToastContainer } from 'react-toastify'
 import LoginHeader from '../../components/LoginHeader'
-import PricingCardsContainer from '../../components/PricingCardsContainer'
 
 const Pricing = () => {
 	return (
@@ -18,12 +17,12 @@ const Pricing = () => {
 								<div className='settings_main_after_login'>
 									<div>
 										<div className='settings_main_after_sup'>
-											<h3>Plans</h3>
-											<p>Lorem ipsum dolor sit amet consectetur</p>
+											{/* <h3>Plans</h3>
+											<p>Lorem ipsum dolor sit amet consectetur</p> */}
 										</div>
 										{/* */}
 										<section className="pricing-plans">
-											<div className="pricing-card basic">
+											{/* <div className="pricing-card basic">
 												<div className="heading">
 													<h4>BASIC</h4>
 													<p>for small websites or blogs</p>
@@ -67,7 +66,7 @@ const Pricing = () => {
 													</li>
 												</ul>
 												<button className="cta-btn">SELECT</button>
-											</div>
+											</div> */}
 											<div className="pricing-card standard">
 												<div className="heading">
 													<h4>STANDARD</h4>
@@ -113,7 +112,7 @@ const Pricing = () => {
 												</ul>
 												<button className="cta-btn">SELECT</button>
 											</div>
-											<div className="pricing-card premium">
+											{/* <div className="pricing-card premium">
 												<div className="heading">
 													<h4>PREMIUM</h4>
 													<p>for small businesses</p>
@@ -161,7 +160,7 @@ const Pricing = () => {
 													</li>
 												</ul>
 												<button className="cta-btn">SELECT</button>
-											</div>
+											</div> */}
 										</section>
 									</div>
 								</div>

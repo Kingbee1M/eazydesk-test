@@ -1,12 +1,8 @@
-import React, { useState } from "react";
-import Header from "../../../components/Header";
+import { useState } from "react";
 import BottomNavigation from "../../../components/BottomNavigation";
 import SettingsIcon from "./SettingsIcon";
 import GeneralInformation from "./SettingsGeneral/GeneralInformation";
-import BillingandTax from "./SettingsGeneral/BillingandTax";
-import LinkedShops from "./SettingsGeneral/LinkedShops";
 import Plans from "./SettingsGeneral/Plans";
-import Security from "./SettingsGeneral/Security";
 import SuperSideNav from "../../../components/SideNav/SuperSideNav";
 import SuperHeader from "../../../components/Headers/SuperHeader";
 
@@ -25,10 +21,9 @@ const SuperSettings = () => {
             <p>Manage your account settings</p>
           </div>
 
-          {/* <div className='settings_container_title_btn'>
-						<button className='btn'>Save change</button>
-						<button className='btn_outline'>Cancel</button>
-					</div> */}
+          <div className='settings_container_title_btn'>
+            <button className='btn'>Save change</button>
+          </div>
         </div>
 
         <div className='settings_container_main'>
@@ -40,10 +35,7 @@ const SuperSettings = () => {
 
           {/* General Information */}
           {activeIndex === 0 && <GeneralInformation />}
-          {activeIndex === 1 && <Security />}
-          {activeIndex === 2 && <BillingandTax />}
-          {activeIndex === 3 && <Plans />}
-          {/* {activeIndex === 4 && <LinkedShops />} */}
+          {activeIndex === 1 && <Plans />}
         </div>
       </main>
     </div>

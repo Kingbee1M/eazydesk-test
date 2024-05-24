@@ -12,6 +12,8 @@ import { customId } from "../Options";
 import NotificationPopUp from "../Scoket/NotificationPopUp";
 import { getUserPrivileges } from "../../hooks/auth";
 
+import StatusModal from "./StatusModal";
+
 const TicketProgress = () => {
 	const { isTeamLead } = getUserPrivileges();
 	const { id }: any = useParams();
@@ -96,6 +98,7 @@ const TicketProgress = () => {
 					</div>
 				</div>
 			</header>
+			<StatusModal viewdata={viewdata} id={id} isTeamLead={isTeamLead} />
 			<div id="tp-header"></div>
 			<main className="container">
 				<div className="tp-main-grid">
