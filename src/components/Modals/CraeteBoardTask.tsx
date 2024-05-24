@@ -12,10 +12,7 @@ const CraeteBoardTask = ({ showTask, setShowTask }: any) => {
 	return (
 		<>
 			<Modal show={showTask} onHide={handleClose} centered>
-				{/* <div className='modal-close'>
-					<h3>Create Board Task</h3>
-					<AiOutlineClose size={25} />
-				</div> */}
+
 				<ModalHeader setShowTask={setShowTask} headerTitle={"Create Board Task"} />
 				<Modal.Body>
 					<Form>
