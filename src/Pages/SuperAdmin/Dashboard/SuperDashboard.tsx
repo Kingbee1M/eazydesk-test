@@ -18,7 +18,7 @@ import SuperHeader from '../../../components/Headers/SuperHeader';
 
 const SuperDashboard = () => {
 	const dispatch = useAppDispatch()
-	const [activeIndex, setActiveIndex] = useState<any>('OUTCESS SOLUTION'); // Initially set the first item as active
+	const [activeIndex, setActiveIndex] = useState<any>('OUTCESS SOLUTIONS'); // Initially set the first item as active
 
 	const { superAdminDashboarddata, dashBoardInfodata } = useAppSelector((state: any) => state.ticket);
 
