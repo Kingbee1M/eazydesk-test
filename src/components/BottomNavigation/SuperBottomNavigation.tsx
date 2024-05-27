@@ -10,7 +10,7 @@ import { IoMdOpen } from 'react-icons/io';
 
 
 
-const BottomNavigation = () => {
+const SuperBottomNavigation = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
 
@@ -60,7 +60,7 @@ const BottomNavigation = () => {
           </NavLink>
           <h4 className="footerOption_title">Company</h4>
         </div>
-        {/* <div className={pathname === "/superregister" ? 'footerOption-active' : "footerOption"}>
+        <div className={pathname === "/superregister" ? 'footerOption-active' : "footerOption"}>
           <NavLink to="/superregister" className={({ isActive }) =>
             [
               "nav-link",
@@ -72,7 +72,7 @@ const BottomNavigation = () => {
             <BiHome size={25} className="footerOption_icon" />
           </NavLink>
           <h4 className="footerOption_title">Register</h4>
-        </div> */}
+        </div>
         <div className={pathname === "/supersubscription" ? 'footerOption-active' : "footerOption"}>
           <NavLink to="/supersubscription" className={({ isActive }) =>
             [
@@ -107,4 +107,4 @@ const BottomNavigation = () => {
   )
 }
 
-export default BottomNavigation
+export default SuperBottomNavigation

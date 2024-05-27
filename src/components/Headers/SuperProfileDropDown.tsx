@@ -83,15 +83,6 @@ const SuperProfileDropDown = () => {
 					<p className='notification-text-profile'>My profile</p>
 				</div>
 			</div>
-			<div className='notification-card' onClick={() => navigate("/supersettings")}>
-				<div className='notification-icon-profile-sup'>
-					<BiHelpCircle size={25} />
-				</div>
-				<div>
-					<p className='notification-text-profile'>Help and Support</p>
-				</div>
-			</div>
-
 			<div className='notification-card' onClick={handleLogout} >
 				<div className='notification-icon-profile-sup'>
 					<MdLogout size={25} />
