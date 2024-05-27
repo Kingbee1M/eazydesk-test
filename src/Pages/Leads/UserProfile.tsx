@@ -18,7 +18,7 @@ const UserProfile = ({ userInfo, userId, lgShow, setLgShow }: any) => {
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [activeTab, setActiveTab] = useState(0);
   const [result, setResult] = useState("Edit Profile");
-  const Edit = ["Edit Profile", "Reset Password", "Upload Image"];
+  const Edit = ["Edit Profile", "Reset Password"];
   const dispatch = useAppDispatch();
   const [errorToastMsg, setErrorToastMgs] = useState(false);
   const [previewImgLoading, setPreviewImgLoading] = useState<any>(false);
@@ -199,7 +199,7 @@ const UserProfile = ({ userInfo, userId, lgShow, setLgShow }: any) => {
 
               <div>
                 {result === "Edit Profile" && (
-                  <form action='' onSubmit={handleUpdateUser}>
+                  <form action='' onSubmit={handleUpdateUser} className="profile_container">
                     <h6 className='text-center'>Edit Personal Information</h6>
                     <div className='row'>
                       <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
@@ -225,20 +225,7 @@ const UserProfile = ({ userInfo, userId, lgShow, setLgShow }: any) => {
                         />
                       </div>
                     </div>
-                    {/* <div className='row'>
-                      <div className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-                        <input
-                          className='TextField-Outline'
-                          id='outlined-basic'
-                          placeholder='Location'
-                          readOnly
-                          value={input?.location}
-                          onChange={(e) =>
-                            handleOnChange("location", e.target.value)
-                          }
-                        />
-                      </div>
-                    </div> */}
+
                     <div className='row'>
                       <div className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
                         <input
@@ -280,7 +267,7 @@ const UserProfile = ({ userInfo, userId, lgShow, setLgShow }: any) => {
                     </div>
 
                     <button
-                      className='button-subnit ripple'
+                      className='btn_long'
                       type='submit'
                       value='Submit'
                       disabled={false && true}
@@ -290,7 +277,7 @@ const UserProfile = ({ userInfo, userId, lgShow, setLgShow }: any) => {
                   </form>
                 )}
                 {result === "Reset Password" && (
-                  <form onSubmit={passwordhandelSubmit}>
+                  <form onSubmit={passwordhandelSubmit} >
                     <h6 className='text-center'>Reset Password</h6>
                     <input
                       className='TextField-Outline'
@@ -323,7 +310,7 @@ const UserProfile = ({ userInfo, userId, lgShow, setLgShow }: any) => {
                     />
 
                     <button
-                      className='button-subnit ripple'
+                      className='btn_long'
                       type='submit'
                       value='Submit'
                       disabled={false}
@@ -332,58 +319,9 @@ const UserProfile = ({ userInfo, userId, lgShow, setLgShow }: any) => {
                     </button>
                   </form>
                 )}
-                {result === "Upload Image" && (
-                  <div>
-                    <form>
-                      <center>
-                        <h6 className='text-center'>
-                          {previewImgLoading
-                            ? "Loading Image Please Wait...."
-                            : "Upload Image"}
-                        </h6>
-                        <div className='avatar-upload'>
-                          <div className='avatar-edit'>
-                            <input
-                              type='file'
-                              id='imageUpload'
-                              accept='.png, .jpg, .jpeg'
-                              disabled={(false || previewImgLoading) && true}
-                            />
 
-                            {/* <label htmlFor='imageUpload'>
-                              <BsCamera className='image-BsCamera' />
-                            </label> */}
-                          </div>
-                          {/* <div className='avatar-preview'>
-                            <div id='imagePreview'>
-                              {imgLocalURL === null ? (
-                                <FaUserCircle className='AiOutlineUserAdd' />
-                              ) : (
-                                <img
-                                  src={imgLocalURL}
-                                  alt='Profile Pic'
-                                  className={
-                                    previewImgLoading && "dark-img-loading"
-                                  }
-                                />
-                              )}
-                            </div>
-                          </div> */}
-                        </div>
-                      </center>
 
-                      <button
-                        className='button-subnit ripple'
-                        type='submit'
-                        value='Submit'
-                        disabled={false && true}
-                      >
-                        {false ? "UPDATING..." : "UPDATE"}
-                      </button>
-                      <div />
-                    </form>
-                  </div>
-                )}
+
               </div>
             </div>
           </div>

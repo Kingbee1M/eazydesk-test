@@ -327,6 +327,13 @@ border-radius: 10px;
     z-index: 999;
 }
 @media screen and (max-width:1200px) {
+
+  .faplus-bell_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+     gap: 10px !important;  
+}
   #header {
   grid-area: header;
   background: var(--white);
@@ -416,3 +423,24 @@ color: var(--black);
 
 
 }
+
+	@media screen and (max-width: 768px) {
+.header_Search_container {
+  position: relative;
+   border: .5px solid  var(--border);
+   background-color: #F7F7F7;
+   padding: 0px 10px; 
+   width: 80%;
+}
+
+  }
+
+  @media screen and (max-width: 400px) {
+ .header_Search_container {
+  position: relative;
+   border: .5px solid  var(--border);
+   background-color: #F7F7F7;
+   padding: 0px 10px; 
+   width: 100% !important;
+}
+	}

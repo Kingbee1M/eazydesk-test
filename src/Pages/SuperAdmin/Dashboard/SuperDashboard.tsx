@@ -11,15 +11,16 @@ import { PiDotsSixVerticalBold } from 'react-icons/pi';
 import LinePerformanceChart from '../../../components/Charts/LinePerformanceChart';
 import { SetStateAction, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/useStore';
-import { superAdminDashboard } from '../../../features/Ticket/ticketSlice';
+import { dashBoardInfo, superAdminDashboard } from '../../../features/Ticket/ticketSlice';
 import SuperSideNav from '../../../components/SideNav/SuperSideNav';
+import SuperHeader from '../../../components/Headers/SuperHeader';
 
 
 const SuperDashboard = () => {
 	const dispatch = useAppDispatch()
-	const [activeIndex, setActiveIndex] = useState<any>('OUTCESS SOLUTION'); // Initially set the first item as active
+	const [activeIndex, setActiveIndex] = useState<any>('OUTCESS SOLUTIONS'); // Initially set the first item as active
 
-	const { superAdminDashboarddata } = useAppSelector((state: any) => state.ticket);
+	const { superAdminDashboarddata, dashBoardInfodata } = useAppSelector((state: any) => state.ticket);
 
 	const type = !superAdminDashboarddata ? [] :
 		superAdminDashboarddata?.filter((company: any) => {
@@ -36,6 +37,15 @@ const SuperDashboard = () => {
 
 	useEffect(() => {
 		dispatch(superAdminDashboard())
+	}, [dispatch])
+
+
+
+	useEffect(() => {
+		dispatch(dashBoardInfo())
+		if (dashBoardInfodata) {
+			localStorage.setItem('dashBoardInfo', JSON.stringify(dashBoardInfodata));
+		}
 	}, [dispatch])
 
 
@@ -76,7 +86,7 @@ const SuperDashboard = () => {
 	return (
 		<div id="page-wrapper">
 			<SuperSideNav />
-			<Header />
+			<SuperHeader />
 			<BottomNavigation />
 			<main>
 				<div className='dashboard_container_grid'>
@@ -162,7 +172,6 @@ const SuperDashboard = () => {
 						<div className='dash_statistics_sub2_text'>
 							<div>
 								<h3>Statistics</h3>
-								{/* <p>Revenue and Sales</p> */}
 							</div>
 							<div className='sta_color_container_main'>
 								<div className='sta_color_container'>

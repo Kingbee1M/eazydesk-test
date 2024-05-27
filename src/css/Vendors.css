@@ -5,9 +5,9 @@
 	border: 1px solid #cdd1d3 !important;
 	border-radius: 10px;
 	padding: 1rem; 
-	/* margin-bottom: 1rem;  */
+ 
  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
- /* flex: 1 1 calc(33.33% - 20px);  */
+ 
 	background-color: var(--white);
 }
 .team-card-container:hover{
@@ -17,9 +17,9 @@
 	border: 1px solid var(--accent-blue)!important;
 	border-radius: 10px;
 	padding: 1rem; 
-	/* margin-bottom: 1rem;  */
+ 
  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
- /* flex: 1 1 calc(33.33% - 20px);  */
+ 
 }
 
 .team-card-container-sup{

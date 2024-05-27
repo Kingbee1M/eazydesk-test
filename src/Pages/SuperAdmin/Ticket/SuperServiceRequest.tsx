@@ -6,6 +6,8 @@ import TicketTableComponent from '../../../components/Table/TicketTableComponent
 import { admingetTicket } from '../../../features/Ticket/ticketSlice'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import SuperSideNav from '../../../components/SideNav/SuperSideNav'
+import TicketHeader from '../../../components/TicketHeaders/TicketHeader'
+import SuperHeader from '../../../components/Headers/SuperHeader'
 
 const SuperServiceRequest = () => {
 	const dispatch = useAppDispatch();
@@ -16,6 +18,7 @@ const SuperServiceRequest = () => {
 	});
 
 
+	let [startDates, setStartDates] = useState<any>([]);
 	let [endDates, setEndDates] = useState<any>([]);
 	const [show, setShow] = useState(false);
 	const [searchItem, setSearchItem] = useState("");
@@ -28,9 +31,7 @@ const SuperServiceRequest = () => {
 
 
 
-	// useEffect(() => {
-	// 	setData(admingetticketdata);
-	// }, [admingetticketdata]);
+
 
 
 	useEffect(() => {
@@ -72,14 +73,12 @@ const SuperServiceRequest = () => {
 	return (
 		<div id="page-wrapper">
 			<SuperSideNav />
-			<Header />
+			<SuperHeader />
 			<BottomNavigation />
 			<main>
 				<div className='dashboard-first-card-boards '>
-					<div>
-						<h5 className='dashboard-first-card-h'>Service Request</h5>
-						{/* <p className='dashboard-first-card-p'>15 incident request ticket</p> */}
-					</div>
+					{/* Ticket Links */}
+					<TicketHeader text={"Service Request"} />
 				</div>
 				<SearchConponent
 					placeholder={"search ticket"}
@@ -89,7 +88,7 @@ const SuperServiceRequest = () => {
 					entriesPerPage={entriesPerPage}
 					setEntriesPerPage={setEntriesPerPage}
 					filter={true}
-					// setStartDates={setStartDates}
+					setStartDates={setStartDates}
 					setEndDates={setEndDates}
 					setShow={setShow}
 					show={show}

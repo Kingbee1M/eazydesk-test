@@ -7,6 +7,8 @@ import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import { admingetTicket } from '../../../features/Ticket/ticketSlice'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 import SuperSideNav from '../../../components/SideNav/SuperSideNav'
+import TicketHeader from '../../../components/TicketHeaders/TicketHeader'
+import SuperHeader from '../../../components/Headers/SuperHeader'
 
 const SuperInProgress = () => {
 	const dispatch = useAppDispatch();
@@ -15,7 +17,7 @@ const SuperInProgress = () => {
 		return "6";
 	});
 	const [limit, setLimit] = useState<any>(8);
-	// const [startDates, setStartDates] = useState([]);
+	const [startDates, setStartDates] = useState([]);
 	let [endDates, setEndDates] = useState<any>([]);
 	const [show, setShow] = useState(false);
 	const [searchItem, setSearchItem] = useState("");
@@ -75,13 +77,13 @@ const SuperInProgress = () => {
 	return (
 		<div id="page-wrapper">
 			<SuperSideNav />
-			<Header />
+			<SuperHeader />
 			<BottomNavigation />
 			<main>
-				<div className='dashboard-first-card-boards  mt-2'>
-					<div>
-						<h5 className='dashboard-first-card-h'>InProgress</h5>
-					</div>
+				<div className='dashboard-first-card-boards'>
+					{/* Ticket Links */}
+					<TicketHeader text={"InProgress"} />
+
 				</div>
 				<SearchConponent
 					placeholder={"search ticket"}
@@ -91,7 +93,7 @@ const SuperInProgress = () => {
 					entriesPerPage={entriesPerPage}
 					setEntriesPerPage={setEntriesPerPage}
 					filter={true}
-					// setStartDates={setStartDates}
+					setStartDates={setStartDates}
 					setEndDates={setEndDates}
 					setShow={setShow}
 					show={show}
@@ -105,7 +107,6 @@ const SuperInProgress = () => {
 						data={admingetticketdata?.tickets}
 						isLoading={admingetticketisLoading}
 						colSpan={8}
-						assignto={true}
 					/>
 				</div>
 			</main>

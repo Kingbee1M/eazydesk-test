@@ -13,6 +13,27 @@ import { PiCalendarCheckDuotone } from "react-icons/pi";
 
 
 const ITSideNav = () => {
+	const [dashBoardInfodata, setDashboardData] = useState<any>(null);
+
+	// Load data from local storage on component mount
+	useEffect(() => {
+		const storedData = localStorage.getItem('dashBoardInfo');
+		if (storedData) {
+			setDashboardData(JSON.parse(storedData));
+		}
+	}, []);
+
+
+
+
+	const changeRequest = dashBoardInfodata?.totals?.ticketType?.changeRequest
+	const incidentRequest = dashBoardInfodata?.totals?.ticketType?.incidentRequest
+	const serviceRequest = dashBoardInfodata?.totals?.ticketType?.serviceRequest
+	const closed = dashBoardInfodata?.totals?.status?.closed
+	const inprogress = dashBoardInfodata?.totals?.status?.inprogress
+	const open = dashBoardInfodata?.totals?.status?.open
+
+
 	const [dropdownOpen, setDropdownOpen] = useState(
 		localStorage.getItem('dropdownOpen') === 'true'
 	);
@@ -70,16 +91,16 @@ const ITSideNav = () => {
 
 				{dropdownOpen && (
 					<div>
-						<NavLink to="/itticketprogress " className={({ isActive }) =>
+						<NavLink to="/itticketprogress" className={({ isActive }) =>
 							["nav-link_sup", isActive ? "active_sup" : null,]
 								.filter(Boolean)
 								.join(" ")
 						}>
 							<div className="nav_dropdown_sub">
 								<IoMdOpen size={21} />
-								<span>In Progress </span>
+								<span>In Progress</span>
 							</div>
-							<div className="side_number">5</div>
+							<div className="side_number">{!inprogress ? 0 : inprogress}</div>
 						</NavLink>
 
 						<NavLink to="/itopenticket" className={({ isActive }) =>
@@ -89,9 +110,9 @@ const ITSideNav = () => {
 						}>
 							<div className="nav_dropdown_sub">
 								<AiOutlineCloseCircle size={21} />
-								<span>Resolved Tickets</span>
+								<span>Completed </span>
 							</div>
-							<div className="side_number_one" >10</div>
+							<div className="side_number_one" >{!open ? 0 : open}</div>
 						</NavLink>
 
 						<NavLink to="/itclosedticket" className={({ isActive }) =>
@@ -101,43 +122,43 @@ const ITSideNav = () => {
 						}>
 							<div className="nav_dropdown_sub">
 								<PiCalendarCheckDuotone size={22} />
-								<span>Closed Ticked</span>
+								<span>Closed</span>
 							</div>
-							<div className="side_number_two">4</div>
+							<div className="side_number_two">{!closed ? 0 : closed}</div>
 						</NavLink>
 
 						<NavLink to="/itincidentrequest" className={({ isActive }) =>
-							["nav-link_sup", isActive ? "active_sup" : null]
+							["nav-link_sup", isActive ? "active_sup" : null,]
 								.filter(Boolean)
 								.join(" ")
 						}>
 							<div className="nav_dropdown_sub">
-								<RiAlarmWarningLine size={22} />
+								<RiAlarmWarningLine size={15} />
 								<span>Incident Request</span>
 							</div>
-							<div className="side_number_three">23</div>
+							<div className="side_number_three">{!incidentRequest ? 0 : incidentRequest}</div>
 						</NavLink>
 						<NavLink to="/itservicerequest" className={({ isActive }) =>
-							["nav-link_sup", isActive ? "active_sup" : null]
+							["nav-link_sup", isActive ? "active_sup" : null,]
 								.filter(Boolean)
 								.join(" ")
 						}>
 							<div className="nav_dropdown_sub">
-								<MdOutlineMiscellaneousServices size={22} />
-								<span>Service request</span>
+								<MdOutlineMiscellaneousServices size={15} />
+								<span>Service Request</span>
 							</div>
-							<div className="side_number_four">4</div>
+							<div className="side_number_five">{!serviceRequest ? 0 : serviceRequest}</div>
 						</NavLink>
 						<NavLink to="/itchangerequest" className={({ isActive }) =>
-							["nav-link_sup", isActive ? "active_sup" : null]
+							["nav-link_sup", isActive ? "active_sup" : null,]
 								.filter(Boolean)
 								.join(" ")
 						}>
 							<div className="nav_dropdown_sub">
-								<TbExchange size={22} />
-								<span>Change request</span>
+								<TbExchange size={15} />
+								<span>Change Request</span>
 							</div>
-							<div className="side_number_five">4</div>
+							<div className="side_number_two">{!changeRequest ? 0 : changeRequest}</div>
 						</NavLink>
 					</div>
 				)}

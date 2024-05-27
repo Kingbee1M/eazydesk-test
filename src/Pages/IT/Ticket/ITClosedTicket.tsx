@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
-import Header from '../../../components/Header'
-import BottomNavigation from '../../../components/BottomNavigation'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 import SearchConponent from '../../../components/SearchConponent'
 import ITSideNav from '../../../components/SideNav/ITSideNav'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import { getItTicketParameter } from '../../../features/Ticket/ticketSlice'
+import ITHeader from '../../../components/Headers/ITHeader'
+import ITBottomNavigation from '../../../components/BottomNavigation/ITBottomNavigation'
+import TicketHeaderList from '../../../components/TicketHeaders/TicketHeaderList'
+
 
 const ITClosedTicket = () => {
 	const dispatch = useAppDispatch();
@@ -52,24 +54,22 @@ const ITClosedTicket = () => {
 		}
 	}
 
-	useEffect(() => {
-		const datas = { status: "CLOSED" };
+	// useEffect(() => {
+	// 	const datas = { status: "CLOSED" };
 
-		// @ts-ignore 
-		dispatch(getItTicketParameter(datas))
+	// 	// @ts-ignore 
+	// 	dispatch(getItTicketParameter(datas))
 
-	}, [dispatch])
+	// }, [dispatch])
 
 	return (
 		<div id="page-wrapper">
 			<ITSideNav />
-			<Header />
-			<BottomNavigation />
+			<ITHeader />
+			<ITBottomNavigation />
 			<main>
-				<div className='dashboard-first-card-boards  mt-2'>
-					<div>
-						<h5 className='dashboard-first-card-h'>Closed Ticket</h5>
-					</div>
+				<div className='dashboard-first-card-boards  '>
+					<TicketHeaderList text="Closed Ticket" />
 				</div>
 				<SearchConponent
 					placeholder={"search ticket report"}

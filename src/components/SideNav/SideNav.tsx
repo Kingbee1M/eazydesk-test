@@ -12,17 +12,21 @@ import logo from '../../assets/img/logo.svg'
 import { RiAlarmWarningLine } from "react-icons/ri";
 import { TbExchange } from "react-icons/tb";
 import { IoMdOpen } from "react-icons/io";
-import { useAppDispatch, useAppSelector } from "../../store/useStore";
-import { dashBoardInfo } from "../../features/Ticket/ticketSlice";
+
 
 
 const SideNav = () => {
-  const dispatch = useAppDispatch()
-  const { dashBoardInfodata } = useAppSelector((state: any) => state.ticket);
+  const [dashBoardInfodata, setDashboardData] = useState<any>(null);
 
+  // Load data from local storage on component mount
   useEffect(() => {
-    dispatch(dashBoardInfo())
-  }, [dispatch])
+    const storedData = localStorage.getItem('dashBoardInfo');
+    if (storedData) {
+      setDashboardData(JSON.parse(storedData));
+    }
+  }, []);
+
+
 
   const [dropdownOpen, setDropdownOpen] = useState(
     localStorage.getItem('dropdownOpen') === 'true'
@@ -44,15 +48,9 @@ const SideNav = () => {
   const changeRequest = dashBoardInfodata?.totals?.ticketType?.changeRequest
   const incidentRequest = dashBoardInfodata?.totals?.ticketType?.incidentRequest
   const serviceRequest = dashBoardInfodata?.totals?.ticketType?.serviceRequest
-  // const approved = dashBoardInfodata?.ticketType?.approved
   const closed = dashBoardInfodata?.totals?.status?.closed
-  // const completed = dashBoardInfodata?.totals?.status?.completed
-  // const dissaproved = dashBoardInfodata?.totals?.status?.dissaproved
   const inprogress = dashBoardInfodata?.totals?.status?.inprogress
-  // const invalid = dashBoardInfodata?.totals?.status?.invalid
   const open = dashBoardInfodata?.totals?.status?.open
-  // const pending = dashBoardInfodata?.totals?.status?.pending
-  // const reopen = dashBoardInfodata?.totals?.status?.reopen
 
 
   return (

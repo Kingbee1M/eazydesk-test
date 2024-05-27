@@ -15,10 +15,13 @@ import { logoutUserAction } from "../features/Auth/authService";
 import { logout, reset } from "../features/Auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../store/useStore";
 import UserProfile from "../Pages/Leads/UserProfile";
+import LeadOptionsHeader from "./TicketHeaders/LeadOptionsHeader";
+import { useIsMobile } from "../hooks/resize";
 
 // Create an instance of DataService
 const dataService = DataService();
 const LeadsHeader = () => {
+  const isMobile = useIsMobile();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [dropdown, setDropdown] = useState(false);
@@ -30,6 +33,16 @@ const LeadsHeader = () => {
   // @ts-ignore
   const userInfo = JSON.parse(localStorage.getItem("service_desk"));
   const userId = userInfo?.id;
+
+
+  useEffect(() => {
+    if (!isMobile) {
+      setToggleMenu(false);
+    } else if (isMobile) {
+      setDropdown(false);
+    }
+  }, [isMobile]);
+
 
   const handleLogout = () => {
     dispatch(logout());
@@ -123,44 +136,16 @@ const LeadsHeader = () => {
           </button>
         </div>
       </div>
-      <div
-        className={toggleMenu ? "menu-btn close" : "menu-btn"}
-        onClick={() => setToggleMenu(!toggleMenu)}
-      >
-        <div className='btn-line' />
-        <div className='btn-line' />
-        <div className='btn-line' />
-      </div>
-      <div className={[toggleMenu ? "open" : "", "mobile-nav"].join(" ")}>
-        <div>
-          {/* {menu?.map((item, i) => (
-						<NavLink
-							key={i}
-							to={item?.path}
-							onClick={() => setToggleMenu(prevToggleMenu => !prevToggleMenu)} // Use functional update to toggle the value based on previous state
-							className={({ isActive }) => (isActive ? "selected" : "")}
-						>
-							{item?.name}
-						</NavLink>
-					))} */}
-          <div className='dropdown-container2'>
-            {/* <div onClick={handleClick}>
-							<FiUser size={25} className="dropdown-a" />
-							<span>Profile</span>
-						</div> */}
-            <div onClick={handleLogout}>
-              <RiLogoutCircleRLine size={25} className='dropdown-a' />
-              <span>Logout</span>
-            </div>
-          </div>
-        </div>
+      <div className={toggleMenu ? "menu-btn close" : "menu-btn"} onClick={() => setToggleMenu(!toggleMenu)} >
+
+        <LeadOptionsHeader handleLogout={handleLogout} handleClick={handleClick} />
         <UserProfile
           userId={userId}
           userInfo={userInfo}
           setLgShow={setLgShow}
           lgShow={lgShow}
         />
-        {/* <UserProfile lgShow={lgShow} setLgShow={setLgShow} /> */}
+
       </div>
     </header>
   );

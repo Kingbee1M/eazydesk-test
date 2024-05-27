@@ -1,19 +1,15 @@
 import { useState, useEffect } from 'react';
-import Header from '../../../components/Header';
 import EditRegisteredUserModal from './EditRegisteredUserModal';
-import RegisterModal from './RegisterModal';
-import BottomNavigation from '../../../components/BottomNavigation';
 import { useAppDispatch, useAppSelector } from '../../../store/useStore';
 import { ToastContainer } from 'react-toastify';
-import { getallReguser, superallReguser } from '../../../features/Registration/registrationSlice';
-import Pagination from '../../../components/Pagination';
+import { superallReguser } from '../../../features/Registration/registrationSlice';
 import TableLoader from '../../../components/TableLoader';
 import { NoRecordFound, TableFetch } from '../../../components/Options';
 import SuperSideNav from '../../../components/SideNav/SuperSideNav';
 import RealPagination from '../../../components/RealPagination';
-import Search from '../../../components/Search';
 import SearchConponent from '../../../components/SearchConponent';
-import moment from 'moment';
+import SuperHeader from '../../../components/Headers/SuperHeader';
+import SuperBottomNavigation from '../../../components/BottomNavigation/SuperBottomNavigation';
 
 
 
@@ -120,8 +116,8 @@ const SuperRegister = ({ switchs }: any) => {
 		<div id="page-wrapper">
 			<ToastContainer position="top-right" containerId={"custom111221"} />
 			<SuperSideNav />
-			<Header />
-			<BottomNavigation />
+			<SuperHeader />
+			<SuperBottomNavigation />
 			<main >
 				<div className='dashboard-first-card-boards mb-2 mt-2'>
 					<div>

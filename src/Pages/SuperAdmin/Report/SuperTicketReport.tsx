@@ -3,15 +3,16 @@ import moment from "moment";
 import { NoRecordFound, TableFetch } from "../../../components/Options";
 import Pagination from "../../../components/Pagination";
 import { data } from "../../../components/StateData";
-import Header from "../../../components/Header";
 import SearchConponent from "../../../components/SearchConponent";
 // import ImageLightbox from "../../../components/ImageLightbox";
 import ViewTicketDetailsModal from "../../../components/Modals/ViewTicketDetailsModal";
 import SuperSideNav from "../../../components/SideNav/SuperSideNav";
+import BottomNavigation from "../../../components/BottomNavigation";
+import SuperHeader from "../../../components/Headers/SuperHeader";
 
 const SuperTicketReport = ({ switchs }: any) => {
-	// const [startDates, setStartDates] = useState([]);
-	// const [endDates, setEndDates] = useState([]);
+	const [startDates, setStartDates] = useState([]);
+	const [endDates, setEndDates] = useState([]);
 	const [show, setShow] = useState(false);
 	const [searchItem, setSearchItem] = useState("");
 
@@ -50,7 +51,8 @@ const SuperTicketReport = ({ switchs }: any) => {
 	return (
 		<div id="page-wrapper">
 			<SuperSideNav />
-			<Header />
+			<BottomNavigation />
+			<SuperHeader />
 			<main>
 				<div className='dashboard-first-card-boards  mt-2'>
 					<div>
@@ -66,8 +68,8 @@ const SuperTicketReport = ({ switchs }: any) => {
 					entriesPerPage={entriesPerPage}
 					setEntriesPerPage={setEntriesPerPage}
 					filter={true}
-					// setStartDates={setStartDates}
-					// setEndDates={setEndDates}
+					setStartDates={setStartDates}
+					setEndDates={setEndDates}
 					setShow={setShow}
 					show={show}
 					handleCustomFilters={handleCustomFilters}

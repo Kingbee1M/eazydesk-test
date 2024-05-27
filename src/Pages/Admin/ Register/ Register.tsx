@@ -1,20 +1,17 @@
 import { useState, useEffect } from "react";
 import SideNav from "../../../components/SideNav/SideNav";
-import Header from "../../../components/Header";
 import EditRegisteredUserModal from "./EditRegisteredUserModal";
 import RegisterModal from "./RegisterModal";
-import BottomNavigation from "../../../components/BottomNavigation";
 import { useAppDispatch, useAppSelector } from "../../../store/useStore";
 import { ToastContainer } from "react-toastify";
 import { getallReguser } from "../../../features/Registration/registrationSlice";
 import Pagination from "../../../components/Pagination";
 import TableLoader from "../../../components/TableLoader";
 import { NoRecordFound, TableFetch } from "../../../components/Options";
+import AdminHeader from "../../../components/Headers/AdminHeader";
+import AdminBottomNavigation from "../../../components/BottomNavigation/AdminBottomNavigation";
 
 const Register = ({ switchs }: any) => {
-	// @ts-ignore
-	const userInfo = JSON.parse(localStorage.getItem("service_desk"));
-
 	const [showEditUser, setShowEditUser] = useState(false);
 	const dispatch = useAppDispatch();
 	const { dataAll, isLoadingAll } = useAppSelector((state: any) => state.reg);
@@ -49,7 +46,8 @@ const Register = ({ switchs }: any) => {
 
 	useEffect(() => {
 		const result = dataAll?.users?.filter((item: any) =>
-			item?.firstname?.toLowerCase()?.includes(searchItem)
+			item?.firstname?.toLowerCase()?.includes(searchItem) ||
+			item?.email?.toLowerCase()?.includes(searchItem)
 		);
 		setRealData(result);
 	}, [dataAll, searchItem]);
@@ -58,10 +56,10 @@ const Register = ({ switchs }: any) => {
 		<div id='page-wrapper'>
 			<ToastContainer position='top-right' containerId={"custom1"} />
 			<SideNav />
-			<Header />
-			<BottomNavigation />
+			<AdminHeader />
+			<AdminBottomNavigation />
 			<main>
-				<div className='dashboard-first-card-boards mb-2 mt-2'>
+				<div className='dashboard-first-card-boards '>
 					<div>
 						<h5 className='dashboard-first-card-h'>Register</h5>
 						<p className='dashboard-first-card-p'>

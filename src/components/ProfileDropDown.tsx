@@ -83,7 +83,7 @@ const ProfileDropDown = () => {
 					<p className='notification-text-profile'>My profile</p>
 				</div>
 			</div>
-			<div className='notification-card' onClick={() => navigate("/itsettings")}>
+			<div className='notification-card' onClick={() => navigate("/settings")}>
 				<div className='notification-icon-profile-sup'>
 					<BiHelpCircle size={25} />
 				</div>

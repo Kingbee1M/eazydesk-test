@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
-import BottomNavigation from '../../../components/BottomNavigation'
-import Header from '../../../components/Header'
 import SearchConponent from '../../../components/SearchConponent'
 import ITSideNav from '../../../components/SideNav/ITSideNav'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import { getItTicketParameter } from '../../../features/Ticket/ticketSlice'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
+import ITHeader from '../../../components/Headers/ITHeader'
+import ITBottomNavigation from '../../../components/BottomNavigation/ITBottomNavigation'
+import TicketHeaderList from '../../../components/TicketHeaders/TicketHeaderList'
+
 
 
 
@@ -62,20 +64,19 @@ const ITIncidentRequest = () => {
 		// @ts-ignore 
 		dispatch(getItTicketParameter(datas))
 
-	}, [dispatch, endDate1, limit])
+	}, [dispatch, limit])
 
 
 
 	return (
 		<div id="page-wrapper">
 			<ITSideNav />
-			<Header />
-			<BottomNavigation />
+			<ITHeader />
+			<ITBottomNavigation />
 			<main>
 				<div className='dashboard-first-card-boards '>
-					<div>
-						<h5 className='dashboard-first-card-h'>Incident Request</h5>
-					</div>
+					<TicketHeaderList text="Incident Request" />
+
 				</div>
 				<SearchConponent
 					placeholder={"Search ticket"}

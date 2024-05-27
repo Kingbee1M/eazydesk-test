@@ -1,7 +1,7 @@
 
 import logo from '../assets/img/outcess-icon-haf.png';
 
-const Copyright = ({ className }: any) => {
+const Copyright = () => {
 	const today = new Date();
 	const year = today.getFullYear();
 	return (

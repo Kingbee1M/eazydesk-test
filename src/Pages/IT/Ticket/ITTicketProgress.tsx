@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
-import Header from '../../../components/Header'
-import BottomNavigation from '../../../components/BottomNavigation'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 import SearchConponent from '../../../components/SearchConponent'
 import ITSideNav from '../../../components/SideNav/ITSideNav'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import { getItTicketParameter } from '../../../features/Ticket/ticketSlice'
+import ITHeader from '../../../components/Headers/ITHeader'
+import ITBottomNavigation from '../../../components/BottomNavigation/ITBottomNavigation'
+import TicketHeaderList from '../../../components/TicketHeaders/TicketHeaderList'
+
+
 
 const ITTicketProgress = () => {
 	const dispatch = useAppDispatch();
@@ -64,13 +67,11 @@ const ITTicketProgress = () => {
 	return (
 		<div id="page-wrapper">
 			<ITSideNav />
-			<Header />
-			<BottomNavigation />
+			<ITHeader />
+			<ITBottomNavigation />
 			<main>
-				<div className='dashboard-first-card-boards  mt-2'>
-					<div>
-						<h5 className='dashboard-first-card-h'>In Progress</h5>
-					</div>
+				<div className='dashboard-first-card-boards'>
+					<TicketHeaderList text="In Progress" />
 				</div>
 				<SearchConponent
 					placeholder={"search ticket report"}

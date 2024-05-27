@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import SideNav from "../../../components/SideNav/SideNav";
-import Header from "../../../components/Header";
-import BottomNavigation from "../../../components/BottomNavigation";
 import SearchConponent from "../../../components/SearchConponent";
 import { useAppDispatch, useAppSelector } from "../../../store/useStore";
 import {
@@ -9,6 +7,9 @@ import {
   getItTicketParameter,
 } from "../../../features/Ticket/ticketSlice";
 import TicketTableComponent from "../../../components/Table/TicketTableComponent";
+import AdminHeader from "../../../components/Headers/AdminHeader";
+import AdminBottomNavigation from "../../../components/BottomNavigation/AdminBottomNavigation";
+import AdminTicketHeader from "../../../components/TicketHeaders/AdminTicketHeader";
 
 const OpenTicket = () => {
   const [limit, setLimit] = useState<any>(10);
@@ -74,13 +75,11 @@ const OpenTicket = () => {
   return (
     <div id='page-wrapper'>
       <SideNav />
-      <Header />
-      <BottomNavigation />
+      <AdminHeader />
+      <AdminBottomNavigation />
       <main>
-        <div className='dashboard-first-card-boards  mt-2'>
-          <div>
-            <h5 className='dashboard-first-card-h'>Completed Ticket</h5>
-          </div>
+        <div className='dashboard-first-card-boards'>
+          <AdminTicketHeader text="Completed Ticket" />
         </div>
         <SearchConponent
           placeholder={"search ticket report"}
@@ -93,7 +92,7 @@ const OpenTicket = () => {
           setShow={setShow}
           show={show}
           handlePagination={handlePagination}
-          // handleCustomFilters={handleCustomFilters}
+        // handleCustomFilters={handleCustomFilters}
         />
 
         <div className='mt-4'>

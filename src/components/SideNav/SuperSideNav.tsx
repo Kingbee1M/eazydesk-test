@@ -14,18 +14,20 @@ import { RiAlarmWarningLine } from "react-icons/ri";
 import { TbExchange } from "react-icons/tb";
 import { getUserPrivileges } from "../../hooks/auth";
 import { IoMdOpen } from "react-icons/io";
-import { useAppDispatch, useAppSelector } from "../../store/useStore";
-import { dashBoardInfo } from "../../features/Ticket/ticketSlice";
 import { MdOutlineSubscriptions } from "react-icons/md";
 
 
 const SuperSideNav = () => {
-  const dispatch = useAppDispatch()
-  const { dashBoardInfodata } = useAppSelector((state: any) => state.ticket);
+  const [dashBoardInfodata, setDashboardData] = useState<any>(null);
 
+  // Load data from local storage on component mount
   useEffect(() => {
-    dispatch(dashBoardInfo())
-  }, [dispatch])
+    const storedData = localStorage.getItem('dashBoardInfo');
+    if (storedData) {
+      setDashboardData(JSON.parse(storedData));
+    }
+  }, []);
+
 
   const { isSuperAdmin } = getUserPrivileges();
   const [dropdownOpen, setDropdownOpen] = useState(

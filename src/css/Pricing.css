@@ -24,15 +24,15 @@
 }
 
 .pricing-card.basic {
-  --col: #0891b2;
+  --col: var(--accent-blue);
 }
 
 .pricing-card.standard {
-  --col: #059669;
+ --col: var(--accent-blue);
 }
 
 .pricing-card.premium {
-  --col: #c026d3;
+ --col: var(--accent-blue);
 }
 
 .pricing-card:hover {

@@ -8,6 +8,7 @@ import { NoRecordFound, TableFetch } from '../../../components/Options';
 import Pagination from '../../../components/Pagination';
 import { ToastContainer } from 'react-toastify';
 import SuperSideNav from '../../../components/SideNav/SuperSideNav';
+import SuperHeader from '../../../components/Headers/SuperHeader';
 
 
 
@@ -39,7 +40,7 @@ const SuperCompanysMembers = () => {
 	return (
 		<div id="page-wrapper">
 			<SuperSideNav />
-			<Header />
+			<SuperHeader />
 			<ToastContainer />
 			<main >
 				<div className='dashboard-first-card-boards mb-2 mt-2'>

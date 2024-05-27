@@ -12,7 +12,7 @@ const Carousels = () => {
 
 
 	return (
-		<div>
+		<div className='Carousels_container_main'>
 			<Carousel fade>
 				<Carousel.Item interval={80000}>
 					<img className="d-block w-100" src={third} alt="First" />

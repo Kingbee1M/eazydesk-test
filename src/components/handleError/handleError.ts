@@ -3,7 +3,9 @@ import { fireAlert } from "../Alert";
 import { customId } from "../Options";
 import { SerializedError } from "@reduxjs/toolkit";
 
-  export const handleError = (error: any) => {
+export const handleError = (error: any) => {
+    
+  console.log('error',error)
   
   // Extract error message from response 
   const message = error?.response?.data?.message ||

@@ -1,39 +1,35 @@
-import BottomNavigation from '../../../components/BottomNavigation';
 import dIcon1 from "../../../assets/DashboardIcons/Dicon1.svg"
 import dIcon2 from "../../../assets/DashboardIcons/Dicon2.svg"
 import dIcon3 from "../../../assets/DashboardIcons/Dicon3.svg"
 import dIcon4 from "../../../assets/DashboardIcons/Dicon4.svg"
 import ITSideNav from '../../../components/SideNav/ITSideNav';
 import { useAppDispatch, useAppSelector } from '../../../store/useStore';
-import { dashBoardInfo, getItTicket } from '../../../features/Ticket/ticketSlice'
+import { dashBoardInfo } from '../../../features/Ticket/ticketSlice'
 import { useEffect } from 'react';
 import ITHeader from '../../../components/Headers/ITHeader';
 import LeadsThreeinOneBarChart from '../../../components/Charts/LeadsThreeinOneBarChart';
 import { GoDotFill } from 'react-icons/go';
 import DoughnutChat from '../../../components/DoughnutChat';
+import ITBottomNavigation from '../../../components/BottomNavigation/ITBottomNavigation';
 
 
 const ITDashboard = () => {
 	const dispatch = useAppDispatch();
-	const { dashBoardInfodata } = useAppSelector((state: any) => state.ticket);
-	// const { itdata, itisLoading } = useAppSelector((state: any) => state.ticket)
-	const { itassignisSuccess } = useAppSelector((state: any) => state.ticket);
+	const { dashBoardInfodata, itassignisSuccess } = useAppSelector((state: any) => state.ticket);
+
+
+
 
 	useEffect(() => {
-		const datas = ""
-		// @ts-ignore
-		dispatch(getItTicket(datas))
 		dispatch(dashBoardInfo())
+		if (dashBoardInfodata) {
+			localStorage.setItem('dashBoardInfo', JSON.stringify(dashBoardInfodata));
+		}
 		if (itassignisSuccess) {
-			// @ts-ignore
-			dispatch(getItTicket(datas))
 			dispatch(dashBoardInfo())
+			localStorage.setItem('dashBoardInfo', JSON.stringify(dashBoardInfodata));
 		}
 	}, [dispatch, itassignisSuccess])
-
-
-
-
 
 
 
@@ -44,8 +40,6 @@ const ITDashboard = () => {
 	const completed = dashBoardInfodata?.totals?.status?.completed
 	const disapproved = dashBoardInfodata?.totals?.status?.dissaproved
 	const inprogress = dashBoardInfodata?.totals?.status?.inprogress
-	// const invalid = dashBoardInfodata?.totals?.status?.invalid
-	// const open = dashBoardInfodata?.totals?.status?.open
 	const pending = dashBoardInfodata?.totals?.status?.pending
 	const reopen = dashBoardInfodata?.totals?.status?.reopen
 
@@ -61,7 +55,7 @@ const ITDashboard = () => {
 		<div id="page-wrapper">
 			<ITSideNav />
 			<ITHeader />
-			<BottomNavigation />
+			<ITBottomNavigation />
 			<main>
 				<div className='dashboard_container_grid'>
 					<div className='total_card'>
@@ -148,15 +142,15 @@ const ITDashboard = () => {
 							</div>
 							<div className='sta_color_container_main'>
 								<div className='sta_color_container'>
-									<GoDotFill color='#883DCF' />
+									<GoDotFill color='#E5ECFB' />
 									<small>New</small>
 								</div>
 								<div className='sta_color_container'>
-									<GoDotFill color='#F2994A' />
+									<GoDotFill color='#0240bc90' />
 									<small>Inprogress</small>
 								</div>
 								<div className='sta_color_container'>
-									<GoDotFill color='#22CAAD' />
+									<GoDotFill color='#0240BC' />
 									<small>Completed</small>
 								</div>
 							</div>

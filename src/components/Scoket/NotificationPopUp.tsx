@@ -7,7 +7,7 @@ import { useContext } from 'react';
 
 
 
-const NotificationPopUp = ({ setRefresh }: any) => {
+const NotificationPopUp = () => {
 	const socket: any = useContext(SocketContext);
 	// @ts-ignore  
 	const userInfo = JSON.parse(localStorage.getItem("service_desk"));
@@ -17,27 +17,23 @@ const NotificationPopUp = ({ setRefresh }: any) => {
 
 
 
+
 	socket.on(userInfo?.email?.toString() + ":newTicket", (org: any) => {
 
 		if (org) {
 			toast.success(org?.ticketType, { toastId: customId });
-			setRefresh(true)
+
 			myAudio?.play()
 		}
-		setTimeout(() => {
-			setRefresh(false)
-		}, 1000);
+
 	});
 
 	socket.on(`${userInfo?.companyId}:comment`, (org: any) => {
 
 		if (org) {
-			setRefresh(true)
 			toast.success(org?.comment, { toastId: customId });
 			myAudio?.play()
-			setTimeout(() => {
-				setRefresh(false)
-			}, 1000);
+
 		}
 	});
 

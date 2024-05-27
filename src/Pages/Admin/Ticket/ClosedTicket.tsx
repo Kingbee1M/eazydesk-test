@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import SideNav from '../../../components/SideNav/SideNav'
-import Header from '../../../components/Header'
-import BottomNavigation from '../../../components/BottomNavigation'
 import SearchConponent from '../../../components/SearchConponent'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
-import moment from 'moment'
 import { admingetTicket } from '../../../features/Ticket/ticketSlice'
+import AdminHeader from '../../../components/Headers/AdminHeader'
+import AdminBottomNavigation from '../../../components/BottomNavigation/AdminBottomNavigation'
+import AdminTicketHeader from '../../../components/TicketHeaders/AdminTicketHeader'
 
 const ClosedTicket = () => {
 	const dispatch = useAppDispatch();
@@ -42,13 +42,11 @@ const ClosedTicket = () => {
 	return (
 		<div id="page-wrapper">
 			<SideNav />
-			<Header />
-			<BottomNavigation />
+			<AdminHeader />
+			<AdminBottomNavigation />
 			<main>
-				<div className='dashboard-first-card-boards  mt-2'>
-					<div>
-						<h5 className='dashboard-first-card-h'>Closed Ticket</h5>
-					</div>
+				<div className='dashboard-first-card-boards'>
+					<AdminTicketHeader text="Closed Ticket" />
 				</div>
 				<SearchConponent
 					placeholder={"search ticket report"}

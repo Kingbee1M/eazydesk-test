@@ -15,8 +15,6 @@ const RegisterModal = () => {
 	// @ts-ignore  
 	const userInfo = JSON.parse(localStorage.getItem("service_desk"));
 
-
-
 	const [show, setShow] = useState(false);
 	const dispatch = useAppDispatch();
 	const { isError, message, isLoading, isSuccess } = useAppSelector(
@@ -59,9 +57,8 @@ const RegisterModal = () => {
 				companyId: ""
 			})
 		}
-		// setTimeout(() => {
+
 		dispatch(reset())
-		// }, 5000);
 	}, [isError, message, dispatch, isSuccess])
 
 
@@ -125,8 +122,8 @@ const RegisterModal = () => {
 										onChange={(e) => handleOnChange("role", e.target.value)}
 									>
 										<option value="">Select Role</option>
-										<option value="ADMIN">Admin</option>
-										<option value="SUPERVISOR">Supervisor</option>
+										{/* <option value="ADMIN">Admin</option>
+										<option value="SUPERVISOR">Supervisor</option> */}
 										<option value="IT_SUPPORT">IT Support</option>
 										<option value="TEAM_LEAD">Team Lead</option>
 									</select>

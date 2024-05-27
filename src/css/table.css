@@ -1,7 +1,4 @@
- .table-container{
- overflow: auto !important;  
-}
-
+ 
   .shadow-z-1 {
   -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
   -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
@@ -339,10 +336,91 @@ border: 1px solid var(--accent-blue);
 
 
 @media (max-width: 768px) {
+
+  .dashboard-first-card-h {
+    margin-bottom: 5px;
+    font-size: 15px;
+    color: var(--small-text);
+}
+  .notification-text-profile {
+    color: var(--black);
+    font-size: 15px;
+}
+  .notification-profile {
+    width: 250px;
+    border: 0.5px solid var(--border);
+    padding:1rem 5px;
+    background-color: var(--white);
+    position: absolute;
+    z-index: 99999999;
+    top: 2.5rem;
+    right: 2.8rem;
+    border-radius: 10px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 4px var(--box-shadow);
+}
+  .notification-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 12px;
+    cursor: pointer !important;
+}
+  .assign-btn {
+    border: 1px solid var(--accent-blue);
+    background-color: var(--accent-blue-light);
+    color: var(--accent-blue);
+    padding: 3px 0.5rem;
+    font-weight: 500 !important;
+}
+  .admin-btn-progresss {
+    padding: 0.1rem 0.5rem !important;
+    border-radius: 15px;
+    background-color: var(--accent-yellow);
+    color: var(--white);
+    font-size: 10px !important;
+    font-weight: bold !important;
+    white-space: nowrap;
+}
+  .btn {
+    background-color: var(--accent-blue);
+    border: 2px solid var(--accent-blue) !important;
+    color: var(--white) !important;
+    border-radius: 7.70833px !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    font-size: 12px !important;
+    line-height: 17px !important;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    white-space: nowrap;
+    border: none;
+    outline: none;
+    padding: 6px 12px !important;
+    cursor: pointer;
+}
+  .btn_pagination {
+    background-color: var(--accent-blue);
+    color: white;
+    border: none;
+    padding: 5px  6px;
+    margin: 0 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
   .pageEntries {
     display: none;
   }
-  
+  	 
+.totalResponses h3 {
+    font-size: 12px;
+}
+.totalResponses span {
+    font-size: 12px;
+}
 
 }
 @media (max-width: 1200px) {
@@ -351,6 +429,12 @@ border: 1px solid var(--accent-blue);
   margin: 0px  0px !important;
 }
 
+.totalResponses h3 {
+    font-size: 10px;
+}
+.totalResponses span {
+    font-size: 10px;
+}
 }
 
 .table_margin{

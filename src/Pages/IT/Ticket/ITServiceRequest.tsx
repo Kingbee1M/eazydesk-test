@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react'
-import BottomNavigation from '../../../components/BottomNavigation'
-import Header from '../../../components/Header'
 import SearchConponent from '../../../components/SearchConponent'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 import ITSideNav from '../../../components/SideNav/ITSideNav'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
-// import { getItTicket } from '../../../features/Ticket/ticketSlice'
 import { getItTicketParameter } from '../../../features/Ticket/ticketSlice'
-// import ITTicketTable from './ITTicketTable'
-// import moment from 'moment'
+import ITHeader from '../../../components/Headers/ITHeader'
+import ITBottomNavigation from '../../../components/BottomNavigation/ITBottomNavigation'
+import TicketHeaderList from '../../../components/TicketHeaders/TicketHeaderList'
+
+
 
 const ITServiceRequest = () => {
 	const dispatch = useAppDispatch();
 	const { itticketparameterdata, itticketparameterisLoading } = useAppSelector((state: any) => state.ticket)
-	const [entriesPerPage, setEntriesPerPage] = useState(() => { return "6" });
+	const [entriesPerPage, setEntriesPerPage] = useState(() => { return "8" });
+	const [startDates, setStartDates] = useState<any>([]);
 	let [endDates, setEndDates] = useState<any>([]);
 	const [show, setShow] = useState(false);
 	const [searchItem, setSearchItem] = useState("");
@@ -72,14 +73,11 @@ const ITServiceRequest = () => {
 	return (
 		<div id="page-wrapper">
 			<ITSideNav />
-			<Header />
-			<BottomNavigation />
+			<ITHeader />
+			<ITBottomNavigation />
 			<main>
 				<div className='dashboard-first-card-boards '>
-					<div>
-						<h5 className='dashboard-first-card-h'>Service Request</h5>
-						{/* <p className='dashboard-first-card-p'>15 incident request ticket</p> */}
-					</div>
+					<TicketHeaderList text="Service Request" />
 				</div>
 				<SearchConponent
 					placeholder={"search ticket"}
@@ -89,7 +87,7 @@ const ITServiceRequest = () => {
 					entriesPerPage={entriesPerPage}
 					setEntriesPerPage={setEntriesPerPage}
 					filter={true}
-					// setStartDates={setStartDates}
+					setStartDates={setStartDates}
 					setEndDates={setEndDates}
 					setShow={setShow}
 					show={show}

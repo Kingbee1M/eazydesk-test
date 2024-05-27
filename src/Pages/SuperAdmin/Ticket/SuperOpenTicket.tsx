@@ -7,6 +7,8 @@ import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import { admingetTicket } from '../../../features/Ticket/ticketSlice'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
 import SuperSideNav from '../../../components/SideNav/SuperSideNav'
+import TicketHeader from '../../../components/TicketHeaders/TicketHeader'
+import SuperHeader from '../../../components/Headers/SuperHeader'
 
 const SuperOpenTicket = () => {
 	const [limit, setLimit] = useState<any>(8);
@@ -74,13 +76,12 @@ const SuperOpenTicket = () => {
 	return (
 		<div id="page-wrapper">
 			<SuperSideNav />
-			<Header />
+			<SuperHeader />
 			<BottomNavigation />
 			<main>
-				<div className='dashboard-first-card-boards  mt-2'>
-					<div>
-						<h5 className='dashboard-first-card-h'>Completed Ticket</h5>
-					</div>
+				<div className='dashboard-first-card-boards   '>
+					{/* Ticket Links */}
+					<TicketHeader text={"Completed Ticket"} />
 				</div>
 				<SearchConponent
 					placeholder={"search ticket"}
@@ -106,7 +107,6 @@ const SuperOpenTicket = () => {
 						isLoading={admingetticketisLoading}
 						handlePagination={handlePagination}
 						colSpan={8}
-						assignto={true}
 					/>
 				</div>
 			</main>

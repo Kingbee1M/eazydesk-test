@@ -1,23 +1,12 @@
  .container-items{
 	display: flex;
 	justify-content: space-between;
-	margin-bottom: 1rem;
-	/* overflow-x: scroll; */
+	margin-bottom: 1rem; 
 }
-/* #dashboard   {
+  #dashboard   {
  overflow-y: auto !important; 
-} */
-#dashboard .service-cards {
-  padding: 4rem 1rem;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-}
-
-#dashboard .service-card {
-  background-color: var(--white);
-  border-radius: 5px;
-}
+}  
+  
 
 #dashboard .service-card {
   background-color: var(--white);
@@ -25,7 +14,27 @@
   padding: .85rem 1.25rem;
   transition: var(--transition);
   box-shadow: var(--box-shadow);
-}
+  width: 20%;
+} 
+#dashboard .service-card { 
+  background-color: var(--white); 
+  width: 20%;  
+  margin-right: 10px; 
+  box-sizing: border-box;  
+  border-radius: 5px;
+  padding: .85rem 1.25rem;
+  transition: var(--transition);
+  box-shadow: var(--box-shadow);
+}  
+
+  .service_cards_container{
+   display: flex; 
+   justify-content: center;
+  overflow-x: auto;  
+  scroll-snap-type: x mandatory;  
+  -webkit-overflow-scrolling: touch;  
+  padding: 10px;  
+} 
 #dashboard .service-card:hover {
   transform: scale(1.05);
 }
@@ -84,17 +93,41 @@
 
 
 /* --- Media Queries --- */
-@media only screen and (max-width: 771px) {
+@media only screen and (max-width: 728px) {
+
+  #dashboard .service-card { 
+  background-color: var(--white);
+  flex: 0 0 auto;   
+  scroll-snap-align: center;   
+  width: 100%;  
+  margin:0px 10px; 
+  box-sizing: border-box;  
+  border-radius: 5px;
+  padding: .85rem 1.25rem;
+  transition: var(--transition);
+  box-shadow: var(--box-shadow);
+  
+} 
    
 #dashboard   {
  overflow-y: auto !important; 
 }
-  #dashboard .service-cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
+
+
+  .service_cards_container{
+ display: flex;
+  overflow-x: auto;  
+  scroll-snap-type: x mandatory;  
+  -webkit-overflow-scrolling: touch;  
+  padding: 10px; 
+  justify-content: flex-start; 
 }
-@media only screen and (max-width: 447px) {
-  #dashboard .service-cards {
-    grid-template-columns: repeat(1, 1fr);
-  }
+ 
 }
+
+.profile_container{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+ 
