@@ -83,3 +83,92 @@ box-shadow: -1px -1px 4px rgba(31, 31, 31, 0.1), 1px 1px 4px rgba(31, 31, 31, 0.
  align-items: center;
  gap:10px ; 
 }
+
+
+
+
+
+
+
+
+
+
+.faq-container {
+  max-width: 600px;
+  margin: 0 auto;
+  /* border-radius: 10px; */
+  background-color: var(--white);
+  overflow: hidden;
+  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; */
+}
+
+.faq {
+  box-sizing: border-box;
+  background: transparent;
+  padding: 30px  10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.faq:not(:first-child) {
+  border-top: 1px solid #e6e6e6;
+}
+
+.faq-title {
+  margin: 0 35px 0 0;
+}
+
+.faq-text {
+  margin: 10px 0 0;
+  display: none;
+  line-height: 1.5rem;
+}
+
+.faq.active {
+  background-color: #f8f8f8;
+  box-shadow: inset 4px 0px 0px 0px var(--accent-blue);
+}
+
+.faq.active .faq-title {
+  color: var(--accent-blue);
+}
+
+.faq.active .faq-text {
+  display: block;
+}
+
+.faq-toggle {
+  background-color: transparent;
+  border: 1px solid #e6e6e6;
+  color: inherit;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  padding-top: 3px;
+  position: absolute;
+  top: 22px;
+  right: 20px;
+  height: 30px;
+  width: 30px;
+  transition: 0.3s ease;
+}
+
+.faq-toggle:focus {
+  outline: none;
+}
+
+.faq.active .faq-toggle {
+  transform: rotate(180deg);
+  background-color: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: var(--white);
+}
+
+
+.faq-title-highlight{
+	display: flex !important;
+	align-items: center;
+}

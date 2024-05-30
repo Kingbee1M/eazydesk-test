@@ -28,6 +28,7 @@ const getToken = () => {
 
   const clearData = () => {
     localStorage.removeItem(tokenKey); 
+    localStorage.removeItem("dashBoardInfo"); 
   };
 
  

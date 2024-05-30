@@ -8,15 +8,28 @@ import NetworkConnetion from '../NetworkConnetion';
 import Badge from '../Badge/Badge';
 import Notification from '../Notification/Notification';
 import AdminProfileDropDown from './AdminProfileDropDown';
+import { useAppDispatch, useAppSelector } from '../../store/useStore';
+import { getItTicket } from '../../features/Ticket/ticketSlice';
 
 
 const AdminHeader = () => {
-
+  const dispatch = useAppDispatch();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [profile, setProfile] = useState(false)
   // @ts-ignore  
-  const userInfo = JSON.parse(localStorage.getItem("service_desk")); 
+  const userInfo = JSON.parse(localStorage.getItem("service_desk"));
+  const { itdata, itassignisSuccess } = useAppSelector((state: any) => state.ticket)
 
+
+
+  useEffect(() => {
+    const datas = ""
+    // @ts-ignore
+    dispatch(getItTicket(datas))
+    // @ts-ignore
+    if (itassignisSuccess) { dispatch(getItTicket(datas)) }
+
+  }, [dispatch, itassignisSuccess])
 
   useEffect(() => {
     const path = window.location.pathname;
@@ -38,7 +51,7 @@ const AdminHeader = () => {
           <HeaderDate />
         </div>
         <div className='faplus-bell_container'>
-          <Badge setIsDrawerOpen={setIsDrawerOpen} isDrawerOpen={isDrawerOpen} />
+          <Badge setIsDrawerOpen={setIsDrawerOpen} isDrawerOpen={isDrawerOpen} itdata={itdata} />
           <div className='profiledropdown_container'>
             <div>
               <h5 className='profiledropdown_container_h5'>{userInfo?.firstname}</h5>

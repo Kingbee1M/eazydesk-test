@@ -77,8 +77,7 @@ export const login = createAsyncThunk('auth/login', async (data, thunkAPI) => {
     return await authService.login(data)
 
   } catch (error: any) {  
-  		// Handle error using handleMessageError function
-		// const message = handleMessageError(error, thunkAPI);
+  		// Handle error using handleMessageError function 
 			const message = error?.response?.data?.message ||
 			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
     return thunkAPI.rejectWithValue(message)

@@ -46,7 +46,6 @@ const AdminProfileDropDown = () => {
 			navigate("/");
 			socket.disconnect()
 			dispatch(reset());
-			socket.disconnect()
 		}
 	}, [dataService, dispatch, navigate, socket, userInfo]);
 
@@ -91,7 +90,6 @@ const AdminProfileDropDown = () => {
 				<div>
 					{isLoadinglogout ? <SVGLoader width={"30px"} height={"30px"} color={"#000"} /> :
 						<p className='notification-text-profile'>Logout</p>}
-
 				</div>
 			</div>
 		</div>

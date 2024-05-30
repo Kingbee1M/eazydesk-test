@@ -1,16 +1,9 @@
 import moment from "moment";
-import { OverlayTrigger, Image, Tooltip, Button } from "react-bootstrap";
-import { baseUrl } from "../../../shared/baseUrl";
-import ViewTicketDetailsModal from "../../../components/Modals/ViewTicketDetailsModal";
 import { NoRecordFound, TableFetch } from "../../../components/Options";
-import AssignTask from "../../../components/Modals/AssignTask";
-import GiveApproval from "../../../components/Modals/GiveApproval";
 import RealPagination from "../../../components/RealPagination";
 
 const SubscriptionTable = ({
-   TYPE,
    data,
-   switchs,
    isLoading,
    handlePagination,
    pagination
@@ -22,7 +15,7 @@ const SubscriptionTable = ({
       <div id="table-container">
          <div className="table-responsive-vertical">
             <div className="table-container">
-               <table id="table" className={switchs ? "table" : " table-hover table-mc-light-blue"}>
+               <table id="table" className={" table-hover table-mc-light-blue"}>
                   <thead>
                      <tr>
                         <th>Reference</th>
@@ -46,11 +39,7 @@ const SubscriptionTable = ({
                         data?.map((user: any) => (
                            <tr key={user?._id}>
                               <td className="Reference" data-title="Reference">
-                                 {user?.ticketType === "INCIDENT REQUEST"
-                                    ? "INC"
-                                    : user?.ticketType === "SERVICE REQUEST"
-                                       ? "SRV"
-                                       : "CHG"}
+                                 {user?.id}
                               </td>
                               <td data-title="ticket type">{user?.ticketType}</td>
 

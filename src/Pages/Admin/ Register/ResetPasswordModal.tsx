@@ -10,7 +10,6 @@ import { customId } from "../../../components/Options";
 const ResetPasswordModal = ({ id }: any) => {
 	const { resetPasswordisSuccess, resetPasswordisLoading } = useAppSelector((state: any) => state.reg);
 	const dispatch = useAppDispatch();
-	//  Update Current Password State
 	const [newPassword, setNewPassword] = useState("");
 	const [confirmNewPassword, setConfirmNewPassword] = useState("");
 	const value = { id, newPassword }

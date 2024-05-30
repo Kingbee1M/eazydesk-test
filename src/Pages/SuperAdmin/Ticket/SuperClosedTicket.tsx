@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import Header from '../../../components/Header'
 import BottomNavigation from '../../../components/BottomNavigation'
 import SearchConponent from '../../../components/SearchConponent'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
@@ -12,29 +11,17 @@ import SuperHeader from '../../../components/Headers/SuperHeader'
 
 const ClosedTicket = () => {
 	const dispatch = useAppDispatch();
-	const { itassignisSuccess } = useAppSelector((state: any) => state.ticket);
-	const [entriesPerPage, setEntriesPerPage] = useState(() => {
-		return "6";
-	});
-
-
-	let [endDates, setEndDates] = useState<any>([]);
+	const { itassignisSuccess, admingetticketdata, admingetticketisLoading } = useAppSelector((state: any) => state.ticket);
+	const [endDate, setEndDates] = useState<any>([]);
 	const [show, setShow] = useState(false);
-	const [startDates, setStartDates] = useState([]);
+	const [startDate, setStartDates] = useState([]);
 	const [searchItem, setSearchItem] = useState("");
 	const [limit, setLimit] = useState<any>(8);
-	const { admingetticketdata, admingetticketisLoading } = useAppSelector((state: any) => state.ticket)
-	endDates = new Date();
-	const formattedEndDate = endDates.toISOString().split('T')[0]; // Extracting date part and removing time
-	const [startDate1] = useState(formattedEndDate);
-	const [endDate1] = useState(formattedEndDate);
+	const [ticketType, setTicketType] = useState("");
+	const [status, setStatus] = useState("");
+	const [data, setData] = useState([]);
+	const pagination = admingetticketdata?.pagination
 
-
-
-
-	// useEffect(() => {
-	// 	setData(admingetticketdata);
-	// }, [admingetticketdata]);
 
 
 
@@ -43,23 +30,36 @@ const ClosedTicket = () => {
 		// @ts-ignore 
 		dispatch(admingetTicket(datas))
 
-	}, [dispatch, endDate1, startDate1, itassignisSuccess])
+	}, [dispatch, itassignisSuccess])
 
 
 	const handlePagination = (type: string, data?: React.ChangeEvent<HTMLSelectElement> | undefined) => {
+		setShow(false)
 		switch (type) {
 			// @ts-ignore
-			case 'prev': dispatch(admingetTicket({ page: pagination?.page - 1, limit: limit }));
+			case 'prev': dispatch(admingetTicket({ status: "CLOSED", page: pagination?.page - 1, limit: limit }));
 				break;
 			// @ts-ignore
-			case 'next': dispatch(admingetTicket({ page: pagination?.page + 1, limit: limit }));
+			case 'next': dispatch(admingetTicket({ status: "CLOSED", page: pagination?.page + 1, limit: limit }));
 				break;
 			case 'limit':
 				if (data) {
 					setLimit(data.target.value);
 					// @ts-ignore
-					dispatch(admingetTicket({ limit: data.target.value }));
-				}
+					dispatch(admingetTicket({ status: "CLOSED", limit: data.target.value }));
+				};
+				break;
+			case 'ticketType':
+				// @ts-ignore
+				dispatch(admingetTicket({ status: "CLOSED", ticketType: ticketType }));
+				break;
+			case 'status':
+				// @ts-ignore
+				dispatch(admingetTicket({ status: status }));
+				break;
+			case 'date':
+				// @ts-ignore
+				dispatch(admingetTicket({ status: "CLOSED", startDate: startDate, endDate: endDate }));
 				break;
 			default:
 				// For page numbers or any other custom actions
@@ -71,6 +71,18 @@ const ClosedTicket = () => {
 				break;
 		}
 	}
+
+	useEffect(() => {
+		const result: any = admingetticketdata?.tickets?.filter(
+			(data: any) =>
+				data?.status?.toLowerCase().includes(searchItem) ||
+				data?.ticketType?.toLowerCase().includes(searchItem) ||
+				data?.severity?.toLowerCase().includes(searchItem)
+		);
+		setData(result)
+	}, [admingetticketdata?.tickets, searchItem]);
+
+
 	return (
 		<div id="page-wrapper">
 			<SuperSideNav />
@@ -87,22 +99,27 @@ const ClosedTicket = () => {
 					setSearchItem={setSearchItem}
 					searchItem={searchItem}
 					data={admingetticketdata?.tickets}
-					entriesPerPage={entriesPerPage}
-					setEntriesPerPage={setEntriesPerPage}
 					filter={true}
 					setStartDates={setStartDates}
 					setEndDates={setEndDates}
 					setShow={setShow}
 					show={show}
 					handlePagination={handlePagination}
-				// handleCustomFilters={handleCustomFilters}
+					report={false}
+					setTicketType={setTicketType}
+					ticketType={ticketType}
+					setStatus={setStatus}
+					status={status}
+					statusFilter={false}
 				/>
 
 				<div  >
 					<TicketTableComponent
 						TYPE={false}
-						data={admingetticketdata?.tickets}
+						pagination={admingetticketdata}
+						data={data}
 						isLoading={admingetticketisLoading}
+						handlePagination={handlePagination}
 						colSpan={8}
 					/>
 				</div>

@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
-import Header from '../../../components/Header'
 import BottomNavigation from '../../../components/BottomNavigation'
 import SearchConponent from '../../../components/SearchConponent'
-import moment from 'moment'
 import { useAppDispatch, useAppSelector } from '../../../store/useStore'
 import { admingetTicket } from '../../../features/Ticket/ticketSlice'
 import TicketTableComponent from '../../../components/Table/TicketTableComponent'
@@ -13,27 +11,19 @@ import SuperHeader from '../../../components/Headers/SuperHeader'
 const SuperOpenTicket = () => {
 	const [limit, setLimit] = useState<any>(8);
 	const dispatch = useAppDispatch();
-	const { itassignisSuccess } = useAppSelector((state: any) => state.ticket);
-	const [startDates, setStartDates] = useState([]);
-	let [endDates, setEndDates] = useState<any>([]);
+	const { itassignisSuccess, admingetticketdata, admingetticketisLoading } = useAppSelector((state: any) => state.ticket);
+	const [startDate, setStartDates] = useState([]);
+	const [endDate, setEndDates] = useState<any>([]);
 	const [show, setShow] = useState(false);
-	const [datas, setDatas] = useState([]);
 	const [searchItem, setSearchItem] = useState("");
-
-	const { admingetticketdata, admingetticketisLoading } = useAppSelector((state: any) => state.ticket)
-	endDates = new Date();
-	const formattedEndDate = endDates.toISOString().split('T')[0]; // Extracting date part and removing time
-	const [startDate1] = useState(formattedEndDate);
-	const [endDate1] = useState(formattedEndDate);
-	const [entriesPerPage, setEntriesPerPage] = useState(() => {
-		return "6";
-	});
+	const [ticketType, setTicketType] = useState("");
+	const [status, setStatus] = useState("");
+	const [data, setData] = useState([]);
+	const pagination = admingetticketdata?.pagination
 
 
-	const currentDate = moment().format("YYYY-MM-DD");
-	const sevenDays = moment().subtract(7, "days").format("YYYY-MM-DD");
-	const yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
-	const [data, setData] = useState<any>([]);
+
+
 
 	useEffect(() => {
 		setData(admingetticketdata);
@@ -45,33 +35,56 @@ const SuperOpenTicket = () => {
 		// @ts-ignore 
 		dispatch(admingetTicket(datas))
 
-	}, [dispatch, endDate1, startDate1, itassignisSuccess])
+	}, [dispatch, itassignisSuccess])
 
 	const handlePagination = (type: string, data?: React.ChangeEvent<HTMLSelectElement> | undefined) => {
+		setShow(false)
 		switch (type) {
 			// @ts-ignore
-			case 'prev': dispatch(admingetTicket({ page: pagination?.page - 1, limit: limit }));
+			case 'prev': dispatch(admingetTicket({ status: "COMPLETED", page: pagination?.page - 1, limit: limit }));
 				break;
 			// @ts-ignore
-			case 'next': dispatch(admingetTicket({ page: pagination?.page + 1, limit: limit }));
+			case 'next': dispatch(admingetTicket({ status: "COMPLETED", page: pagination?.page + 1, limit: limit }));
 				break;
 			case 'limit':
 				if (data) {
 					setLimit(data.target.value);
 					// @ts-ignore
-					dispatch(admingetTicket({ limit: data.target.value }));
-				}
+					dispatch(admingetTicket({ status: "COMPLETED", limit: data.target.value }));
+				};
+				break;
+			case 'ticketType':
+				// @ts-ignore
+				dispatch(admingetTicket({ status: "COMPLETED", ticketType: ticketType }));
+				break;
+			case 'status':
+				// @ts-ignore
+				dispatch(admingetTicket({ status: status }));
+				break;
+			case 'date':
+				// @ts-ignore
+				dispatch(admingetTicket({ status: "COMPLETED", startDate: startDate, endDate: endDate }));
 				break;
 			default:
 				// For page numbers or any other custom actions
 				const pageNumber = parseInt(type);
 				if (!isNaN(pageNumber)) {
 					// @ts-ignore
-					dispatch(getItTicketParameter({ page: pageNumber, limit: limit }));
+					dispatch(admingetTicket({ status: "COMPLETED", page: pageNumber, limit: limit }));
 				}
 				break;
 		}
 	}
+
+	useEffect(() => {
+		const result: any = admingetticketdata?.tickets?.filter(
+			(data: any) =>
+				data?.status?.toLowerCase().includes(searchItem) ||
+				data?.ticketType?.toLowerCase().includes(searchItem) ||
+				data?.severity?.toLowerCase().includes(searchItem)
+		);
+		setData(result)
+	}, [admingetticketdata?.tickets, searchItem]);
 
 	return (
 		<div id="page-wrapper">
@@ -88,22 +101,25 @@ const SuperOpenTicket = () => {
 					setSearchItem={setSearchItem}
 					searchItem={searchItem}
 					data={admingetticketdata?.tickets}
-					entriesPerPage={entriesPerPage}
-					setEntriesPerPage={setEntriesPerPage}
 					filter={true}
 					setStartDates={setStartDates}
 					setEndDates={setEndDates}
 					setShow={setShow}
 					show={show}
 					handlePagination={handlePagination}
-				// handleCustomFilters={handleCustomFilters}
+					report={false}
+					setTicketType={setTicketType}
+					ticketType={ticketType}
+					setStatus={setStatus}
+					status={status}
+					statusFilter={false}
 				/>
 
-				<div className='mt-4'>
+				<div>
 					<TicketTableComponent
 						TYPE={false}
 						pagination={admingetticketdata}
-						data={admingetticketdata?.tickets}
+						data={data}
 						isLoading={admingetticketisLoading}
 						handlePagination={handlePagination}
 						colSpan={8}

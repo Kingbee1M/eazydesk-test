@@ -8,9 +8,9 @@ import ModalHeader from './Modals/ModalHeader';
 import { customStyles } from './Options';
 import { ticketstatus, tickettype } from './Data';
 
-const FilterModal = ({ setEndDates, setStartDates, handleCustomFilters, show, setShow, handlePagination }: any) => {
+const FilterModal = ({ setEndDates, setStartDates, show, setShow, handlePagination, report, setTicketType, ticketType, setStatus, status, statusFilter }: any) => {
 
-	const handleClose = () => setShow(false);
+
 	const handleShow = (e: { preventDefault: () => void; }) => {
 		e.preventDefault();
 		setShow(true);
@@ -153,32 +153,31 @@ const FilterModal = ({ setEndDates, setStartDates, handleCustomFilters, show, se
 							</div>
 						</form>
 					</div>
-					<div className='mb-4 mt-4'>
-						<label className='label-side'>Select by Status</label>
-						<Select name="Select by Status" id="register-select"
-							// value={assignedUserId}
-							// onChange={handleSelectedChange1}
-							options={ticketstatus}
-							// isDisabled={ITgetallReguserisLoading}
-							// isLoading={ITgetallReguserisLoading}
-							styles={customStyles}
-						/>
-					</div>
-					<div className='mb-4 mt-4'>
-						<label className='label-side'>Select by Ticket Type</label>
-						<Select name="Select by Status" id="register-select"
-							// value={assignedUserId}
-							// onChange={handleSelectedChange1}
-							options={tickettype}
-							// isDisabled={ITgetallReguserisLoading}
-							// isLoading={ITgetallReguserisLoading}
-							styles={customStyles}
-						/>
-					</div>
+					{statusFilter &&
+						<div className='mb-4 mt-4'>
+							<label className='label-side'>Select by Status</label>
+							<Select name="Select by Status" id="register-select"
+								value={status.value}
+								onChange={(selectedOption) => setStatus(selectedOption.value)}
+								options={ticketstatus}
+								styles={customStyles}
+							/>
+						</div>}
+					{report &&
+						<div className='mb-4 mt-4'>
+							<label className='label-side'>Select by Ticket Type</label>
+							<Select name="Select by Status" id="register-select"
+								value={ticketType.value}
+								onChange={(selectedOption) => setTicketType(selectedOption.value)}
+								options={tickettype}
+								styles={customStyles}
+							/>
+						</div>}
+
 					<button
 						id='custom-btn'
 						className="mt-4"
-						onClick={handleCustomFilters}>
+						onClick={() => handlePagination(ticketType ? "ticketType" : status ? 'status' : "date")}>
 						Filter
 					</button>
 				</Modal.Body>

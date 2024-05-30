@@ -18,10 +18,7 @@ const ITOpenTicket = () => {
 	const [show, setShow] = useState(false);
 	const [searchItem, setSearchItem] = useState("");
 	const [limit, setLimit] = useState<any>(10);
-	endDates = new Date();
-	const formattedEndDate = endDates.toISOString().split('T')[0]; // Extracting date part and removing time
-	const [startDate1] = useState(formattedEndDate);
-	const [endDate1] = useState(formattedEndDate);
+
 	const [data] = useState<any>([]);
 
 
@@ -57,7 +54,7 @@ const ITOpenTicket = () => {
 		const datas = { status: "COMPLETED" };
 		// @ts-ignore 
 		dispatch(getItTicketParameter(datas))
-	}, [dispatch, endDate1])
+	}, [dispatch])
 
 
 
@@ -84,7 +81,6 @@ const ITOpenTicket = () => {
 					setShow={setShow}
 					show={show}
 					handlePagination={handlePagination}
-				// handleCustomFilters={handleCustomFilters}
 				/>
 
 				<div className='mt-4'>

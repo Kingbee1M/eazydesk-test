@@ -47,7 +47,6 @@ const SuperProfileDropDown = () => {
 			navigate("/");
 			socket.disconnect()
 			dispatch(reset());
-			socket.disconnect()
 		}
 	}, [dataService, dispatch, navigate, socket, userInfo]);
 

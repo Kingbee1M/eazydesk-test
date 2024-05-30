@@ -2,9 +2,7 @@ import Modal from 'react-bootstrap/Modal';
 import { customId, customStyles } from '../Options';
 import ModalHeader from './ModalHeader';
 import { useNavigate } from 'react-router-dom';
-
 import { useEffect, useState } from 'react';
-
 import { ToastContainer, toast } from 'react-toastify';
 import { SVGLoader } from '../SVGLoader';
 import Select from 'react-select'
