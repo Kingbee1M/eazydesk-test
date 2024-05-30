@@ -1,7 +1,5 @@
-import React from "react";
 import { FaArrowRight } from "react-icons/fa6";
-import { GoPlusCircle } from "react-icons/go";
-import { IoCheckmarkCircle } from "react-icons/io5";
+
 
 const PricingCardsContainer = () => (
   <div className='pricing_card_container'>

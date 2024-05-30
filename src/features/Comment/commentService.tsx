@@ -2,6 +2,8 @@
 import createHttpService from "../../helpers/HttpService";
 
 
+
+
 const getComment = async (id: any) => {
 	const HttpService = createHttpService();
 	const { data }: any = await HttpService.get(`/api/v2/comment/${id}`)

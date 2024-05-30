@@ -269,16 +269,44 @@ table th {
   box-shadow: var(--box-shadow);
  
 }
- 
-
+   .dash_statistics_container1 {
+        display: flex;
+        	justify-content: space-between;
+        margin-top: 28px;
+        gap: 22px;
+    }
+@media screen and (max-width: 1080px) {
+    .dash_statistics_container1 {
+        display: flex;
+        flex-direction: column;
+        margin-top: 2px;
+        gap: 22px;
+    }
+}
  
 
 /* --- Media Queries --- */
 @media only screen and (max-width: 835px) {
+  .hero-search {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 1rem;
+}
   .hero-search-container {
     width: 100%;
   }
 
+ 
+#dashboard {
+    display: grid !important;
+    position: relative;
+    height: 100dvh !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: 200px 1fr !important;
+    grid-template-areas:
+        "client-header "
+        "main";
+}
  }
  
 

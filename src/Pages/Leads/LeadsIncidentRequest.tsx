@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { HiOutlineSearch } from 'react-icons/hi';
-import { RiAlarmWarningFill } from 'react-icons/ri';
-import { Modal } from 'react-bootstrap';
 // import TicketForm from '../components/TicketForm';
-import { useNavigate } from "react-router-dom";
 import LeadsHeader from '../../components/LeadsHeader';
-import SearchConponent from '../../components/SearchConponent';
 import TicketTableComponent from '../../components/Table/TicketTableComponent';
-import { data } from '../../components/StateData';
 import { EntriesPerPage } from '../../components/Options';
 import IncidentRequestModal from '../../components/TicketModals/IncidentRequestModal';
 import { useAppDispatch, useAppSelector } from '../../store/useStore';
@@ -44,7 +39,7 @@ const LeadsIncidentRequest = () => {
 	});
 
 
-
+	// console.log('data', data)
 
 
 

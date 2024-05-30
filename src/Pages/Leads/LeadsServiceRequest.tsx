@@ -6,17 +6,16 @@ import ServiceRequestModal from '../../components/TicketModals/ServiceRequestMod
 import { useAppDispatch, useAppSelector } from '../../store/useStore';
 import { getTicket } from '../../features/Ticket/ticketSlice';
 import TicketTableComponent from '../../components/Table/TicketTableComponent';
-// import TableLoader from '../../components/TableLoader';
+
 
 
 
 const LeadsServiceRequest = () => {
-	// setLimit
+
 	const [limit,] = useState<any>(10);
 	const dispatch = useAppDispatch();
-	const { data, isLoading } = useAppSelector((state: any) => state.ticket)
-	const { createisSuccess } = useAppSelector((state: any) => state.ticket)
-	// const data = ticket?.tickets?.filter((ticket: any) => ticket?.ticketType?.includes("SERVICE"));
+	const { data, isLoading, createisSuccess } = useAppSelector((state: any) => state.ticket)
+
 
 
 
@@ -38,36 +37,11 @@ const LeadsServiceRequest = () => {
 	});
 
 	useEffect(() => {
-		// setDisplayData(data?.slice(pagesVisited, pagesVisited + usersPerPage));
 		localStorage.setItem("rowsPerPage", entriesPerPage);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [entriesPerPage]);
 
-	// const handlePagination = (type: string, data?: React.ChangeEvent<HTMLSelectElement> | undefined) => {
-	// 	switch (type) {
-	// 		// @ts-ignore
-	// 		case 'prev': dispatch(getTicket({ page: pagination?.page - 1, limit: limit }));
-	// 			break;
-	// 		// @ts-ignore
-	// 		case 'next': dispatch(getTicket({ page: pagination?.page + 1, limit: limit }));
-	// 			break;
-	// 		case 'limit':
-	// 			if (data) {
-	// 				setLimit(data.target.value);
-	// 				// @ts-ignore
-	// 				dispatch(getTicket({ limit: data.target.value }));
-	// 			}
-	// 			break;
-	// 		default:
-	// 			// For page numbers or any other custom actions
-	// 			const pageNumber = parseInt(type);
-	// 			if (!isNaN(pageNumber)) {
-	// 				// @ts-ignore
-	// 				dispatch(getTicket({ page: pageNumber, limit: limit, ticketType: "SERVICE" }));
-	// 			}
-	// 			break;
-	// 	}
-	// }
+
 
 
 	useEffect(() => {
