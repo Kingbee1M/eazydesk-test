@@ -7,12 +7,18 @@ import { customId } from "./Options";
 import { editProfile, reset } from "../features/Registration/registrationSlice";
 import { HiUserCircle } from "react-icons/hi";
 
-
 const GeneralInformation = () => {
   const dispatch = useAppDispatch();
-  const { editProfileisSuccess, editProfileisLoading } = useAppSelector((state: any) => state.reg);
+  const { editProfileisSuccess, editProfileisLoading } = useAppSelector(
+    (state: any) => state.reg
+  );
   // @ts-ignore
   const userInfo = JSON.parse(localStorage.getItem("service_desk"));
+  const [isReadOnly, setIsReadOnly] = useState(true);
+
+  const toggleReadOnly = () => {
+    setIsReadOnly(!isReadOnly);
+  };
 
   const [input, setInput] = useState<any>({
     firstname: "",
@@ -21,9 +27,6 @@ const GeneralInformation = () => {
     emailaddress: "",
     role: "",
   });
-
-
-
 
   useEffect(() => {
     setInput((prevState: any) => {
@@ -52,23 +55,23 @@ const GeneralInformation = () => {
     }));
   };
 
-
-
   const handleUpdateUser = (e: { preventDefault: () => void }) => {
-
     e.preventDefault();
+    setIsReadOnly(!isReadOnly);
     // @ts-ignore
     dispatch(editProfile(input));
   };
   useEffect(() => {
     if (editProfileisSuccess) {
+      // setIsReadOnly(true);
       toast.success("Profile Updated!", { toastId: customId });
       // setShowEdit(false);
     }
     setTimeout(() => {
       dispatch(reset());
+      // setIsReadOnly(false);
     }, 1000);
-  }, [editProfileisSuccess, dispatch]);
+  }, [editProfileisSuccess, setIsReadOnly, isReadOnly, dispatch]);
 
   return (
     <div className='settings_main_after'>
@@ -77,13 +80,13 @@ const GeneralInformation = () => {
         <h3>General Information</h3>
         <p>Manage your account settings</p>
       </div>
-      <h5 className='settings_main_profile_title'>Profile Picture</h5>
+      <h5 className='settings_main_profile_title'>Profile</h5>
 
       {/* settings  profile */}
       <div className='settings_profile_title_container'>
         {/* <div className='settings_profile_title'> */}
 
-        <span className='  profile_img'  >
+        <span className='  profile_img'>
           <HiUserCircle size={40} />
         </span>
         {/* </div> */}
@@ -93,6 +96,11 @@ const GeneralInformation = () => {
           </h6>
           <p>{input?.role}</p>
         </div>
+        {isReadOnly && (
+          <button onClick={toggleReadOnly} className='btn'>
+            Edit
+          </button>
+        )}
       </div>
 
       {/* form */}
@@ -106,6 +114,7 @@ const GeneralInformation = () => {
                 placeholder='E.g: John '
                 value={input?.firstname}
                 onChange={(e) => handleChange("firstname", e.target.value)}
+                readOnly={isReadOnly}
                 required
               />
             </div>
@@ -116,6 +125,7 @@ const GeneralInformation = () => {
                 placeholder='E.g:  Smith'
                 value={input?.lastname}
                 onChange={(e) => handleChange("lastname", e.target.value)}
+                readOnly={isReadOnly}
                 required
               />
             </div>
@@ -126,8 +136,8 @@ const GeneralInformation = () => {
                 placeholder='xyz@gmail.com'
                 value={input?.emailaddress}
                 onChange={(e) => handleChange("emailaddress", e.target.value)}
+                readOnly={isReadOnly}
                 required
-                readOnly
               />
             </div>
             <div className='input__box'>
@@ -137,7 +147,7 @@ const GeneralInformation = () => {
                 placeholder='123-098-345-09'
                 value={input?.phonenumber}
                 onChange={(e) => handleChange("phonenumber", e.target.value)}
-                required
+                readOnly={isReadOnly}
               />
             </div>
             <div className='input__box'>
@@ -152,7 +162,11 @@ const GeneralInformation = () => {
               />
             </div>
           </div>
-          <button className='btn'>{editProfileisLoading ? <Spinner size="sm" /> : "Update"}</button>
+          {!isReadOnly && (
+            <button className='btn'>
+              {editProfileisLoading ? <Spinner size='sm' /> : "Update"}
+            </button>
+          )}
         </form>
       </div>
     </div>
