@@ -11,37 +11,55 @@ import TicketHeaderList from '../../../components/TicketHeaders/TicketHeaderList
 
 const ITClosedTicket = () => {
 	const dispatch = useAppDispatch();
-	const { itticketparameterdata, itticketparameterisLoading } = useAppSelector((state: any) => state.ticket)
-	const [entriesPerPage, setEntriesPerPage] = useState(() => { return "6" });
-	const [startDates, setStartDates] = useState([]);
-	let [endDates, setEndDates] = useState<any>([]);
+	const { itticketparameterdata, itticketparameterisLoading, itticketparameterSuccess } = useAppSelector((state: any) => state.ticket)
+	const [endDate, setEndDates] = useState<any>([]);
 	const [show, setShow] = useState(false);
+	const [startDate, setStartDates] = useState([]);
 	const [searchItem, setSearchItem] = useState("");
-	const [limit, setLimit] = useState<any>(10);
-	endDates = new Date();
-	const formattedEndDate = endDates.toISOString().split('T')[0]; // Extracting date part and removing time
-	const [startDate1] = useState(formattedEndDate);
-	const [endDate1] = useState(formattedEndDate);
-	const [data] = useState<any>([]);
+	const [limit, setLimit] = useState<any>(8);
+	const [ticketType, setTicketType] = useState("");
+	const [status, setStatus] = useState("");
+	const [data, setData] = useState([]);
+	const pagination = itticketparameterdata?.pagination
 
 
 
+
+	useEffect(() => {
+		const datas = { status: "CLOSED" };
+		// @ts-ignore 
+		dispatch(getItTicketParameter(datas))
+
+	}, [dispatch, itticketparameterSuccess])
 
 
 	const handlePagination = (type: string, data?: React.ChangeEvent<HTMLSelectElement> | undefined) => {
+		setShow(false)
 		switch (type) {
 			// @ts-ignore
-			case 'prev': dispatch(getItTicketParameter({ page: pagination?.page - 1, limit: limit }));
+			case 'prev': dispatch(getItTicketParameter({ status: "CLOSED", page: pagination?.page - 1, limit: limit }));
 				break;
 			// @ts-ignore
-			case 'next': dispatch(getItTicketParameter({ page: pagination?.page + 1, limit: limit }));
+			case 'next': dispatch(getItTicketParameter({ status: "CLOSED", page: pagination?.page + 1, limit: limit }));
 				break;
 			case 'limit':
 				if (data) {
 					setLimit(data.target.value);
 					// @ts-ignore
-					dispatch(getItTicketParameter({ limit: data.target.value }));
-				}
+					dispatch(getItTicketParameter({ status: "CLOSED", limit: data.target.value }));
+				};
+				break;
+			case 'ticketType':
+				// @ts-ignore
+				dispatch(getItTicketParameter({ status: "CLOSED", ticketType: ticketType }));
+				break;
+			case 'status':
+				// @ts-ignore
+				dispatch(getItTicketParameter({ status: status }));
+				break;
+			case 'date':
+				// @ts-ignore
+				dispatch(getItTicketParameter({ status: "CLOSED", startDate: startDate, endDate: endDate }));
 				break;
 			default:
 				// For page numbers or any other custom actions
@@ -54,13 +72,18 @@ const ITClosedTicket = () => {
 		}
 	}
 
-	// useEffect(() => {
-	// 	const datas = { status: "CLOSED" };
+	useEffect(() => {
+		const result: any = itticketparameterdata?.tickets?.filter(
+			(data: any) =>
+				data?.status?.toLowerCase().includes(searchItem) ||
+				data?.ticketType?.toLowerCase().includes(searchItem) ||
+				data?.severity?.toLowerCase().includes(searchItem)
+		);
+		setData(result)
+	}, [itticketparameterdata?.tickets, searchItem]);
 
-	// 	// @ts-ignore 
-	// 	dispatch(getItTicketParameter(datas))
 
-	// }, [dispatch])
+
 
 	return (
 		<div id="page-wrapper">
@@ -76,15 +99,18 @@ const ITClosedTicket = () => {
 					setSearchItem={setSearchItem}
 					searchItem={searchItem}
 					data={itticketparameterdata?.tickets}
-					entriesPerPage={entriesPerPage}
-					setEntriesPerPage={setEntriesPerPage}
 					filter={true}
 					setStartDates={setStartDates}
 					setEndDates={setEndDates}
 					setShow={setShow}
 					show={show}
 					handlePagination={handlePagination}
-				// handleCustomFilters={handleCustomFilters}
+					report={false}
+					setTicketType={setTicketType}
+					ticketType={ticketType}
+					setStatus={setStatus}
+					status={status}
+					statusFilter={false}
 				/>
 
 				<div className='mt-4'>
@@ -92,7 +118,7 @@ const ITClosedTicket = () => {
 						TYPE={false}
 						pagination={itticketparameterdata}
 						handlePagination={handlePagination}
-						data={itticketparameterdata?.tickets}
+						data={data}
 						isLoading={itticketparameterisLoading}
 						colSpan={8}
 					/>

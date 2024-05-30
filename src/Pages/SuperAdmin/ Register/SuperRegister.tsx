@@ -14,60 +14,32 @@ import SuperBottomNavigation from '../../../components/BottomNavigation/SuperBot
 
 
 
-const SuperRegister = ({ switchs }: any) => {
-	// @ts-ignore 
-	const userInfo = JSON.parse(localStorage.getItem("service_desk"));
+const SuperRegister = () => {
 	const [limit, setLimit] = useState<any>(8);
 	const [showEditUser, setShowEditUser] = useState(false)
 	const dispatch = useAppDispatch();
-	const { superallReguserdata, superallReguserisLoading } = useAppSelector((state: any) => state.reg);
-	const { isSuccess } = useAppSelector((state) => state.reg)
-	const { edituserisSuccess } = useAppSelector((state: any) => state.reg);
-
+	const { superallReguserdata, superallReguserisLoading, isSuccess, edituserisSuccess } = useAppSelector((state: any) => state.reg);
+	const [searchItem, setSearchItem] = useState("");
+	const [ticketType, setTicketType] = useState("");
+	const [status, setStatus] = useState("");
 	const pagination = superallReguserdata?.data?.pagination
 	const users = superallReguserdata?.data?.users
-
-
-
-
-	// --- Pagination --- //
-	const [entriesPerPage, setEntriesPerPage] = useState(() => {
-		return localStorage.getItem("reportsPerPages") || "8";
-	});
 	const [data, setRealData] = useState<any>([]);
-	const [searchItem, setSearchItem] = useState("");
-	const [startDates, setStartDates] = useState([]);
-	let [endDates, setEndDates] = useState<any>([]);
+	const [startDate, setStartDates] = useState([]);
+	let [endDate, setEndDates] = useState<any>([]);
 	const [show, setShow] = useState(false);
-	const [datas, setDatas] = useState([]);
-
-
-	endDates = new Date();
-	const formattedEndDate = endDates.toISOString().split('T')[0]; // Extracting date part and removing time
-	const [startDate1] = useState(formattedEndDate);
-	const [endDate1] = useState(formattedEndDate);
 
 
 
-
-
-
-	// Data Fetching (Conditional) Effect
 	useEffect(() => {
+		// Fetch data when the component is mounted or dispatch changes 
+		dispatch(superallReguser());
 		if (isSuccess || edituserisSuccess) {
 			// If success is true, fetch data again
-			dispatch(superallReguser());
-		} else {
-			// Fetch data when the component is mounted or dispatch changes 
 			dispatch(superallReguser());
 		}
 	}, [dispatch, edituserisSuccess, isSuccess]);
 
-	// Local Storage Effect
-	useEffect(() => {
-		// Update the 'reportsPerPages' item in local storage when entriesPerPage changes
-		localStorage.setItem("reportsPerPages", entriesPerPage);
-	}, [entriesPerPage]);
 
 
 
@@ -80,9 +52,7 @@ const SuperRegister = ({ switchs }: any) => {
 	}, [superallReguserdata, searchItem]);
 
 
-	useEffect(() => {
-		dispatch(superallReguser())
-	}, [dispatch])
+
 
 	const handlePagination = (type: string, data?: React.ChangeEvent<HTMLSelectElement> | undefined) => {
 		switch (type) {
@@ -96,7 +66,7 @@ const SuperRegister = ({ switchs }: any) => {
 				if (data) {
 					setLimit(data.target.value);
 					// @ts-ignore
-					// dispatch(superallReguser({ limit: data.target.value }));
+					dispatch(superallReguser({ limit: data.target.value }));
 				}
 				break;
 			default:
@@ -104,7 +74,7 @@ const SuperRegister = ({ switchs }: any) => {
 				const pageNumber = parseInt(type);
 				if (!isNaN(pageNumber)) {
 					// @ts-ignore
-					// dispatch(superallReguser({ page: pageNumber, limit: limit }));
+					dispatch(superallReguser({ page: pageNumber, limit: limit }));
 				}
 				break;
 		}
@@ -128,9 +98,7 @@ const SuperRegister = ({ switchs }: any) => {
 					placeholder={"Search registered users"}
 					setSearchItem={setSearchItem}
 					searchItem={searchItem}
-					data={superallReguserdata?.users}
-					entriesPerPage={entriesPerPage}
-					setEntriesPerPage={setEntriesPerPage}
+					data={users}
 					filter={true}
 					setStartDates={setStartDates}
 					setEndDates={setEndDates}
@@ -138,11 +106,15 @@ const SuperRegister = ({ switchs }: any) => {
 					show={show}
 					handlePagination={handlePagination}
 					RegModal={true}
-				// handleCustomFilters={handleCustomFilters}
+					setTicketType={setTicketType}
+					ticketType={ticketType}
+					setStatus={setStatus}
+					status={status}
+					statusFilter={false}
 				/>
 				<div className='table-container mt-4'>
 					{superallReguserisLoading && <TableLoader isLoading={superallReguserisLoading} />}
-					<table id="table" className={switchs ? "table" : " table-hover table-mc-light-blue"}>
+					<table id="table" className={"table-hover table-mc-light-blue"}>
 						<thead>
 							<tr>
 								<th>First Name</th>
@@ -183,7 +155,7 @@ const SuperRegister = ({ switchs }: any) => {
 					</table>
 				</div>
 				<footer className="main-table-footer">
-					{pagination?.pagination?.totalTickets > 1 && <div className="totalResponses">
+					{pagination?.totalUsers > 1 && <div className="totalResponses">
 						<h3>Total of {pagination?.totalUsers} Tickets - <span>Page {pagination?.page} of {pagination?.totalPages}</span></h3>
 						<RealPagination handlePagination={handlePagination} pagination={pagination} />
 					</div>}

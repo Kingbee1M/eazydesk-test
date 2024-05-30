@@ -38,7 +38,7 @@ const StatusModal = ({ viewdata, id, isTeamLead }: any) => {
 	const handleUpdateTicketStatus = (e: any) => {
 		const datas = { id, inputs }
 		e.preventDefault();
-		if (inputs === "CLOSED" || inputs === "REOPENED") {
+		if (inputs === "CLOSED" || inputs === "REOPEN") {
 			// @ts-ignore 
 			dispatch(updateLeadTicket(datas));
 		} else {
@@ -54,7 +54,6 @@ const StatusModal = ({ viewdata, id, isTeamLead }: any) => {
 	return (
 		<div>
 			<ToastContainer position="top-right" containerId={"custom123"} />
-
 			<div className="chat_update_container">
 				<div className='mobile_login_text_container' onClick={() => setShow(true)}>
 					<HiMenuAlt3 />
@@ -69,11 +68,11 @@ const StatusModal = ({ viewdata, id, isTeamLead }: any) => {
 				<Modal.Body>
 					<div className="tp-shared-container1">
 						<div>
-							{[viewdata]?.map((item: any, i: any) => (
+							{[viewdata]?.map((item: any) => (
 								item?.status === "INPROGRESS" ? (
 									<div className="finalStatus-assigned">
 										IN PROGRESS</div>
-								) : item?.status === "REOPENED" ? (
+								) : item?.status === "REOPEN" ? (
 									<div className="finalStatus-reopned">
 										{item?.status}
 									</div>
@@ -133,7 +132,7 @@ const StatusModal = ({ viewdata, id, isTeamLead }: any) => {
 										onChange={(e) => setinputs(e.target.value)}>
 										<option value=""> </option>
 										<option value="CLOSED">Closed</option>
-										{viewdata?.status === "COMPLETED" && <option value="REOPENED">Reopen</option>}
+										{viewdata?.status === "COMPLETED" && <option value="REOPEN">Reopen</option>}
 
 									</select>
 									<button type="submit" id="custom-btn" disabled={false} onClick={handleUpdateTicketStatus}>

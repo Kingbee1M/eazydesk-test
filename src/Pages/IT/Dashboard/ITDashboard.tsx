@@ -18,16 +18,10 @@ const ITDashboard = () => {
 	const { dashBoardInfodata, itassignisSuccess } = useAppSelector((state: any) => state.ticket);
 
 
-
-
 	useEffect(() => {
 		dispatch(dashBoardInfo())
-		if (dashBoardInfodata) {
-			localStorage.setItem('dashBoardInfo', JSON.stringify(dashBoardInfodata));
-		}
 		if (itassignisSuccess) {
 			dispatch(dashBoardInfo())
-			localStorage.setItem('dashBoardInfo', JSON.stringify(dashBoardInfodata));
 		}
 	}, [dispatch, itassignisSuccess])
 

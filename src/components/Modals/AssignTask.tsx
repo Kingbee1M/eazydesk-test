@@ -29,6 +29,8 @@ const AssignTask = ({ id, Assigned, needsApproval, data }: any) => {
 	})) || [];
 
 
+
+
 	//@ts-ignore
 	const formData = { "assignedUserId": assignedUserId?.value }
 	const handleSubmit = (e: any) => {
@@ -77,7 +79,6 @@ const AssignTask = ({ id, Assigned, needsApproval, data }: any) => {
 				<Modal.Body>
 					<form onSubmit={handleSubmit}>
 						<div className='mb-4'>
-							{/* <label className='label-side'>Assigned To</label> */}
 							<Select name="AssignedTo" id="register-select"
 								value={assignedUserId}
 								onChange={handleSelectedChange1}

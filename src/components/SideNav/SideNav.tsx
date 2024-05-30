@@ -52,6 +52,8 @@ const SideNav = () => {
   const inprogress = dashBoardInfodata?.totals?.status?.inprogress
   const open = dashBoardInfodata?.totals?.status?.open
 
+  // console.log('dashBoardInfodata', dashBoardInfodata)
+
 
   return (
     <div id="side-nav">

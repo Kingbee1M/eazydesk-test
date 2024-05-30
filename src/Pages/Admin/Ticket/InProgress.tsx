@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
-import Header from "../../../components/Header";
-import BottomNavigation from "../../../components/BottomNavigation";
 import SearchConponent from "../../../components/SearchConponent";
 import SideNav from "../../../components/SideNav/SideNav";
-import AdminTicketTable from "./AdminTicketTable";
 import { useAppDispatch, useAppSelector } from "../../../store/useStore";
-import moment from "moment";
 import { admingetTicket } from "../../../features/Ticket/ticketSlice";
 import TicketTableComponent from "../../../components/Table/TicketTableComponent";
 import AdminHeader from "../../../components/Headers/AdminHeader";
@@ -14,29 +10,73 @@ import AdminTicketHeader from "../../../components/TicketHeaders/AdminTicketHead
 
 const InProgress = () => {
   const dispatch = useAppDispatch();
-  const { itassignisSuccess } = useAppSelector((state: any) => state.ticket);
-  const [entriesPerPage, setEntriesPerPage] = useState(() => {
-    return "6";
-  });
-
-  const [startDates, setStartDates] = useState([]);
-  let [endDates, setEndDates] = useState<any>([]);
+  const [limit, setLimit] = useState<any>(8);
+  const { itassignisSuccess, admingetticketdata, admingetticketisLoading } = useAppSelector((state: any) => state.ticket);
   const [show, setShow] = useState(false);
-  const [datas, setDatas] = useState([]);
+  const [startDate, setStartDates] = useState([]);
+  const [endDate, setEndDates] = useState<any>([]);
+  const [status, setStatus] = useState("");
+  const [ticketType, setTicketType] = useState("");
+  const [data, setData] = useState([]);
   const [searchItem, setSearchItem] = useState("");
-  const { admingetticketdata, admingetticketisLoading } = useAppSelector(
-    (state: any) => state.ticket
-  );
-  endDates = new Date();
-  const formattedEndDate = endDates.toISOString().split("T")[0];
-  const [startDate1] = useState(formattedEndDate);
-  const [endDate1] = useState(formattedEndDate);
+  const pagination = admingetticketdata?.pagination
+
+
 
   useEffect(() => {
     const datas = { status: "INPROGRESS" };
     // @ts-ignore
     dispatch(admingetTicket(datas));
-  }, [dispatch, endDate1, startDate1, itassignisSuccess]);
+  }, [dispatch, itassignisSuccess]);
+
+  const handlePagination = (type: string, data?: React.ChangeEvent<HTMLSelectElement> | undefined) => {
+    setShow(false)
+    switch (type) {
+      // @ts-ignore
+      case 'prev': dispatch(admingetTicket({ status: "INPROGRESS", page: pagination?.page - 1, limit: limit }));
+        break;
+      // @ts-ignore
+      case 'next': dispatch(admingetTicket({ status: "INPROGRESS", page: pagination?.page + 1, limit: limit }));
+        break;
+      case 'limit':
+        if (data) {
+          setLimit(data.target.value);
+          // @ts-ignore
+          dispatch(admingetTicket({ status: "INPROGRESS", limit: data.target.value }));
+        };
+        break;
+      case 'ticketType':
+        // @ts-ignore
+        dispatch(admingetTicket({ status: "INPROGRESS", ticketType: ticketType }));
+        break;
+      case 'status':
+        // @ts-ignore
+        dispatch(admingetTicket({ status: status }));
+        break;
+      case 'date':
+        // @ts-ignore
+        dispatch(admingetTicket({ status: "INPROGRESS", startDate: startDate, endDate: endDate }));
+        break;
+      default:
+        // For page numbers or any other custom actions
+        const pageNumber = parseInt(type);
+        if (!isNaN(pageNumber)) {
+          // @ts-ignore
+          dispatch(admingetTicket({ status: "INPROGRESS", page: pageNumber, limit: limit }));
+        }
+        break;
+    }
+  }
+
+  useEffect(() => {
+    const result: any = admingetticketdata?.tickets?.filter(
+      (data: any) =>
+        data?.status?.toLowerCase().includes(searchItem) ||
+        data?.ticketType?.toLowerCase().includes(searchItem) ||
+        data?.severity?.toLowerCase().includes(searchItem)
+    );
+    setData(result)
+  }, [admingetticketdata?.tickets, searchItem]);
 
   return (
     <div id='page-wrapper'>
@@ -51,21 +91,26 @@ const InProgress = () => {
           placeholder={"search ticket report"}
           setSearchItem={setSearchItem}
           searchItem={searchItem}
-          data={datas}
-          entriesPerPage={entriesPerPage}
-          setEntriesPerPage={setEntriesPerPage}
+          data={data}
           filter={true}
           setStartDates={setStartDates}
           setEndDates={setEndDates}
           setShow={setShow}
           show={show}
-        // handleCustomFilters={handleCustomFilters}
+          handlePagination={handlePagination}
+          report={false}
+          setTicketType={setTicketType}
+          ticketType={ticketType}
+          setStatus={setStatus}
+          status={status}
+          statusFilter={false}
         />
 
-        <div className='mt-4'>
+        <div >
           <TicketTableComponent
             TYPE={false}
-            data={admingetticketdata?.tickets}
+            data={data}
+            handlePagination={handlePagination}
             isLoading={admingetticketisLoading}
             colSpan={8}
           />

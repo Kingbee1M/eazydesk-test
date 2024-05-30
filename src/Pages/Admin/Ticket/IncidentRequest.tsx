@@ -13,22 +13,16 @@ import AdminTicketHeader from '../../../components/TicketHeaders/AdminTicketHead
 
 const IncidentRequest = () => {
 	const dispatch = useAppDispatch();
-	const { itassignisSuccess } = useAppSelector((state: any) => state.ticket);
-	const { admingetticketdata, admingetticketisLoading } = useAppSelector((state: any) => state.ticket)
-
-	const [entriesPerPage, setEntriesPerPage] = useState(() => {
-		return "6";
-	});
-
-	const [startDates, setStartDates] = useState([]);
-	let [endDates, setEndDates] = useState<any>([]);
+	const [limit, setLimit] = useState<any>(8);
+	const { itassignisSuccess, admingetticketdata, admingetticketisLoading } = useAppSelector((state: any) => state.ticket);
+	const [startDate, setStartDates] = useState([]);
+	const [endDate, setEndDates] = useState<any>([]);
 	const [show, setShow] = useState(false);
 	const [searchItem, setSearchItem] = useState("");
-
-	endDates = new Date();
-	const formattedEndDate = endDates.toISOString().split('T')[0]; // Extracting date part and removing time
-	const [startDate1] = useState(formattedEndDate);
-	const [endDate1] = useState(formattedEndDate);
+	const [ticketType, setTicketType] = useState("");
+	const [status, setStatus] = useState("");
+	const [data, setData] = useState([]);
+	const pagination = admingetticketdata?.pagination
 
 
 
@@ -37,8 +31,56 @@ const IncidentRequest = () => {
 		// @ts-ignore 
 		dispatch(admingetTicket(datas))
 
-	}, [dispatch, endDate1, startDate1, itassignisSuccess])
+	}, [dispatch, itassignisSuccess])
 
+	const handlePagination = (type: string, data?: React.ChangeEvent<HTMLSelectElement> | undefined) => {
+		setShow(false)
+		switch (type) {
+			// @ts-ignore
+			case 'prev': dispatch(admingetTicket({ ticketType: "INCIDENT", page: pagination?.page - 1, limit: limit }));
+				break;
+			// @ts-ignore
+			case 'next': dispatch(admingetTicket({ ticketType: "INCIDENT", page: pagination?.page + 1, limit: limit }));
+				break;
+			case 'limit':
+				if (data) {
+					setLimit(data.target.value);
+					// @ts-ignore
+					dispatch(admingetTicket({ ticketType: "INCIDENT", limit: data.target.value }));
+				};
+				break;
+			case 'ticketType':
+				// @ts-ignore
+				dispatch(admingetTicket({ ticketType: ticketType }));
+				break;
+			case 'status':
+				// @ts-ignore
+				dispatch(admingetTicket({ ticketType: "INCIDENT", status: status }));
+				break;
+			case 'date':
+				// @ts-ignore
+				dispatch(admingetTicket({ ticketType: "INCIDENT", startDate: startDate, endDate: endDate }));
+				break;
+			default:
+				// For page numbers or any other custom actions
+				const pageNumber = parseInt(type);
+				if (!isNaN(pageNumber)) {
+					// @ts-ignore
+					dispatch(admingetTicket({ ticketType: "INCIDENT", page: pageNumber, limit: limit }));
+				}
+				break;
+		}
+	}
+
+	useEffect(() => {
+		const result: any = admingetticketdata?.tickets?.filter(
+			(data: any) =>
+				data?.status?.toLowerCase().includes(searchItem) ||
+				data?.ticketType?.toLowerCase().includes(searchItem) ||
+				data?.severity?.toLowerCase().includes(searchItem)
+		);
+		setData(result)
+	}, [admingetticketdata?.tickets, searchItem]);
 
 	return (
 		<div id="page-wrapper">
@@ -53,21 +95,25 @@ const IncidentRequest = () => {
 					placeholder={"search ticket"}
 					setSearchItem={setSearchItem}
 					searchItem={searchItem}
-					data={admingetticketdata?.tickets}
-					entriesPerPage={entriesPerPage}
-					setEntriesPerPage={setEntriesPerPage}
+					data={data}
 					filter={true}
 					setStartDates={setStartDates}
 					setEndDates={setEndDates}
 					setShow={setShow}
 					show={show}
-				// handleCustomFilters={handleCustomFilters}
+					handlePagination={handlePagination}
+					report={false}
+					setTicketType={setTicketType}
+					ticketType={ticketType}
+					setStatus={setStatus}
+					status={status}
+					statusFilter={false}
 				/>
 
-				<div className='mt-4'>
+				<div >
 					<TicketTableComponent
 						TYPE={false}
-						data={admingetticketdata?.tickets}
+						data={data}
 						isLoading={admingetticketisLoading}
 						pagination={admingetticketdata}
 						colSpan={8}

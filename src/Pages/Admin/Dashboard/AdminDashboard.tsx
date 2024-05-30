@@ -1,6 +1,4 @@
-import Header from "../../../components/Header";
 import SideNav from "../../../components/SideNav/SideNav";
-import BottomNavigation from "../../../components/BottomNavigation";
 import dIcon1 from "../../../assets/DashboardIcons/Dicon1.svg";
 import dIcon2 from "../../../assets/DashboardIcons/Dicon2.svg";
 import dIcon3 from "../../../assets/DashboardIcons/Dicon3.svg";
@@ -26,9 +24,6 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     dispatch(dashBoardInfo())
-    if (dashBoardInfodata) {
-      localStorage.setItem('dashBoardInfo', JSON.stringify(dashBoardInfodata));
-    }
   }, [dispatch])
 
 
@@ -62,13 +57,11 @@ const AdminDashboard = () => {
   const statusList = [
     "Inprogress",
     "Service",
+    "Incident",
     "Change",
     "Approved",
     "Closed",
-    // 'Completed',
-    // 'Dissaproved',
     "Pending",
-    // 'Reopen'
   ];
 
   const types = !dashBoardInfodata
@@ -124,8 +117,7 @@ const AdminDashboard = () => {
             <div>
               <div className='total_card_flex_icon_source'>
                 <div className='total_card_ArrowUpSFill'>
-                  {" "}
-                  <p>Approved</p>{" "}
+                  <p>Approved</p>
                 </div>
                 <h3>{!approved ? 0 : approved}</h3>
               </div>
@@ -197,7 +189,6 @@ const AdminDashboard = () => {
           <div className='dash_statistics_sub1'>
             <div>
               <h3>Ticket</h3>
-              {/* <p>Summary</p> */}
             </div>
             <div>
               <DoughnutChat
@@ -212,7 +203,6 @@ const AdminDashboard = () => {
             <div className='dash_statistics_sub2_text'>
               <div>
                 <h3>Statistics</h3>
-                {/* <p>Revenue and Sales</p> */}
               </div>
               <div className='sta_color_container_main'>
                 <div className='sta_color_container'>
@@ -242,10 +232,8 @@ const AdminDashboard = () => {
           <div className='dashboard-first-card2 mb-2'>
             <div>
               <h5 className='dashboard-first-card-h'>Ticket Status & Types</h5>
-              {/* <p className='dashboard-first-card-p'>Teams with leads graph analysis</p> */}
             </div>
             <div className='dashboard-first-card-second-icon'>
-              {" "}
               <PiDotsSixVerticalBold size={20} />
             </div>
           </div>

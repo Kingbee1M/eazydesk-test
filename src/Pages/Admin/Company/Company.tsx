@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import SideNav from '../../../components/SideNav/SideNav';
-import Header from '../../../components/Header';
 import { SVGLoader } from '../../../components/SVGLoader';
 import { BsThreeDots } from 'react-icons/bs'
 import { TiUserOutline } from "react-icons/ti";

@@ -11,7 +11,6 @@ import { toast, ToastContainer } from "react-toastify";
 import { customId } from "../Options";
 import NotificationPopUp from "../Scoket/NotificationPopUp";
 import { getUserPrivileges } from "../../hooks/auth";
-
 import StatusModal from "./StatusModal";
 
 const TicketProgress = () => {
@@ -20,7 +19,6 @@ const TicketProgress = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const form: any = useRef();
-	const [ticket] = useState<any>({});
 	const [inputs, setinputs] = useState("")
 	const { viewdata } = useAppSelector((state: any) => state.ticket)
 	const { updateTicketisLoading, updateTicketisSuccess, updateTicketisError, updateTicketmessage } = useAppSelector((state: any) => state.ticket)
@@ -41,7 +39,9 @@ const TicketProgress = () => {
 		} else if (updateTicketisError) {
 			toast.error(updateTicketmessage, { toastId: customId });
 		}
-		dispatch(reset())
+		setTimeout(() => {
+			dispatch(reset())
+		}, 2000);
 	}, [dispatch, updateLeadTicketisError, updateLeadTicketisSuccess, updateLeadTicketmessage, updateTicketisError, updateTicketisSuccess, updateTicketmessage])
 
 	useEffect(() => {
@@ -64,7 +64,7 @@ const TicketProgress = () => {
 	const handleUpdateTicketStatus = (e: any) => {
 		const datas = { id, inputs }
 		e.preventDefault();
-		if (inputs === "CLOSED" || inputs === "REOPENED") {
+		if (inputs === "CLOSED" || inputs === "REOPEN") {
 			// @ts-ignore 
 			dispatch(updateLeadTicket(datas));
 		} else {
@@ -72,6 +72,8 @@ const TicketProgress = () => {
 			dispatch(updateTicket(datas));
 		}
 	};
+
+	console.log('ticket', viewdata)
 
 
 	return (
@@ -111,7 +113,7 @@ const TicketProgress = () => {
 								</p>
 							))}
 						</div>
-						<ProgressChat id={id} ticket={ticket} viewdata={viewdata} setInputs={setInputs} input={input} />
+						<ProgressChat id={id} viewdata={viewdata} setInputs={setInputs} input={input} />
 
 					</div>
 					<div className="tp-shared-section">
@@ -121,7 +123,7 @@ const TicketProgress = () => {
 									item?.status === "INPROGRESS" ? (
 										<div className="finalStatus-assigned">
 											IN PROGRESS</div>
-									) : item?.status === "REOPENED" ? (
+									) : item?.status === "REOPEN" ? (
 										<div className="finalStatus-reopned">
 											{item?.status}
 										</div>
@@ -181,24 +183,19 @@ const TicketProgress = () => {
 											onChange={(e) => setinputs(e.target.value)}>
 											<option value=""> </option>
 											<option value="CLOSED">Closed</option>
-											{viewdata?.status === "COMPLETED" && <option value="REOPENED">Reopen</option>}
+											{viewdata?.status === "COMPLETED" && <option value="REOPEN">Reopen</option>}
 
 										</select>
 										<button type="submit" id="custom-btn" disabled={false} onClick={handleUpdateTicketStatus}>
 											{updateTicketisLoading ? <SVGLoader width={"35px"} height={"35px"} color={"#fff"} /> : "Update"}
 										</button>
-									</form> : <form className="tp-update" ref={form}>
+									</form> : viewdata?.status === "COMPLETED" ? "" : <form className="tp-update" ref={form}>
 										<select
 											id="js-select"
 											value={inputs}
 											onChange={(e) => setinputs(e.target.value)}>
-											<option value="">
-											</option>
-											{ticket?.status === "COMPLETED" ? (
-												""
-											) : (
-												<option value="COMPLETED">Resolved</option>
-											)}
+											<option value=""> 	</option>
+											<option value="COMPLETED">Resolved</option>
 										</select>
 										<button type="submit" id="custom-btn" disabled={false}
 											onClick={handleUpdateTicketStatus}>

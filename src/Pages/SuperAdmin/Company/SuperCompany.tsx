@@ -17,9 +17,8 @@ import SuperHeader from '../../../components/Headers/SuperHeader';
 
 const SuperCompany = () => {
 	const dispatch = useAppDispatch();
-	const { data, isLoading } = useAppSelector((state: any) => state.company)
-	const { deleteisSuccess } = useAppSelector((state: any) => state.company)
-	const { updateisSuccess } = useAppSelector((state: any) => state.company);
+	const { data, isLoading, updateisSuccess, deleteisSuccess } = useAppSelector((state: any) => state.company)
+
 
 	const navigate = useNavigate();
 	const [selectedTeam, setSelectedTeam] = useState(null);

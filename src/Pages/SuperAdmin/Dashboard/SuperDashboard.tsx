@@ -1,4 +1,3 @@
-import Header from '../../../components/Header'
 import BottomNavigation from '../../../components/BottomNavigation';
 import dIcon1 from "../../../assets/DashboardIcons/Dicon1.svg"
 import dIcon2 from "../../../assets/DashboardIcons/Dicon2.svg"
@@ -14,13 +13,14 @@ import { useAppDispatch, useAppSelector } from '../../../store/useStore';
 import { dashBoardInfo, superAdminDashboard } from '../../../features/Ticket/ticketSlice';
 import SuperSideNav from '../../../components/SideNav/SuperSideNav';
 import SuperHeader from '../../../components/Headers/SuperHeader';
+import HandleVendorTickets from '../../../components/HandleVendorTickets';
 
 
 const SuperDashboard = () => {
 	const dispatch = useAppDispatch()
 	const [activeIndex, setActiveIndex] = useState<any>('OUTCESS SOLUTIONS'); // Initially set the first item as active
 
-	const { superAdminDashboarddata, dashBoardInfodata } = useAppSelector((state: any) => state.ticket);
+	const { superAdminDashboarddata } = useAppSelector((state: any) => state.ticket);
 
 	const type = !superAdminDashboarddata ? [] :
 		superAdminDashboarddata?.filter((company: any) => {
@@ -34,18 +34,9 @@ const SuperDashboard = () => {
 			.map((company: any) => company?.companyInfo?.tickets) || [];
 	const flattenedTypes = types?.flat();
 
-
-	useEffect(() => {
-		dispatch(superAdminDashboard())
-	}, [dispatch])
-
-
-
 	useEffect(() => {
 		dispatch(dashBoardInfo())
-		if (dashBoardInfodata) {
-			localStorage.setItem('dashBoardInfo', JSON.stringify(dashBoardInfodata));
-		}
+		dispatch(superAdminDashboard())
 	}, [dispatch])
 
 
@@ -65,22 +56,22 @@ const SuperDashboard = () => {
 
 
 
-	const TeamsPerformanceUL = () => {
-		const handleClick = (index: SetStateAction<string>) => {
-			setActiveIndex(index);
-		};
+	// const HandleVendorTickets = () => {
+	// 	const handleClick = (index: SetStateAction<string>) => {
+	// 		setActiveIndex(index);
+	// 	};
 
-		const statusList = superAdminDashboarddata?.map((company: { companyInfo: { company_name: any; }; }) => company?.companyInfo?.company_name);
-		return (
-			<ul className='TeamsPerformanceUL'>
-				{statusList?.map((status: string, index: any) => (
-					<li key={index} onClick={() => handleClick(status)} className={status === activeIndex ? 'TeamsPerformanceUL_active' : ''}>
-						{status}
-					</li>
-				))}
-			</ul>
-		);
-	};
+	// 	const statusList = superAdminDashboarddata?.map((company: { companyInfo: { company_name: any; }; }) => company?.companyInfo?.company_name);
+	// 	return (
+	// 		<ul className='TeamsPerformanceUL'>
+	// 			{statusList?.map((status: string, index: any) => (
+	// 				<li key={index} onClick={() => handleClick(status)} className={status === activeIndex ? 'TeamsPerformanceUL_active' : ''}>
+	// 					{status}
+	// 				</li>
+	// 			))}
+	// 		</ul>
+	// 	);
+	// };
 
 
 	return (
@@ -156,7 +147,6 @@ const SuperDashboard = () => {
 					<div className='dash_statistics_sub1'>
 						<div>
 							<h3>Ticket</h3>
-							{/* <p>Summary</p> */}
 						</div>
 						<div>
 							<DoughnutChat
@@ -201,13 +191,16 @@ const SuperDashboard = () => {
 					<div className='dashboard-first-card2 mb-2'>
 						<div>
 							<h5 className='dashboard-first-card-h'>Vendor Tickets</h5>
-							{/* <p className='dashboard-first-card-p'>Teams with leads graph analysis</p> */}
 						</div>
 						<div className='dashboard-first-card-second-icon'>	<PiDotsSixVerticalBold size={20} /></div>
 					</div>
 					<div className='TeamsPerformancechart'>
 						<div className='TeamsPerformancechartsub1'>
-							<TeamsPerformanceUL />
+							{/* <HandleVendorTickets /> */}
+							<HandleVendorTickets
+								superAdminDashboarddata={superAdminDashboarddata}
+								setActiveIndex={setActiveIndex}
+								activeIndex={activeIndex} />
 						</div>
 						<LinePerformanceChart
 							types={flattenedTypes}

@@ -5,7 +5,7 @@
 
 export const buildDynamicURL = (
   id: any,
-  fromDate: any,
+  startDate: any,
   endDate: any,
   limit: any,
   page: any,
@@ -39,9 +39,9 @@ export const buildDynamicURL = (
   ) {
     queryParams.push(`ticketType=${ticketType}`);
   }
-  // Add 'fromDate' to the query parameters if it's not null or undefined
-  if (fromDate !== null && fromDate !== undefined && !Array.isArray(fromDate)) {
-    queryParams.push(`fromDate=${fromDate}`);
+  // Add 'startDate' to the query parameters if it's not null or undefined
+  if (startDate !== null && startDate !== undefined && !Array.isArray(startDate)) {
+    queryParams.push(`startDate=${startDate}`);
   }
 
   // Add 'endDate' to the query parameters if it's not null or undefined

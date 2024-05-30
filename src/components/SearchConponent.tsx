@@ -1,31 +1,27 @@
 import { EntriesLimit } from './Options';
 import FilterModal from './FilterModal';
-// import { useIsMobile } from '../hooks/resize';
 import Search from './Search';
 import SubscriptionModal from '../Pages/SuperAdmin/Subscription/SubscriptionModal';
-
 import { ToastContainer } from 'react-toastify';
 import RegisterModal from '../Pages/SuperAdmin/ Register/RegisterModal';
 
 
-const SearchConponent = ({ ID, handleCustomFilters, setEndDates, setStartDates, searchItem, setSearchItem, placeholder, data, filter, show, setShow, limit, handlePagination, subscription, RegModal }: any) => {
+const SearchConponent = ({ ID, setEndDates, setStartDates, searchItem, setSearchItem, placeholder, data, filter, show, setShow, limit, handlePagination, subscription, RegModal, report, setTicketType, ticketType,
+	setStatus, status, statusFilter
+}: any) => {
 
-
-	// const handleChangeFilter = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-	// 	setResult(e.target.value);
-	// };
 
 
 
 	return (
-		<div id='reports'  >
+		<div id='reports'>
 			<ToastContainer position="top-right" containerId={"custom1345"} />
+
 			<div className="search-area">
 				<Search
 					placeholder={placeholder}
 					setSearchItem={setSearchItem}
 					searchItem={searchItem}
-
 				/>
 
 				<form>
@@ -37,7 +33,19 @@ const SearchConponent = ({ ID, handleCustomFilters, setEndDates, setStartDates, 
 					</div>}
 
 
-					{filter && <FilterModal handleCustomFilters={handleCustomFilters} setStartDates={setStartDates} setEndDates={setEndDates} setShow={setShow} show={show} handlePagination={handlePagination} />}
+					{filter && <FilterModal
+						setStartDates={setStartDates}
+						setEndDates={setEndDates}
+						setShow={setShow}
+						show={show}
+						handlePagination={handlePagination}
+						report={report}
+						setTicketType={setTicketType}
+						ticketType={ticketType}
+						setStatus={setStatus}
+						status={status}
+						statusFilter={statusFilter}
+					/>}
 
 					<EntriesLimit
 						limit={limit}
@@ -46,10 +54,8 @@ const SearchConponent = ({ ID, handleCustomFilters, setEndDates, setStartDates, 
 						filterLimit={data?.totalTickets}
 					/>
 				</form>
-
 				{subscription && <SubscriptionModal />}
 				{RegModal && <RegisterModal />}
-
 			</div>
 		</div>
 	)

@@ -8,15 +8,29 @@ import NetworkConnetion from '../NetworkConnetion';
 import Badge from '../Badge/Badge';
 import Notification from '../Notification/Notification';
 import SuperProfileDropDown from './SuperProfileDropDown';
+import { useAppDispatch, useAppSelector } from '../../store/useStore';
+import { getItTicket } from '../../features/Ticket/ticketSlice';
 
 
 const SuperHeader = () => {
+  const dispatch = useAppDispatch();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [profile, setProfile] = useState(false)
   // @ts-ignore  
   const userInfo = JSON.parse(localStorage.getItem("service_desk"));
 
+  const { itdata, itassignisSuccess } = useAppSelector((state: any) => state.ticket)
 
+
+
+  useEffect(() => {
+    const datas = ""
+    // @ts-ignore
+    dispatch(getItTicket(datas))
+    // @ts-ignore
+    if (itassignisSuccess) { dispatch(getItTicket(datas)) }
+
+  }, [dispatch, itassignisSuccess])
   useEffect(() => {
     const path = window.location.pathname;
     const title = pageTitles[path] ? `Eazy Desk | ${pageTitles[path]}` : "Eazy Desk | Page";
@@ -37,7 +51,7 @@ const SuperHeader = () => {
           <HeaderDate />
         </div>
         <div className='faplus-bell_container'>
-          <Badge setIsDrawerOpen={setIsDrawerOpen} isDrawerOpen={isDrawerOpen} />
+          <Badge setIsDrawerOpen={setIsDrawerOpen} isDrawerOpen={isDrawerOpen} itdata={itdata} />
           <div className='profiledropdown_container'>
             <div>
               <h5 className='profiledropdown_container_h5'>{userInfo?.firstname}</h5>

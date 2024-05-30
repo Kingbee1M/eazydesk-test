@@ -74,7 +74,7 @@ const itAssignTicket = async (datas: any) => {
 }
 
 const getTicketAssignTicket = async (datas: any) => {
-	const { endDate, startDate, limit, page, ticketType, ticketId, status } = datas;
+	const { startDate, endDate, limit, page, ticketType, ticketId, status } = datas;
 	const base = `/api/v2/ticket/itsupport`;
 	const url = buildDynamicURL(null, startDate, endDate, limit, page, base, ticketType, ticketId, status);
 	const { data }: any = await HttpService.get(url)
@@ -83,6 +83,7 @@ const getTicketAssignTicket = async (datas: any) => {
 
 const dashBoardInfo = async () => {
 	const { data }: any = await HttpService.get(`/api/v2/ticket/totals`)
+	localStorage.setItem('dashBoardInfo', JSON.stringify(data?.data));
 	return data
 }
 
