@@ -34,32 +34,14 @@ const Support = () => {
                 <div id='accordion-body-form'>
                   <Accordion.Header>
                     <h4>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Sunt, magni?
+                      How do I sign up on Eazy desk
                     </h4>
                   </Accordion.Header>
-                  <Accordion.Body>
-                    <div>
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                        Aut quaerat animi exercitationem ab maiores, quasi labore!
-                        A nam magni quam cupiditate laboriosam sint explicabo unde
-                        animi asperiores facere optio officiis ratione est
-                        nesciunt sapiente expedita, nemo aperiam? Quisquam,
-                        voluptas! Veniam laboriosam dolorem libero officia fugit
-                        voluptatibus qui, natus quos! At ullam deserunt explicabo,
-                        amet vel quam cumque maiores. Voluptatibus odio saepe
-                        sapiente voluptates dolor at necessitatibus velit totam
-                        nostrum aliquam, minus quod repellendus vel dolore maiores
-                        temporibus error ipsa porro magni provident labore quae,
-                        beatae veritatis! Ab eos consequuntur aperiam quidem
-                        pariatur iure reprehenderit tempora labore quo nam
-                        suscipit recusandae architecto minus porro, repellat quis
-                        excepturi quod et iusto? Autem suscipit voluptatibus
-                        delectus est vel reprehenderit voluptatum doloremque sunt
-                        sapiente!
-                      </p>
-                    </div>
+                  <Accordion.Body >
+                      <ul>
+                       <li>Once on the sign-in page, take a look at the top right corner of your screen and click on Sign up</li>
+                       <li>Next fill out the necessary details which are; name of the company, name of the individual, E-mail etc </li>
+                      </ul>
                   </Accordion.Body>
                 </div>
               </Accordion.Item>
@@ -67,32 +49,16 @@ const Support = () => {
                 <div id='accordion-body-form'>
                   <Accordion.Header>
                     <h4>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Sunt, magni?
+                      I forgot my password  
                     </h4>
                   </Accordion.Header>
                   <Accordion.Body>
-                    <div>
-                      <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                        Quidem praesentium ipsam nemo quaerat itaque vitae? Magni
-                        officiis saepe, possimus enim minus labore magnam sequi id
-                        voluptate natus eligendi culpa suscipit. Repellendus
-                        fugiat, dolorem, consequuntur quasi amet obcaecati
-                        distinctio non, eligendi ut consectetur nemo eveniet
-                        molestias! Voluptatum perspiciatis tempore, ducimus iure
-                        numquam, consequuntur minus similique dignissimos autem
-                        delectus laborum saepe dolorum quia labore qui soluta
-                        ratione necessitatibus a sint illo eos. Sunt, ipsam quas
-                        dolores dolor ea obcaecati tempore possimus accusamus sed
-                        officia iste blanditiis perspiciatis, quasi ratione velit
-                        adipisci nulla eligendi facilis rerum enim corporis
-                        aspernatur. Porro aut dolorum modi perspiciatis aliquid
-                        quas voluptas rerum veniam repellat molestias. Incidunt,
-                        exercitationem ipsum. Temporibus quidem corrupti mollitia
-                        dolores? Hic in reiciendis quaerat.
-                      </p>
-                    </div>
+                      <ul>
+                        <li>Once you are on the Sign-in page you will be able to see a "forgot password?" phrase below the sign-in button</li>
+                        <li>Go ahead and click on it, after doing so you will be redirected to a different page</li>
+                        <li>On that page you will be required to enter your email and then submit.
+                            After this a reset password link will be sent to your email</li>
+                      </ul>
                   </Accordion.Body>
                 </div>
               </Accordion.Item>
@@ -100,31 +66,16 @@ const Support = () => {
                 <div id='accordion-body-form'>
                   <Accordion.Header>
                     <h4>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Sunt, magni?
+                      Registering various users in a company
                     </h4>
                   </Accordion.Header>
                   <Accordion.Body>
-                    <div>
-                      <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                        Quaerat minima itaque quo harum reiciendis rem unde eaque
-                        commodi iure consectetur. Id, quidem laudantium a velit
-                        dicta asperiores repellendus officia enim labore eos ut
-                        tempore praesentium quia deleniti dolores debitis quis quo
-                        ullam quam eum. Adipisci dignissimos alias aspernatur fuga
-                        amet dolore, magnam distinctio repellendus sunt dolores
-                        beatae iste ad animi dicta aut. Vero vitae natus est
-                        porro, nemo officia vel quidem non beatae laboriosam nulla
-                        nisi! Et deserunt id atque tenetur. Maiores perspiciatis
-                        neque saepe nobis nihil mollitia provident aperiam,
-                        deleniti tempore ad possimus dolores? Ratione, omnis
-                        maiores! Facere eaque vero qui. Ipsam laboriosam,
-                        molestiae aliquid, obcaecati tenetur odit delectus ducimus
-                        exercitationem aspernatur architecto cupiditate corrupti
-                        ratione optio voluptatem et.
-                      </p>
-                    </div>
+                    <ul>
+                      <li>Once you sign up, you are automatically an Admin and that gives you the ability to create
+                          users under a company.</li>
+                      <li>There are various roles that need to be assigned to any user created such as; IT support, Team Lead etc</li>
+                      <li>Once you assign a role to a user and fill in the necessary details, you can go ahead and submit the registration</li>
+                    </ul>  
                   </Accordion.Body>
                 </div>
               </Accordion.Item>
@@ -132,31 +83,13 @@ const Support = () => {
                 <div id='accordion-body-form'>
                   <Accordion.Header>
                     <h4>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Sunt, magni?
+                      Create a ticket
                     </h4>
                   </Accordion.Header>
                   <Accordion.Body>
-                    <div>
-                      <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                        Quaerat minima itaque quo harum reiciendis rem unde eaque
-                        commodi iure consectetur. Id, quidem laudantium a velit
-                        dicta asperiores repellendus officia enim labore eos ut
-                        tempore praesentium quia deleniti dolores debitis quis quo
-                        ullam quam eum. Adipisci dignissimos alias aspernatur fuga
-                        amet dolore, magnam distinctio repellendus sunt dolores
-                        beatae iste ad animi dicta aut. Vero vitae natus est
-                        porro, nemo officia vel quidem non beatae laboriosam nulla
-                        nisi! Et deserunt id atque tenetur. Maiores perspiciatis
-                        neque saepe nobis nihil mollitia provident aperiam,
-                        deleniti tempore ad possimus dolores? Ratione, omnis
-                        maiores! Facere eaque vero qui. Ipsam laboriosam,
-                        molestiae aliquid, obcaecati tenetur odit delectus ducimus
-                        exercitationem aspernatur architecto cupiditate corrupti
-                        ratione optio voluptatem et.
-                      </p>
-                    </div>
+                      <ul>
+                        <li>Only the Team lead of a company is allowed to create a ticket</li>
+                      </ul>
                   </Accordion.Body>
                 </div>
               </Accordion.Item>
@@ -164,34 +97,47 @@ const Support = () => {
                 <div id='accordion-body-form'>
                   <Accordion.Header>
                     <h4>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Sunt, magni?
+                      How to create a ticket
                     </h4>
                   </Accordion.Header>
                   <Accordion.Body>
-                    <div>
-                      <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                        Quaerat minima itaque quo harum reiciendis rem unde eaque
-                        commodi iure consectetur. Id, quidem laudantium a velit
-                        dicta asperiores repellendus officia enim labore eos ut
-                        tempore praesentium quia deleniti dolores debitis quis quo
-                        ullam quam eum. Adipisci dignissimos alias aspernatur fuga
-                        amet dolore, magnam distinctio repellendus sunt dolores
-                        beatae iste ad animi dicta aut. Vero vitae natus est
-                        porro, nemo officia vel quidem non beatae laboriosam nulla
-                        nisi! Et deserunt id atque tenetur. Maiores perspiciatis
-                        neque saepe nobis nihil mollitia provident aperiam,
-                        deleniti tempore ad possimus dolores? Ratione, omnis
-                        maiores! Facere eaque vero qui. Ipsam laboriosam,
-                        molestiae aliquid, obcaecati tenetur odit delectus ducimus
-                        exercitationem aspernatur architecto cupiditate corrupti
-                        ratione optio voluptatem et.
-                      </p>
-                    </div>
+                      <ul>
+                       <li>There are different types of tickets that can be created such as; incident, service and change ticket</li> 
+                       <li>Once the Team lead of the company signs-in on the platform, he/she will be able to raise the type of ticket needed</li>
+                      </ul>
                   </Accordion.Body>
                 </div>
               </Accordion.Item>
+              <Accordion.Item eventKey='5'>
+                <div id='accordion-body-form'>
+                  <Accordion.Header>
+                    <h4>
+                      How to assign a ticket
+                    </h4>
+                  </Accordion.Header>
+                  <Accordion.Body>
+                      <ul>
+                       <li>Once the team lead of a company raises a ticket no matter the type, an Admin or IT support user would be able to assign the ticket raised</li>
+                       <li>Once the ticket has been assigned, the users with the authorization can decide to leave comments and also update the status of the ticket</li>
+                      </ul>
+                  </Accordion.Body>
+                </div>
+              </Accordion.Item>
+              <Accordion.Item eventKey='6'>
+                <div id='accordion-body-form'>
+                  <Accordion.Header>
+                    <h4>
+                      How to view all tickets created and assigned
+                    </h4>
+                  </Accordion.Header>
+                  <Accordion.Body>
+                      <ul>
+                       <li>Only an Admin and IT support user has the authorization to view the tickets that have been created and assigned</li>
+                       <li>Once any of the users sign-in on the platform, a list of all the tickets will be located on the left side of the screen</li>
+                      </ul>
+                  </Accordion.Body>
+                </div>
+                </Accordion.Item>
             </div>
           </Accordion>
         </div>
