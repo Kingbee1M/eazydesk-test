@@ -14,13 +14,51 @@ const Notification = ({ isOpen, onClose }: any) => {
 	const dispatch = useAppDispatch();
 	const drawerclassNameName = `drawer-container ${isOpen ? 'drawer-open' : ''}`;
 	const { itdata, itisLoading, itassignisSuccess } = useAppSelector((state: any) => state.ticket)
+
+	console.log('itdata', itdata)
+	const faqData = [
+		{
+			title: "Lorem ipsum dolor sit amet.",
+			text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod nobis, repellat neque non dicta fugiat veritatis sit delectus perspiciatis quis?",
+			active: false,
+		},
+		{
+			title: "Lorem ipsum dolor sit amet.",
+			text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod nobis, repellat neque non dicta fugiat veritatis sit delectus perspiciatis quis?",
+			active: true,
+		},
+		{
+			title: "Lorem ipsum dolor sit amet.",
+			text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod nobis, repellat neque non dicta fugiat veritatis sit delectus perspiciatis quis?",
+			active: false,
+		},
+		{
+			title: "Lorem ipsum dolor sit amet.",
+			text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod nobis, repellat neque non dicta fugiat veritatis sit delectus perspiciatis quis?",
+			active: false,
+		},
+		{
+			title: "Lorem ipsum dolor sit amet.",
+			text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod nobis, repellat neque non dicta fugiat veritatis sit delectus perspiciatis quis?",
+			active: false,
+		},
+	];
+
+
+	const [faqs, setFaqs] = useState(itdata?.tickets?.map((faq: any) => ({ ...faq, active: false })));
+
+	const toggleFaq = (index: any) => {
+		setFaqs(faqs?.map((faq: { active: any; }, i: any) => ({
+			...faq,
+			active: i === index ? !faq.active : false
+
 	const datas = ""
 	const [faqs, setFaqs] = useState(itdata?.tickets?.map((faq: any) => ({ ...faq, active: false })));
 
 	const toggleFaq = (index: any) => {
 		setFaqs(faqs?.map((item: { active: any; }, i: any) => ({
 			...item,
-			active: i === index ? !item?.active : false
+			active: i === index ? !item?.active
 		})));
 	};
 
@@ -101,11 +139,16 @@ const Notification = ({ isOpen, onClose }: any) => {
 					</div>
 				) : (
 					<div className="faq-container">
-						{faqs?.map((item: any, index: any) => (
+						{faqs?.map((item: any, index: any) => 
+							<div key={index} className={`faq ${item.active ? 'active' : ''}`}>
+								{item?.active ? "" : <div className="faq-title-highlight">
+									<h3 className="faq-title">
+										{item.ticketType} - {item?.status}
+
 							<div key={index} className={`faq ${item?.active ? 'active' : ''}`}>
 								{item?.active ? "" : <div className="faq-title-highlight-main"> <div className="faq-title-highlight">
 									<h3 className="faq-title">
-										{item?.ticketType} - {item?.status}
+										{item?.ticketType} - {item?.st
 									</h3>
 									<div>
 										{item?.severity === "High" ? (
