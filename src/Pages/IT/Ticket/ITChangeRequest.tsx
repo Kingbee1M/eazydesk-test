@@ -22,7 +22,6 @@ const ITChangeRequest = () => {
 	const [data, setData] = useState([]);
 	const pagination = itticketparameterdata?.pagination
 
-	console.log('itticketparameterdata', itticketparameterdata)
 
 
 

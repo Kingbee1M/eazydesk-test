@@ -55,7 +55,7 @@ const ITHeader = () => {
               <h5 className='profiledropdown_container_h5'>{userInfo?.firstname}</h5>
               <p className='profiledropdown_container_p'>{userInfo?.role}</p>
             </div>
-            <span className='FaPlus-name' onMouseEnter={() => setProfile(true)} onMouseLeave={() => setProfile(false)}>
+            <span className='FaPlus-name' onClick={() => setProfile(!profile)} onMouseLeave={() => setProfile(false)}>
               <HiUserCircle size={40} />
               {profile && <ITProfileDropDown />}
             </span>

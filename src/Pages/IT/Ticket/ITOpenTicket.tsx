@@ -83,11 +83,11 @@ const ITOpenTicket = () => {
 					handlePagination={handlePagination}
 				/>
 
-				<div className='mt-4'>
+				<div  >
 					<TicketTableComponent
 						pagination={itticketparameterdata}
 						handlePagination={handlePagination}
-						data={itticketparameterdata?.tickets}
+						data={data}
 						isLoading={itticketparameterisLoading}
 						TYPE={false}
 						colSpan={8}
