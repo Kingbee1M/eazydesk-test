@@ -69,9 +69,21 @@ const edituser = async (value: any) => {
   const { data } = await HttpService.put(`/api/v2/auth/admin-update-user/${id}`, input2); 
   return data;
 };
+//Edit Profile
+const editProfile = async (input: any) => { 
+  const HttpService = createHttpService();
+  const { data } = await HttpService.put(`/api/v2/auth/user/update-profile`, input); 
+  return data;
+};
 
 // Get Supervisors
 const getsupervisors = async () => {
+  const HttpService = createHttpService();
+  const { data }: any = await HttpService.get("/api/v1/auth/users/supervisors");
+  return data;
+};
+// Get Supervisors
+const getCurrentUser = async () => {
   const HttpService = createHttpService();
   const { data }: any = await HttpService.get("/api/v1/auth/users/supervisors");
   return data;
@@ -87,7 +99,8 @@ const registrationSlice = {
   edituser,
   getsupervisors,
   ITgetallReguser,
-  superallReguser
+  superallReguser,
+  editProfile
 };
 
 export default registrationSlice;

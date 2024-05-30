@@ -1,18 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { states } from "../../../../components/Data";
-import pro_img from "../../../../assets/img/Rectangle.png";
+import { useEffect, useState } from "react";
+import pro_img from "../assets/img/Rectangle.png";
+import { toast, ToastContainer } from "react-toastify";
+import { Spinner } from "react-bootstrap";
+import { useAppDispatch, useAppSelector } from "../store/useStore";
+import { customId } from "./Options";
+import { editProfile, reset } from "../features/Registration/registrationSlice";
+import { HiUserCircle } from "react-icons/hi";
+
 
 const GeneralInformation = () => {
+  const dispatch = useAppDispatch();
+  const { editProfileisSuccess, editProfileisLoading } = useAppSelector((state: any) => state.reg);
   // @ts-ignore
   const userInfo = JSON.parse(localStorage.getItem("service_desk"));
 
-  const [input, setInput] = useState({
+  const [input, setInput] = useState<any>({
     firstname: "",
     lastname: "",
     phonenumber: "",
     emailaddress: "",
     role: "",
   });
+
+
+
 
   useEffect(() => {
     setInput((prevState: any) => {
@@ -41,8 +52,27 @@ const GeneralInformation = () => {
     }));
   };
 
+
+
+  const handleUpdateUser = (e: { preventDefault: () => void }) => {
+
+    e.preventDefault();
+    // @ts-ignore
+    dispatch(editProfile(input));
+  };
+  useEffect(() => {
+    if (editProfileisSuccess) {
+      toast.success("Profile Updated!", { toastId: customId });
+      // setShowEdit(false);
+    }
+    setTimeout(() => {
+      dispatch(reset());
+    }, 1000);
+  }, [editProfileisSuccess, dispatch]);
+
   return (
     <div className='settings_main_after'>
+      <ToastContainer position='top-right' containerId={"custom1"} />
       <div className='settings_main_after_sup'>
         <h3>General Information</h3>
         <p>Manage your account settings</p>
@@ -51,36 +81,30 @@ const GeneralInformation = () => {
 
       {/* settings  profile */}
       <div className='settings_profile_title_container'>
-        <div className='settings_profile_title'>
-          <img
-            src={pro_img}
-            alt='logo'
-            crossOrigin='anonymous'
-            className='profile_img'
-          />
-        </div>
+        {/* <div className='settings_profile_title'> */}
+
+        <span className='  profile_img'  >
+          <HiUserCircle size={40} />
+        </span>
+        {/* </div> */}
         <div className='settings_profile_title_text'>
           <h6>
-            {userInfo.firstname} {userInfo.lastname}
+            {userInfo?.firstname} {userInfo?.lastname}
           </h6>
-          <p>{input.role}</p>
-        </div>
-        <div className='settings_container_title_btn'>
-          <button className='btn'>Change</button>
-          {/* <button className='btn_outline'>Delete</button> */}
+          <p>{input?.role}</p>
         </div>
       </div>
 
       {/* form */}
       <div className='container_reg  settings_container_form'>
-        <form>
+        <form onSubmit={handleUpdateUser}>
           <div className='user__details'>
             <div className='input__box'>
               <span className='details'>Firstname</span>
               <input
                 type='text'
                 placeholder='E.g: John '
-                value={input.firstname}
+                value={input?.firstname}
                 onChange={(e) => handleChange("firstname", e.target.value)}
                 required
               />
@@ -90,7 +114,7 @@ const GeneralInformation = () => {
               <input
                 type='text'
                 placeholder='E.g:  Smith'
-                value={input.lastname}
+                value={input?.lastname}
                 onChange={(e) => handleChange("lastname", e.target.value)}
                 required
               />
@@ -100,7 +124,7 @@ const GeneralInformation = () => {
               <input
                 type='text'
                 placeholder='xyz@gmail.com'
-                value={input.emailaddress}
+                value={input?.emailaddress}
                 onChange={(e) => handleChange("emailaddress", e.target.value)}
                 required
                 readOnly
@@ -111,7 +135,7 @@ const GeneralInformation = () => {
               <input
                 type='phonenumber'
                 placeholder='123-098-345-09'
-                value={input.phonenumber}
+                value={input?.phonenumber}
                 onChange={(e) => handleChange("phonenumber", e.target.value)}
                 required
               />
@@ -121,13 +145,14 @@ const GeneralInformation = () => {
               <input
                 type='text'
                 placeholder='012-345-6789'
-                value={input.role}
+                value={input?.role}
                 onChange={(e) => handleChange("role", e.target.value)}
                 required
                 readOnly
               />
             </div>
           </div>
+          <button className='btn'>{editProfileisLoading ? <Spinner size="sm" /> : "Update"}</button>
         </form>
       </div>
     </div>

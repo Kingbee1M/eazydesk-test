@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import SettingsIcon from './SettingsIcon';
-import GeneralInformation from './SettingsGeneral/GeneralInformation';
 import Plans from './SettingsGeneral/Plans';
 import ITSideNav from '../../../components/SideNav/ITSideNav';
 import ITHeader from '../../../components/Headers/ITHeader';
 import ITBottomNavigation from '../../../components/BottomNavigation/ITBottomNavigation';
+import GeneralInformation from '../../../components/GeneralInformation';
 
 const Settings = () => {
 	const [activeIndex, setActiveIndex] = useState<any>(0);
@@ -21,10 +21,6 @@ const Settings = () => {
 					<div>
 						<h3>Settings</h3>
 						<p>Manage your account settings</p>
-					</div>
-
-					<div className='settings_container_title_btn'>
-						<button className='btn'>Save change</button>
 					</div>
 				</div>
 
