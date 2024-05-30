@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Modal } from "react-bootstrap";
-import TextField from "@material-ui/core/TextField";
-import { useDispatch, useSelector } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
-import { BsCamera } from "react-icons/bs";
-import axios from "axios";
 import { baseUrl } from "../../shared/baseUrl";
 import ModalHeader from "../../components/Modals/ModalHeader";
 import { useAppDispatch } from "../../store/useStore";
-import { edituser } from "../../features/Registration/registrationSlice";
 
 const UserProfile = ({ userInfo, userId, lgShow, setLgShow }: any) => {
   // @ts-ignore

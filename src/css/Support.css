@@ -61,6 +61,7 @@
   color: var(--black) !important;
   border-top-left-radius: var(--bs-accordion-inner-border-radius);
   border-top-right-radius: var(--bs-accordion-inner-border-radius);
+   width: 800px
 }
 
 .accordion-button {
@@ -108,6 +109,7 @@
   padding: 15px;
   margin: 10px;
   border-radius: 0px; 
+ 
 }
 
  .accordion-button h4{
@@ -122,8 +124,16 @@
 
  
   @media screen and (max-width: 1080px) { 
+    .accordion-item:first-of-type .accordion-button {
+  box-shadow: none !important;
+  color: var(--black) !important;
+  border-top-left-radius: var(--bs-accordion-inner-border-radius);
+  border-top-right-radius: var(--bs-accordion-inner-border-radius);
+   width: 100% !important
+}
   .support-page_center{
     width: 90%;
+
   }
 
 
@@ -167,6 +177,7 @@
  
 }
 @media screen and (max-width: 400px) {
+ 
   .support-page-top h1 {
     font-size: 30px !important;
     font: bold;

@@ -26,7 +26,7 @@ const TicketProgress = () => {
 	const { createisSuccess } = useAppSelector((state: any) => state.comment)
 	const [input, setInputs] = useState({
 		comment: "",
-		images: [],
+		file: [],
 	});
 
 
@@ -52,7 +52,7 @@ const TicketProgress = () => {
 			dispatch(viewTicket(id))
 			setInputs({
 				comment: "",
-				images: [],
+				file: [],
 			})
 		}
 		// @ts-ignore 

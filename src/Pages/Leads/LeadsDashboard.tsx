@@ -50,7 +50,7 @@ const LeadsDashboard = () => {
 
 			</div>
 			<main  >
-				<div className='dash_statistics_container'>
+				<div className='dash_statistics_container1'>
 					<div className='dash_statistics_sub1'>
 						<div>
 							<h3>Ticket</h3>

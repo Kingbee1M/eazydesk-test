@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import ToSelect from "./ToSelect";
-import CcSelect from "./CcSelect";
 import ReactQuillWrapper from "./ReactQuillWrapper";
 import { useAppDispatch, useAppSelector } from "../../store/useStore";
 import { createTicket, reset } from "../../features/Ticket/ticketSlice";
@@ -12,14 +11,26 @@ import { ITgetallReguser } from "../../features/Registration/registrationSlice";
 
 
 const TicketForm = ({ type, setShow, currentState, proposedChange }: any) => {
-
+  const [file, setFile] = useState<any>([]);
   const { createisLoading, createisSuccess } = useAppSelector((state: any) => state.ticket)
   const dispatch = useAppDispatch();
   const { ITgetallReguserdata, ITgetallReguserisLoading } = useAppSelector((state: any) => state.reg);
   const user = ITgetallReguserdata?.data?.users
 
 
+  const InputChange = (e: any) => {
+    const selectedFiles = Array.from(e.target.files);
+    setFile((prevFiles: any) => [...prevFiles, ...selectedFiles]);
 
+    selectedFiles.forEach(file => {
+      let reader: any = new FileReader();
+      reader.onloadend = () => {
+        // You can handle file read success here if needed
+        console.log(reader.result); // This logs the base64 string of the file content
+      };
+      reader.readAsDataURL(file);
+    });
+  };
 
   useEffect(() => {
     // Fetch data when the component is mounted or dispatch changes 
@@ -58,7 +69,7 @@ const TicketForm = ({ type, setShow, currentState, proposedChange }: any) => {
 
 
   const formFields = [
-    { key: 'file', value: input.file },
+    { key: 'file', value: file },
     { key: 'ticketType', value: input.ticketType },
     { key: 'affectedUsers', value: input.affectedUsers },
     { key: 'severity', value: input.severity },
@@ -284,7 +295,7 @@ const TicketForm = ({ type, setShow, currentState, proposedChange }: any) => {
             accept="image/*"
             multiple
             // @ts-ignore 
-            onChange={(e) => handleOnChange("file", e.target.files)}
+            onChange={InputChange}
             id="attach-image"
           />
         </div>

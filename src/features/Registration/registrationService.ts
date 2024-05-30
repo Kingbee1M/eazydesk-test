@@ -100,7 +100,8 @@ const registrationSlice = {
   getsupervisors,
   ITgetallReguser,
   superallReguser,
-  editProfile
+  editProfile,
+  getCurrentUser
 };
 
 export default registrationSlice;

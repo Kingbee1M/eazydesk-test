@@ -8,7 +8,7 @@ const PowerResetComponent: React.FC<{ setIsLoading: React.Dispatch<React.SetStat
 		setIsLoading(true);
 		try {
 			const HttpService = createHttpService(); // Instantiate your HTTP service
-			const { data } = await HttpService.post('/api/v2/auth/resend-email-verification', {
+			await HttpService.post('/api/v2/auth/resend-email-verification', {
 				email: email,
 			});
 		} catch (error) {
