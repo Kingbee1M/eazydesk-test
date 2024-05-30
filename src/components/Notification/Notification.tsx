@@ -44,10 +44,10 @@ const Notification = ({ isOpen, onClose }: any) => {
 	];
 
 
-	const [faqs, setFaqs] = useState(itdata?.tickets.map((faq: any) => ({ ...faq, active: false })));
+	const [faqs, setFaqs] = useState(itdata?.tickets?.map((faq: any) => ({ ...faq, active: false })));
 
 	const toggleFaq = (index: any) => {
-		setFaqs(faqs.map((faq: { active: any; }, i: any) => ({
+		setFaqs(faqs?.map((faq: { active: any; }, i: any) => ({
 			...faq,
 			active: i === index ? !faq.active : false
 		})));
@@ -153,11 +153,11 @@ const Notification = ({ isOpen, onClose }: any) => {
 					</div>
 				) : (
 					<div className="faq-container">
-						{faqs.map((item: any, index: any) => (
+						{faqs?.map((item: any, index: any) => (
 							<div key={index} className={`faq ${item.active ? 'active' : ''}`}>
-								{item.active ? "" : <div className="faq-title-highlight">
+								{item?.active ? "" : <div className="faq-title-highlight">
 									<h3 className="faq-title">
-										{item.ticketType} - {item.status}
+										{item.ticketType} - {item?.status}
 									</h3>
 									<div>
 										{item?.severity === "High" ? (
