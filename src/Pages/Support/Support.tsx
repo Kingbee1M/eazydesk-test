@@ -16,7 +16,7 @@ const Support = () => {
     <div className='support-page'>
       <div className='support-page-top'>
         <div className="support-page_center">
-          <h1>Frequenty Asked Questions</h1>
+          <h1>Frequently Asked Questions</h1>
         </div>
       </div>
 
