@@ -95,11 +95,9 @@ box-shadow: -1px -1px 4px rgba(31, 31, 31, 0.1), 1px 1px 4px rgba(31, 31, 31, 0.
 
 .faq-container {
   max-width: 600px;
-  margin: 0 auto;
-  /* border-radius: 10px; */
+  margin: 0 auto; 
   background-color: var(--white);
-  overflow: hidden;
-  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; */
+  overflow: hidden; 
 }
 
 .faq {
@@ -171,4 +169,11 @@ box-shadow: -1px -1px 4px rgba(31, 31, 31, 0.1), 1px 1px 4px rgba(31, 31, 31, 0.
 .faq-title-highlight{
 	display: flex !important;
 	align-items: center;
+}
+
+.faq-title-highlight-main{
+		display: flex !important;
+	align-items: center;
+	justify-content: space-between;
+	margin-right: 3rem;
 }

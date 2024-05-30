@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, SerializedError } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import ticketService from './ticketService'
 import { handleMessageError } from '../../components/handleError/handleError'
 
@@ -131,7 +131,8 @@ export const createTicket = createAsyncThunk('ticket/createTicket', async (data,
 		return await ticketService.createTicket(data)
 	} catch (error: any) {
 		// Handle error using handleMessageError function
-		const message = handleMessageError(error, thunkAPI);
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
 		return thunkAPI.rejectWithValue(message)
 	}
 })
@@ -142,7 +143,8 @@ export const admingetTicket = createAsyncThunk('ticket/admingetTicket', async (d
 		return await ticketService.admingetTicket(data)
 	} catch (error: any) {
 		// Handle error using handleMessageError function
-		const message = handleMessageError(error, thunkAPI);
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
 		return thunkAPI.rejectWithValue(message)
 	}
 })
@@ -153,7 +155,8 @@ export const getTicketID = createAsyncThunk('ticket/getTicketID', async (data, t
 		return await ticketService.getTicketID(data)
 	} catch (error: any) {
 		// Handle error using handleMessageError function
-		const message = handleMessageError(error, thunkAPI);
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
 		return thunkAPI.rejectWithValue(message)
 	}
 })
@@ -164,7 +167,8 @@ export const viewTicket = createAsyncThunk('ticket/viewTicket', async (data, thu
 		return await ticketService.viewTicket(data)
 	} catch (error: any) {
 		// Handle error using handleMessageError function
-		const message = handleMessageError(error, thunkAPI);
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
 		return thunkAPI.rejectWithValue(message)
 	}
 })
@@ -175,7 +179,8 @@ export const itAssignTicket = createAsyncThunk('ticket/itAssignTicket', async (d
 		return await ticketService.itAssignTicket(data)
 	} catch (error: any) {
 		// Handle error using handleMessageError function
-		const message = handleMessageError(error, thunkAPI);
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
 		return thunkAPI.rejectWithValue(message)
 	}
 })
@@ -187,7 +192,8 @@ export const getTicketAssignTicket = createAsyncThunk('ticket/getTicketAssignTic
 		return await ticketService.getTicketAssignTicket(data)
 	} catch (error: any) {
 		// Handle error using handleMessageError function
-		const message = handleMessageError(error, thunkAPI);
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
 		return thunkAPI.rejectWithValue(message)
 	}
 })
@@ -198,7 +204,8 @@ export const dashBoardInfo = createAsyncThunk('ticket/dashBoardInfo', async (dat
 		return await ticketService.dashBoardInfo()
 	} catch (error: any) {
 		// Handle error using handleMessageError function
-		const message = handleMessageError(error, thunkAPI);
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
 		return thunkAPI.rejectWithValue(message)
 	}
 })
@@ -208,7 +215,8 @@ export const updateTicket = createAsyncThunk('ticket/updateTicket', async (data,
 		return await ticketService.updateTicket(data)
 	} catch (error: any) {
 		// Handle error using handleMessageError function
-		const message = handleMessageError(error, thunkAPI);
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
 		// Return the rejected promise with the error message
 		return thunkAPI.rejectWithValue(message);
 	}
@@ -219,7 +227,8 @@ export const updateLeadTicket = createAsyncThunk('ticket/updateLeadTicket', asyn
 		return await ticketService.updateLeadTicket(data)
 	} catch (error: any) {
 		// Handle error using handleMessageError function
-		const message = handleMessageError(error, thunkAPI);
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
 		// Return the rejected promise with the error message
 		return thunkAPI.rejectWithValue(message);
 	}
@@ -230,7 +239,8 @@ export const giveApproval = createAsyncThunk('ticket/giveApproval', async (data,
 		return await ticketService.giveApproval(data)
 	} catch (error: any) {
 		// Handle error using handleMessageError function
-		const message = handleMessageError(error, thunkAPI);
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
 		return thunkAPI.rejectWithValue(message)
 	}
 })
@@ -240,7 +250,8 @@ export const superAdminDashboard = createAsyncThunk('ticket/superAdminDashboard'
 		return await ticketService.superAdminDashboard()
 	} catch (error: any) {
 		// Handle error using handleMessageError function
-		const message = handleMessageError(error, thunkAPI);
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
 		return thunkAPI.rejectWithValue(message)
 	}
 })

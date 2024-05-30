@@ -826,18 +826,7 @@ overflow: auto;
     gap: 15px;
     width: 100%;
   }
-
-  /* .settings_main_after_sup h3 {
-    font-style: normal;
-    font-weight: 600;
-    font: bold;
-    font-size: 15px !important;
-    line-height: 12px !important;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    color: var(--black);
-} */
+ 
   .pricing_card_container {
     display: grid;
     grid-template-columns: 1fr;
@@ -873,8 +862,7 @@ overflow: auto;
   }
   .settings_container_main {
     width: 100%;
-    background-color: var(--white);
-    /* height: 73vh; */
+    background-color: var(--white); 
     border-radius: 12px;
     margin-top: 26px;
     display: flex;

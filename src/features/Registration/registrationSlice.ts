@@ -62,6 +62,12 @@ const initialState = {
   superallReguserisSuccess: false,
   superallReguserisLoading: false, 
   superallRegusermessage: '', 
+
+  editProfiledata:   [],
+  editProfileisError: false,
+  editProfileisSuccess: false,
+  editProfileisLoading: false, 
+  editProfilemessage: '', 
 }
 
  
@@ -183,6 +189,17 @@ export const superallReguser = createAsyncThunk('register/superallReguser', asyn
     return thunkAPI.rejectWithValue(message)
   }
 })
+//Edit Profile
+export const editProfile = createAsyncThunk('register/editProfile', async ( data,thunkAPI) => {
+  try { 
+    return await registrationService.editProfile(data)
+  } catch (error:any) {
+      const message = error?.response?.data?.message ||
+    (error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
+    
+    return thunkAPI.rejectWithValue(message)
+  }
+})
  
 
 
@@ -240,7 +257,12 @@ export const registrationSlice = createSlice({
       state.superallReguserisLoading = false
       state.superallReguserisSuccess = false  
       state.superallReguserisError = false
-      state.superallRegusermessage= ''
+      state.superallRegusermessage = ''
+      
+      state.editProfileisLoading = false
+      state.editProfileisSuccess = false  
+      state.editProfileisError = false
+      state.editProfilemessage= ''
       
     },
     
@@ -397,6 +419,20 @@ export const registrationSlice = createSlice({
         state.superallReguserisError = true
         state.superallRegusermessage = action.payload
         state.superallReguserdata = [] 
+      })
+    .addCase(editProfile.pending, (state) => {
+        state.editProfileisLoading = true 
+      })
+      .addCase(editProfile.fulfilled, (state:any, action) => {
+        state.editProfileisLoading = false
+        state.editProfileisSuccess = true
+        state.editProfiledata = action.payload 
+      })
+      .addCase(editProfile.rejected, (state:any, action) => {
+        state.editProfileisLoading = false
+        state.editProfileisError = true
+        state.editProfilemessage = action.payload
+        state.editProfiledata = [] 
       })
       
   },

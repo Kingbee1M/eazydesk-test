@@ -23,6 +23,7 @@ const EditRegisteredUserModal = ({ data, id }: any) => {
   const [activeTab, setActiveTab] = useState(0);
   const [result, setResult] = useState("Edit User");
 
+
   const [input, setInput] = useState<any>({
     firstname: "",
     lastname: "",
@@ -30,7 +31,13 @@ const EditRegisteredUserModal = ({ data, id }: any) => {
     mobileNumber: "",
     role: "",
     activated: "",
-  });
+  })
+  const [input2, setInput2] = useState<any>({
+    email: "",
+    payload: [],
+  })
+
+
 
   const showInfo = (catagory: React.SetStateAction<string>) => {
     setResult(catagory);
@@ -41,9 +48,10 @@ const EditRegisteredUserModal = ({ data, id }: any) => {
     setShowEdit(true);
   };
 
+
   useEffect(() => {
     setInput((prevState: any) => {
-      return {
+      return ({
         ...prevState,
         firstname: data?.firstname,
         lastname: data?.lastname,
@@ -51,17 +59,19 @@ const EditRegisteredUserModal = ({ data, id }: any) => {
         mobileNumber: data?.mobileNumber,
         role: data?.role,
         activated: data?.activated,
-      };
+      });
     });
-  }, [
-    data?.lastname,
-    data?.email,
-    data?.firstname,
-    data?.activated,
-    data?.mobileNumber,
-    data?.role,
-    setInput,
-  ]);
+  }, [data?.lastname, data?.email, data?.firstname, data?.activated, data?.mobileNumber, data?.role, setInput]);
+  useEffect(() => {
+    setInput2((prevState: any) => {
+      return ({
+        ...prevState,
+        email: data?.email,
+        payload: input,
+      });
+    });
+  }, [data?.email, input]);
+
 
   const handleOnChange = (input: any, value: any) => {
     setInput((prevState: any) => ({
@@ -70,12 +80,13 @@ const EditRegisteredUserModal = ({ data, id }: any) => {
     }));
   };
 
-  const handleUpdateUser = (e: { preventDefault: () => void }) => {
-    const value = { id, input };
-    e.preventDefault();
-    // @ts-ignore
-    dispatch(edituser(value));
-  };
+
+  const handleUpdateUser = (e: { preventDefault: () => void; }) => {
+    const value = { id, input2 }
+    e.preventDefault()
+    // @ts-ignore 
+    dispatch(edituser(value))
+  }
   useEffect(() => {
     if (edituserisSuccess) {
       toast.success("User Edited!", { toastId: customId });
@@ -84,10 +95,9 @@ const EditRegisteredUserModal = ({ data, id }: any) => {
       setShowEdit(false);
     }
     setTimeout(() => {
-      dispatch(reset());
+      dispatch(reset())
     }, 5000);
   }, [edituserisSuccess, dispatch, resetPasswordisSuccess]);
-
   return (
     <>
       <ToastContainer position='top-right' containerId={"custom1"} />

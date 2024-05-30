@@ -1,10 +1,10 @@
 import { useState } from "react";
 import BottomNavigation from "../../../components/BottomNavigation";
 import SettingsIcon from "./SettingsIcon";
-import GeneralInformation from "./SettingsGeneral/GeneralInformation";
 import Plans from "./SettingsGeneral/Plans";
 import SuperSideNav from "../../../components/SideNav/SuperSideNav";
 import SuperHeader from "../../../components/Headers/SuperHeader";
+import GeneralInformation from "../../../components/GeneralInformation";
 
 const SuperSettings = () => {
   const [activeIndex, setActiveIndex] = useState<any>(0);
