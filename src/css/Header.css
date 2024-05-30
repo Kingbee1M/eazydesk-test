@@ -99,6 +99,20 @@
   color: #767675;
   font-weight: bold;
 }
+.profile_img{
+  width: 43px;
+  height: 43px;
+  background-color:var(--accent-green-light); 
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #767675;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .FaPlus-icon-container{
   display: flex;

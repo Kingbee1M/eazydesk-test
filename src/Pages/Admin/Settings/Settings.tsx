@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import SideNav from '../../../components/SideNav/SideNav'
 import SettingsIcon from './SettingsIcon';
-import GeneralInformation from './SettingsGeneral/GeneralInformation';
+
 import Plans from './SettingsGeneral/Plans';
 import AdminHeader from '../../../components/Headers/AdminHeader';
 import AdminBottomNavigation from '../../../components/BottomNavigation/AdminBottomNavigation';
+import GeneralInformation from '../../../components/GeneralInformation';
 
 const Settings = () => {
 	const [activeIndex, setActiveIndex] = useState<any>(0);

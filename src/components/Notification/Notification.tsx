@@ -7,6 +7,7 @@ import { NoRecordFound, TableFetch } from '../Options';
 import AssignTask from '../Modals/AssignTask';
 import TicketStatusCell from '../../Pages/Admin/Ticket/TicketStatusCell';
 import { FiChevronDown } from 'react-icons/fi';
+import moment from 'moment';
 
 
 const Notification = ({ isOpen, onClose }: any) => {
@@ -50,12 +51,23 @@ const Notification = ({ isOpen, onClose }: any) => {
 		setFaqs(faqs?.map((faq: { active: any; }, i: any) => ({
 			...faq,
 			active: i === index ? !faq.active : false
+
+	const datas = ""
+	const [faqs, setFaqs] = useState(itdata?.tickets?.map((faq: any) => ({ ...faq, active: false })));
+
+	const toggleFaq = (index: any) => {
+		setFaqs(faqs?.map((item: { active: any; }, i: any) => ({
+			...item,
+			active: i === index ? !item?.active
 		})));
 	};
 
 
 	useEffect(() => {
-		const datas = ""
+
+		// @ts-ignore
+		dispatch(getItTicket(datas))
+
 		if (isOpen) {
 			// @ts-ignore
 			dispatch(getItTicket(datas))
@@ -114,33 +126,7 @@ const Notification = ({ isOpen, onClose }: any) => {
 		<div>
 			<div className={drawerclassNameName}>
 				<ModalHeaderIcon setShow={onClose} icon={<AiOutlineNotification size={30} />} title={"Notification"} subtitle={"Notification & Assign Task"} />
-				{/* <div>
-					<div className="side-wrapper">
-						<div className='dashboard_stack_right_container_main'>
-							{itdata?.tickets?.length === undefined ? "" :
-								<div className='stack_right_container_sub'>
-									<div>Reference</div>
-									<div>Ticket Type</div>
-									<div>Severity</div>
-									<div>Time Stamp</div>
-									<div>Status</div>
-								</div>}
-							<div className="inner_border_two_container">
-								{itisLoading ? (
-									<div className='Doughnutcontainer'>
-										<TableFetch colSpan={8} />	</div>
-								) : itdata?.tickets?.length === undefined ? (
-									<div className='Doughnutcontainer'>
-										<NoRecordFound
-											colSpan={8}
-											children={"No record found!"} />
-									</div>) : (
-									renderData(itdata?.tickets)
-								)}
-							</div>
-						</div>
-					</div>
-				</div> */}
+
 				{itisLoading ? (
 					<div className='Doughnutcontainer'>
 						<TableFetch colSpan={8} />
@@ -153,11 +139,16 @@ const Notification = ({ isOpen, onClose }: any) => {
 					</div>
 				) : (
 					<div className="faq-container">
-						{faqs?.map((item: any, index: any) => (
+						{faqs?.map((item: any, index: any) => 
 							<div key={index} className={`faq ${item.active ? 'active' : ''}`}>
 								{item?.active ? "" : <div className="faq-title-highlight">
 									<h3 className="faq-title">
 										{item.ticketType} - {item?.status}
+
+							<div key={index} className={`faq ${item?.active ? 'active' : ''}`}>
+								{item?.active ? "" : <div className="faq-title-highlight-main"> <div className="faq-title-highlight">
+									<h3 className="faq-title">
+										{item?.ticketType} - {item?.st
 									</h3>
 									<div>
 										{item?.severity === "High" ? (
@@ -168,9 +159,12 @@ const Notification = ({ isOpen, onClose }: any) => {
 											<span className="severity-low">{item?.severity}</span>
 										)}
 									</div>
-								</div>}
 
-								{item.active && (
+								</div> 	<p style={{ marginLeft: "12px", marginTop: "5px" }}>
+										{moment.duration(moment().diff(item?.created_at)).humanize()}{" "}
+										ago</p></div>}
+
+								{item?.active && (
 									<div className="inner_border_two_container">
 										{renderData(item)}
 									</div>
