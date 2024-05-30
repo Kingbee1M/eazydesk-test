@@ -17,11 +17,6 @@ const Support = () => {
       <div className='support-page-top'>
         <div className="support-page_center">
           <h1>Frequenty Asked Questions</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
-            explicabo fugiat aperiam non iste deleniti asperiores harum modi
-            perferendis! Veniam molestias quo temporibus consectetur qui.
-          </p>
         </div>
       </div>
 
