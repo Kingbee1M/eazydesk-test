@@ -7,7 +7,6 @@ const Pricing = () => {
     <div id='login-wrapper'>
       <Carousels />
       <div className='login-container'>
-        <ToastContainer position='top-right' containerId={"custom1"} />
         <div className='login-content-layout'>
           {/* Login Header */}
           <LoginHeader />

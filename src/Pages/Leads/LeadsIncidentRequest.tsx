@@ -7,6 +7,7 @@ import { EntriesPerPage } from '../../components/Options';
 import IncidentRequestModal from '../../components/TicketModals/IncidentRequestModal';
 import { useAppDispatch, useAppSelector } from '../../store/useStore';
 import { getTicket } from '../../features/Ticket/ticketSlice';
+import { ToastContainer } from 'react-toastify';
 
 
 const LeadsIncidentRequest = () => {
@@ -53,6 +54,7 @@ const LeadsIncidentRequest = () => {
 		<div id="dashboard">
 			<div className="hero-section2">
 				<LeadsHeader />
+				<ToastContainer />
 				<div className="hero-search container">
 					<div className="hero-search-container">
 						<input

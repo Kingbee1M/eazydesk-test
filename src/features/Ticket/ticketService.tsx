@@ -1,8 +1,8 @@
 
-import createHttpService from "../../helpers/HttpService";
+import CreateHttpService from "../../helpers/HttpService";
 import { buildDynamicURL } from "../../shared/baseUrl";
 
-const HttpService = createHttpService();
+const HttpService = CreateHttpService();
 
 
 const superAdminDashboard = async () => {

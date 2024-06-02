@@ -6,7 +6,7 @@ import LoginHeader from "../../components/LoginHeader";
 import Copyright from "../../components/Copyright";
 import Carousels from "../../components/Carousels";
 import { useAppDispatch } from "../../store/useStore";
-import createHttpService from "../../helpers/HttpService";
+import CreateHttpService from "../../helpers/HttpService";
 import VerifyLoader from "../../components/Toast/VerifyLoader";
 import { svgPaths } from "../../components/Options";
 
@@ -71,7 +71,7 @@ const VerifyEmail = () => {
 		setIsLoading(true);
 		resetIt();
 		try {
-			const HttpService = createHttpService(); // Instantiate your HTTP service
+			const HttpService = CreateHttpService(); // Instantiate your HTTP service
 			const { data } = await HttpService.post('/api/v2/auth/verify-email', input);
 			trueIt()
 			setiIsSuccessr(true)
@@ -99,7 +99,6 @@ const VerifyEmail = () => {
 		<div id="login-wrapper">
 			<Carousels />
 			<div className="login-container">
-				<ToastContainer position="top-right" containerId={"custom1"} />
 				<div className="login-content-layout">
 					{/* Login Header */}
 					<LoginHeader />

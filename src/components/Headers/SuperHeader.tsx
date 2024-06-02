@@ -58,7 +58,7 @@ const SuperHeader = () => {
               <p className='profiledropdown_container_p'>{userInfo?.role}</p>
             </div>
 
-            <span className='FaPlus-name' onMouseEnter={() => setProfile(true)} onMouseLeave={() => setProfile(false)}>
+            <span className='FaPlus-name' onClick={() => setProfile(true)} onMouseLeave={() => setProfile(false)}>
               <HiUserCircle size={40} />
               {profile && <SuperProfileDropDown />}
             </span>

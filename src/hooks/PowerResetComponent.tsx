@@ -1,13 +1,13 @@
 import React from 'react'
 import { GrPowerReset } from 'react-icons/gr';
-import createHttpService from '../helpers/HttpService';
+import CreateHttpService from '../helpers/HttpService';
 
 const PowerResetComponent: React.FC<{ setIsLoading: React.Dispatch<React.SetStateAction<boolean>>; isLoading: boolean; email: string }> = ({ setIsLoading, email }) => {
 
 	const handleResetEmail = async () => {
 		setIsLoading(true);
 		try {
-			const HttpService = createHttpService(); // Instantiate your HTTP service
+			const HttpService = CreateHttpService(); // Instantiate your HTTP service
 			await HttpService.post('/api/v2/auth/resend-email-verification', {
 				email: email,
 			});

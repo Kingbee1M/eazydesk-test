@@ -8,8 +8,8 @@ import 'react-quill/dist/quill.snow.css';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 import { UserProvider } from './hooks/UserContext';
-import { ToastContainer } from 'react-toastify';
 import { SocketProvider } from './components/Scoket/SocketContext';
+import { ToastContainer } from 'react-toastify';
 
 
 const root = ReactDOM.createRoot(
@@ -20,10 +20,10 @@ root.render(
     <Provider store={store}>
       <SocketProvider>
         <UserProvider>
-          <ToastContainer />
           <App />
         </UserProvider>
       </SocketProvider>
+      <ToastContainer containerId={"custom1"} />
     </Provider>
   </React.StrictMode >
 );

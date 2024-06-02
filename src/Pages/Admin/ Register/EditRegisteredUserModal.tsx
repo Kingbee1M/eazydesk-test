@@ -100,7 +100,6 @@ const EditRegisteredUserModal = ({ data, id }: any) => {
   }, [edituserisSuccess, dispatch, resetPasswordisSuccess]);
   return (
     <>
-      <ToastContainer position='top-right' containerId={"custom1"} />
       <button
         id='custom-btn-two-active'
         onClick={handleShow}

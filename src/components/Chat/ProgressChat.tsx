@@ -10,7 +10,7 @@ import { ToastContainer } from "react-toastify";
 import { BsChatRightText } from "react-icons/bs";
 import Skelenton from "../Skelenton/Skelenton";
 
-const ProgressChat = ({ viewdata, id, input, setInputs }: any) => {
+const ProgressChat = ({ viewdata, id, input, setInput }: any) => {
   const [files, setFile] = useState<any>([]);
   const dispatch = useAppDispatch();
   const { isLoading, isSuccess, getTicketID } = useAppSelector((state: any) => state.comment)
@@ -22,7 +22,7 @@ const ProgressChat = ({ viewdata, id, input, setInputs }: any) => {
   const formData = new FormData();
   const form = useRef<HTMLFormElement>(null);
 
-
+  console.log('files', files)
 
 
   const formFields = [
@@ -36,9 +36,9 @@ const ProgressChat = ({ viewdata, id, input, setInputs }: any) => {
   });
 
 
-  console.log('formFields', formFields)
+  // console.log('formFields', formFields)
   const handleChangeInput = (input: any, value: any) => {
-    setInputs((prevState: any) => ({
+    setInput((prevState: any) => ({
       ...prevState,
       [input]: value,
     }));
@@ -81,8 +81,7 @@ const ProgressChat = ({ viewdata, id, input, setInputs }: any) => {
   return (
     <>
       <div>
-        <ToastContainer position="top-right" containerId={"custom1"} />
-        <h5 className="page-title">CHAT</h5>
+        <h5 className="page-title">Chat</h5>
         <div className="chat-container">
           {false ? <Skelenton count={5} /> : viewdata?.Comment?.length === 0 ? (
             <div className="chat-container-icons">
@@ -123,36 +122,37 @@ const ProgressChat = ({ viewdata, id, input, setInputs }: any) => {
             ))
           )}
         </div>
-        <div className="btn-area-container">
-          <form onSubmit={handleSubmitComment} className="form" ref={form}>
+        {viewdata?.status === "CLOSED" ? "" : (
+          <div className="btn-area-container">
+            <form onSubmit={handleSubmitComment} className="form" ref={form}>
 
-            <input
-              id="bottom_input_container"
-              required
-              placeholder="Comment on this request..."
-              value={input?.comment}
-              onChange={(e) => handleChangeInput("comment", e.target.value)}
-            />
-            <button type="submit" disabled={createisLoading}>
-              {createisLoading ? <SVGLoader width={"30px"} height={"30px"} color={"#fff"} /> : <RiMailSendLine size={20} color="#0240BC" />}
-            </button>
-          </form>
-          <div className="btn-area">
-            <label className="img-pckr">
-              <FaCamera size={20} color="#0240BC" />
               <input
-                type="file"
-                style={{ display: "none" }}
-                multiple
-                onChange={InputChange}
-
-              // onChange={handleUploadMultiImg}
-              // disabled={loading}
+                id="bottom_input_container"
+                required
+                placeholder="Comment on this request..."
+                value={input?.comment}
+                onChange={(e) => handleChangeInput("comment", e.target.value)}
               />
-            </label>
+              <button type="submit" disabled={createisLoading}>
+                {createisLoading ? <SVGLoader width={"30px"} height={"30px"} color={"#fff"} /> : <RiMailSendLine size={20} color="#0240BC" />}
+              </button>
+            </form>
+            <div className="btn-area">
+              <label className="img-pckr">
+                <FaCamera size={20} color="#0240BC" />
+                <input
+                  type="file"
+                  style={{ display: "none" }}
+                  multiple
+                  onChange={InputChange}
 
-          </div>
-        </div>
+                // onChange={handleUploadMultiImg}
+                // disabled={loading}
+                />
+              </label>
+
+            </div>
+          </div>)}
       </div>
     </>
   );

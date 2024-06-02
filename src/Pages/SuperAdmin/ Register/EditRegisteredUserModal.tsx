@@ -97,7 +97,6 @@ const EditRegisteredUserModal = ({ data, id }: any) => {
 
 	return (
 		<>
-			<ToastContainer position="top-right" containerId={"custom1"} />
 			<button id='custom-btn-two-active' onClick={handleShow} style={{ whiteSpace: "nowrap" }}>
 				EDIT USER
 			</button>

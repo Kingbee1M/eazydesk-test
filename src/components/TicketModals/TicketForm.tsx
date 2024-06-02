@@ -15,8 +15,9 @@ const TicketForm = ({ type, setShow, currentState, proposedChange }: any) => {
   const { createisLoading, createisSuccess } = useAppSelector((state: any) => state.ticket)
   const dispatch = useAppDispatch();
   const { ITgetallReguserdata, ITgetallReguserisLoading } = useAppSelector((state: any) => state.reg);
-  const user = ITgetallReguserdata?.data?.users
-
+  const user = ITgetallReguserdata?.data?.users?.filter((person: { role: string; }) =>
+    person?.role === 'IT_SUPPORT' || person?.role === 'Admin'
+  );
 
   const InputChange = (e: any) => {
     const selectedFiles = Array.from(e.target.files);

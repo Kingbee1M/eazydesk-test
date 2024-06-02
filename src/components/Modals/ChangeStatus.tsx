@@ -45,7 +45,6 @@ const ChangeStatus = ({ show, setShow, id }: any) => {
 
 	return (
 		<>
-			<ToastContainer position="top-right" containerId={"custom1"} />
 			<Modal show={show} onHide={handleClose} centered>
 				<ModalHeader setShow={setShow} headerTitle={"Add Team Member"} />
 				<Modal.Body>

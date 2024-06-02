@@ -51,7 +51,7 @@ const GiveApproval = ({ id }: any) => {
 
 	return (
 		<>
-			<ToastContainer position="top-right" containerId={"custom1"} />
+			<ToastContainer />
 			<button className="assign-btn" onClick={() => setShow(true)} >Give Approval</button>
 			<Modal show={show} onHide={handleClose} centered>
 				<ModalHeader setShow={setShow} headerTitle={"Give Approval"} />
