@@ -28,7 +28,6 @@ const CompletedModal = ({ id, show, setShow }: any) => {
 
 	return (
 		<div >
-			<ToastContainer position="top-right" containerId={"custom1"} />
 			<Modal show={show} centered>
 				<div className='exit-modal' onClick={() => setShow(false)}>
 					<BsXLg size={20} className='close-span-icon' />

@@ -55,7 +55,6 @@ const EditCompany = ({ id, name }: any) => {
 				<BsPencil size={16} />
 				<span>Edit Company</span>
 			</div>
-			<ToastContainer />
 			<Modal show={show} onHide={handleClose} centered>
 				<ModalHeader setShow={setShow} headerTitle={"Edit Company"} />
 				<Modal.Body>

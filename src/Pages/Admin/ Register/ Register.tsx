@@ -81,7 +81,6 @@ const Register = () => {
 
 	return (
 		<div id='page-wrapper'>
-			<ToastContainer position='top-right' containerId={"custom1"} />
 			<SideNav />
 			<AdminHeader />
 			<AdminBottomNavigation />

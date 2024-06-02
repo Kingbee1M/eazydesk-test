@@ -75,7 +75,7 @@ const GeneralInformation = () => {
 
   return (
     <div className='settings_main_after'>
-      <ToastContainer position='top-right' containerId={"custom1"} />
+      {/* <ToastContainer position='top-right' containerId={"custom1"} /> */}
       <div className='settings_main_after_sup'>
         <h3>General Information</h3>
         <p>Manage your account settings</p>

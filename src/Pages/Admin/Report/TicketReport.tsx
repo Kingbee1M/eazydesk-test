@@ -98,7 +98,6 @@ const TicketReport = () => {
       <SideNav />
       <AdminHeader />
       <AdminBottomNavigation />
-      <ToastContainer />
       <main>
         <div className='dashboard-first-card-boards   '>
           <div>

@@ -78,7 +78,6 @@ const RegisterModal = () => {
 
 	return (
 		<div>
-			<ToastContainer position="top-right" containerId={"custom123"} />
 			<button className='btn' onClick={() => setShow(true)}>
 				<FiPlus size={18} /> <span>Register users</span>
 			</button>

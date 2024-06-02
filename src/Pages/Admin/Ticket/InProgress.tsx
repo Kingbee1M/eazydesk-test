@@ -7,6 +7,7 @@ import TicketTableComponent from "../../../components/Table/TicketTableComponent
 import AdminHeader from "../../../components/Headers/AdminHeader";
 import AdminBottomNavigation from "../../../components/BottomNavigation/AdminBottomNavigation";
 import AdminTicketHeader from "../../../components/TicketHeaders/AdminTicketHeader";
+import { ToastContainer } from "react-toastify";
 
 const InProgress = () => {
   const dispatch = useAppDispatch();
@@ -83,6 +84,7 @@ const InProgress = () => {
       <SideNav />
       <AdminHeader />
       <AdminBottomNavigation />
+      <ToastContainer />
       <main>
         <div className='dashboard-first-card-boards'>
           <AdminTicketHeader text="Ticket Progress" />

@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import ticketService from './ticketService'
-import { handleMessageError } from '../../components/handleError/handleError'
 
 
 const initialState = {
@@ -99,7 +98,8 @@ export const getTicket = createAsyncThunk('ticket/getTicket', async (data, thunk
 		return await ticketService.getTicket(data)
 	} catch (error: any) {
 		// Handle error using handleMessageError function
-		const message = handleMessageError(error, thunkAPI);
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
 		return thunkAPI.rejectWithValue(message)
 	}
 })
@@ -110,7 +110,8 @@ export const getItTicket = createAsyncThunk('ticket/getItTicket', async (data, t
 		return await ticketService.getItTicket(data)
 	} catch (error: any) {
 		// Handle error using handleMessageError function
-		const message = handleMessageError(error, thunkAPI);
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
 		return thunkAPI.rejectWithValue(message)
 	}
 })
@@ -119,7 +120,8 @@ export const getItTicketParameter = createAsyncThunk('ticket/getItTicketParamete
 		return await ticketService.getItTicketParameter(data)
 	} catch (error: any) {
 		// Handle error using handleMessageError function
-		const message = handleMessageError(error, thunkAPI);
+		const message = error?.response?.data?.message ||
+			(error?.response?.data?.errors?.map((error: { message: any; }) => error.message) || []).join(', ');
 		return thunkAPI.rejectWithValue(message)
 	}
 })

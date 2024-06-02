@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/useStore";
 import { dashBoardInfo } from "../../../features/Ticket/ticketSlice";
 import AdminHeader from "../../../components/Headers/AdminHeader";
 import AdminBottomNavigation from "../../../components/BottomNavigation/AdminBottomNavigation";
+import { statusList } from "../../../components/Data";
 
 const AdminDashboard = () => {
   const [activeIndex, setActiveIndex] = useState<any>("Inprogress"); // Initially set the first item as active
@@ -54,15 +55,6 @@ const AdminDashboard = () => {
 
 
 
-  const statusList = [
-    "Inprogress",
-    "Service",
-    "Incident",
-    "Change",
-    "Approved",
-    "Closed",
-    "Pending",
-  ];
 
   const types = !dashBoardInfodata
     ? []

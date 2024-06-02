@@ -14,7 +14,6 @@ import { Key } from "react";
 const TicketTableComponent = ({
   TYPE,
   data,
-  switchs,
   isLoading,
   handlePagination,
   pagination,
@@ -28,11 +27,10 @@ const TicketTableComponent = ({
   return (
     <>
       <div id="table-container">
-        <ToastContainer />
         <div className="table-responsive-vertical">
           <div className="table-container">
             <TableLoader isLoading={isLoading} />
-            <table id="table" className={switchs ? "table" : " table-hover table-mc-light-blue"}>
+            <table id="table" className={" table-hover table-mc-light-blue"}>
               <thead>
                 <tr>
                   <th>Ticket Type</th>
@@ -96,7 +94,8 @@ const TicketTableComponent = ({
                             TYPE && item?.status === "DISAPPROVED" ? "" :
                               TYPE && item?.status === "APPROVED" ? "" :
                                 TYPE && item?.status === "INPROGRESS" ? "" :
-                                  TYPE && <GiveApproval id={item?.id} />
+                                  TYPE && item?.status === "CLOSED" ? "" :
+                                    TYPE && <GiveApproval id={item?.id} />
                           }
                         </td>
                       }

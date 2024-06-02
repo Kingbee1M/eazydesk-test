@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../store/useStore";
 import LeadsThreeinOneBarChart from "../../components/Charts/LeadsThreeinOneBarChart";
 
 import ServiceCards from "./ServiceCards";
+import { ToastContainer } from "react-toastify";
 
 
 const LeadsDashboard = () => {
@@ -47,7 +48,7 @@ const LeadsDashboard = () => {
 			<div className="hero-section1">
 				<LeadsHeader />
 				<ServiceCards incident={incident} service={service} change={change} />
-
+				<ToastContainer />
 			</div>
 			<main  >
 				<div className='dash_statistics_container1'>

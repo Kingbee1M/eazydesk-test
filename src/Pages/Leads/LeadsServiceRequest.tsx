@@ -6,6 +6,7 @@ import ServiceRequestModal from '../../components/TicketModals/ServiceRequestMod
 import { useAppDispatch, useAppSelector } from '../../store/useStore';
 import { getTicket } from '../../features/Ticket/ticketSlice';
 import TicketTableComponent from '../../components/Table/TicketTableComponent';
+import { ToastContainer } from 'react-toastify';
 
 
 
@@ -56,6 +57,7 @@ const LeadsServiceRequest = () => {
 		<div id="dashboard">
 			<div className="hero-section3">
 				<LeadsHeader />
+				<ToastContainer />
 				<div className="hero-search container">
 					<div className="hero-search-container">
 						<input

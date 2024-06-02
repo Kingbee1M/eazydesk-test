@@ -94,7 +94,6 @@ const AdminChangeStatus = ({ show, setShow, id, data }: any) => {
 
 	return (
 		<>
-			<ToastContainer position="top-right" containerId={"custom1"} />
 			<Modal show={show} onHide={handleClose} centered>
 				<ModalHeader setShow={setShow} headerTitle={"Update Task"} />
 				<Modal.Body>

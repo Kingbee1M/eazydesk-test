@@ -17,7 +17,6 @@ const LeadTicketTableComponent = ({
 
   return (
     <div id='table-container'>
-      <ToastContainer position='top-right' containerId={"custom1"} />
       <div className='table-responsive-vertical '>
         <div className='table-container'>
           <table

@@ -84,7 +84,6 @@ const SuperRegister = () => {
 
 	return (
 		<div id="page-wrapper">
-			<ToastContainer position="top-right" containerId={"custom111221"} />
 			<SuperSideNav />
 			<SuperHeader />
 			<SuperBottomNavigation />
