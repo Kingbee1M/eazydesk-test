@@ -113,6 +113,7 @@ const ClosedTicket = () => {
 					<TicketTableComponent
 						TYPE={false}
 						data={data}
+						pagination={admingetticketdata}
 						handlePagination={handlePagination}
 						isLoading={admingetticketisLoading}
 						colSpan={8}

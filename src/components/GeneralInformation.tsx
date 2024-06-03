@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import pro_img from "../assets/img/Rectangle.png";
 import { toast, ToastContainer } from "react-toastify";
 import { Spinner } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../store/useStore";
@@ -75,7 +74,7 @@ const GeneralInformation = () => {
 
   return (
     <div className='settings_main_after'>
-      {/* <ToastContainer position='top-right' containerId={"custom1"} /> */}
+      <ToastContainer containerId={"custom1"} />
       <div className='settings_main_after_sup'>
         <h3>General Information</h3>
         <p>Manage your account settings</p>

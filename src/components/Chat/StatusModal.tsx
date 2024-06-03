@@ -53,7 +53,7 @@ const StatusModal = ({ viewdata, id, isTeamLead }: any) => {
 
 	return (
 		<div>
-			<ToastContainer position="top-right" containerId={"custom123"} />
+			<ToastContainer containerId={"custom1"} />
 			<div className="chat_update_container">
 				<div className='mobile_login_text_container' onClick={() => setShow(true)}>
 					<HiMenuAlt3 />

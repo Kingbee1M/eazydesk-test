@@ -1,15 +1,15 @@
 import moment from "moment";
-// import { OverlayTrigger, Image, Tooltip, Button } from "react-bootstrap";
 import { NoRecordFound, TableFetch } from "../Options";
 import ViewTicketDetailsModal from "../Modals/ViewTicketDetailsModal";
 import GiveApproval from "../Modals/GiveApproval";
 import AssignTask from "../Modals/AssignTask";
 import TicketStatusCell from "../../Pages/Admin/Ticket/TicketStatusCell";
 import RealPagination from "../RealPagination";
-import { ToastContainer } from "react-toastify";
 import TableLoader from "../TableLoader";
-import { Key } from "react";
-
+import { Key, SetStateAction, useState } from "react";
+import { ToastContainer } from "react-toastify";
+import { FaFilePdf, FaFileCsv, FaFileImage, FaFile } from 'react-icons/fa';
+import PdfViewer from "../Modals/PdfViewer";
 
 const TicketTableComponent = ({
   TYPE,
@@ -21,11 +21,31 @@ const TicketTableComponent = ({
   Requester,
   assignto
 }: any) => {
-
-
+  const [show, setShow] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const openModal = (fileUrl: SetStateAction<null>) => {
+    setSelectedFile(fileUrl);
+    setShow(true);
+  };
+  const getFileIcon = (fileType: any) => {
+    switch (fileType) {
+      case 'pdf':
+        return <FaFilePdf color={"red"} size={25} />;
+      case 'csv':
+        return <FaFileCsv size={25} />;
+      case 'jpeg':
+      case 'jpg':
+        return <FaFileImage size={25} />;
+      case 'png':
+        return <FaFileImage size={25} />;
+      default:
+        return <FaFile size={25} />;
+    }
+  };
 
   return (
     <>
+      <ToastContainer containerId={"custom1"} />
       <div id="table-container">
         <div className="table-responsive-vertical">
           <div className="table-container">
@@ -36,6 +56,7 @@ const TicketTableComponent = ({
                   <th>Ticket Type</th>
                   <th>Severity</th>
                   <th>Issue Description</th>
+                  <th>File</th>
                   <th>Affected Users</th>
                   {Requester && <th>Requester</th>}
                   <th>Time Stamp</th>
@@ -77,6 +98,31 @@ const TicketTableComponent = ({
                       </td>
                       <td data-title="description">
                         <ViewTicketDetailsModal text={"View"} data={item} />
+
+                      </td>
+                      {/* <td data-title="file">
+                        {item?.TicketFiles?.length > 0
+                          ? item?.TicketFiles?.map((file: any, index: any) => {
+                            const fileExtension = file?.filePath?.split('.').pop().toLowerCase();
+                            return (
+                              <span key={index} style={{ marginRight: '5px', cursor: 'pointer' }} onClick={() => openModal(file.filePath)}>
+                                {getFileIcon(fileExtension)}
+                              </span>
+                            );
+                          })
+                          : '-'}
+                      </td> */}
+                      <td data-title="file">
+                        {item?.TicketFiles?.length > 0
+                          ? item?.TicketFiles.map((file: any, index: any) => {
+                            const fileExtension = file?.filePath.split('.').pop().toLowerCase();
+                            return (
+                              <span key={index} style={{ marginRight: '5px', cursor: 'pointer' }} onClick={() => openModal(file?.filePath)}>
+                                {getFileIcon(fileExtension)}
+                              </span>
+                            );
+                          })
+                          : '-'}
                       </td>
                       <td data-title="affected users">
                         {item?.affectedUsers === null ? 0 : item?.affectedUsers}
@@ -123,6 +169,7 @@ const TicketTableComponent = ({
                 )}
               </tbody>
             </table>
+            <PdfViewer fileUrl={selectedFile} setShow={setShow} show={show} />
           </div>
           {pagination?.pagination?.totalTickets > 1 && <div className="totalResponses">
             <h3>Total of {pagination?.pagination?.totalTickets} Tickets - <span>Page {pagination?.pagination?.page} of {pagination?.pagination?.totalPages}</span></h3>

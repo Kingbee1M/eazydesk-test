@@ -36,6 +36,7 @@ const DeleteCompanyModal = ({ id, }: any) => {
 
 	return (
 		<div >
+			<ToastContainer containerId={"custom1"} />
 			<div className='team-card-option' onClick={() => setShow(true)}>
 				<BsTrash size={16} />
 				<span>Delete Company</span>

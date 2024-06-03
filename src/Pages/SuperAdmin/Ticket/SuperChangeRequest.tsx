@@ -21,7 +21,7 @@ const SuperChangeRequest = () => {
 	const [data, setData] = useState([]);
 	const pagination = admingetticketdata?.pagination
 
-
+	console.log('admingetticketdata', admingetticketdata)
 
 
 	useEffect(() => {

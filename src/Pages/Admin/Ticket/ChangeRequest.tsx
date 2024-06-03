@@ -7,6 +7,7 @@ import TicketTableComponent from "../../../components/Table/TicketTableComponent
 import AdminBottomNavigation from "../../../components/BottomNavigation/AdminBottomNavigation";
 import AdminHeader from "../../../components/Headers/AdminHeader";
 import AdminTicketHeader from "../../../components/TicketHeaders/AdminTicketHeader";
+import { ToastContainer } from "react-toastify";
 
 const ChangeRequest = () => {
   const dispatch = useAppDispatch();
@@ -23,9 +24,24 @@ const ChangeRequest = () => {
   const [data, setData] = useState([]);
   const pagination = admingetticketdata?.pagination
 
+  console.log('admingetticketdata', admingetticketdata)
 
 
+  const fileTypes = admingetticketdata?.tickets?.map((ticket: { TicketFiles: any[]; id: any; }) => {
+    return ticket.TicketFiles.map(file => {
+      const filePath = file.filePath;
+      const fileExtension = filePath.split('.').pop();
+      return {
+        ticketId: ticket.id,
+        filePath: filePath,
+        fileType: fileExtension,
+      };
+    });
+  });
+  // Flatten the array of arrays into a single array of file objects
+  const flattenedFileTypes = [].concat(...fileTypes);
 
+  console.log(flattenedFileTypes);
   useEffect(() => {
     const datas = { ticketType: "CHANGE" };
     // @ts-ignore 
@@ -88,6 +104,7 @@ const ChangeRequest = () => {
       <SideNav />
       <AdminHeader />
       <AdminBottomNavigation />
+      <ToastContainer containerId={"custom11"} />
       <main>
         <div className='dashboard-first-card-boards '>
           <AdminTicketHeader text="Change Request" />
