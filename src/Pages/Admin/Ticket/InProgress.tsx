@@ -113,6 +113,7 @@ const InProgress = () => {
             TYPE={false}
             data={data}
             handlePagination={handlePagination}
+            pagination={admingetticketdata}
             isLoading={admingetticketisLoading}
             colSpan={8}
           />

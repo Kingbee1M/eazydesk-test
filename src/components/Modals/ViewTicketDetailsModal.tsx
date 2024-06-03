@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import ModalHeader from "./ModalHeader";
 import ReactQuillWrapper from "../TicketModals/ReactQuillWrapper";
+import ReactQuillView from "../ReactQuillView";
 
 const ViewTicketDetailsModal = ({ data }: any) => {
   const [showModal, setLgShow] = useState(false);
@@ -39,7 +40,7 @@ const ViewTicketDetailsModal = ({ data }: any) => {
                     <span className='form_info'>{data?.issueDescription} </span>
                   </div>
                 </div>
-                <ReactQuillWrapper
+                <ReactQuillView
                   value={data?.description}
                 />
 

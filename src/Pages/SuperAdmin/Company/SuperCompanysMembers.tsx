@@ -41,6 +41,7 @@ const SuperCompanysMembers = () => {
 		<div id="page-wrapper">
 			<SuperSideNav />
 			<SuperHeader />
+			<ToastContainer containerId={"custom1"} />
 			<main >
 				<div className='dashboard-first-card-boards mb-2 mt-2'>
 					<div>

@@ -28,7 +28,7 @@ const TicketProgress = () => {
 		file: [],
 	});
 
-	console.log('viewdata===viewdata', viewdata)
+	// console.log('viewdata', viewdata)
 
 	useEffect(() => {
 		if (updateTicketisSuccess || updateLeadTicketisSuccess) {

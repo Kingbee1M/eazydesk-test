@@ -48,7 +48,7 @@ const NotificationPopUp = ({ setRefresh }: any) => {
 
 	return (
 		<>
-			<ToastContainer position="top-right" containerId={"custom1"} />
+			<ToastContainer containerId={"custom1"} />
 		</>
 	)
 

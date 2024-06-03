@@ -68,7 +68,6 @@ const AssignTask = ({ id, Assigned, needsApproval, data }: any) => {
 
 	return (
 		<>
-			<ToastContainer />
 			<button
 				disabled={disabled}
 				className={className}
@@ -77,6 +76,7 @@ const AssignTask = ({ id, Assigned, needsApproval, data }: any) => {
 				Assign
 			</button>
 
+			<ToastContainer containerId={"custom123"} />
 			<Modal show={show} onHide={handleClose} centered>
 				<ModalHeader setShow={setShow} headerTitle={"Assign Ticket to"} />
 				<Modal.Body>

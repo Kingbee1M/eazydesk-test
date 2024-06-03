@@ -2,7 +2,6 @@ import { EntriesLimit } from './Options';
 import FilterModal from './FilterModal';
 import Search from './Search';
 import SubscriptionModal from '../Pages/SuperAdmin/Subscription/SubscriptionModal';
-import { ToastContainer } from 'react-toastify';
 import RegisterModal from '../Pages/SuperAdmin/ Register/RegisterModal';
 
 
@@ -15,7 +14,6 @@ const SearchConponent = ({ ID, setEndDates, setStartDates, searchItem, setSearch
 
 	return (
 		<div id='reports'>
-			{/* <ToastContainer position="top-right" containerId={"custom1345"} /> */}
 
 			<div className="search-area">
 				<Search
@@ -51,7 +49,6 @@ const SearchConponent = ({ ID, setEndDates, setStartDates, searchItem, setSearch
 						limit={limit}
 						data={data}
 						handlePagination={handlePagination}
-						filterLimit={data?.totalTickets}
 					/>
 				</form>
 				{subscription && <SubscriptionModal />}

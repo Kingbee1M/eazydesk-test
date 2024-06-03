@@ -4,7 +4,7 @@ import QuillEditor from "react-quill";
 
 
 
-const ReactQuillWrapper = ({ value, setValue }: any) => {
+const ReactQuillView = ({ value, setValue }: any) => {
 	// Editor state
 
 
@@ -87,11 +87,10 @@ const ReactQuillWrapper = ({ value, setValue }: any) => {
 				theme="snow"
 				formats={formats}
 				modules={modules}
-				onChange={(value) => setValue(value)}
 				value={value}
 			/>
 		</div>
 	);
 };
 
-export default ReactQuillWrapper
+export default ReactQuillView

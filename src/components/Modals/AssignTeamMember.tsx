@@ -66,7 +66,7 @@ const AssignTeamMember = ({ showAssignMember, setShowAssignMember, TeamId }: any
 
 	return (
 		<>
-			<ToastContainer position="top-right" containerId={"custom1"} />
+			<ToastContainer containerId={"custom1"} />
 			<Modal show={showAssignMember} onHide={handleClose} centered>
 				<ModalHeader setShow={setShowAssignMember} headerTitle={"Add Team Member"} />
 				<Modal.Body>

@@ -113,6 +113,7 @@ const OpenTicket = () => {
             TYPE={false}
             isLoading={admingetticketisLoading}
             handlePagination={handlePagination}
+            pagination={admingetticketdata}
             data={data}
             colSpan={8}
           />
