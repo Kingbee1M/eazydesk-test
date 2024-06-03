@@ -90,7 +90,6 @@ const SubscriptionModal = () => {
 
 	return (
 		<div>
-			<ToastContainer position="top-right" containerId={"custom1"} />
 			<button className='btn' onClick={() => setShow(true)}>
 				<FiPlus size={18} /> <span>Create Subscription</span>
 			</button>
@@ -106,7 +105,7 @@ const SubscriptionModal = () => {
 					<div className="container_reg">
 						<form onSubmit={onSubmitRegistration}>
 							<div className="user__details">
-							
+
 								<div className="input__box">
 									<span className="subscriptiontype">Subscription Type</span>
 									<select name="subscriptiontype" id="register-select"
@@ -117,10 +116,10 @@ const SubscriptionModal = () => {
 										<option value="Basic">Basic</option>
 										<option value="Standard">Standard</option>
 										<option value="Premium">Premium</option>
-									
+
 									</select>
-                                </div>
-                                <div className="input__box">
+								</div>
+								<div className="input__box">
 									<span className="subscriptionprice">Subscription Price</span>
 									<select name="subscriptionprice" id="register-select"
 										value={input?.role}
@@ -130,10 +129,10 @@ const SubscriptionModal = () => {
 										<option value="1000">$1000</option>
 										<option value="5000">$5000</option>
 										<option value="10000">$10000</option>
-									
+
 									</select>
-                                </div>
-                                <div className="input__box">
+								</div>
+								<div className="input__box">
 									<span className="subcribedusers">Number of Users</span>
 									<input type="text" placeholder="johnWC98"
 										value={input?.subcribedusers}
@@ -152,7 +151,7 @@ const SubscriptionModal = () => {
 										value={input?.subscriptionendtdate}
 										onChange={(e) => handleOnChange("subscriptionendtdate", e.target.value)} required />
 								</div>
-								
+
 
 							</div>
 							<div className="Register-button-container">

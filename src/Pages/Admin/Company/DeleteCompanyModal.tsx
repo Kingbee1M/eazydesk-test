@@ -36,11 +36,11 @@ const DeleteCompanyModal = ({ id, }: any) => {
 
 	return (
 		<div >
+			<ToastContainer containerId={"custom1"} />
 			<div className='team-card-option' onClick={() => setShow(true)}>
 				<BsTrash size={16} />
 				<span>Delete Company</span>
 			</div>
-			<ToastContainer position="top-right" containerId={"custom1"} />
 			<Modal show={show} centered>
 				<div className='exit-modal' onClick={() => setShow(false)}>
 					<BsXLg size={20} className='close-span-icon' />

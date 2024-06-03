@@ -5,44 +5,54 @@ import { MdOutlineClose } from "react-icons/md";
 import ProgressChat from "./ProgressChat";
 import { useAppDispatch, useAppSelector } from "../../store/useStore";
 import { reset } from "../../features/Comment/commentSlice";
-import { updateLeadTicket, updateTicket, viewTicket } from "../../features/Ticket/ticketSlice";
+import { reset as ticketreset, updateLeadTicket, updateTicket, viewTicket } from "../../features/Ticket/ticketSlice";
 import { SVGLoader } from "../SVGLoader";
-import { toast, ToastContainer } from "react-toastify";
 import { customId } from "../Options";
 import NotificationPopUp from "../Scoket/NotificationPopUp";
 import { getUserPrivileges } from "../../hooks/auth";
 import StatusModal from "./StatusModal";
+import { toast, ToastContainer } from "react-toastify";
 
 const TicketProgress = () => {
+	const [refresh, setRefresh] = useState(false);
 	const { isTeamLead } = getUserPrivileges();
 	const { id }: any = useParams();
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const form: any = useRef();
 	const [inputs, setinputs] = useState("")
-	const { viewdata } = useAppSelector((state: any) => state.ticket)
-	const { updateTicketisLoading, updateTicketisSuccess, updateTicketisError, updateTicketmessage } = useAppSelector((state: any) => state.ticket)
-	const { updateLeadTicketisLoading, updateLeadTicketisSuccess, updateLeadTicketisError, updateLeadTicketmessage } = useAppSelector((state: any) => state.ticket)
+	const { viewdata, updateLeadTicketisLoading, updateLeadTicketisSuccess, updateLeadTicketisError, updateLeadTicketmessage, updateTicketisLoading, updateTicketisSuccess, updateTicketisError, updateTicketmessage } = useAppSelector((state: any) => state.ticket)
 	const { createisSuccess } = useAppSelector((state: any) => state.comment)
-	const [input, setInputs] = useState({
+	const [input, setInput] = useState({
 		comment: "",
-		images: [],
+		file: [],
 	});
 
-
+	// console.log('viewdata', viewdata)
 
 	useEffect(() => {
 		if (updateTicketisSuccess || updateLeadTicketisSuccess) {
 			toast.success("Ticket Updated!", { toastId: customId });
-		} else if (updateLeadTicketisError) {
-			toast.error(updateLeadTicketmessage, { toastId: customId });
-		} else if (updateTicketisError) {
-			toast.error(updateTicketmessage, { toastId: customId });
 		}
-		setTimeout(() => {
-			dispatch(reset())
+
+		const timeoutId = setTimeout(() => {
+			dispatch(ticketreset());
+			dispatch(reset());
 		}, 2000);
-	}, [dispatch, updateLeadTicketisError, updateLeadTicketisSuccess, updateLeadTicketmessage, updateTicketisError, updateTicketisSuccess, updateTicketmessage])
+
+		// Cleanup function to clear the timeout if the component unmounts
+		return () => clearTimeout(timeoutId);
+	}, [
+		dispatch,
+		updateLeadTicketisError,
+		updateLeadTicketisSuccess,
+		updateLeadTicketmessage,
+		updateTicketisError,
+		updateTicketisSuccess,
+		updateTicketmessage,
+	]);
+
+
 
 	useEffect(() => {
 		// @ts-ignore 
@@ -50,15 +60,15 @@ const TicketProgress = () => {
 		if (createisSuccess || updateTicketisSuccess || updateLeadTicketisSuccess) {
 			// @ts-ignore 
 			dispatch(viewTicket(id))
-			setInputs({
+			setInput({
 				comment: "",
-				images: [],
+				file: [],
 			})
 		}
-		// @ts-ignore 
+
 		dispatch(reset())
 
-	}, [dispatch, id, createisSuccess, updateTicketisSuccess, updateLeadTicketisSuccess])
+	}, [dispatch, id, createisSuccess, updateTicketisSuccess, updateLeadTicketisSuccess, refresh])
 
 
 	const handleUpdateTicketStatus = (e: any) => {
@@ -73,13 +83,13 @@ const TicketProgress = () => {
 		}
 	};
 
-	console.log('ticket', viewdata)
+
 
 
 	return (
 		<div>
-			<NotificationPopUp />
-			<ToastContainer position="top-right" containerId={"custom1"} />
+			<NotificationPopUp setRefresh={setRefresh} />
+			<ToastContainer containerId={"custom1"} />
 			<header className="ChatProgressView-header">
 				<div>
 					<span className="in-progresss-header">
@@ -113,7 +123,7 @@ const TicketProgress = () => {
 								</p>
 							))}
 						</div>
-						<ProgressChat id={id} viewdata={viewdata} setInputs={setInputs} input={input} />
+						<ProgressChat id={id} viewdata={viewdata} setInput={setInput} input={input} />
 
 					</div>
 					<div className="tp-shared-section">

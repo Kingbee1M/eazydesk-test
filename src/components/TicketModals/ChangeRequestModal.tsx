@@ -1,6 +1,6 @@
 
 
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Modal } from 'react-bootstrap'
 import TicketForm from './TicketForm'
 import ModalHeader from '../Modals/ModalHeader'

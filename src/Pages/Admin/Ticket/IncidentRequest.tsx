@@ -116,6 +116,7 @@ const IncidentRequest = () => {
 						data={data}
 						isLoading={admingetticketisLoading}
 						pagination={admingetticketdata}
+						handlePagination={handlePagination}
 						colSpan={8}
 						assignto={true}
 					/>

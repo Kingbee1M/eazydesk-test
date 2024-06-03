@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import moment from "moment";
 import { FaRegUserCircle, FaCamera } from "react-icons/fa";
 import { baseUrl } from "../../shared/baseUrl";
@@ -10,8 +10,8 @@ import { ToastContainer } from "react-toastify";
 import { BsChatRightText } from "react-icons/bs";
 import Skelenton from "../Skelenton/Skelenton";
 
-const ProgressChat = ({ viewdata, id, input, setInputs }: any) => {
-
+const ProgressChat = ({ viewdata, id, input, setInput }: any) => {
+  const [files, setFile] = useState<any>([]);
   const dispatch = useAppDispatch();
   const { isLoading, isSuccess, getTicketID } = useAppSelector((state: any) => state.comment)
   const { createdata, createisLoading, createisSuccess } = useAppSelector((state: any) => state.comment)
@@ -20,27 +20,25 @@ const ProgressChat = ({ viewdata, id, input, setInputs }: any) => {
 
 
   const formData = new FormData();
-  const form: any = useRef();
+  const form = useRef<HTMLFormElement>(null);
 
-
+  console.log('files', files)
 
 
   const formFields = [
     { key: 'ticketId', value: id },
     { key: 'comment', value: input.comment },
-    { key: 'file', value: input.images },
+    { key: 'file', value: files },
   ];
 
   formFields.forEach(field => {
     formData.append(field.key, field.value);
   });
 
-  // const [imgsLocalURL, setImgsLocalURL] = useState<any>([]);
-  // const [isLoadingImg, setIsLoadingImg] = useState(false);
 
-
+  // console.log('formFields', formFields)
   const handleChangeInput = (input: any, value: any) => {
-    setInputs((prevState: any) => ({
+    setInput((prevState: any) => ({
       ...prevState,
       [input]: value,
     }));
@@ -51,46 +49,31 @@ const ProgressChat = ({ viewdata, id, input, setInputs }: any) => {
     // @ts-ignore 
     dispatch(createComment(formData));
   }
-  // const handleUploadMultiImg = async (e: any) => {
-  //   setImgsLocalURL([]);
 
-  //   const files = e.target.files;
-  //   let formData = new FormData();
+  const InputChange = (e: any) => {
+    // --For Multiple File Input
+    let images = [];
+    for (let i = 0; i < e.target.files.length; i++) {
+      images.push(e.target.files[i]);
+      let reader = new FileReader();
+      let file = e.target.files[i];
+      reader.onloadend = () => {
+        setFile((preValue: any) => {
+          return [
+            ...preValue,
+            {
+              file: e.target.files[i],
 
-  //   for (const file of files) {
-  //     formData.append("image", file);
-  //     setImgsLocalURL((prevState: any) => [
-  //       URL?.createObjectURL(file),
-  //       ...prevState,
-  //     ]);
-  //   }
+            }
+          ];
+        })
 
-  //   try {
-  //     setIsLoadingImg(true);
-  //     const data = await axios.post(
-  //       baseUrl + "/api/v1/imageupload/multiple",
-  //       formData,
-  //       {
-  //         headers: {
-  //           "Content-Type": "multipart/form-data",
-  //           Authorization: `Bearer ${userInfo?.token}`,
-  //         },
-  //       }
-  //     );
-  //     setInputs((prevState) => ({
-  //       ...prevState,
-  //       images: data.data.IMAGES,
-  //     }));
-  //     setIsLoadingImg(false);
-  //   } catch (err: any) {
-  //     setIsLoadingImg(false);
-  //     console.log(
-  //       err.response && err.response.data.message
-  //         ? err.response.data.message
-  //         : err.message
-  //     );
-  //   }
-  // };
+      };
+      if (e.target.files[i]) {
+        reader.readAsDataURL(file);
+      }
+    }
+  };
 
 
 
@@ -98,18 +81,7 @@ const ProgressChat = ({ viewdata, id, input, setInputs }: any) => {
   return (
     <>
       <div>
-        <ToastContainer position="top-right" containerId={"custom1"} />
-
-        {/* <div className="img-preview">
-          {imgsLocalURL?.length > 0 && isLoadingImg ? (
-            <p style={{ color: "red" }}>Please wait...</p>
-          ) : (
-            imgsLocalURL?.map((item: any, i: any) => (
-              <img key={i} src={item} alt={`PhotoIMG-${i}`} />
-            ))
-          )}
-        </div> */}
-        <h5 className="page-title">CHAT</h5>
+        <h5 className="page-title">Chat</h5>
         <div className="chat-container">
           {false ? <Skelenton count={5} /> : viewdata?.Comment?.length === 0 ? (
             <div className="chat-container-icons">
@@ -150,35 +122,37 @@ const ProgressChat = ({ viewdata, id, input, setInputs }: any) => {
             ))
           )}
         </div>
-        <div className="btn-area-container">
-          <form onSubmit={handleSubmitComment} className="form" ref={form}>
+        {viewdata?.status === "CLOSED" ? "" : (
+          <div className="btn-area-container">
+            <form onSubmit={handleSubmitComment} className="form" ref={form}>
 
-            <input
-              id="bottom_input_container"
-              required
-              placeholder="Comment on this request..."
-              value={input?.comment}
-              onChange={(e) => handleChangeInput("comment", e.target.value)}
-            />
-            <button type="submit" disabled={createisLoading}>
-              {createisLoading ? <SVGLoader width={"30px"} height={"30px"} color={"#fff"} /> : <RiMailSendLine size={20} color="#0240BC" />}
-            </button>
-          </form>
-          <div className="btn-area">
-            <label className="img-pckr">
-              <FaCamera size={20} color="#0240BC" />
               <input
-                type="file"
-                accept="image/*"
-                style={{ display: "none" }}
-                multiple
-              // onChange={handleUploadMultiImg}
-              // disabled={loading}
+                id="bottom_input_container"
+                required
+                placeholder="Comment on this request..."
+                value={input?.comment}
+                onChange={(e) => handleChangeInput("comment", e.target.value)}
               />
-            </label>
+              <button type="submit" disabled={createisLoading}>
+                {createisLoading ? <SVGLoader width={"30px"} height={"30px"} color={"#fff"} /> : <RiMailSendLine size={20} color="#0240BC" />}
+              </button>
+            </form>
+            <div className="btn-area">
+              <label className="img-pckr">
+                <FaCamera size={20} color="#0240BC" />
+                <input
+                  type="file"
+                  style={{ display: "none" }}
+                  multiple
+                  onChange={InputChange}
 
-          </div>
-        </div>
+                // onChange={handleUploadMultiImg}
+                // disabled={loading}
+                />
+              </label>
+
+            </div>
+          </div>)}
       </div>
     </>
   );

@@ -181,7 +181,6 @@ export default function GeekStepper() {
 
   return (
     <>
-      <ToastContainer position='top-right' />
       {activeStep === 2 ? (
         <SignupSuccessPage />
       ) : (

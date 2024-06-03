@@ -1,7 +1,8 @@
-import axios from "axios";
-import createHttpService from "../../helpers/HttpService";
+import axios from "axios"; 
 import { baseUrl } from "../../shared/baseUrl";  
 import DataService from "./dataService";
+import CreateHttpService from "../../helpers/HttpService";
+import { toast } from "react-toastify";
  
  
 const dataService = DataService();
@@ -20,7 +21,7 @@ const dataService = DataService();
  
   // logout  
 const logout = async () => { 
-   const HttpService = createHttpService();
+   const HttpService = CreateHttpService();
   const { data }: any = await HttpService.get( '/api/v2/auth/signout')  
    return data
 };
@@ -28,7 +29,7 @@ const logout = async () => {
 
   // View user by ID
 const ViewUserByID = async (id: any) => {
-  const HttpService = createHttpService(); 
+  const HttpService = CreateHttpService(); 
   const { data }: any = await HttpService.get( `/api/v2/auth/users/user/${id}`)  
    return data
 };
@@ -36,14 +37,14 @@ const ViewUserByID = async (id: any) => {
 
   // Forget Password
 const forgetPassword = async (email: any) => { 
-   const HttpService = createHttpService(); 
+   const HttpService = CreateHttpService(); 
   const { data } = await HttpService.post( `/api/v2/auth/forgot-password`,email)  
    return data
 };
 
   // Reset Password
 const resetPassword = async (value: any) => { 
-  const HttpService = createHttpService(); 
+  const HttpService = CreateHttpService(); 
   const { input, id}= value; 
   const { data } = await HttpService.post( `/api/v2/auth/reset-password/${id}`,input)  
    return data
@@ -51,27 +52,28 @@ const resetPassword = async (value: any) => {
 
   // Update Profile
 const updateProfile = async (value: any) => { 
-  const HttpService = createHttpService(); 
+  const HttpService = CreateHttpService(); 
   const { data } = await HttpService.patch( `/api/v2/auth/user/update-profile`, value)  
    return data
 };
 
   // Current User
 const currentUser = async () => {  
-    const HttpService = createHttpService(); 
+    const HttpService = CreateHttpService(); 
   const { data }: any = await HttpService.get( `/api/v2/auth/current-user`)  
    return data
 };
   // Supervisor User
 const supervisorUser = async (id:any) => {  
-    const HttpService = createHttpService(); 
+    const HttpService = CreateHttpService(); 
   const { data }: any = await HttpService.get( `/api/v2/auth/users/supervisor/${id}`)  
    return data
 };
 
   
   export const logoutUserAction = () => ( ) => {
-  localStorage.removeItem("service_desk");     
+    localStorage.removeItem("service_desk");     
+       toast.dismiss();
 };
 
 

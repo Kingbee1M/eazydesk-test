@@ -16,13 +16,16 @@ const AssignTask = ({ id, Assigned, needsApproval, data }: any) => {
 	const dispatch = useAppDispatch();
 	const { itassignisSuccess, itassignisLoading, } = useAppSelector((state: any) => state.ticket);
 	const { ITgetallReguserdata, ITgetallReguserisLoading } = useAppSelector((state: any) => state.reg);
-	const user = ITgetallReguserdata?.data?.users
+	const user = ITgetallReguserdata?.data?.users?.filter((person: { role: string; }) => person?.role === 'IT_SUPPORT');
+
 	const handleClose = () => setShow(false);
 	const [show, setShow] = useState(false);
 	const [assignedUserId, setAssignedUserId] = useState(null);
 	const handleSelectedChange1 = (assignedUserId: any) => {
 		setAssignedUserId(assignedUserId);
 	};
+
+
 	const item = user?.map((item: any) => ({
 		value: item?.id,
 		label: `${item.firstname}  ${item.lastname}`,
@@ -65,7 +68,6 @@ const AssignTask = ({ id, Assigned, needsApproval, data }: any) => {
 
 	return (
 		<>
-			<ToastContainer position="top-right" containerId={"custom1"} />
 			<button
 				disabled={disabled}
 				className={className}
@@ -74,6 +76,7 @@ const AssignTask = ({ id, Assigned, needsApproval, data }: any) => {
 				Assign
 			</button>
 
+			<ToastContainer containerId={"custom123"} />
 			<Modal show={show} onHide={handleClose} centered>
 				<ModalHeader setShow={setShow} headerTitle={"Assign Ticket to"} />
 				<Modal.Body>

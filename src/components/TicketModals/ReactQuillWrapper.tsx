@@ -8,26 +8,12 @@ const ReactQuillWrapper = ({ value, setValue }: any) => {
 	// Editor state
 
 
-	// useEffect(() => {
-	// 	setInput((prevState: any) => {
-	// 		return ({
-	// 			...prevState,
-	// 			firstname: data?.firstname,
-	// 			lastname: data?.lastname,
-	// 			email: data?.email,
-	// 			mobileNumber: data?.mobileNumber,
-	// 			role: data?.role,
-	// 			activated: data?.activated,
-	// 		});
-	// 	});
-	// }, [ ]);
+
 
 	// Editor ref
 	const quill: any = useRef();
 
-	// Handler to handle button clicked
-	// function handler() { 
-	// }
+
 
 	const imageHandler = useCallback(() => {
 		// Create an input element of type 'file'
@@ -104,9 +90,6 @@ const ReactQuillWrapper = ({ value, setValue }: any) => {
 				onChange={(value) => setValue(value)}
 				value={value}
 			/>
-			{/* <button onClick={handler} className={"btn"}>
-				Submit
-			</button> */}
 		</div>
 	);
 };

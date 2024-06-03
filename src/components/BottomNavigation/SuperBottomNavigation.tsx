@@ -1,20 +1,13 @@
-import { useState } from 'react'
-import { MdInsights, MdOutlineDashboard, MdOutlineSubscriptions } from 'react-icons/md'
+import { MdOutlineDashboard, MdOutlineSubscriptions } from 'react-icons/md'
 import { NavLink, useLocation } from 'react-router-dom';
-import { HiOutlineCalendar } from 'react-icons/hi';
 import { BiHome } from 'react-icons/bi';
-import { LuTag, LuUsers } from 'react-icons/lu';
-import { HiOutlineRectangleStack } from 'react-icons/hi2';
+import { LuTag } from 'react-icons/lu';
 import { BsFileEarmarkCheck, BsFileText } from 'react-icons/bs';
-import { IoMdOpen } from 'react-icons/io';
+
 
 
 
 const SuperBottomNavigation = () => {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-
-
   const { pathname } = useLocation();
 
   return (

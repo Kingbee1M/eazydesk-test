@@ -41,7 +41,7 @@ const CompanysMembers = () => {
 		<div id="page-wrapper">
 			<SideNav />
 			<AdminHeader />
-			<ToastContainer />
+			<ToastContainer containerId={"custom1"} />
 			<AdminBottomNavigation />
 			<main >
 				<div className='dashboard-first-card-boards mb-2 mt-2'>

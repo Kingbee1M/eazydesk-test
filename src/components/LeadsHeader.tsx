@@ -46,6 +46,7 @@ const LeadsHeader = () => {
 
   const handleLogout = () => {
     dispatch(logout());
+    toast.dismiss();
   };
 
   useEffect(() => {
@@ -58,13 +59,12 @@ const LeadsHeader = () => {
   useEffect(() => {
     if (isSuccesslogout) {
       // localStorage.removeItem("service_desk");
+      toast.dismiss();
       delete axios.defaults.headers.common["Authorization"];
       dispatch(logoutUserAction());
       dataService.clearData();
     } else if (isErrorlogout) {
-      toast.error(messagelogout, {
-        toastId: customId,
-      });
+      toast.error(messagelogout, { toastId: customId });
       dispatch(logoutUserAction());
       dataService.clearData();
     }

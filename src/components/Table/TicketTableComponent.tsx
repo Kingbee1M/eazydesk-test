@@ -1,20 +1,20 @@
 import moment from "moment";
-// import { OverlayTrigger, Image, Tooltip, Button } from "react-bootstrap";
 import { NoRecordFound, TableFetch } from "../Options";
 import ViewTicketDetailsModal from "../Modals/ViewTicketDetailsModal";
 import GiveApproval from "../Modals/GiveApproval";
 import AssignTask from "../Modals/AssignTask";
 import TicketStatusCell from "../../Pages/Admin/Ticket/TicketStatusCell";
 import RealPagination from "../RealPagination";
-import { ToastContainer } from "react-toastify";
 import TableLoader from "../TableLoader";
-import { Key } from "react";
-
+import { Key, SetStateAction, useState } from "react";
+import { ToastContainer } from "react-toastify";
+import { FaFilePdf, FaFileCsv, FaFileImage, FaFile } from 'react-icons/fa';
+import PdfViewer from "../Modals/PdfViewer";
+import ImageLightbox from "../ImageLightbox";
 
 const TicketTableComponent = ({
   TYPE,
   data,
-  switchs,
   isLoading,
   handlePagination,
   pagination,
@@ -22,22 +22,45 @@ const TicketTableComponent = ({
   Requester,
   assignto
 }: any) => {
+  const [show, setShow] = useState(false);
+  const [isPDF, setIsPDF] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const openModal = (fileUrl: SetStateAction<null>, fileType: string, file: any) => {
+    setSelectedFile(file);
+    setIsPDF(fileType === 'pdf');
+    setShow(true);
+  };
 
+  console.log('setSelectedFile', selectedFile)
 
-
+  const getFileIcon = (fileType: any) => {
+    switch (fileType) {
+      case 'pdf':
+        return <FaFilePdf color={"red"} size={25} />;
+      case 'csv':
+        return <FaFileCsv size={25} color={"green"} />;
+      case 'jpeg':
+      case 'jpg':
+      case 'png':
+        return <FaFileImage size={25} color={"gray"} />;
+      default:
+        return <FaFile size={25} />;
+    }
+  };
   return (
     <>
+      <ToastContainer containerId={"custom1"} />
       <div id="table-container">
-        <ToastContainer />
         <div className="table-responsive-vertical">
           <div className="table-container">
             <TableLoader isLoading={isLoading} />
-            <table id="table" className={switchs ? "table" : " table-hover table-mc-light-blue"}>
+            <table id="table" className={" table-hover table-mc-light-blue"}>
               <thead>
                 <tr>
                   <th>Ticket Type</th>
                   <th>Severity</th>
                   <th>Issue Description</th>
+                  <th>File</th>
                   <th>Affected Users</th>
                   {Requester && <th>Requester</th>}
                   <th>Time Stamp</th>
@@ -79,7 +102,37 @@ const TicketTableComponent = ({
                       </td>
                       <td data-title="description">
                         <ViewTicketDetailsModal text={"View"} data={item} />
+
                       </td>
+                      {/* <td data-title="file">
+                        {item?.TicketFiles?.length > 0
+                          ? item?.TicketFiles?.map((file: any, index: any) => {
+                            const fileExtension = file?.filePath?.split('.').pop().toLowerCase();
+                            return (
+                              <span key={index} style={{ marginRight: '5px', cursor: 'pointer' }} onClick={() => openModal(file.filePath)}>
+                                {getFileIcon(fileExtension)}
+                              </span>
+                            );
+                          })
+                          : '-'}
+                      </td> */}
+                      <td data-title="file">
+                        {item?.TicketFiles?.length > 0
+                          ? item?.TicketFiles.map((file: any, index: any) => {
+                            const fileExtension = file?.filePath.split('.').pop().toLowerCase();
+                            return (
+                              <span
+                                key={index}
+                                style={{ marginRight: '5px', cursor: 'pointer' }}
+                                onClick={() => openModal(file?.filePath, fileExtension, file)} // Pass fileType as the second argument
+                              >
+                                {getFileIcon(fileExtension)}
+                              </span>
+                            );
+                          })
+                          : '-'}
+                      </td>
+
                       <td data-title="affected users">
                         {item?.affectedUsers === null ? 0 : item?.affectedUsers}
                       </td>
@@ -96,7 +149,8 @@ const TicketTableComponent = ({
                             TYPE && item?.status === "DISAPPROVED" ? "" :
                               TYPE && item?.status === "APPROVED" ? "" :
                                 TYPE && item?.status === "INPROGRESS" ? "" :
-                                  TYPE && <GiveApproval id={item?.id} />
+                                  TYPE && item?.status === "CLOSED" ? "" :
+                                    TYPE && <GiveApproval id={item?.id} />
                           }
                         </td>
                       }
@@ -124,6 +178,12 @@ const TicketTableComponent = ({
                 )}
               </tbody>
             </table>
+            {isPDF ? (
+              <PdfViewer fileUrl={selectedFile} setShow={setShow} show={show} />
+            ) : (
+              <ImageLightbox images={selectedFile} setShow={setShow} show={show} />
+            )}
+
           </div>
           {pagination?.pagination?.totalTickets > 1 && <div className="totalResponses">
             <h3>Total of {pagination?.pagination?.totalTickets} Tickets - <span>Page {pagination?.pagination?.page} of {pagination?.pagination?.totalPages}</span></h3>
@@ -131,6 +191,8 @@ const TicketTableComponent = ({
           </div>}
         </div>
       </div>
+
+
     </>
   );
 };

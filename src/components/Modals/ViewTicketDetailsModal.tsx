@@ -1,18 +1,13 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
-// import { NoRecordFound } from '../Options';
-// import ImageLightbox from '../ImageLightbox';
 import ModalHeader from "./ModalHeader";
 import ReactQuillWrapper from "../TicketModals/ReactQuillWrapper";
+import ReactQuillView from "../ReactQuillView";
 
 const ViewTicketDetailsModal = ({ data }: any) => {
   const [showModal, setLgShow] = useState(false);
-  const [value, setValue] = useState("");
 
-  // const { Image } = dataAll
-  // const images = Image?.map((item: { image: any; }) => (
-  // 	`${baseUrl}/${item.image}` // Replace with the actual path to your original images // Replace with the actual path to your thumbnail images
-  // ));
+
 
   return (
     <>
@@ -45,22 +40,10 @@ const ViewTicketDetailsModal = ({ data }: any) => {
                     <span className='form_info'>{data?.issueDescription} </span>
                   </div>
                 </div>
-                <ReactQuillWrapper
-                  setValue={setValue}
+                <ReactQuillView
                   value={data?.description}
                 />
-                {/* <div className="image_gallery">
-									<span className='form_info'> Image </span>
-									{Image?.length === 0 || Image === undefined ? (
-										<div className='ang-dash-notfound'>
-											<NoRecordFound colSpan={9} />
-										</div>
-									) : (
 
-										<ImageLightbox images={data?.images} />
-									)}
-
-								</div> */}
               </div>
             </div>
           </Modal.Body>

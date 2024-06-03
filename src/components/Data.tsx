@@ -21,5 +21,14 @@ export const tickettype = [
 	{ value: "CHANGE", label: "change" }
 ];
 
+export const statusList = [
+	"Inprogress",
+	"Service",
+	"Incident",
+	"Change",
+	"Approved",
+	"Closed",
+	"Pending",
+];
 
 
