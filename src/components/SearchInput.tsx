@@ -10,10 +10,6 @@ const SearchInput = () => {
 		{ label: 'JavaScript', icon: '📜' },
 		{ label: 'CSS', icon: '🎨' },
 		{ label: 'HTML', icon: '📄' },
-		{ label: 'Node.js', icon: '🚀' },
-		{ label: 'TypeScript', icon: '🔵' },
-		{ label: 'Python', icon: '🐍' },
-		{ label: 'Vue.js', icon: '🖖' },
 	]);
 
 	const handleInputChange = (e: any) => {
