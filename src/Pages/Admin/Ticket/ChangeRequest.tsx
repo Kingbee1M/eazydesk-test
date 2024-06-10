@@ -24,22 +24,22 @@ const ChangeRequest = () => {
   const [data, setData] = useState([]);
   const pagination = admingetticketdata?.pagination
 
-  console.log('admingetticketdata', admingetticketdata)
+
 
 
   const fileTypes = admingetticketdata?.tickets?.map((ticket: { TicketFiles: any[]; id: any; }) => {
-    return ticket.TicketFiles.map(file => {
-      const filePath = file.filePath;
-      const fileExtension = filePath.split('.').pop();
+    return ticket?.TicketFiles.map(file => {
+      const filePath = file?.filePath;
+      const fileExtension = filePath?.split('.').pop();
       return {
-        ticketId: ticket.id,
+        ticketId: ticket?.id,
         filePath: filePath,
         fileType: fileExtension,
       };
     });
   });
   // Flatten the array of arrays into a single array of file objects
-  const flattenedFileTypes = [].concat(...fileTypes);
+  const flattenedFileTypes = [].concat(...[fileTypes]);
 
   console.log(flattenedFileTypes);
   useEffect(() => {
