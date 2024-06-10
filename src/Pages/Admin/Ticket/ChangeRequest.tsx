@@ -24,13 +24,13 @@ const ChangeRequest = () => {
   const [data, setData] = useState([]);
   const pagination = admingetticketdata?.pagination
 
-  console.log('admingetticketdata', admingetticketdata)
+
 
 
   const fileTypes = admingetticketdata?.tickets?.map((ticket: { TicketFiles: any[]; id: any; }) => {
-    return ticket?.TicketFiles?.map(file => {
+    return ticket?.TicketFiles.map(file => {
       const filePath = file?.filePath;
-      const fileExtension = filePath?.split('.')?.pop();
+      const fileExtension = filePath?.split('.').pop();
       return {
         ticketId: ticket?.id,
         filePath: filePath,
