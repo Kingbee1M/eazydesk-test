@@ -28,18 +28,18 @@ const ChangeRequest = () => {
 
 
   const fileTypes = admingetticketdata?.tickets?.map((ticket: { TicketFiles: any[]; id: any; }) => {
-    return ticket.TicketFiles.map(file => {
-      const filePath = file.filePath;
-      const fileExtension = filePath.split('.').pop();
+    return ticket?.TicketFiles?.map(file => {
+      const filePath = file?.filePath;
+      const fileExtension = filePath?.split('.')?.pop();
       return {
-        ticketId: ticket.id,
+        ticketId: ticket?.id,
         filePath: filePath,
         fileType: fileExtension,
       };
     });
   });
   // Flatten the array of arrays into a single array of file objects
-  const flattenedFileTypes = [].concat(...fileTypes);
+  const flattenedFileTypes = [].concat(...[fileTypes]);
 
   console.log(flattenedFileTypes);
   useEffect(() => {
@@ -62,9 +62,9 @@ const ChangeRequest = () => {
         break;
       case 'limit':
         if (data) {
-          setLimit(data.target.value);
+          setLimit(data?.target?.value);
           // @ts-ignore
-          dispatch(admingetTicket({ ticketType: "CHANGE", limit: data.target.value }));
+          dispatch(admingetTicket({ ticketType: "CHANGE", limit: data?.target?.value }));
         };
         break;
       case 'ticketType':
@@ -92,9 +92,9 @@ const ChangeRequest = () => {
   useEffect(() => {
     const result: any = admingetticketdata?.tickets?.filter(
       (data: any) =>
-        data?.status?.toLowerCase().includes(searchItem) ||
-        data?.ticketType?.toLowerCase().includes(searchItem) ||
-        data?.severity?.toLowerCase().includes(searchItem)
+        data?.status?.toLowerCase()?.includes(searchItem) ||
+        data?.ticketType?.toLowerCase()?.includes(searchItem) ||
+        data?.severity?.toLowerCase()?.includes(searchItem)
     );
     setData(result)
   }, [admingetticketdata?.tickets, searchItem]);
