@@ -57,7 +57,7 @@ const PdfViewer = ({ show, setShow, fileUrl }: any) => {
 							<Page pageNumber={1} />
 						</Document>
 					</div> */}
-					<div className="App-pdf"  >
+					<div className="App-pdf">
 						<div className="page-container">
 							<Document file={"https://pdfobject.com/pdf/sample.pdf"} onLoadSuccess={onDocumentLoadSuccess}>
 								<Page pageNumber={pageNumber} scale={pageScale} />
