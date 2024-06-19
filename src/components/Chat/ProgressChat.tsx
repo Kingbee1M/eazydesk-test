@@ -9,9 +9,11 @@ import { RiMailSendLine } from "react-icons/ri";
 import { ToastContainer } from "react-toastify";
 import { BsChatRightText } from "react-icons/bs";
 import Skelenton from "../Skelenton/Skelenton";
+import { ImAttachment } from "react-icons/im";
+import FileRenderer from "../FileRenderer";
 
 const ProgressChat = ({ viewdata, id, input, setInput }: any) => {
-  const [files, setFile] = useState<any>([]);
+  const [file, setFile] = useState<File>();
   const dispatch = useAppDispatch();
   const { isLoading, isSuccess, getTicketID } = useAppSelector((state: any) => state.comment)
   const { createdata, createisLoading, createisSuccess } = useAppSelector((state: any) => state.comment)
@@ -22,13 +24,14 @@ const ProgressChat = ({ viewdata, id, input, setInput }: any) => {
   const formData = new FormData();
   const form = useRef<HTMLFormElement>(null);
 
-  console.log('files', files)
+
+  // console.log('file', file)
 
 
   const formFields = [
     { key: 'ticketId', value: id },
     { key: 'comment', value: input.comment },
-    { key: 'file', value: files },
+    { key: 'file', value: file },
   ];
 
   formFields.forEach(field => {
@@ -36,7 +39,7 @@ const ProgressChat = ({ viewdata, id, input, setInput }: any) => {
   });
 
 
-  // console.log('formFields', formFields)
+
   const handleChangeInput = (input: any, value: any) => {
     setInput((prevState: any) => ({
       ...prevState,
@@ -50,32 +53,16 @@ const ProgressChat = ({ viewdata, id, input, setInput }: any) => {
     dispatch(createComment(formData));
   }
 
-  const InputChange = (e: any) => {
-    // --For Multiple File Input
-    let images = [];
-    for (let i = 0; i < e.target.files.length; i++) {
-      images.push(e.target.files[i]);
-      let reader = new FileReader();
-      let file = e.target.files[i];
-      reader.onloadend = () => {
-        setFile((preValue: any) => {
-          return [
-            ...preValue,
-            {
-              file: e.target.files[i],
 
-            }
-          ];
-        })
 
-      };
-      if (e.target.files[i]) {
-        reader.readAsDataURL(file);
-      }
+  // Handle file input change
+  const InputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      // const selectedFiles = Array.from(e.target.files);
+      // @ts-ignore 
+      setFile(e.target.files[0]);
     }
   };
-
-
 
 
   return (
@@ -104,16 +91,24 @@ const ProgressChat = ({ viewdata, id, input, setInput }: any) => {
                     </span>
                   </h6>
                   <p>{item?.comment}</p>
-                  {item?.images?.length > 0 && (
+
+                  {/* {item?.CommentFiles?.length > 0 && (
                     <div className="msg-img">
-                      {item?.images?.map((img: any, j: any) => (
+                      {item?.CommentFiles?.map((img: any, i: any) => (
                         <img
-                          key={j}
-                          className="img"
+                          key={i}
+                          className="img-comment"
                           crossOrigin="anonymous"
-                          src={`${baseUrl}/${img}`}
-                          alt={`IMG-${j}`}
+                          src={`${baseUrl}/${img?.filePath}`}
+                          alt={`IMG-${i}`}
                         />
+                      ))}
+                    </div>
+                  )} */}
+                  {item?.CommentFiles?.length > 0 && (
+                    <div>
+                      {item?.CommentFiles?.map((file: any, i: any) => (
+                        <FileRenderer key={i} file={file} />
                       ))}
                     </div>
                   )}
@@ -139,7 +134,7 @@ const ProgressChat = ({ viewdata, id, input, setInput }: any) => {
             </form>
             <div className="btn-area">
               <label className="img-pckr">
-                <FaCamera size={20} color="#0240BC" />
+                <ImAttachment size={20} color="#0240BC" />
                 <input
                   type="file"
                   style={{ display: "none" }}

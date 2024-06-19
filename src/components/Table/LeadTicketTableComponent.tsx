@@ -1,4 +1,3 @@
-import { useState } from "react";
 import moment from "moment";
 import { OverlayTrigger, Image, Tooltip, Button } from "react-bootstrap";
 import { baseUrl } from "../../shared/baseUrl";
@@ -13,7 +12,6 @@ const LeadTicketTableComponent = ({
   Requester,
   isLoading,
 }: any) => {
-  const [sortData, setSortData] = useState<any>([]);
 
   return (
     <div id='table-container'>
@@ -21,7 +19,7 @@ const LeadTicketTableComponent = ({
         <div className='table-container'>
           <table
             id='table'
-            className={" table-hover table-mc-light-blue"}
+            className={"table-hover table-mc-light-blue"}
           >
             <thead>
               <tr>
@@ -30,7 +28,7 @@ const LeadTicketTableComponent = ({
                 <th>Issue Description</th>
                 <th>Affected Users</th>
                 <th>Time Stamp</th>
-                <th>{sortData?.status === "OPEN" ? "" : "Ticket Status"}</th>
+                <th>Ticket Status</th>
               </tr>
             </thead>
             <tbody>

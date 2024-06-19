@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.12.4",
     "@react-pdf-viewer/core": "^3.12.0",
+    "@react-pdf-viewer/default-layout": "^3.12.0",
     "@reduxjs/toolkit": "^2.2.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
@@ -21,6 +22,8 @@
     "inspirational-quotes": "^2.0.1",
     "moment": "^2.30.1",
     "npm-git-install": "^0.3.0",
+    "pdf-viewer": "^0.8.1",
+    "pdfjs-dist": "^3.4.120",
     "primeicons": "^7.0.0",
     "quill": "^1.3.7",
     "react": "^18.2.0",
@@ -29,7 +32,6 @@
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
     "react-paginate": "^8.2.0",
-    "react-pdf": "^9.0.0",
     "react-quill": "^2.0.0",
     "react-quill-with-table": "^1.3.3",
     "react-redux": "^9.1.0",
@@ -73,6 +75,8 @@
   },
   "devDependencies": {
     "@types/crypto-js": "^4.2.2",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "file-loader": "^6.2.0",
+    "react-app-rewired": "^2.2.1"
   }
 }

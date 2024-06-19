@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import ModalHeader from './Modals/ModalHeader';
 import { Modal } from 'react-bootstrap';
+import { baseUrl } from '../shared/baseUrl';
+
 
 
 
@@ -20,7 +22,7 @@ function ImageLightbox({ images, show, setShow }: any) {
 	};
 
 
-	console.log('images', images)
+ 
 
 
 
@@ -33,7 +35,7 @@ function ImageLightbox({ images, show, setShow }: any) {
 					<div className={`main-image ${isZoomed ? 'zoomed' : ''}`} onClick={handleMainImageClick}>
 						<img
 							crossOrigin="anonymous"
-							src={mainImage}
+							src={baseUrl + "/" + images?.filePath}
 							alt="Main Image"
 							className={isZoomed ? 'zoomed-image' : ''}
 						/>
@@ -47,7 +49,7 @@ function ImageLightbox({ images, show, setShow }: any) {
 							>
 								<img
 									crossOrigin="anonymous"
-									src={image}
+									src={baseUrl + "/" + images?.filePath}
 									alt={`Thumbnail ${index}`}
 									className="thumbnail-image"
 								/>

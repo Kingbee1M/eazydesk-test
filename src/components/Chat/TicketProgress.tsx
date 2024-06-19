@@ -14,7 +14,7 @@ import StatusModal from "./StatusModal";
 import { toast, ToastContainer } from "react-toastify";
 
 const TicketProgress = () => {
-	const [refresh, setRefresh] = useState(false);
+
 	const { isTeamLead } = getUserPrivileges();
 	const { id }: any = useParams();
 	const dispatch = useAppDispatch();
@@ -29,6 +29,7 @@ const TicketProgress = () => {
 	});
 
 	// console.log('viewdata', viewdata)
+
 
 	useEffect(() => {
 		if (updateTicketisSuccess || updateLeadTicketisSuccess) {
@@ -68,7 +69,7 @@ const TicketProgress = () => {
 
 		dispatch(reset())
 
-	}, [dispatch, id, createisSuccess, updateTicketisSuccess, updateLeadTicketisSuccess, refresh])
+	}, [dispatch, id, createisSuccess, updateTicketisSuccess, updateLeadTicketisSuccess])
 
 
 	const handleUpdateTicketStatus = (e: any) => {
@@ -88,7 +89,7 @@ const TicketProgress = () => {
 
 	return (
 		<div>
-			<NotificationPopUp setRefresh={setRefresh} />
+			<NotificationPopUp />
 			<ToastContainer containerId={"custom1"} />
 			<header className="ChatProgressView-header">
 				<div>
