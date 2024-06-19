@@ -11,7 +11,8 @@ import { ITgetallReguser } from "../../features/Registration/registrationSlice";
 
 
 const TicketForm = ({ type, setShow, currentState, proposedChange }: any) => {
-  const [file, setFile] = useState<any>([]);
+  const form: any = useRef()
+  // const [file, setFile] = useState<any>([]);
   const { createisLoading, createisSuccess } = useAppSelector((state: any) => state.ticket)
   const dispatch = useAppDispatch();
   const { ITgetallReguserdata, ITgetallReguserisLoading } = useAppSelector((state: any) => state.reg);
@@ -19,27 +20,16 @@ const TicketForm = ({ type, setShow, currentState, proposedChange }: any) => {
     person?.role === 'IT_SUPPORT' || person?.role === 'Admin'
   );
 
-  const InputChange = (e: any) => {
-    const selectedFiles = Array.from(e.target.files);
-    setFile((prevFiles: any) => [...prevFiles, ...selectedFiles]);
 
-    selectedFiles.forEach(file => {
-      let reader: any = new FileReader();
-      reader.onloadend = () => {
-        // You can handle file read success here if needed
-        console.log(reader.result); // This logs the base64 string of the file content
-      };
-      reader.readAsDataURL(file);
-    });
-  };
+
 
   useEffect(() => {
     // Fetch data when the component is mounted or dispatch changes 
     dispatch(ITgetallReguser());
   }, [dispatch]);
-  const formData = new FormData();
-  const form: any = useRef();
-  const [value, setValue] = useState('');
+
+
+  const [file, setFile] = useState<File>();
   const [input, setInput] = useState<any>({
     file: [],
     ticketType: type,
@@ -49,7 +39,65 @@ const TicketForm = ({ type, setShow, currentState, proposedChange }: any) => {
     description: "",
     currentState: "",
     proposedChange: ""
-  })
+  });
+  const [value, setValue] = useState('');
+
+  // Fetch data on component mount
+  useEffect(() => {
+    dispatch(ITgetallReguser());
+  }, [dispatch]);
+
+
+
+
+
+  useEffect(() => {
+    if (createisSuccess) {
+      toast.success("Ticket Created!", { toastId: customId });
+      setShow(false); // Assuming setShow is used to control modal visibility
+    }
+    dispatch(reset()); // Reset createSuccess state in Redux after handling success
+  }, [createisSuccess, dispatch, setShow]);
+
+  // Handle description input change
+  useEffect(() => {
+    setInput((prevState: any) => ({
+      ...prevState,
+      description: value,
+    }));
+  }, [value]);
+
+
+
+  // Handle file input change
+  const InputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      // const selectedFiles = Array.from(e.target.files);
+      setFile(e.target.files[0]);
+
+
+    }
+  };
+
+  // Handle form submission
+  const handleCreateTicket = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData: any = new FormData();
+
+    formData.append('file', file);
+    formData.append('ticketType', input.ticketType);
+    formData.append('affectedUsers', input.affectedUsers);
+    formData.append('severity', input.severity);
+    formData.append('emails', JSON.stringify(Array.isArray(input.emails) ? input.emails.map((item: any) => item?.value) : []));
+    formData.append('description', input.description);
+    formData.append('currentState', input.currentState);
+    formData.append('proposedChange', input.proposedChange);
+
+    // @ts-ignore 
+    dispatch(createTicket(formData));
+  };
+
+  // console.log('file-file', file)
 
 
   useEffect(() => {
@@ -67,28 +115,6 @@ const TicketForm = ({ type, setShow, currentState, proposedChange }: any) => {
 
 
 
-
-
-  const formFields = [
-    { key: 'file', value: file },
-    { key: 'ticketType', value: input.ticketType },
-    { key: 'affectedUsers', value: input.affectedUsers },
-    { key: 'severity', value: input.severity },
-    {
-      key: 'emails', value: JSON.stringify(
-        Array.isArray(input?.emails) ? input.emails.map((item: { value: any; }) => item?.value) : []
-      )
-    },
-    { key: 'description', value: input.description },
-    { key: 'currentState', value: input.currentState },
-    { key: 'proposedChange', value: input.proposedChange },
-  ];
-
-  formFields.forEach(field => {
-    formData.append(field.key, field.value);
-  });
-
-
   useEffect(() => {
     setInput((prevState: any) => {
       return ({
@@ -97,8 +123,6 @@ const TicketForm = ({ type, setShow, currentState, proposedChange }: any) => {
       });
     });
   }, [value]);
-
-
 
 
   useEffect(() => {
@@ -141,48 +165,10 @@ const TicketForm = ({ type, setShow, currentState, proposedChange }: any) => {
       [input]: value,
     }));
   };
-  const handleCreateTicket = (e: { preventDefault: () => void; }) => {
-    e.preventDefault();
-    // @ts-ignore 
-    dispatch(createTicket(formData));
-  };
 
 
 
-  // const handleUploadMultiImg = async (e: { target: { files: any; }; }) => {
-  //   const files = e.target.files;
-  //   let formData = new FormData();
 
-  //   for (const file of files) {
-  //     formData.append("image", file);
-  //   }
-
-  //   try {
-  //     setIsLoadingImg(true);
-  //     const data = await axios.post(
-  //       baseUrl + "/api/v1/imageupload/multiple",
-  //       formData,
-  //       {
-  //         headers: {
-  //           "Content-Type": "multipart/form-data",
-  //           // Authorization: `Bearer ${userInfo?.token}`,
-  //         },
-  //       }
-  //     );
-  //     setInput((prevState: any) => ({
-  //       ...prevState,
-  //       images: data.data.IMAGES,
-  //     }));
-  //     setIsLoadingImg(false);
-  //   } catch (err: any) {
-  //     setIsLoadingImg(false);
-  //     console.log(
-  //       err.response && err.response.data.message
-  //         ? err.response.data.message
-  //         : err.message
-  //     );
-  //   }
-  // };
 
   return (
     <div>
