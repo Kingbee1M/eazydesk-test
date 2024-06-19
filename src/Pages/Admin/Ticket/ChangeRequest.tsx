@@ -41,7 +41,6 @@ const ChangeRequest = () => {
   // Flatten the array of arrays into a single array of file objects
   const flattenedFileTypes = [].concat(...[fileTypes]);
 
-  console.log(flattenedFileTypes);
   useEffect(() => {
     const datas = { ticketType: "CHANGE" };
     // @ts-ignore 

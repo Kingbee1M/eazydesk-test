@@ -12,7 +12,7 @@ const ChangeStatus = ({ show, setShow, id }: any) => {
 
 
 
-	const navigate = useNavigate();
+
 	const handleClose = () => setShow(false);
 
 

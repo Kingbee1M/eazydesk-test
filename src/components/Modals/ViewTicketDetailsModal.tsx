@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import ModalHeader from "./ModalHeader";
-import ReactQuillWrapper from "../TicketModals/ReactQuillWrapper";
 import ReactQuillView from "../ReactQuillView";
 
 const ViewTicketDetailsModal = ({ data }: any) => {

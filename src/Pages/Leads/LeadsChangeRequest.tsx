@@ -34,7 +34,7 @@ const LeadsChangeRequest = () => {
 	const [result, setResult] = useState("");
 
 
-	console.log('ticket', ticket)
+
 
 
 	useEffect(() => {
