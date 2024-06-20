@@ -185,3 +185,8 @@ gap: 20px;
   top: -5px;
   left: 21px;
 }
+
+.img-lenght-icon{
+  z-index: 9999999 !important;
+  cursor: pointer;
+}

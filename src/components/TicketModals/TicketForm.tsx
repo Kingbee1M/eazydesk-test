@@ -20,6 +20,8 @@ const TicketForm = ({ type, setShow, currentState, proposedChange }: any) => {
   );
 
 
+
+
   useEffect(() => {
     // Fetch data when the component is mounted or dispatch changes 
     dispatch(ITgetallReguser());

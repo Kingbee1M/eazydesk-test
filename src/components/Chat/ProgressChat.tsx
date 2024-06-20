@@ -107,13 +107,14 @@ const ProgressChat = ({ viewdata, id, input, setInput, loadingCount }: any) => {
             <div className="btn-area">
               <label className="img-pckr">
                 <div className="img-lenght">
-                  <ImAttachment size={20} color="#0240BC" />
                   {file?.length === 0 ? "" :
                     <span className="img-lenght-sup">{file?.length}</span>}
+                  <ImAttachment size={20} color="#0240BC" className="img-lenght-icon" />
                 </div>
 
                 <input
-                  accept="image,pdf"
+                  type="file"
+                  accept="image/*, application/pdf"
                   style={{ display: "none" }}
                   multiple
                   onChange={InputChange}
