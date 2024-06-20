@@ -3,7 +3,13 @@ import { Modal } from "react-bootstrap";
 import { FaUserCircle } from "react-icons/fa";
 import { baseUrl } from "../../shared/baseUrl";
 import ModalHeader from "../../components/Modals/ModalHeader";
-import { useAppDispatch } from "../../store/useStore";
+import { useAppDispatch, useAppSelector } from "../../store/useStore";
+import { customId } from "../../components/Options";
+import { toast } from "react-toastify";
+import {
+  editProfile,
+  reset,
+} from "../../features/Registration/registrationSlice";
 
 const UserProfile = ({ userInfo, userId, lgShow, setLgShow }: any) => {
   // @ts-ignore
@@ -15,9 +21,17 @@ const UserProfile = ({ userInfo, userId, lgShow, setLgShow }: any) => {
   const [result, setResult] = useState("Edit Profile");
   const Edit = ["Edit Profile", "Reset Password"];
   const dispatch = useAppDispatch();
-  const [errorToastMsg, setErrorToastMgs] = useState(false);
-  const [previewImgLoading, setPreviewImgLoading] = useState<any>(false);
-  const [imgLocalURL, setImgLocalURL] = useState(null);
+  // const [errorToastMsg, setErrorToastMgs] = useState(false);
+  // const [previewImgLoading, setPreviewImgLoading] = useState<any>(false);
+  // const [imgLocalURL, setImgLocalURL] = useState(null);
+  const { editProfileisSuccess, editProfileisLoading } = useAppSelector(
+    (state: any) => state.reg
+  );
+  // const [resetPassword, setResetPassword] = useState<any>({
+  //   previousPassword: "",
+  //   newPassword: "",
+  //   confirmNewPassword: "",
+  // });
   const [input, setInput] = useState<any>({
     firstname: "",
     lastname: "",
@@ -28,18 +42,6 @@ const UserProfile = ({ userInfo, userId, lgShow, setLgShow }: any) => {
 
   const showInfo = (catagory: React.SetStateAction<string>) => {
     setResult(catagory);
-  };
-
-  const passwordhandelSubmit = (e: any) => {
-    e.preventDefault();
-    if (newPassword !== confirmNewPassword) {
-      setErrorToastMgs(true);
-      setTimeout(() => {
-        setErrorToastMgs(false);
-      }, 5000);
-    } else {
-      // dispatch(updatePasswordUser(currentPassword, newPassword));
-    }
   };
 
   useEffect(() => {
@@ -69,58 +71,38 @@ const UserProfile = ({ userInfo, userId, lgShow, setLgShow }: any) => {
     }));
   };
 
-  const handleUpdateUser = (e: { preventDefault: () => void }) => {
-    const value = { userId, input };
+  const passwordhandelSubmit = (e: any) => {
     e.preventDefault();
-    // @ts-ignore
-    // dispatch(edituser(value));
+    if (newPassword !== confirmNewPassword) {
+      // setErrorToastMgs(true);
+      setTimeout(() => {
+        // setErrorToastMgs(false);
+      }, 5000);
+    } else {
+      // dispatch(updatePasswordUser(currentPassword, newPassword));
+    }
   };
 
-  // const profilesubmitHandler = (e: any) => {
-  //   e.preventDefault();
-  //   //Create Profile Actions
-  //   dispatch(
-  //     updateProfile(
-  //       firstname,
-  //       lastname,
-  //       email,
-  //       phoneNumber,
-  //       location,
-  //       roleName,
-  //       profilePic
-  //     )
-  //   );
-  // };
+  const handlePasswordChange = (input: any, value: any) => {
+    setNewPassword((prevState: any) => ({
+      ...prevState,
+      [input]: value,
+    }));
+  };
 
-  // useEffect(() => {
-  //   if (success) {
-  //     toast.success("Profile Updated!");
-  //     dispatch(getUserProfileAction());
-  //     dispatch({
-  //       type: PROFILE_UPDATE_RESET,
-  //     });
-  //   } else if (error) {
-  //     toast.error(error);
-  //     dispatch({
-  //       type: PROFILE_UPDATE_RESET,
-  //     });
-  //   } else if (successChange) {
-  //     setCurrentPassword("");
-  //     setNewPassword("");
-  //     setConfirmNewPassword("");
-  //     toast.success("Password Updated!");
-  //     dispatch({
-  //       type: USER_UPDATE_PASSWORD_RESET,
-  //     });
-  //   } else if (errorChange) {
-  //     toast.error(errorChange);
-  //     dispatch({
-  //       type: USER_UPDATE_PASSWORD_RESET,
-  //     });
-  //   } else if (errorToastMsg) {
-  //     toast.error("Password do not match");
-  //   }
-  // }, [dispatch, success, error, successChange, errorChange, errorToastMsg]);
+  const handleUpdateUser = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    // @ts-ignore
+    dispatch(editProfile(input));
+  };
+  useEffect(() => {
+    if (editProfileisSuccess) {
+      toast.success("Profile Updated!", { toastId: customId });
+    }
+    setTimeout(() => {
+      dispatch(reset());
+    }, 1000);
+  }, [editProfileisSuccess, dispatch]);
 
   // const onChange = (e: any) => {
   //   const file = e.target.files[0];
@@ -194,7 +176,11 @@ const UserProfile = ({ userInfo, userId, lgShow, setLgShow }: any) => {
 
               <div>
                 {result === "Edit Profile" && (
-                  <form action='' onSubmit={handleUpdateUser} className="profile_container">
+                  <form
+                    action=''
+                    onSubmit={handleUpdateUser}
+                    className='profile_container'
+                  >
                     <h6 className='text-center'>Edit Personal Information</h6>
                     <div className='row'>
                       <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
@@ -272,7 +258,7 @@ const UserProfile = ({ userInfo, userId, lgShow, setLgShow }: any) => {
                   </form>
                 )}
                 {result === "Reset Password" && (
-                  <form onSubmit={passwordhandelSubmit} >
+                  <form onSubmit={passwordhandelSubmit}>
                     <h6 className='text-center'>Reset Password</h6>
                     <input
                       className='TextField-Outline'
@@ -314,9 +300,6 @@ const UserProfile = ({ userInfo, userId, lgShow, setLgShow }: any) => {
                     </button>
                   </form>
                 )}
-
-
-
               </div>
             </div>
           </div>

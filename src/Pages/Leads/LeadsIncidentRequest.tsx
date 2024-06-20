@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { HiOutlineSearch } from 'react-icons/hi';
-// import TicketForm from '../components/TicketForm';
 import LeadsHeader from '../../components/LeadsHeader';
 import TicketTableComponent from '../../components/Table/TicketTableComponent';
-import { EntriesLimit, EntriesPerPage } from '../../components/Options';
+import { EntriesLimit } from '../../components/Options';
 import IncidentRequestModal from '../../components/TicketModals/IncidentRequestModal';
 import { useAppDispatch, useAppSelector } from '../../store/useStore';
 import { getTicket } from '../../features/Ticket/ticketSlice';
@@ -92,9 +91,10 @@ const LeadsIncidentRequest = () => {
 			<div className="hero-section2"> 
 				<LeadsHeader />
 				<ToastContainer />
-				<div className="hero-search container">
+				<div className="hero-search">
 					<div className="hero-search-container">
 						<input
+							className="custom-placeholder"
 							type="text"
 							value={result}
 							onChange={(e) => setResult(e.target.value)}

@@ -90,13 +90,13 @@ const LeadsChangeRequest = () => {
 			<div className="hero-section4">
 				<ToastContainer />
 				<LeadsHeader />
-				<div className="hero-search container">
+				<div className="hero-search">
 					<div className="hero-search-container">
 						<input
 							type="text"
 							value={result}
 							onChange={(e) => setResult(e.target.value)}
-							placeholder='search with severity,status'
+							placeholder='search with severity, status'
 						/>
 						<span>
 							<HiOutlineSearch size={30} color="#fff" />

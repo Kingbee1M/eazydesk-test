@@ -206,7 +206,6 @@ const EntriesLimit = ({ data, limit, handlePagination }: any) => (
   <div className="entries-perpage">
     {data?.length > 1 && (
       <>
-        Entries
         <select
           value={limit}
           // @ts-ignore
@@ -217,7 +216,6 @@ const EntriesLimit = ({ data, limit, handlePagination }: any) => (
             </option>
           ))}
         </select>
-        Perpage
       </>
     )}
   </div>

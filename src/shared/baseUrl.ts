@@ -1,6 +1,7 @@
  
       export const baseUrl: any = "http://localhost:5000";
-  // export const baseUrl: any = "https://105.112.129.222"; 
+  // export const baseUrl: any = "https://crm.outcess.com"; 
+    // export const baseUrl: any = "https://105.112.129.222"; 
  
 
 export const buildDynamicURL = (
@@ -14,8 +15,6 @@ export const buildDynamicURL = (
   ticketId: any,
   status: any
 ) => {
-
-  
   let baseURL = `${base}`;
   const queryParams = [];
 
@@ -42,7 +41,11 @@ export const buildDynamicURL = (
     queryParams.push(`ticketType=${ticketType}`);
   }
   // Add 'startDate' to the query parameters if it's not null or undefined
-  if (startDate !== null && startDate !== undefined && !Array.isArray(startDate)) {
+  if (
+    startDate !== null &&
+    startDate !== undefined &&
+    !Array.isArray(startDate)
+  ) {
     queryParams.push(`startDate=${startDate}`);
   }
 
