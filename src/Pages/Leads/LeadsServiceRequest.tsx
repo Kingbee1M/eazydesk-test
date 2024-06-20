@@ -106,7 +106,7 @@ const LeadsServiceRequest = () => {
 			<div className="hero-section3">
 				<LeadsHeader />
 				<ToastContainer />
-				<div className="hero-search container">
+				<div className="hero-search">
 					<div className="hero-search-container">
 						<input
 							type="text"

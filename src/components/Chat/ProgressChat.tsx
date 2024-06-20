@@ -12,8 +12,9 @@ import Skelenton from "../Skelenton/Skelenton";
 import { ImAttachment } from "react-icons/im";
 import FileRenderer from "../FileRenderer";
 
-const ProgressChat = ({ viewdata, id, input, setInput }: any) => {
+const ProgressChat = ({ viewdata, id, input, setInput, loadingCount }: any) => {
   const [file, setFile] = useState<File>();
+
   const dispatch = useAppDispatch();
   const { isLoading, isSuccess, getTicketID } = useAppSelector((state: any) => state.comment)
   const { createdata, createisLoading, createisSuccess } = useAppSelector((state: any) => state.comment)
@@ -70,7 +71,7 @@ const ProgressChat = ({ viewdata, id, input, setInput }: any) => {
       <div>
         <h5 className="page-title">Chat</h5>
         <div className="chat-container">
-          {false ? <Skelenton count={5} /> : viewdata?.Comment?.length === 0 ? (
+          {loadingCount === 1 && isLoading ? <Skelenton count={5} /> : viewdata?.Comment?.length === 0 ? (
             <div className="chat-container-icons">
               <BsChatRightText size={80} color="#e5e5e5" />
             </div>

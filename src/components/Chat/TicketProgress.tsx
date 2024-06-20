@@ -21,6 +21,7 @@ const TicketProgress = () => {
 	const navigate = useNavigate();
 	const form: any = useRef();
 	const [inputs, setinputs] = useState("")
+	let [loadingCount, setLoadingCount] = useState(0);
 	const { viewdata, updateLeadTicketisLoading, updateLeadTicketisSuccess, updateLeadTicketisError, updateLeadTicketmessage, updateTicketisLoading, updateTicketisSuccess, updateTicketisError, updateTicketmessage } = useAppSelector((state: any) => state.ticket)
 	const { createisSuccess } = useAppSelector((state: any) => state.comment)
 	const [input, setInput] = useState({
@@ -61,6 +62,7 @@ const TicketProgress = () => {
 		if (createisSuccess || updateTicketisSuccess || updateLeadTicketisSuccess) {
 			// @ts-ignore 
 			dispatch(viewTicket(id))
+			setLoadingCount(loadingCount++)
 			setInput({
 				comment: "",
 				file: [],
@@ -124,7 +126,7 @@ const TicketProgress = () => {
 								</p>
 							))}
 						</div>
-						<ProgressChat id={id} viewdata={viewdata} setInput={setInput} input={input} />
+						<ProgressChat id={id} viewdata={viewdata} setInput={setInput} input={input} loadingCount={loadingCount} />
 
 					</div>
 					<div className="tp-shared-section">

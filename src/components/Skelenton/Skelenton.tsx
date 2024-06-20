@@ -10,7 +10,7 @@ const Skelenton = ({ count }: SkelentonProps) => {
 		<div className="card_container">
 			{skeletonCards.map((_, i) => (
 				<div className="skelenton-cont" key={i}>
-					<div className="container">
+					<div className="skelenton_container">
 						<div className="pp">
 							<div className="card-skelenton">
 							</div>

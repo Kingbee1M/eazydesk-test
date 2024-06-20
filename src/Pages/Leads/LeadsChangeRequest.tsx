@@ -90,7 +90,7 @@ const LeadsChangeRequest = () => {
 			<div className="hero-section4">
 				<ToastContainer />
 				<LeadsHeader />
-				<div className="hero-search container">
+				<div className="hero-search">
 					<div className="hero-search-container">
 						<input
 							type="text"
