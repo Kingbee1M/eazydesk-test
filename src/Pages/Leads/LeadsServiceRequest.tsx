@@ -33,15 +33,6 @@ const LeadsServiceRequest = () => {
 
 	const [result, setResult] = useState("")
 	const [data, setData] = useState([])
-	const [entriesPerPage, setEntriesPerPage] = useState(() => {
-		return "10";
-	});
-
-	useEffect(() => {
-		localStorage.setItem("rowsPerPage", entriesPerPage);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [entriesPerPage]);
-
 
 
 
@@ -62,6 +53,7 @@ const LeadsServiceRequest = () => {
 		);
 		setData(results)
 	}, [datat, result]);
+
 	const handlePagination = (type: string, data?: React.ChangeEvent<HTMLSelectElement> | undefined) => {
 
 		switch (type) {

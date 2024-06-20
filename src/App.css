@@ -148,3 +148,40 @@ gap: 20px;
   display: flex;
   gap: 8px;
 }
+
+  .custom-placeholder::placeholder {
+  color: fff !important;  
+}
+
+ 
+
+
+@media screen and (max-width: 768px) {
+.totalResponses{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  overflow: auto;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+ 
+}
+}
+
+.img-lenght{
+  display: flex;
+  position: relative;
+}
+.img-lenght-sup{ 
+  position: absolute;
+  background-color: aquamarine;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  top: -5px;
+  left: 21px;
+}

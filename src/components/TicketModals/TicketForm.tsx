@@ -12,7 +12,6 @@ import { ITgetallReguser } from "../../features/Registration/registrationSlice";
 
 const TicketForm = ({ type, setShow, currentState, proposedChange }: any) => {
   const form: any = useRef()
-  // const [file, setFile] = useState<any>([]);
   const { createisLoading, createisSuccess } = useAppSelector((state: any) => state.ticket)
   const dispatch = useAppDispatch();
   const { ITgetallReguserdata, ITgetallReguserisLoading } = useAppSelector((state: any) => state.reg);
@@ -21,15 +20,13 @@ const TicketForm = ({ type, setShow, currentState, proposedChange }: any) => {
   );
 
 
-
-
   useEffect(() => {
     // Fetch data when the component is mounted or dispatch changes 
     dispatch(ITgetallReguser());
   }, [dispatch]);
 
 
-  const [file, setFile] = useState<File>();
+  const [file, setFile] = useState<File[]>([]);
   const [input, setInput] = useState<any>({
     file: [],
     ticketType: type,
@@ -50,9 +47,9 @@ const TicketForm = ({ type, setShow, currentState, proposedChange }: any) => {
 
 
 
-
   useEffect(() => {
     if (createisSuccess) {
+      setFile([])
       toast.success("Ticket Created!", { toastId: customId });
       setShow(false); // Assuming setShow is used to control modal visibility
     }
@@ -72,19 +69,18 @@ const TicketForm = ({ type, setShow, currentState, proposedChange }: any) => {
   // Handle file input change
   const InputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      // const selectedFiles = Array.from(e.target.files);
-      setFile(e.target.files[0]);
-
-
+      const selectedFiles = Array.from(e.target.files); // Convert FileList to an array
+      setFile(selectedFiles);
     }
   };
+
 
   // Handle form submission
   const handleCreateTicket = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData: any = new FormData();
 
-    formData.append('file', file);
+    file.forEach(file => formData.append('file', file));
     formData.append('ticketType', input.ticketType);
     formData.append('affectedUsers', input.affectedUsers);
     formData.append('severity', input.severity);
@@ -97,7 +93,7 @@ const TicketForm = ({ type, setShow, currentState, proposedChange }: any) => {
     dispatch(createTicket(formData));
   };
 
-  // console.log('file-file', file)
+
 
 
   useEffect(() => {
@@ -279,7 +275,7 @@ const TicketForm = ({ type, setShow, currentState, proposedChange }: any) => {
           <label htmlFor="attach-image">Attach Screen</label>
           <input
             type="file"
-            accept="image/*"
+            accept="image,pdf"
             multiple
             // @ts-ignore 
             onChange={InputChange}

@@ -96,7 +96,7 @@ const LeadsChangeRequest = () => {
 							type="text"
 							value={result}
 							onChange={(e) => setResult(e.target.value)}
-							placeholder='search with severity,status'
+							placeholder='search with severity, status'
 						/>
 						<span>
 							<HiOutlineSearch size={30} color="#fff" />

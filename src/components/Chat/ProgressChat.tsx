@@ -1,44 +1,26 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import moment from "moment";
-import { FaRegUserCircle, FaCamera } from "react-icons/fa";
-import { baseUrl } from "../../shared/baseUrl";
+import { FaRegUserCircle } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../../store/useStore";
 import { createComment } from "../../features/Comment/commentSlice";
 import { SVGLoader } from "../SVGLoader";
 import { RiMailSendLine } from "react-icons/ri";
-import { ToastContainer } from "react-toastify";
+
 import { BsChatRightText } from "react-icons/bs";
 import Skelenton from "../Skelenton/Skelenton";
 import { ImAttachment } from "react-icons/im";
 import FileRenderer from "../FileRenderer";
 
 const ProgressChat = ({ viewdata, id, input, setInput, loadingCount }: any) => {
-  const [file, setFile] = useState<File>();
-
+  const [file, setFile] = useState<File[]>([]);
   const dispatch = useAppDispatch();
-  const { isLoading, isSuccess, getTicketID } = useAppSelector((state: any) => state.comment)
-  const { createdata, createisLoading, createisSuccess } = useAppSelector((state: any) => state.comment)
-
-
-
-
-  const formData = new FormData();
+  const { isLoading, createisSuccess, createisLoading } = useAppSelector((state: any) => state.comment)
   const form = useRef<HTMLFormElement>(null);
-
-
-  // console.log('file', file)
-
-
-  const formFields = [
-    { key: 'ticketId', value: id },
-    { key: 'comment', value: input.comment },
-    { key: 'file', value: file },
-  ];
-
-  formFields.forEach(field => {
-    formData.append(field.key, field.value);
-  });
-
+  useEffect(() => {
+    if (createisSuccess) {
+      setFile([])
+    }
+  }, [createisSuccess])
 
 
   const handleChangeInput = (input: any, value: any) => {
@@ -50,6 +32,10 @@ const ProgressChat = ({ viewdata, id, input, setInput, loadingCount }: any) => {
 
   const handleSubmitComment = (e: any) => {
     e.preventDefault();
+    const formData = new FormData();
+    file.forEach(file => formData.append('file', file));
+    formData.append('ticketId', id); // Replace 'id' with your actual ticketId value
+    formData.append('comment', input.comment);
     // @ts-ignore 
     dispatch(createComment(formData));
   }
@@ -59,11 +45,11 @@ const ProgressChat = ({ viewdata, id, input, setInput, loadingCount }: any) => {
   // Handle file input change
   const InputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      // const selectedFiles = Array.from(e.target.files);
-      // @ts-ignore 
-      setFile(e.target.files[0]);
+      const selectedFiles = Array.from(e.target.files); // Convert FileList to an array
+      setFile(selectedFiles);
     }
   };
+
 
 
   return (
@@ -92,20 +78,6 @@ const ProgressChat = ({ viewdata, id, input, setInput, loadingCount }: any) => {
                     </span>
                   </h6>
                   <p>{item?.comment}</p>
-
-                  {/* {item?.CommentFiles?.length > 0 && (
-                    <div className="msg-img">
-                      {item?.CommentFiles?.map((img: any, i: any) => (
-                        <img
-                          key={i}
-                          className="img-comment"
-                          crossOrigin="anonymous"
-                          src={`${baseUrl}/${img?.filePath}`}
-                          alt={`IMG-${i}`}
-                        />
-                      ))}
-                    </div>
-                  )} */}
                   {item?.CommentFiles?.length > 0 && (
                     <div>
                       {item?.CommentFiles?.map((file: any, i: any) => (
@@ -121,7 +93,6 @@ const ProgressChat = ({ viewdata, id, input, setInput, loadingCount }: any) => {
         {viewdata?.status === "CLOSED" ? "" : (
           <div className="btn-area-container">
             <form onSubmit={handleSubmitComment} className="form" ref={form}>
-
               <input
                 id="bottom_input_container"
                 required
@@ -135,15 +106,17 @@ const ProgressChat = ({ viewdata, id, input, setInput, loadingCount }: any) => {
             </form>
             <div className="btn-area">
               <label className="img-pckr">
-                <ImAttachment size={20} color="#0240BC" />
+                <div className="img-lenght">
+                  <ImAttachment size={20} color="#0240BC" />
+                  {file?.length === 0 ? "" :
+                    <span className="img-lenght-sup">{file?.length}</span>}
+                </div>
+
                 <input
-                  type="file"
+                  accept="image,pdf"
                   style={{ display: "none" }}
                   multiple
                   onChange={InputChange}
-
-                // onChange={handleUploadMultiImg}
-                // disabled={loading}
                 />
               </label>
 
