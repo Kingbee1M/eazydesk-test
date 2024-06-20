@@ -21,17 +21,17 @@ const UserProfile = ({ userInfo, userId, lgShow, setLgShow }: any) => {
   const [result, setResult] = useState("Edit Profile");
   const Edit = ["Edit Profile", "Reset Password"];
   const dispatch = useAppDispatch();
-  const [errorToastMsg, setErrorToastMgs] = useState(false);
-  const [previewImgLoading, setPreviewImgLoading] = useState<any>(false);
-  const [imgLocalURL, setImgLocalURL] = useState(null);
+  // const [errorToastMsg, setErrorToastMgs] = useState(false);
+  // const [previewImgLoading, setPreviewImgLoading] = useState<any>(false);
+  // const [imgLocalURL, setImgLocalURL] = useState(null);
   const { editProfileisSuccess, editProfileisLoading } = useAppSelector(
     (state: any) => state.reg
   );
-  const [resetPassword, setResetPassword] = useState<any>({
-    previousPassword: "",
-    newPassword: "",
-    confirmNewPassword: "",
-  });
+  // const [resetPassword, setResetPassword] = useState<any>({
+  //   previousPassword: "",
+  //   newPassword: "",
+  //   confirmNewPassword: "",
+  // });
   const [input, setInput] = useState<any>({
     firstname: "",
     lastname: "",
@@ -74,9 +74,9 @@ const UserProfile = ({ userInfo, userId, lgShow, setLgShow }: any) => {
   const passwordhandelSubmit = (e: any) => {
     e.preventDefault();
     if (newPassword !== confirmNewPassword) {
-      setErrorToastMgs(true);
+      // setErrorToastMgs(true);
       setTimeout(() => {
-        setErrorToastMgs(false);
+        // setErrorToastMgs(false);
       }, 5000);
     } else {
       // dispatch(updatePasswordUser(currentPassword, newPassword));
