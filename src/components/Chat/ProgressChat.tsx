@@ -101,7 +101,7 @@ const ProgressChat = ({ viewdata, id, input, setInput, loadingCount }: any) => {
                 onChange={(e) => handleChangeInput("comment", e.target.value)}
               />
               <button type="submit" disabled={createisLoading}>
-                {createisLoading ? <SVGLoader width={"30px"} height={"30px"} color={"#fff"} /> : <RiMailSendLine size={20} color="#0240BC" />}
+                {createisLoading ? <SVGLoader width={"30px"} height={"30px"} color={"#000"} /> : <RiMailSendLine size={20} color="#0240BC" />}
               </button>
             </form>
             <div className="btn-area">
