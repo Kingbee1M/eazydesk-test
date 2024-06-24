@@ -136,7 +136,7 @@ const RegisterModal = () => {
 										{isSuperAdmin &&
 											<option value="SUPER_ADMIN">Super Admin</option>}
 										<option value="ADMIN">Admin</option>
-										<option value="SUPERVISOR">Supervisor</option>
+										{/* <option value="SUPERVISOR">Supervisor</option> */}
 										<option value="IT_SUPPORT">IT Support</option>
 										<option value="TEAM_LEAD">Team Lead</option>
 									</select>
