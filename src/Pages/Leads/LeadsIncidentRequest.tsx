@@ -88,7 +88,7 @@ const LeadsIncidentRequest = () => {
 
 	return (
 		<div id="dashboard">
-			<div className="hero-section2">
+			<div className="hero-section2"> 
 				<LeadsHeader />
 				<ToastContainer />
 				<div className="hero-search">

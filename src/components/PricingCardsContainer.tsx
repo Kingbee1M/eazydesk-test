@@ -21,7 +21,7 @@ const PricingCardsContainer = () => (
             <strong>Unlimited</strong> Team Lead
           </li>
           <li>
-            <strong>Unlimited</strong> Supervisor
+        \    <strong>Unlimited</strong> Supervisor
           </li>
           <li>
             <strong>24/7</strong> Support
