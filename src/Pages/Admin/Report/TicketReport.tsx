@@ -34,6 +34,82 @@ const TicketReport = () => {
   );
   const pagination = admingetticketdata?.pagination
 
+  const toPlainText = (value: any) => {
+    if (typeof value !== "string") return "";
+    return value.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+  };
+
+  const csvEscape = (value: any) => {
+    const normalized = value === null || value === undefined ? "" : String(value);
+    const escaped = normalized.replace(/"/g, '""');
+    return `"${escaped}"`;
+  };
+
+  const buildTicketCsv = (rows: any[]) => {
+    const headers = [
+      "Ticket ID",
+      "Ticket Type",
+      "Severity",
+      "Issue Description",
+      "Created At",
+      "Closed At",
+      "Resolution Minutes",
+      "Affected Users",
+      "Email",
+      "Time Stamp",
+      "Approval",
+      "Ticket Status",
+    ];
+
+    const csvRows = rows.map((item: any) => {
+      const issueDescription = item?.issueDescription ?? toPlainText(item?.description);
+      const createdAt = moment(item?.createdAt).format("YYYY-MM-DD HH:mm:ss");
+      const closedAt =
+        item?.status !== "CLOSED"
+          ? "Not Yet Closed"
+          : moment(item?.updatedAt).format("YYYY-MM-DD HH:mm:ss");
+      const resolutionMinutes =
+        item?.status === "CLOSED" && item?.createdAt && item?.updatedAt
+          ? moment(item?.updatedAt).diff(moment(item?.createdAt), "minutes")
+          : "";
+      const affectedUsers = item?.affectedUsers === null ? 0 : item?.affectedUsers;
+      const emails = Array.isArray(item?.emails) ? item?.emails.join("; ") : "";
+      const timeStamp = moment(item?.createdAt)?.format("DD-MMM-YY H:mm:ss");
+      const approval = "";
+
+      return [
+        item?.id ?? "",
+        item?.ticketType ?? "",
+        item?.severity ?? "",
+        issueDescription ?? "",
+        createdAt,
+        closedAt,
+        resolutionMinutes,
+        affectedUsers,
+        emails,
+        timeStamp,
+        approval,
+        item?.status ?? "",
+      ].map(csvEscape).join(",");
+    });
+
+    return [headers.map(csvEscape).join(","), ...csvRows].join("\n");
+  };
+
+  const handleExportCsv = () => {
+    if (!data || data.length === 0) return;
+    const csv = buildTicketCsv(data);
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `ticket-report-${moment().format("YYYY-MM-DD-HHmmss")}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  };
+
   useEffect(() => {
     const datas = { status: undefined };
     // @ts-ignore
@@ -105,6 +181,13 @@ const TicketReport = () => {
             <p className='dashboard-first-card-p'>
               {admingetticketdata?.tickets?.length} Total Report are added
             </p>
+            <button
+              className="btn"
+              onClick={handleExportCsv}
+              disabled={admingetticketisLoading || !data || data.length === 0}
+            >
+              Export CSV
+            </button>
           </div>
         </div>
         <SearchConponent
@@ -133,6 +216,7 @@ const TicketReport = () => {
               <table id="table" className={" table-hover table-mc-light-blue"}>
                 <thead>
                   <tr>
+                    <th>Ticket ID</th>
                     <th>Ticket Type</th>
                     <th>Severity</th>
                     <th>Issue Description</th>
@@ -142,6 +226,7 @@ const TicketReport = () => {
                     <th className="green_effect">
                       Closed At
                     </th>
+                    <th>Resolution Minutes</th>
                     <th>Affected Users</th>
                     <th>Email</th>
                     <th>Time Stamp</th>
@@ -157,7 +242,7 @@ const TicketReport = () => {
                   ) : (
                     data?.map((item: any, i: any) => (
                       <tr key={i}>
-
+                        <td data-title="ticket id">{item?.id}</td>
                         <td data-title="ticket type">{item?.ticketType}</td>
                         <td data-title="severity">
                           {item?.severity === "High" ? (
@@ -201,6 +286,11 @@ const TicketReport = () => {
                           ) : (
                             moment(item?.updatedAt).format("YYYY-MM-DD HH:mm:ss")
                           )}
+                        </td>
+                        <td data-title="resolution minutes">
+                          {item?.status === "CLOSED" && item?.createdAt && item?.updatedAt
+                            ? moment(item?.updatedAt).diff(moment(item?.createdAt), "minutes")
+                            : "-"}
                         </td>
                         <td data-title="affected users">
                           {item?.affectedUsers === null ? 0 : item?.affectedUsers}

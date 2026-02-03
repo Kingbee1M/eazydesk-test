@@ -57,6 +57,7 @@ const TicketTableComponent = ({
       <table id="table" className={"table-hover table-mc-light-blue"}>
        <thead>
         <tr>
+         <th>Ticket ID</th>
          <th>Ticket Type</th>
          <th>Severity</th>
          <th>Issue Description</th>
@@ -77,7 +78,7 @@ const TicketTableComponent = ({
         ) : (
          data?.map((item: any, i: Key | null | undefined) => (
           <tr key={i}>
-
+           <td data-title="ticket ID">{item?.id}</td>
            <td data-title="ticket type">{item?.ticketType}</td>
            <td data-title="severity">
             {item?.severity === "High" ? (
