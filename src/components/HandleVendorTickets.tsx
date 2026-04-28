@@ -47,7 +47,7 @@ const HandleVendorTickets = ({ superAdminDashboarddata, setActiveIndex, activeIn
 			</ul>
 			<Select name="Select by Status" id="register-select"
 				value={activeIndex?.value}
-				onChange={(selectedOption) => setActiveIndex(selectedOption.value)}
+				onChange={(selectedOption: any) => setActiveIndex(selectedOption.value)}
 				options={options}
 				styles={customStyles}
 			/>

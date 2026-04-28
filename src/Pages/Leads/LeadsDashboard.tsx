@@ -8,7 +8,10 @@ import LeadsThreeinOneBarChart from "../../components/Charts/LeadsThreeinOneBarC
 
 import ServiceCards from "./ServiceCards";
 import { ToastContainer } from "react-toastify";
+import MainDisplay from "src/components/NewUI/mainDIsplay";
 
+
+import TopBar from "src/components/NewUI/topbar";
 
 const LeadsDashboard = () => {
 	const [limit, setLimit] = useState<any>(10);
@@ -47,11 +50,18 @@ const LeadsDashboard = () => {
 		<div id="dashboard">
 			<div className="hero-section1">
 				<LeadsHeader />
-				<ServiceCards incident={incident} service={service} change={change} />
+				{/* <ServiceCards incident={incident} service={service} change={change} /> */}
 				<ToastContainer />
 			</div>
-			<main  >
-				<div className='dash_statistics_container1'>
+
+			
+			<main className='main' >
+				<TopBar/>
+				<MainDisplay totalTicket={124} 
+    pendingAssign={12} 
+    resolvedToday={45}/>
+
+				{/* <div className='dash_statistics_container1'>
 					<div className='dash_statistics_sub1'>
 						<div>
 							<h3>Ticket</h3>
@@ -94,7 +104,7 @@ const LeadsDashboard = () => {
 							assignto={false}
 						/>
 					</div>
-				</div>
+				</div> */}
 			</main>
 		</div>
 	);

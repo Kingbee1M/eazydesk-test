@@ -75,7 +75,14 @@ const initialState = {
 // Login user
 export const login = createAsyncThunk('auth/login', async (data, thunkAPI) => {
   try {
-    return await authService.login(data)
+    // 1. Call the service and wait for the result
+    const response = await authService.login(data);
+
+    // 2. Log the response BEFORE returning
+    console.log('User data from server: ', response);
+
+    // 3. Finally, return the data to Redux
+    return response;
 
   } catch (error: any) {  
   		// Handle error using handleMessageError function 

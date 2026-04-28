@@ -5,7 +5,13 @@
 	margin-bottom: 1rem; 
 }
   #dashboard   {
- overflow-y: auto !important; 
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  grid-template-rows: 100vh;
+  width: 100%;
+  max-width: 1440px;
+  max-height: 1000px;
+  overflow-y: hidden;
 }  
   
 
@@ -132,3 +138,8 @@
   gap: 20px;
 }
  
+
+.main {
+  margin: 0 !important;
+  padding: 0 !important;
+}

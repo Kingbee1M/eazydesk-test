@@ -1,0 +1,144 @@
+.waving {
+    width: 20px;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px !important;
+    font-weight: 500;
+}
+
+.right-section {
+        display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px !important;
+    font-weight: 500;
+}
+
+.topbar {
+    padding: 10px 15px;
+    border-bottom: 0.5px solid #D5D5D5;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.top-botton-2 {
+    position: relative;
+    font-size: 18px !important;
+    background: none;
+    margin-right: 10px;
+}
+
+.notification-count {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    font-size: 10px;
+    width: 13px;
+    height: 13px;
+    border-radius: 30px;
+    background-color: var(--accent-blue);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-id {
+    background-color: #DBE3FF;
+    padding: 5px 10px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    
+}
+
+.chev {
+    background: none;
+}
+
+.top-button-1 {
+    align-items: center;
+    background: #f4f4f4;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 10px !important;
+    height: 40px;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+.top-botton-1 {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 40px;
+    height: 40px;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.top-botton-1.active {
+    width: 250px;
+    cursor: default;
+    padding-left: 12px;
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    background: transparent;
+    margin-left: 10px;
+    width: 0;
+    opacity: 0;
+    pointer-events: none; 
+    visibility: hidden;
+    transition: width 0.4s ease, opacity 0.3s ease, visibility 0.4s;
+}
+
+.active .search-input {
+    width: 100%;
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0;
+    /* ADD THESE TWO LINES */
+    pointer-events: none;
+    visibility: hidden;
+    transform: translateX(20px);
+    transition: all 0.3s ease;
+}
+
+.active .close-btn {
+    opacity: 1;
+    transform: translateX(0);
+    /* REVERSE THEM WHEN ACTIVE */
+    pointer-events: auto;
+    visibility: visible;
+}
+
+.search-icon {
+    min-width: 20px;
+    font-size: 17px
+}

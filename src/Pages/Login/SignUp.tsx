@@ -32,16 +32,25 @@ function getStepContent(
   inputs: any,
   setInputs: any
 ) {
-  const handleCreate = (e: any) => {
+const handleCreate = async (e: any) => {
     e.preventDefault();
-    if (step === 0) {
-      // @ts-ignore
-      dispatch(createCompany(input));
-    } else if (step === 1) {
-      // @ts-ignore
-      dispatch(signUp(inputs));
+    
+    try {
+      if (step === 0) {
+        // .unwrap() lets you catch the 'rejectWithValue' message in the catch block
+        const response = await dispatch(createCompany(input)).unwrap();
+        console.log("Server Response:", response);
+      } else if (step === 1) {
+        const response = await dispatch(signUp(inputs)).unwrap();
+        console.log("Signup Success:", response);
+      }
+    } catch (err) {
+      // This will log the 'message' you defined in your thunk's rejectWithValue
+      console.error("Authentication Error:", err);
     }
   };
+
+  
   const handleOnChange = (input: string, value: string) => {
     setInput((prevState: any) => ({
       ...prevState,

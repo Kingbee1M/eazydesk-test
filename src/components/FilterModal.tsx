@@ -158,7 +158,7 @@ const FilterModal = ({ setEndDates, setStartDates, show, setShow, handlePaginati
 							<label className='label-side'>Select by Status</label>
 							<Select name="Select by Status" id="register-select"
 								value={status.value}
-								onChange={(selectedOption) => setStatus(selectedOption.value)}
+								onChange={(selectedOption: any) => setStatus(selectedOption.value)}
 								options={ticketstatus}
 								styles={customStyles}
 							/>
@@ -168,7 +168,7 @@ const FilterModal = ({ setEndDates, setStartDates, show, setShow, handlePaginati
 							<label className='label-side'>Select by Ticket Type</label>
 							<Select name="Select by Status" id="register-select"
 								value={ticketType.value}
-								onChange={(selectedOption) => setTicketType(selectedOption.value)}
+								onChange={(selectedOption: any) => setTicketType(selectedOption.value)}
 								options={tickettype}
 								styles={customStyles}
 							/>
