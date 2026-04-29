@@ -5,10 +5,28 @@ import { BsPersonCircle } from "react-icons/bs";
 import { FaChevronDown } from "react-icons/fa6";
 import { useState } from 'react';
 import { IoIosClose } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../store/useStore";
+import DataService from "../../features/Auth/dataService";
+import { baseUrl } from "../../shared/baseUrl";
+import { logout, reset } from "../../features/Auth/authSlice";
+import { io } from "socket.io-client";
+import { MdLogout } from "react-icons/md";
+import { SVGLoader } from "../SVGLoader";
+
 
 
 export default function TopBar () {
+    const [isOpen, setIsOpen] = useState (false)
     const [isSearchActive, setIsSearchActive] = useState(false)
+
+    const socket = io(baseUrl);
+    const {
+            isLoadinglogout,
+            isErrorlogout,
+            messagelogout,
+            isSuccesslogout
+        } = useAppSelector((state: { auth: any; }) => state.auth)
     const userInfo = JSON.parse(localStorage.getItem("service_desk") || "{}");
     console.log(userInfo)
     const notification = []
@@ -18,6 +36,18 @@ export default function TopBar () {
         }
         return role
     }
+
+    	const dataService = DataService();
+	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
+
+        const handleLogout = () => {
+            dispatch(logout());
+            navigate("/");
+            dataService.clearData()
+            dispatch(reset());
+            socket.disconnect()
+        };
     return (
         <header className='topbar'>
             <section className='left-section'>
@@ -61,8 +91,27 @@ export default function TopBar () {
                         {role_modifier(userInfo?.role)}
                     </span>
 
-                    <button className='chev'>
+                    <button className='chev' onClick={()=>setIsOpen(!isOpen)}>
                         <FaChevronDown/>
+                        {isOpen && (<div className='mini-menu'>
+                            <div className='notification-card' onClick={() => navigate("/itsettings")}>
+                                <div className='notification-icon-profile' style={{textTransform: 'capitalize'}}>
+                                    {userInfo?.firstname?.charAt(0)}
+                                </div>
+                                <div>
+                                    <p className='notification-text-profile'>My profile</p>
+                                </div>
+                            </div>
+                            <div className='notification-card' onClick={handleLogout} >
+                                <div className='notification-icon-profile-sup'>
+                                    <MdLogout size={25} />
+                                </div>
+                                <div>
+                                    {isLoadinglogout ? <SVGLoader width={"30px"} height={"30px"} color={"#000"} /> :
+                                        <p className='notification-text-profile'>Logout</p>}
+                                </div>
+                            </div>
+                        </div>)}
                     </button>
                 </div>
 

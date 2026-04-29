@@ -132,7 +132,7 @@ const LeadsHeader = ({ incident, service, change }: any) => {
           to={'/leadsdashboard'}
           className={({ isActive }) => (isActive ? "selected" : "")}
         >
-          <CiGrid42 className="icons" /> Dashboards
+          <CiGrid42 className="icons" /> Dashboard
         </NavLink>
 
         {/* ALL TICKETS - The Link + Dropdown Toggle */}

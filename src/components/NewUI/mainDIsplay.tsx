@@ -1,18 +1,33 @@
 import React from 'react';
+import DonutChart from './donutChart';
+import { TicketProps } from 'src/Pages/Leads/LeadsDashboard';
+import UnassignedTicket from './unassignedTicket';
+import TicketPerMonth from './ticketPerMonth';
+import { TicketsData } from 'src/Pages/Leads/LeadsDashboard';
 
 interface MainDisplayProps {
     totalTicket: number;
     pendingAssign: number;
     resolvedToday: number;
+    Service: number;
+    Change: number;
+    Incident: number;
+    tickets: TicketProps[];
+    ticketChart: TicketsData[]
 }
 
 export default function MainDisplay({ 
     totalTicket, 
     pendingAssign, 
-    resolvedToday 
+    resolvedToday,
+    Service,
+    Change,
+    Incident,
+    tickets,
+    ticketChart
 }: MainDisplayProps) {
-    
-    // Quick array to map through for the UI
+    const userInfo = JSON.parse(localStorage.getItem("service_desk") || "{}");
+    const role = userInfo?.role
     const stats = [
         { label: 'Total Tickets', value: totalTicket, },
         { label: 'Pending Assignment', value: pendingAssign, },
@@ -20,29 +35,39 @@ export default function MainDisplay({
     ];
 
     return (
-        <main className='main-content-wrapper'>
-            
+        <div className='content-holder'>
 
-            <section className='left-grid'>
-                <h1>Dashboard</h1>
-                <div className="stats-grid">
-                {stats.map((stat, index) => (
-                    <div key={index} className="stat-card">
-                        <p className="stat-label">{stat.label}</p>
-                        <h2 className="stat-value">
-                            {stat.value}
-                        </h2>
+            <h1>Dashboard</h1>
+         
+            <main className='main-content-wrapper'>
+                
+                
+                
+                <section className='left-grid'>
+                    
+                    <div className="stats-grid">
+                        {stats.map((stat, index) => (
+                            <div key={index} className="stat-card stylish-border">
+                                <p className="stat-label">{stat.label}</p>
+                                <h2 className="stat-value">
+                                    {stat.value}
+                                </h2>
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
 
+                     <UnassignedTicket tickets={tickets} />
 
-            </section>
-            
+                    <TicketPerMonth TicketData={ticketChart}  />
+                    
+                </section>
+                
 
-            <section className="table-container">
-                {/* Your ticket list will go here later */}
-            </section>
-        </main>
+                <section className="right-grid">
+                    <DonutChart Service={Service} Incident={Incident} Change={Change} />
+                </section>
+            </main>
+
+        </div>
     )
 }

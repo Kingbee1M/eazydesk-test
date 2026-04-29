@@ -139,7 +139,7 @@ main {
   background-color: #fff;
 }
 
-table {
+/* table {
   background-color: var(--white);
   width: 100%;
   border-collapse: collapse;
@@ -156,12 +156,11 @@ table td {
   font-size: 12px;
 }
 table th {
-  background-color: #EDEDED;
   color:  #64676a;
   font-weight: 500;
   white-space: nowrap !important;
   font-weight: bold;
-}
+} */
  
  
 
@@ -359,9 +358,20 @@ transition: opacity 150ms linear;
 @import url(./css/Notification.css);
 @import url(./css/topbar.css);
 @import url(./css/mainDisplay.css);
+@import url(./css/donutChart.css);
+@import url(./css/unassignedTickets.css);
+@import url(./css/ticketPerMonth.css);
+@import url(./css/ticketRaised.css);
 
  
-
+.stylish-border {
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 16px;
+  border: 1px solid #E8E8E8;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease;
+}
  
  
 

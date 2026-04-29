@@ -1,12 +1,25 @@
-.main-content-wrapper {
+.content-holder {
     padding: 24px;
-    background-color: #FAFBFF; /* Light subtle blue-grey */
+    margin-bottom: 100px;
+    background-color: #FAFBFF;
     min-height: 100vh;
     font-family: 'IBM Plex Sans', sans-serif;
-    overflow-y: auto !important;
-    display: grid;
-    grid-template-columns: 80% 20%;
+    overflow-y: none !important;
+    height: auto;
+}
+
+.main-content-wrapper {
     width: 100%;
+    /* This ensures it grows to exactly the size of the children */
+    height: auto; 
+    display: grid;
+    /* Note: 60% + 30% leaves 10% for the 'space-between' gap */
+    grid-template-columns: 60% 30%; 
+    justify-content: space-between;
+    padding: 0 !important;
+    margin-top: 16px;
+    /* Prevents internal content from forcing a scrollbar */
+    overflow: visible;
 }
 
 .left-grid {
@@ -17,19 +30,17 @@
 
 .stats-grid {
     display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 160px));
-    grid-template-rows: 100px;
-    gap: 10px;
+    grid-template-columns: repeat(3, minmax(70px, 1fr));
+    gap: 15px;
+    grid-template-rows: 150px;
     margin-bottom: 30px;
+    justify-content: space-between;
 }
 
 .stat-card {
-    background: #ffffff;
-    padding: 15px;
-    border-radius: 16px;
-    border: 1px solid #E8E8E8;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.03);
-    transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .stat-card:hover {

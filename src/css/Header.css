@@ -226,15 +226,15 @@ color: var(--accent-blue);
   align-items: center;
 }
 .notification-icon-profile{
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   border-radius: 50px;
   background-color: var(--accent-blue-light);
   color: var(--accent-blue);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 25px;
+  font-size: 15px;
 }
 .notification-icon-profile-sup{
   width: 50px;
@@ -251,7 +251,7 @@ color: var(--accent-blue);
   display: flex;
   align-items: center;
   gap: 10px;  
-  padding: 5px 15px;
+  padding: 1px 3px;
   cursor: pointer !important;
 }
 .notification-card:active{
@@ -264,7 +264,6 @@ color: var(--accent-blue);
 }
 .notification-card:hover{ 
 background-color: var(--accent-blue-light);
-padding: 5px 15px;
 border-radius: 10px;
 
 }
@@ -279,7 +278,7 @@ border-radius: 10px;
 }
 .notification-text-profile{
   color: var(--black);
-  font-size: 16px; 
+  font-size: 14px; 
 }
 
 .notification-header-text{

@@ -1,0 +1,59 @@
+.table-container {
+    width: 100%;
+}
+
+.table-header {
+    background-color: white !important;
+}
+
+.table-comp {
+    font-size: 12px !important;
+}
+
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-badge.unassign {
+    background-color: #FFF0F0;
+    color: #FF4D4D;
+    border: 1px solid #FFD6D6;
+}
+
+.status-badge.assigned {
+    background-color: #E8F5E9;
+    color: #2E7D32;
+}
+
+.ticket-button {
+    background-color: #148DF6;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+}
+
+.heading2 {
+    font-size: 16px;
+}
+
+.heading-holder {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pending {
+    background-color: #FFFAEB;
+    border: 0.5px solid #FEDF89;
+    padding: 3px 10px;
+    border-radius: 15px;
+    color: #B54708;
+}
+
+.section-wrapper {
+    width: 100%;
+}

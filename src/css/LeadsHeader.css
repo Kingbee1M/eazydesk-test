@@ -18,7 +18,7 @@
 }
 
 .icons {
-  font-size: 18px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -197,7 +197,7 @@
   border-radius: 5px;
   cursor: pointer;
   color: var(--black);
-  font-size: 14px;
+  font-size: 12px;
   transition: var(--transition);
   font-size: 12px !important;
 }
