@@ -30,15 +30,15 @@ const LeadsHeader = ({ incident, service, change }: any) => {
   // ------NEW CODE-----
   const [isTicketsOpen, setIsTicketsOpen] = useState(true);
   const [activeSubScreen, setActiveSubScreen] = useState("Incident");
-  const Incident = incident || [];
-  const Service = service || [];
-  const Change = change || [];
+  const Incident = incident;
+  const Service = service;
+  const Change = change;
   
   const screens = [
-    {title: 'Change', count: Change.length || 0},
-    {title: 'Service', count: Service.lenght || 0},
-    {title: 'Incident', count: Incident.lenght || 0},
-  ]
+    { title: 'Change', path: 'change', count: Change },
+    { title: 'Service', path: 'service', count: Service },
+    { title: 'Incident', path: 'incident', count: Incident },
+  ];
   
   
 
@@ -130,51 +130,61 @@ const LeadsHeader = ({ incident, service, change }: any) => {
         {/* Dashboard Link */}
         <NavLink 
           to={'/leadsdashboard'}
+          end
           className={({ isActive }) => (isActive ? "selected" : "")}
         >
           <CiGrid42 className="icons" /> Dashboard
         </NavLink>
 
-        {/* ALL TICKETS - The Link + Dropdown Toggle */}
+        {/* ALL TICKETS */}
         <div className="nav-group-container">
-          <NavLink
-            to={'/all-tickets'} 
-            className={({ isActive }) => (isActive ? "selected parent-link" : "parent-link")}
-            onClick={(e) => {
-              e.preventDefault();
-              setToggleMenu(!toggleMenu);
-            }}
-          >
-             <PiTicketBold className="icons" />
-            <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
-              <span>ALL TICKETS</span>
-              <MdKeyboardArrowDown className={`arrow ${toggleMenu ? 'open' : ''}`} />
-            </div>
-          </NavLink>
+  {/* ALL TICKETS - Parent Link */}
+  <NavLink
+    to="all-tickets"
+    end
+    className={({ isActive }) => {
+      const isSubRoute = screens.some(screen => window.location.pathname.includes(screen.path));
+      return `parent-link ${isActive || isSubRoute ? "selected" : ""}`;
+    }}
+    onClick={() => {
+      // Clicking the link itself should open the menu and navigate
+      setToggleMenu(true);
+    }}
+  >
+    <PiTicketBold className="icons" />
+    <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
+      <span>ALL TICKETS</span>
+      
+      <div 
+        className={`arrow-container ${toggleMenu ? 'open' : ''}`}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setToggleMenu(!toggleMenu);
+        }}
+        style={{ padding: '5px', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+      >
+        <MdKeyboardArrowDown className={`arrow ${toggleMenu ? 'open' : ''}`} />
+      </div>
+    </div>
+  </NavLink>
 
-          {toggleMenu && (
-            <div className="sub-menu-list">
-              {screens.map((screen) => {
-                const isActive = title.includes(screen.title);
-                
-                return (
-                  <div
-                    key={screen.title}
-                    className={`sub-nav-item ${isActive ? "sub-selected" : ""}`}
-                    onClick={() => {
-                      // Update the document title and your internal view state
-                      setTitle(`eazyDesk | ${screen.title}-Request`);
-                      // Add your specific logic here to filter the table/data
-                    }}
-                  >
-                    <span className="sub-title">{screen.title}</span>
-                    <span className="sub-count">{screen.count}</span>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
+  {/* The Sub-Menu List */}
+  {toggleMenu && (
+    <div className="sub-menu-list" style={{display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '5px' }}>
+      {screens.map((screen) => (
+        <NavLink
+          key={screen.title}
+          to={screen.path}
+          className={({ isActive }) => `sub-nav-item ${isActive ? "sub-selected" : ""}`}
+        >
+          <span className="sub-title" style={{ fontSize: '14px' }}>{screen.title}</span>
+          <span className="sub-count" style={{ fontSize: '12px', opacity: 0.8 }}>{screen.count}</span>
+        </NavLink>
+      ))}
+    </div>
+  )}
+</div>
       </nav>
     </header>
   );
@@ -183,55 +193,3 @@ const LeadsHeader = ({ incident, service, change }: any) => {
 export default LeadsHeader;
 
 
-//{/* <NetworkConnetion /> */}
-      // <Link to='/dashboard' className='logo'>
-      //   <div className='logo_area_leads'>
-      //     <img
-      //       src={Logo}
-      //       alt='logo'
-      //       crossOrigin='anonymous'
-      //       className='logo-leads-img'
-      //     />
-      //     <h2>Eazy Desk</h2>
-      //   </div>
-      // </Link>
-      // <nav>
-      //   {menu?.map((item, i) => (
-      //     <NavLink
-      //       key={i}
-      //       to={item.path}
-      //       className={({ isActive }) => (isActive ? "selected" : "")}
-      //     >
-      //       {item.name}
-      //     </NavLink>
-      //   ))}
-      // </nav>
-      // <div className='user-info' onClick={() => setDropdown(!dropdown)}>
-      //   <FaRegUserCircle size={30} color={"rgba(0,0,0,.5)"} />
-      //   <p>{userInfo?.firstname}</p>
-      //   <MdKeyboardArrowDown size={25} color={"rgba(0,0,0,.5)"} />
-      // </div>
-
-      // <div className={dropdown ? "dropdown display" : "dropdown"}>
-      //   <div className='dropdown-container'>
-      //     <div className='drop-item' onClick={handleClick}>
-      //       <FiUser size={23} />
-      //       <span>Profile</span>
-      //     </div>
-      //     <button className='drop-item' onClick={handleLogout}>
-      //       <RiLogoutCircleRLine size={23} />
-      //       <span>Sign Out</span>
-      //     </button>
-      //   </div>
-      // </div>
-      // <div className={toggleMenu ? "menu-btn close" : "menu-btn"} onClick={() => setToggleMenu(!toggleMenu)} >
-
-      //   <LeadOptionsHeader handleLogout={handleLogout} handleClick={handleClick} />
-      //   <UserProfile
-      //     userId={userId}
-      //     userInfo={userInfo}
-      //     setLgShow={setLgShow}
-      //     lgShow={lgShow}
-      //   />
-
-      // </div>

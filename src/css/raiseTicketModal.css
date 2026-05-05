@@ -1,0 +1,58 @@
+/* Dark background covering the entire viewport */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* Tinted backdrop */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* Higher than sidebar/topbar */
+  backdrop-filter: blur(2px); /* Optional: slight blur effect */
+}
+
+
+.modal-content-container {
+  position: relative;
+  background: white;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  min-height: 100vh;
+  border-radius: 5px;
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  animation: modalSlideUp 0.3s ease-out;
+}
+
+@keyframes modalSlideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.close-x {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  font-size: 12px;
+}
+
+input:focus {
+  outline: none !important;
+  border: none !important;
+}
+
+.submitForm {
+  width: '100%';
+  text-align: 'center';
+  background-color: #148DF6;
+  padding: 8px 0px!important;
+  border-radius: 8px;
+  margin-top: 20px;
+  color: white;
+  cursor: pointer;
+}

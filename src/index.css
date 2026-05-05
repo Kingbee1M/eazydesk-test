@@ -362,6 +362,11 @@ transition: opacity 150ms linear;
 @import url(./css/unassignedTickets.css);
 @import url(./css/ticketPerMonth.css);
 @import url(./css/ticketRaised.css);
+@import url(./css/TicketCategoryView.css);
+@import url(./css/ticketTable.css);
+@import url(./css/raiseTicketModal.css);
+@import url(./css/comboBox.css);
+@import url(./css/typographyComp.css);
 
  
 .stylish-border {

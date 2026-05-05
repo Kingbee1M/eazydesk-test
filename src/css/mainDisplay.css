@@ -1,6 +1,6 @@
 .content-holder {
     padding: 24px;
-    margin-bottom: 100px;
+    margin-bottom: 20px;
     background-color: #FAFBFF;
     min-height: 100vh;
     font-family: 'IBM Plex Sans', sans-serif;
@@ -25,7 +25,13 @@
 .left-grid {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
+}
+
+.right-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
 }
 
 .stats-grid {

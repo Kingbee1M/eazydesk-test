@@ -49,8 +49,8 @@ import SuperChangeRequest from "./Pages/SuperAdmin/Ticket/SuperChangeRequest";
 import SuperInProgress from "./Pages/SuperAdmin/Ticket/SuperInProgress";
 import SuperSettings from "./Pages/SuperAdmin/Settings/SuperSettings";
 import PageNotFound from "./Pages/Login/PageNotFound";
-
-
+import TicketCategoryView from "./components/NewUI/TicketCategoryView";
+import AllTickets from "./components/NewUI/AllTickets";
 
 function App() {
 
@@ -123,6 +123,43 @@ function App() {
         <Route path="/service-request" element={<LeadsServiceRequest />} />
         <Route path="/change-request" element={<LeadsChangeRequest />} />
         <Route path="*" element={<PageNotFound />} />
+
+        {/* New screens */}
+
+
+        {/* Leads Screen */}
+        <Route 
+          path="/leadsdashboard" 
+          element={<LeadsDashboard />} // The layout stays mounted for ALL sub-routes
+        >
+          {/* 
+            We don't need an 'index' route here because your LeadsDashboard 
+            component already handles the default view with the {isDashboardHome} check! 
+          */}
+          <Route path="all-tickets" element={<AllTickets />} />
+          <Route path="incident" element={<TicketCategoryView type="Incident" />} />
+          <Route path="service" element={<TicketCategoryView type="Service" />} />
+          <Route path="change" element={<TicketCategoryView type="Change" />} />
+        </Route>
+
+        {/* Do the same for Admin if you want /admindashboard/incident to work */}
+        <Route path="/admindashboard" element={<AdminDashboard />}>
+  {/* No 'index' route needed because AdminDashboard handles the home view via {isDashboardHome} */}
+  <Route path="all-tickets" element={<AllTickets />} />
+  <Route path="incident" element={<TicketCategoryView type="Incident" />} />
+  <Route path="service" element={<TicketCategoryView type="Service" />} />
+  <Route path="change" element={<TicketCategoryView type="Change" />} />
+</Route>
+
+{/* 3. IT - Fixed */}
+<Route path="/itdashboard" element={<ITDashboard />}>
+  <Route path="all-tickets" element={<AllTickets />} />
+  <Route path="incident" element={<TicketCategoryView type="Incident" />} />
+  <Route path="service" element={<TicketCategoryView type="Service" />} />
+  <Route path="change" element={<TicketCategoryView type="Change" />} />
+</Route>
+
+
       </Routes>
     </BrowserRouter>
   );

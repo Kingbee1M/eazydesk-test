@@ -1,0 +1,15 @@
+
+.ticket-row {
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+/* The hover effect */
+.ticket-row:hover {
+    background-color: #c0bfbf50 !important;
+}
+
+/* Optional: Highlight the text or ID on hover */
+.ticket-row:hover td {
+    color: #000; 
+}

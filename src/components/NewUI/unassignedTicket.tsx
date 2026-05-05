@@ -52,7 +52,7 @@ export default function UnassignedTicket({ tickets }: UnassignedTicketProps) {
                     </TableHead>
                     <TableBody>
                         {topUnassignedTickets.map((ticket) => (
-                            <TableRow key={ticket.ticketId} hover>
+                            <TableRow key={ticket.ticketId} className="ticket-row">
                                 <TableCell style={{fontSize: 10}}>
                                     #{ticket.ticketId}
                                 </TableCell>

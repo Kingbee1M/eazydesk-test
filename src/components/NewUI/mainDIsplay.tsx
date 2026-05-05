@@ -1,9 +1,10 @@
 import React from 'react';
 import DonutChart from './donutChart';
-import { TicketProps } from 'src/Pages/Leads/LeadsDashboard';
 import UnassignedTicket from './unassignedTicket';
 import TicketPerMonth from './ticketPerMonth';
-import { TicketsData } from 'src/Pages/Leads/LeadsDashboard';
+import TicketRaised from './ticketRaised';
+import { AnnualStaffPerformance, TicketsData, TicketProps } from 'src/Pages/Leads/LeadsDashboard';
+import StaffPerformance from './staffPreformance';
 
 interface MainDisplayProps {
     totalTicket: number;
@@ -14,6 +15,7 @@ interface MainDisplayProps {
     Incident: number;
     tickets: TicketProps[];
     ticketChart: TicketsData[]
+    staffData: AnnualStaffPerformance
 }
 
 export default function MainDisplay({ 
@@ -24,7 +26,9 @@ export default function MainDisplay({
     Change,
     Incident,
     tickets,
-    ticketChart
+    ticketChart,
+    staffData,
+
 }: MainDisplayProps) {
     const userInfo = JSON.parse(localStorage.getItem("service_desk") || "{}");
     const role = userInfo?.role
@@ -56,15 +60,18 @@ export default function MainDisplay({
                         ))}
                     </div>
 
-                     <UnassignedTicket tickets={tickets} />
+                     {role === "ADMIN" && <UnassignedTicket tickets={tickets} />}
 
                     <TicketPerMonth TicketData={ticketChart}  />
+
+                    {role === "TEAM_LEAD" && <TicketRaised tickets={tickets} />}
                     
                 </section>
                 
 
                 <section className="right-grid">
                     <DonutChart Service={Service} Incident={Incident} Change={Change} />
+                    {role === "ADMIN" && <StaffPerformance data={staffData} />}
                 </section>
             </main>
 
