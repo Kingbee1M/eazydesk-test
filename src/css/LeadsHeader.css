@@ -69,7 +69,8 @@
 }
 
 .client-header nav a:hover {
-  color: var(--black);
+  background-color: var( --accent-blue);
+  color: white;
 }
 
 .client-header nav a.selected {

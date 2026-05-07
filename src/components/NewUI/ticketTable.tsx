@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { HiDotsVertical } from "react-icons/hi";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import pdf from '../../assets/img/pdf-icon.svg'
 import { BsFiletypeDoc } from "react-icons/bs";
 import { BsFiletypePng } from "react-icons/bs";
+import ViewTicketPortal from "./viewTicket";
 
 
 interface TicketTableProps {
@@ -12,6 +13,8 @@ interface TicketTableProps {
 }
 
 export default function TicketTable({ tickets, page }: TicketTableProps) {
+    const [selectedTicket, setSelectedTicket] = useState<any>(null);
+    const [isViewOpen, setIsViewOpen] = useState(false);
     return (
         <div className="table-container" style={{ width: '100%', overflowX: 'auto', marginTop: '20px' }}>
             <table className="ticket-table" style={{ width: '100%', borderCollapse: 'collapse' }}>
@@ -36,6 +39,8 @@ export default function TicketTable({ tickets, page }: TicketTableProps) {
 
                         const isInProgress = ticket.status === 'In Progress';
                         const isResolved = ticket.status === 'Resolved';
+                        const isClosed = ticket.status === 'Closed';
+
 
                         return (
                             <tr key={index} style={{ borderBottom: '1px solid #D5D5D5' }} className="ticket-row">
@@ -101,15 +106,15 @@ export default function TicketTable({ tickets, page }: TicketTableProps) {
                                     <span style={{ 
                                         padding: '4px 10px', 
                                         borderRadius: '16px', 
-                                        backgroundColor: isInProgress ? '#EFF8FF' : isResolved ? '#ECFDF3' : '#FFFAEB',
-                                        color: isInProgress ? '#175CD3' : isResolved ? '#067647' : '#B54708',
-                                        border: `1px solid ${isInProgress ? '#B2DDFF' : isResolved ? '#ABEFC6' : '#FEDF89'}`
+                                        backgroundColor: isInProgress ? '#EFF8FF' : isResolved ? '#ECFDF3' : isClosed ? '#F7F8FB' : '#FFFAEB',
+                                        color: isInProgress ? '#175CD3' : isResolved ? '#067647' : isClosed ? '#6C757D' : '#B54708',
+                                        border: `1px solid ${isInProgress ? '#B2DDFF' : isResolved ? '#ABEFC6' : isClosed ? '#E2E6EF' : '#FEDF89'}`
                                     }}>
                                         {ticket.status}
                                     </span>
                                 </td>
                                 <td style={cellStyle}>
-                                    <button style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+                                    <button style={{ background: 'none', border: 'none', cursor: 'pointer' }} onClick={() => { setSelectedTicket(ticket); setIsViewOpen(true); }}>
                                         <FaEye />
                                     </button>
                                 </td>
@@ -126,6 +131,12 @@ export default function TicketTable({ tickets, page }: TicketTableProps) {
                             )}
                 </tbody>
             </table>
+
+            <ViewTicketPortal 
+            isOpen={isViewOpen} 
+            onClose={() => setIsViewOpen(false)} 
+            ticket={selectedTicket} 
+            />
         </div>
     );
 }

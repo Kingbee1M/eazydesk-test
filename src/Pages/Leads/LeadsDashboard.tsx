@@ -10,6 +10,15 @@ import TopBar from "src/components/NewUI/topbar";
 import { Outlet, useLocation } from "react-router-dom";
 import { current } from "@reduxjs/toolkit";
 
+type Activity = {
+  id: string;
+  type: 'status_change' | 'comment' | 'assignment' | 'update' | 'closed';
+  user: string;
+  action: string;
+  timestamp: string;
+  metadata?: Record<string, any>;
+};
+
 export interface TicketProps {
     ticketId: string;
     severity: 'LOW' | 'CRITICAL' | 'MEDIUM';
@@ -36,71 +45,151 @@ export interface AnnualStaffPerformance {
 
 export const mockTickets = [
     { 
-        ticketId: '4401', 
+        ticketId: '4401',
+        createdBy: {user:'James Ope', userId: 'james-ope-001', userRole: 'Team Lead'},
         severity: 'CRITICAL', 
         file: ['error_log.pdf', 'sys_dump.txt', 'config.json'], 
         ticketType: 'Incident', 
-        affectedUser: 'Idris Babatunde', 
+        affectedUsers: 'Idris Babatunde', 
         subject: 'Database Connection Timeout', 
         timestamp: '2026-05-03 09:15', 
         status: 'Pending',
+        assignedTo: 'john doe',
+        activity: [
+            {actionID: 'act-1',time: '2026-02-03 09:15', action: 'Ticket raised by James Ope (Team Lead)', status: 'created', user: 'James Ope'},
+            {actionID: 'act-2',time: '2026-04-08 10:25', action: 'Assigned to John Doe. by Admin', status: 'assigned', user: 'Admin'},
+            {actionID: 'act-3',time: '2026-05-08 10:25', action: 'Assigned to John Doe. by Admin', status: 'assigned', user: 'Admin'},
+            {actionID: 'act-4',time: '2026-05-10 21:25', action: 'Resolved by Emeka L.', status: 'update', user: 'Emeka okafor'},
+            {actionID: 'act-5',time: '2026-05-15 14:30', action: 'Closed by James Ope (Team Lead)', status: 'closed', user: 'James Ope'},
+
+        ],
         description: 'The main database is experiencing intermittent connection timeouts, affecting all users. Immediate attention required to prevent data loss.',
     },
     { 
-        ticketId: '4402', 
+        ticketId: '4402',
+        createdBy: {user:'James Ope', userId: 'james-ope-001', userRole: 'Team Lead'}, 
         severity: 'LOW', 
         file: 'N/A', 
         ticketType: 'Service', 
-        affectedUser: 'Sarah Jenkins', 
+        affectedUsers: 'Sarah Jenkins', 
         subject: 'Software Installation Request', 
         timestamp: '2026-05-03 10:22', 
         status: 'Resolved',
+        assignedTo: 'john doe',
+        activity: [
+            {actionID: 'act-1',time: '2026-02-03 09:15', action: 'Ticket raised by James Ope (Team Lead)', status: 'created', user: 'James Ope'},
+            {actionID: 'act-2',time: '2026-04-08 10:25', action: 'Assigned to John Doe. by Admin', status: 'assigned', user: 'Admin'},
+            {actionID: 'act-3',time: '2026-05-08 10:25', action: 'Assigned to John Doe. by Admin', status: 'assigned', user: 'Admin'},
+            {actionID: 'act-4',time: '2026-05-10 21:25', action: 'Resolved by Emeka L.', status: 'update', user: 'Emeka okafor'},
+            {actionID: 'act-5',time: '2026-05-15 14:30', action: 'Closed by James Ope (Team Lead)', status: 'closed', user: 'James Ope'},
+
+        ],
         description: 'The main database is experiencing intermittent connection timeouts, affecting all users. Immediate attention required to prevent data loss.', 
     },
     { 
-        ticketId: '4403', 
+        ticketId: '4403',
+        createdBy: {user:'James Ope', userId: 'james-ope-001', userRole: 'Team Lead'}, 
         severity: 'MEDIUM', 
         file: ['screenshot.png', 'design_mockup.sketch'], 
         ticketType: 'Incident', 
-        affectedUser: 'Michael Chen', 
+        affectedUsers: 'Michael Chen', 
         subject: 'UI Glitch on Dashboard', 
         timestamp: '2026-05-03 11:05', 
         status: 'In Progress',
+        assignedTo: 'john doe',
+        activity: [
+            {actionID: 'act-1',time: '2026-02-03 09:15', action: 'Ticket raised by James Ope (Team Lead)', status: 'created', user: 'James Ope'},
+            {actionID: 'act-2',time: '2026-04-08 10:25', action: 'Assigned to John Doe. by Admin', status: 'assigned', user: 'Admin'},
+            {actionID: 'act-3',time: '2026-05-08 10:25', action: 'Assigned to John Doe. by Admin', status: 'assigned', user: 'Admin'},
+            {actionID: 'act-4',time: '2026-05-10 21:25', action: 'Resolved by Emeka L.', status: 'update', user: 'Emeka okafor'},
+            {actionID: 'act-5',time: '2026-05-15 14:30', action: 'Closed by James Ope (Team Lead)', status: 'closed', user: 'James Ope'},
+
+        ],
         description: 'The main database is experiencing intermittent connection timeouts, affecting all users. Immediate attention required to prevent data loss.', 
     },
     { 
-        ticketId: '4404', 
+        ticketId: '4404',
+        createdBy: {user:'James Ope', userId: 'james-ope-001', userRole: 'Team Lead'}, 
         severity: 'MEDIUM', 
         file: 'RFC_doc.docx', 
         ticketType: 'Change', 
-        affectedUser: 'Admin System', 
+        affectedUsers: 'Admin System', 
         subject: 'Server Migration Prep', 
         timestamp: '2026-05-02 14:45', 
         status: 'Pending',
         currentState: 'Planning',
+        approved: false,
         proposedChange: 'Migrate to new cloud provider by end of Q3',
-        description: 'The main database is experiencing intermittent connection timeouts, affecting all users. Immediate attention required to prevent data loss.', 
+        assignedTo: 'john doe',
+        activity: [
+            {actionID: 'act-1',time: '2026-02-03 09:15', action: 'Ticket raised by James Ope (Team Lead)', status: 'created', user: 'James Ope'},
+            {actionID: 'act-2',time: '2026-04-08 10:25', action: 'Assigned to John Doe. by Admin', status: 'assigned', user: 'Admin'},
+            {actionID: 'act-3',time: '2026-05-08 10:25', action: 'Assigned to John Doe. by Admin', status: 'assigned', user: 'Admin'},
+            {actionID: 'act-4',time: '2026-05-10 21:25', action: 'Resolved by Emeka L.', status: 'update', user: 'Emeka okafor'},
+            {actionID: 'act-5',time: '2026-05-15 14:30', action: 'Closed by James Ope (Team Lead)', status: 'closed', user: 'James Ope'},
+
+        ],
+        description: 'The main database is experiencing intermittent connection timeouts, affecting all users. Immediate attention required to prevent data loss.',
+        implementationPlan: `
+            <p><strong>Proposed Maintenance Steps:</strong></p>
+            <ol>
+                <li>Enable HA failover</li>
+                <li>Update primary FortiGate</li>
+                <li>Failback and test</li>
+                <li>Update secondary</li>
+                <li>Verify all firewall rules</li>
+            </ol>
+            <p><em>Note: Ensure a backup is taken before starting.</em></p>
+        `,
+        rollbackPlan: `
+            <p><strong>Rollback Steps:</strong></p>
+            <ul>
+                <li>Restore configuration from backup</li>
+                <li>Revert HA failover state</li>
+                <li>Notify network operations center</li>
+            </ul>
+        `,
     },
     { 
-        ticketId: '4405', 
+        ticketId: '4405',
+        createdBy: {user:'James Ope', userId: 'james-ope-001', userRole: 'Team Lead'}, 
         severity: 'CRITICAL', 
         file: ['sys_dump.txt', 'error_report.pdf'], 
         ticketType: 'Incident', 
-        affectedUser: 'Olawale Segun', 
+        affectedUsers: 'Olawale Segun', 
         subject: 'Payment Gateway Down', 
         timestamp: '2026-05-03 08:30', 
         status: 'In Progress',
+        assignedTo: 'john doe',
+        activity: [
+            {actionID: 'act-1',time: '2026-02-03 09:15', action: 'Ticket raised by James Ope (Team Lead)', status: 'created', user: 'James Ope'},
+            {actionID: 'act-2',time: '2026-04-08 10:25', action: 'Assigned to John Doe. by Admin', status: 'assigned', user: 'Admin'},
+            {actionID: 'act-3',time: '2026-05-08 10:25', action: 'Assigned to John Doe. by Admin', status: 'assigned', user: 'Admin'},
+            {actionID: 'act-4',time: '2026-05-10 21:25', action: 'Resolved by Emeka L.', status: 'update', user: 'Emeka okafor'},
+            {actionID: 'act-5',time: '2026-05-15 14:30', action: 'Closed by James Ope (Team Lead)', status: 'closed', user: 'James Ope'},
+
+        ],
         description: 'The main database is experiencing intermittent connection timeouts, affecting all users. Immediate attention required to prevent data loss.', 
     },
     { 
-        ticketId: '4406', 
+        ticketId: '4406',
+        createdBy: {user:'James Ope', userId: 'james-ope-001', userRole: 'Team Lead'}, 
         severity: 'LOW', 
         file: 'N/A', 
         ticketType: 'Service', 
-        affectedUser: 'Emily Blunt', 
+        affectedUsers: 'Emily Blunt', 
         subject: 'VPN Access Reset', 
         timestamp: '2026-05-03 12:00', 
-        status: 'Resolved',
+        status: 'Closed',
+        assignedTo: 'john doe',
+        activity: [
+            {actionID: 'act-1',time: '2026-02-03 09:15', action: 'Ticket raised by James Ope (Team Lead)', status: 'created', user: 'James Ope'},
+            {actionID: 'act-2',time: '2026-04-08 10:25', action: 'Assigned to John Doe. by Admin', status: 'assigned', user: 'Admin'},
+            {actionID: 'act-3',time: '2026-05-08 10:25', action: 'Assigned to John Doe. by Admin', status: 'assigned', user: 'Admin'},
+            {actionID: 'act-4',time: '2026-05-10 21:25', action: 'Resolved by Emeka L.', status: 'update', user: 'Emeka okafor'},
+            {actionID: 'act-5',time: '2026-05-15 14:30', action: 'Closed by James Ope (Team Lead)', status: 'closed', user: 'James Ope'},
+
+        ],
         description: 'The main database is experiencing intermittent connection timeouts, affecting all users. Immediate attention required to prevent data loss.', 
     },
     { 
@@ -108,48 +197,127 @@ export const mockTickets = [
         severity: 'CRITICAL', 
         file: ['security_alert.log', 'intrusion_report.pdf'], 
         ticketType: 'Incident', 
-        affectedUser: 'Security Bot', 
+        affectedUsers: 'Security Bot', 
         subject: 'Unauthorized Login Attempt', 
         timestamp: '2026-05-03 01:10', 
         status: 'Pending',
+        assignedTo: 'john doe',
+        activity: [
+            {actionID: 'act-1',time: '2026-02-03 09:15', action: 'Ticket raised by James Ope (Team Lead)', status: 'created', user: 'James Ope'},
+            {actionID: 'act-2',time: '2026-04-08 10:25', action: 'Assigned to John Doe. by Admin', status: 'assigned', user: 'Admin'},
+            {actionID: 'act-3',time: '2026-05-08 10:25', action: 'Assigned to John Doe. by Admin', status: 'assigned', user: 'Admin'},
+            {actionID: 'act-4',time: '2026-05-10 21:25', action: 'Resolved by Emeka L.', status: 'update', user: 'Emeka okafor'},
+            {actionID: 'act-5',time: '2026-05-15 14:30', action: 'Closed by James Ope (Team Lead)', status: 'closed', user: 'James Ope'},
+
+        ],
         description: 'The main database is experiencing intermittent connection timeouts, affecting all users. Immediate attention required to prevent data loss.', 
     },
     { 
-        ticketId: '4408', 
+        ticketId: '4408',
+        createdBy: {user:'James Ope', userId: 'james-ope-001', userRole: 'Team Lead'}, 
         severity: 'LOW', 
         file: ['form_v2.pdf', 'workflow_chart.png'], 
         ticketType: 'Change', 
-        affectedUser: 'Jessica Wu', 
+        affectedUsers: 'Jessica Wu', 
         subject: 'Update User Profile Fields', 
         timestamp: '2026-05-01 16:20', 
         status: 'Resolved',
         currentState: 'on the road',
         proposedChange: 'I have a plan',
-        description: 'The main database is experiencing intermittent connection timeouts, affecting all users. Immediate attention required to prevent data loss.', 
+        assignedTo: 'john doe',
+        approved: true,
+        activity: [
+            {actionID: 'act-1',time: '2026-02-03 09:15', action: 'Ticket raised by James Ope (Team Lead)', status: 'created', user: 'James Ope'},
+            {actionID: 'act-2',time: '2026-04-08 10:25', action: 'Assigned to John Doe. by Admin', status: 'assigned', user: 'Admin'},
+            {actionID: 'act-3',time: '2026-05-08 10:25', action: 'Assigned to John Doe. by Admin', status: 'assigned', user: 'Admin'},
+            {actionID: 'act-4',time: '2026-05-10 21:25', action: 'Resolved by Emeka L.', status: 'update', user: 'Emeka okafor'},
+            {actionID: 'act-5',time: '2026-05-15 14:30', action: 'Closed by James Ope (Team Lead)', status: 'closed', user: 'James Ope'},
+
+        ],
+        description: 'The main database is experiencing intermittent connection timeouts, affecting all users. Immediate attention required to prevent data loss.',
+        implementationPlan: `
+            <p><strong>Proposed Maintenance Steps:</strong></p>
+            <ol>
+                <li>Enable HA failover</li>
+                <li>Update primary FortiGate</li>
+                <li>Failback and test</li>
+                <li>Update secondary</li>
+                <li>Verify all firewall rules</li>
+            </ol>
+            <p><em>Note: Ensure a backup is taken before starting.</em></p>
+        `,
+        rollbackPlan: `
+            <p><strong>Rollback Steps:</strong></p>
+            <ul>
+                <li>Restore configuration from backup</li>
+                <li>Revert HA failover state</li>
+                <li>Notify network operations center</li>
+            </ul>
+        `,
     },
     { 
-        ticketId: '4409', 
+        ticketId: '4409',
+        createdBy: {user:'James Ope', userId: 'james-ope-001', userRole: 'Team Lead'}, 
         severity: 'MEDIUM', 
         file: 'N/A', 
         ticketType: 'Service', 
-        affectedUser: 'David Miller', 
+        affectedUsers: 'David Miller', 
         subject: 'Hardware Upgrade Request', 
         timestamp: '2026-05-02 09:00', 
         status: 'Pending',
+        assignedTo: 'john doe',
+        activity: [
+            {actionID: 'act-1',time: '2026-02-03 09:15', action: 'Ticket raised by James Ope (Team Lead)', status: 'created', user: 'James Ope'},
+            {actionID: 'act-2',time: '2026-04-08 10:25', action: 'Assigned to John Doe. by Admin', status: 'assigned', user: 'Admin'},
+            {actionID: 'act-3',time: '2026-05-08 10:25', action: 'Assigned to John Doe. by Admin', status: 'assigned', user: 'Admin'},
+            {actionID: 'act-4',time: '2026-05-10 21:25', action: 'Resolved by Emeka L.', status: 'update', user: 'Emeka okafor'},
+            {actionID: 'act-5',time: '2026-05-15 14:30', action: 'Closed by James Ope (Team Lead)', status: 'closed', user: 'James Ope'},
+
+        ],
         description: 'The main database is experiencing intermittent connection timeouts, affecting all users. Immediate attention required to prevent data loss.', 
     },
     { 
-        ticketId: '4410', 
+        ticketId: '4410',
+        createdBy: {user:'James Ope', userId: 'james-ope-001', userRole: 'Team Lead'}, 
         severity: 'MEDIUM', 
         file: [ 'upgrade_plan.xlsx', 'budget_approval.pdf' ], 
         ticketType: 'Change', 
-        affectedUser: 'IT Support', 
+        affectedUsers: 'IT Support', 
         subject: 'API Key Rotation', 
         timestamp: '2026-05-03 11:55', 
         status: 'In Progress',
         currentState: 'starte the engine',
         proposedChange: 'get ready to rumble',
-        description: 'The main database is experiencing intermittent connection timeouts, affecting all users. Immediate attention required to prevent data loss.', 
+        assignedTo: 'john doe',
+        approved: true,
+        activity: [
+            {actionID: 'act-1',time: '2026-02-03 09:15', action: 'Ticket raised by James Ope (Team Lead)', status: 'created', user: 'James Ope'},
+            {actionID: 'act-2',time: '2026-04-08 10:25', action: 'Assigned to John Doe. by Admin', status: 'assigned', user: 'Admin'},
+            {actionID: 'act-3',time: '2026-05-08 10:25', action: 'Assigned to John Doe. by Admin', status: 'assigned', user: 'Admin'},
+            {actionID: 'act-4',time: '2026-05-10 21:25', action: 'Resolved by Emeka L.', status: 'update', user: 'Emeka okafor'},
+            {actionID: 'act-5',time: '2026-05-15 14:30', action: 'Closed by James Ope (Team Lead)', status: 'closed', user: 'James Ope'},
+
+        ],
+        description: 'The main database is experiencing intermittent connection timeouts, affecting all users. Immediate attention required to prevent data loss.',
+        implementationPlan: `
+            <p><strong>Proposed Maintenance Steps:</strong></p>
+            <ol>
+                <li>Enable HA failover</li>
+                <li>Update primary FortiGate</li>
+                <li>Failback and test</li>
+                <li>Update secondary</li>
+                <li>Verify all firewall rules</li>
+            </ol>
+            <p><em>Note: Ensure a backup is taken before starting.</em></p>
+        `,
+        rollbackPlan: `
+            <p><strong>Rollback Steps:</strong></p>
+            <ul>
+                <li>Restore configuration from backup</li>
+                <li>Revert HA failover state</li>
+                <li>Notify network operations center</li>
+            </ul>
+        `, 
     }
 ];
 

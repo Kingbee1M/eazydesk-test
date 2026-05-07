@@ -367,6 +367,9 @@ transition: opacity 150ms linear;
 @import url(./css/raiseTicketModal.css);
 @import url(./css/comboBox.css);
 @import url(./css/typographyComp.css);
+@import url(./css/viewTicket.css);
+@import url(./css/details.css);
+@import url(./css/workNotes.css);
 
  
 .stylish-border {

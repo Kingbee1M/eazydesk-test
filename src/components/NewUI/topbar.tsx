@@ -58,7 +58,7 @@ export default function TopBar () {
 
 
             <section className='right-section'>
-                <div className={`top-botton-1 ${isSearchActive ? 'active' : ''}`}
+                <div className={`top-botton-1 ${isSearchActive ? 'searchactive' : ''}`}
                 style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}
                     onClick={() => !isSearchActive && setIsSearchActive(true)}>
                     <BiSearchAlt className="search-icon"/>

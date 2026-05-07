@@ -1,0 +1,192 @@
+.section-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
+}
+
+.section-grid {
+    width: 100%;
+    display: grid;
+    row-gap: 12px;
+    column-gap: 10px;
+    grid-template-columns: repeat(2, 1fr); 
+    grid-template-rows: repeat(2, 60px);
+}
+
+.headings {
+    font-size: 12px;
+    color: #9DA4BD;
+    font-weight: 400;
+}
+
+.value {
+    font-size: 12px;
+    color: #212121;
+    font-weight: 400;
+}
+
+.description-content {
+    line-height: 1.6;
+    color: #334155; /* Slate color */
+    background-color: rgb(240, 227, 203);
+    border-left: 10px solid #2152FF;
+    padding: 8px;
+    border-radius: 0 10px 10px 0;
+}
+
+.description-content p {
+    margin-bottom: 10px; /* Space out the paragraphs */
+}
+
+.description-content ul, .description-content ol {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.description-content strong {
+    font-weight: 600;
+}
+
+.data-result {
+    font-size: 12px;
+}
+
+.wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.wrap :is(ul, ol) {
+    list-style-position: inside;
+    padding-left: 0;
+    margin-left: 10px;
+}
+
+
+.wrap :is(ul, ol) :is(ul, ol) {
+    margin-left: 20px;
+    list-style-position: inside;
+}
+
+.activity-timeline {
+    margin-top: 30px;
+    padding-bottom: 20px;
+}
+
+.timeline-container {
+    position: relative;
+    margin-top: 20px;
+    padding-left: 30px; /* Space for the line and dots */
+}
+
+/* The Vertical Line */
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    left: 4px; /* Centered with the 10px dots */
+    top: 5px;
+    bottom: 5px;
+    width: 2px;
+    background: #e2e8f0; /* Light gray line */
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+/* The Dots */
+.timeline-dot {
+    position: absolute;
+    left: -30px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: white;
+    z-index: 1;
+}
+
+/* Status-based Dot Colors */
+.timeline-dot.created { border: 2px solid #22c55e; } /* Green */
+.timeline-dot.assigned { border: 2px solid #3b82f6; } /* Blue */
+.timeline-dot.update { border: 2px solid #f59e0b; }   /* Amber */
+.timeline-dot.closed { border: 2px solid #64748b; }   /* Slate */
+
+/* Content Styling */
+.timeline-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.timeline-action {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.timeline-time {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.timeline-user {
+    font-size: 13px;
+    color: #64748b;
+    margin: 0;
+}
+
+.approval-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background-color: #22c55e;
+    border-radius: 50%;
+}
+
+.approval-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 25px 20px;
+    background-color: #F2F4F9;
+    border-radius: 10px;
+}
+
+.plan-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+    gap: 40px;
+}
+
+
+.plan-section :is(ul, ol) {
+    list-style-position: inside;
+    padding-left: 0;
+    margin-left: 10px;
+}
+
+
+.plan-section :is(ul, ol) :is(ul, ol) {
+    margin-left: 20px;
+    list-style-position: inside;
+}

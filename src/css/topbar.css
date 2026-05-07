@@ -92,7 +92,7 @@
     white-space: nowrap;
 }
 
-.top-botton-1.active {
+.top-botton-1.searchactive {
     width: 250px;
     cursor: default;
     padding-left: 12px;
@@ -110,7 +110,7 @@
     transition: width 0.4s ease, opacity 0.3s ease, visibility 0.4s;
 }
 
-.active .search-input {
+.searchactive .search-input {
     width: 100%;
     opacity: 1;
     pointer-events: auto;
@@ -131,7 +131,7 @@
     transition: all 0.3s ease;
 }
 
-.active .close-btn {
+.searchactive .close-btn {
     opacity: 1;
     transform: translateX(0);
     /* REVERSE THEM WHEN ACTIVE */
