@@ -44,7 +44,7 @@ export default function TicketTable({ tickets, page }: TicketTableProps) {
 
                         return (
                             <tr key={index} style={{ borderBottom: '1px solid #D5D5D5' }} className="ticket-row">
-                                <td style={cellStyle}>#{ticket.ticketId}</td>
+                                <td style={cellStyle}>{ticket.ticketId}</td>
                                 <td style={cellStyle}>
                                     <span 
                                         className={`${ticket.severity.toLowerCase()}`} 

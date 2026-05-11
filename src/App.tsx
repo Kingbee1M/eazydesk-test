@@ -109,7 +109,7 @@ function App() {
         <Route path="/itincidentrequest" element={<ITIncidentRequest />} />
         <Route path="/itservicerequest" element={<ITServiceRequest />} />
         <Route path="/itchangerequest" element={<ITChangeRequest />} />
-        <Route path="/itsettings" element={<ITSettings />} />
+        
 
 
         {/* IT Screens */}
@@ -140,24 +140,29 @@ function App() {
           <Route path="incident" element={<TicketCategoryView type="Incident" />} />
           <Route path="service" element={<TicketCategoryView type="Service" />} />
           <Route path="change" element={<TicketCategoryView type="Change" />} />
+          <Route path="settings" element={<ITSettings />} />
         </Route>
 
         {/* Do the same for Admin if you want /admindashboard/incident to work */}
         <Route path="/admindashboard" element={<AdminDashboard />}>
-  {/* No 'index' route needed because AdminDashboard handles the home view via {isDashboardHome} */}
-  <Route path="all-tickets" element={<AllTickets />} />
-  <Route path="incident" element={<TicketCategoryView type="Incident" />} />
-  <Route path="service" element={<TicketCategoryView type="Service" />} />
-  <Route path="change" element={<TicketCategoryView type="Change" />} />
-</Route>
+        {/* No 'index' route needed because AdminDashboard handles the home view via {isDashboardHome} */}
+        <Route path="all-tickets" element={<AllTickets />} />
+        <Route path="incident" element={<TicketCategoryView type="Incident" />} />
+        <Route path="service" element={<TicketCategoryView type="Service" />} />
+        <Route path="change" element={<TicketCategoryView type="Change" />} />
+        <Route path="register" element={<Register />} />
+        <Route path="settings" element={<ITSettings />} />
+        <Route path="report" element={<TicketReport />} />
+        </Route>
 
-{/* 3. IT - Fixed */}
-<Route path="/itdashboard" element={<ITDashboard />}>
-  <Route path="all-tickets" element={<AllTickets />} />
-  <Route path="incident" element={<TicketCategoryView type="Incident" />} />
-  <Route path="service" element={<TicketCategoryView type="Service" />} />
-  <Route path="change" element={<TicketCategoryView type="Change" />} />
-</Route>
+        {/* 3. IT  */}
+        <Route path="/itdashboard" element={<ITDashboard />}>
+          <Route path="all-tickets" element={<AllTickets />} />
+          <Route path="incident" element={<TicketCategoryView type="Incident" />} />
+          <Route path="service" element={<TicketCategoryView type="Service" />} />
+          <Route path="change" element={<TicketCategoryView type="Change" />} />
+          <Route path="settings" element={<ITSettings />} />
+        </Route>
 
 
       </Routes>

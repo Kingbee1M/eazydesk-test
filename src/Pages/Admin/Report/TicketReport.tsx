@@ -170,10 +170,6 @@ const TicketReport = () => {
 
 
   return (
-    <div id='page-wrapper'>
-      <SideNav />
-      <AdminHeader />
-      <AdminBottomNavigation />
       <main>
         <div className='dashboard-first-card-boards   '>
           <div>
@@ -322,7 +318,6 @@ const TicketReport = () => {
           </div>
         </div>
       </main>
-    </div>
   );
 };
 

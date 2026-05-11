@@ -80,10 +80,6 @@ const Register = () => {
 
 
 	return (
-		<div id='page-wrapper'>
-			<SideNav />
-			<AdminHeader />
-			<AdminBottomNavigation />
 			<main >
 				<div className='dashboard-first-card-boards mb-2 mt-2'>
 					<div>
@@ -110,16 +106,16 @@ const Register = () => {
 				/>
 				<div className='table-container '>
 					{isLoadingAll && <TableLoader isLoading={isLoadingAll} />}
-					<table id="table" className={"table-hover table-mc-light-blue"}>
+					<table style={{ width: '100%', borderCollapse: 'collapse' }} >
 						<thead>
-							<tr>
-								<th>First Name</th>
-								<th>Last Name</th>
-								<th>Email</th>
-								<th>Phone Number</th>
-								<th>Role</th>
-								<th>isActive</th>
-								<th>Edit User</th>
+							<tr style={{ textAlign: 'left', borderBottom: '2px solid #f0f0f0' }}>
+								<th style={headerStyle}>First Name</th>
+								<th style={headerStyle}>Last Name</th>
+								<th style={headerStyle}>Email</th>
+								<th style={headerStyle}>Phone Number</th>
+								<th style={headerStyle}>Role</th>
+								<th style={headerStyle}>isActive</th>
+								<th style={headerStyle}>Edit User</th>
 							</tr>
 						</thead>
 						<tbody className="data-table-content">
@@ -129,18 +125,18 @@ const Register = () => {
 								<NoRecordFound colSpan={9} />
 							) : (
 								data?.map((item: any, i: any) => (
-									<tr key={i}>
-										<td >{item?.firstname}</td>
-										<td >{item?.lastname}</td>
-										<td >{item?.email}</td>
-										<td >{item?.mobileNumber}</td>
-										<td >{item?.role}</td>
-										<td >
+									<tr key={i} style={{ borderBottom: '1px solid #D5D5D5', }} className="ticket-row">
+										<td style={cellStyle}>{item?.firstname}</td>
+										<td style={cellStyle}>{item?.lastname}</td>
+										<td style={cellStyle}>{item?.email}</td>
+										<td style={cellStyle}>{item?.mobileNumber}</td>
+										<td style={cellStyle}>{item?.role}</td>
+										<td style={cellStyle}>
 											<button className={item?.activated ? "table-link-active" : "de-active"}>
 												{item?.activated ? "Active" : "Deactivated"}
 											</button>
 										</td>
-										<td >
+										<td style={{padding: '15px 20px'}}>
 											<EditRegisteredUserModal data={item} showEditUser={showEditUser} setShowEditUser={setShowEditUser} id={item?.id} />
 										</td>
 									</tr>
@@ -155,8 +151,27 @@ const Register = () => {
 					</div>}
 				</footer>
 			</main>
-		</div>
 	);
 };
 
 export default Register;
+
+const headerStyle: React.CSSProperties = {
+	padding: '12px 5px',
+	fontSize: '14px',
+	fontWeight: '600',
+	color: '#363636',
+};
+
+const cellStyle: React.CSSProperties = {
+	padding: '12px 5px',
+	fontSize: '14px',
+	color: '#333',
+};
+
+const statuscellStyle: React.CSSProperties = {
+	padding: '12px 0px',
+	fontSize: '10px',
+	color: '#333',
+	width: '90px',
+};

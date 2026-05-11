@@ -171,6 +171,7 @@ const ITDashboard = () => {
 				>
 					{isMenuOpen ? "✕" : "☰"}
 				</motion.button>
+				{isMenuOpen && <div className="menu-overlay" onClick={toggleMenu} />}
                 <TopBar />
                 
                 <div className="content-area">

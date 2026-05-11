@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import SettingsIcon from './SettingsIcon';
 import Plans from './SettingsGeneral/Plans';
 import ITSideNav from '../../../components/SideNav/ITSideNav';
@@ -7,15 +6,10 @@ import ITBottomNavigation from '../../../components/BottomNavigation/ITBottomNav
 import GeneralInformation from '../../../components/GeneralInformation';
 
 const Settings = () => {
-	const [activeIndex, setActiveIndex] = useState<any>(0);
 
 
 
 	return (
-		<div id="page-wrapper">
-			<ITSideNav />
-			<ITHeader />
-			<ITBottomNavigation />
 			<main>
 				<div className='settings_container_title'>
 					<div>
@@ -25,16 +19,11 @@ const Settings = () => {
 				</div>
 
 				<div className='settings_container_main'>
-					{/* Settings Icon */}
-					<SettingsIcon activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
-
-					{/* General Information */}
-					{activeIndex === 0 && <GeneralInformation />}
-					{activeIndex === 1 && <Plans />}
+					<GeneralInformation />
 				</div>
 			</main>
 
-		</div>
+
 	)
 }
 

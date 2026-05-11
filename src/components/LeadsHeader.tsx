@@ -4,10 +4,25 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { CiGrid42 } from "react-icons/ci";
 import { PiTicketBold } from "react-icons/pi";
 import Logo from "../assets/img/logo.svg";
+import { CiSettings } from "react-icons/ci";
+import { MdPeopleOutline } from "react-icons/md";
+import { FaRegFileLines } from "react-icons/fa6";
+
 
 const LeadsHeader = ({ incident, service, change }: any) => {
   const [toggleMenu, setToggleMenu] = useState(true);
-  
+  const userInfo = JSON.parse(localStorage.getItem("service_desk") || "{}");
+  const role = userInfo?.role
+  const activeDashboard = () => {
+    switch (role) {
+      case "ADMIN": 
+        return '/admindashboard';
+      case "TEAM_LEAD": 
+        return '/leadsdashboard';
+      default: 
+        return '/itdashboard';
+    }
+  };
   const screens = [
     { title: 'Change', path: 'change', count: change },
     { title: 'Service', path: 'service', count: service },
@@ -25,6 +40,7 @@ const LeadsHeader = ({ incident, service, change }: any) => {
     gap: '10px',
     alignItems: 'center',
     textDecoration: 'none',
+    fontSize: '14px',
   };
 
   // Replicating .client-header nav a.selected
@@ -72,7 +88,7 @@ const LeadsHeader = ({ incident, service, change }: any) => {
       }}>
         
         {/* Dashboard Link */}
-        <NavLink to='/leadsdashboard' end style={getNavLinkStyle}>
+        <NavLink to={activeDashboard()} end style={getNavLinkStyle}>
           <CiGrid42 className="icons" style={{ fontSize: '18px', fontWeight: 700 }} /> 
           Dashboard
         </NavLink>
@@ -117,7 +133,7 @@ const LeadsHeader = ({ incident, service, change }: any) => {
                     padding: '0.4rem 0.85rem',
                     borderRadius: '5px',
                     textDecoration: 'none',
-                    fontSize: '12px',
+                    fontSize: '14px',
                     transition: 'var(--transition)',
                     backgroundColor: isActive ? 'var(--accent-blue)' : 'transparent',
                     color: isActive ? 'white' : 'var(--black)',
@@ -143,7 +159,25 @@ const LeadsHeader = ({ incident, service, change }: any) => {
             </div>
           )}
         </div>
+
+        {role === 'ADMIN' && (<NavLink to='register' end style={getNavLinkStyle}>
+          <MdPeopleOutline className="icons" style={{ fontSize: '18px', fontWeight: 700 }} /> 
+          Register
+        </NavLink>)}
+
+
+        {role === 'ADMIN' && (<NavLink to='report' end style={getNavLinkStyle}>
+          <FaRegFileLines className="icons" style={{ fontSize: '18px', fontWeight: 700 }} /> 
+          Report
+        </NavLink>)}
+
+        <NavLink to='settings' end style={getNavLinkStyle}>
+          <CiSettings className="icons" style={{ fontSize: '18px', fontWeight: 700 }} /> 
+          Setings
+        </NavLink>
       </div>
+
+      
     </header>
   );
 };
