@@ -73,7 +73,7 @@ const LeadsHeader = ({ incident, service, change }: any) => {
         
         {/* Dashboard Link */}
         <NavLink to='/leadsdashboard' end style={getNavLinkStyle}>
-          <CiGrid42 className="icons" style={{ fontSize: '12px', fontWeight: 700 }} /> 
+          <CiGrid42 className="icons" style={{ fontSize: '18px', fontWeight: 700 }} /> 
           Dashboard
         </NavLink>
 
@@ -84,7 +84,7 @@ const LeadsHeader = ({ incident, service, change }: any) => {
             style={getNavLinkStyle}
             onClick={() => setToggleMenu(!toggleMenu)}
           >
-            <PiTicketBold className="icons" style={{ fontSize: '12px', fontWeight: 700 }} />
+            <PiTicketBold className="icons" style={{ fontSize: '18px', fontWeight: 700 }} />
             <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
               <span>ALL TICKETS</span>
               <MdKeyboardArrowDown 
