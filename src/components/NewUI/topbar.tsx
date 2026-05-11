@@ -94,7 +94,7 @@ export default function TopBar () {
                     <button className='chev' onClick={()=>setIsOpen(!isOpen)}>
                         <FaChevronDown/>
                         {isOpen && (<div className='mini-menu'>
-                            <div className='notification-card' onClick={() => navigate("/itsettings")}>
+                            <div className='notification-card' onClick={() => navigate("settings")}>
                                 <div className='notification-icon-profile' style={{textTransform: 'capitalize'}}>
                                     {userInfo?.firstname?.charAt(0)}
                                 </div>
