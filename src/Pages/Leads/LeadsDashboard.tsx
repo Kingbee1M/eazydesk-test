@@ -2,13 +2,14 @@
 
 import { getTicket } from "../../features/Ticket/ticketSlice";
 import { useAppDispatch, useAppSelector } from "../../store/useStore";
-import { useEffect, useState } from "react";
 import LeadsHeader from "../../components/LeadsHeader";
 import { ToastContainer } from "react-toastify";
 import MainDisplay from "src/components/NewUI/mainDIsplay";
 import TopBar from "src/components/NewUI/topbar";
 import { Outlet, useLocation } from "react-router-dom";
 import { current } from "@reduxjs/toolkit";
+import { useState } from "react";
+import { motion } from "framer-motion";
 
 type Activity = {
   id: string;
@@ -50,7 +51,7 @@ export const mockTickets = [
         severity: 'CRITICAL', 
         file: ['error_log.pdf', 'sys_dump.txt', 'config.json'], 
         ticketType: 'Incident', 
-        affectedUsers: 'Idris Babatunde', 
+        affectedUsers: 12, 
         subject: 'Database Connection Timeout', 
         timestamp: '2026-05-03 09:15', 
         status: 'Pending',
@@ -71,7 +72,7 @@ export const mockTickets = [
         severity: 'LOW', 
         file: 'N/A', 
         ticketType: 'Service', 
-        affectedUsers: 'Sarah Jenkins', 
+        affectedUsers: 60, 
         subject: 'Software Installation Request', 
         timestamp: '2026-05-03 10:22', 
         status: 'Resolved',
@@ -92,7 +93,7 @@ export const mockTickets = [
         severity: 'MEDIUM', 
         file: ['screenshot.png', 'design_mockup.sketch'], 
         ticketType: 'Incident', 
-        affectedUsers: 'Michael Chen', 
+        affectedUsers: 195, 
         subject: 'UI Glitch on Dashboard', 
         timestamp: '2026-05-03 11:05', 
         status: 'In Progress',
@@ -113,7 +114,7 @@ export const mockTickets = [
         severity: 'MEDIUM', 
         file: 'RFC_doc.docx', 
         ticketType: 'Change', 
-        affectedUsers: 'Admin System', 
+        affectedUsers: 44, 
         subject: 'Server Migration Prep', 
         timestamp: '2026-05-02 14:45', 
         status: 'Pending',
@@ -156,7 +157,7 @@ export const mockTickets = [
         severity: 'CRITICAL', 
         file: ['sys_dump.txt', 'error_report.pdf'], 
         ticketType: 'Incident', 
-        affectedUsers: 'Olawale Segun', 
+        affectedUsers: 27, 
         subject: 'Payment Gateway Down', 
         timestamp: '2026-05-03 08:30', 
         status: 'In Progress',
@@ -177,7 +178,7 @@ export const mockTickets = [
         severity: 'LOW', 
         file: 'N/A', 
         ticketType: 'Service', 
-        affectedUsers: 'Emily Blunt', 
+        affectedUsers: 65, 
         subject: 'VPN Access Reset', 
         timestamp: '2026-05-03 12:00', 
         status: 'Closed',
@@ -197,7 +198,7 @@ export const mockTickets = [
         severity: 'CRITICAL', 
         file: ['security_alert.log', 'intrusion_report.pdf'], 
         ticketType: 'Incident', 
-        affectedUsers: 'Security Bot', 
+        affectedUsers: 5, 
         subject: 'Unauthorized Login Attempt', 
         timestamp: '2026-05-03 01:10', 
         status: 'Pending',
@@ -218,7 +219,7 @@ export const mockTickets = [
         severity: 'LOW', 
         file: ['form_v2.pdf', 'workflow_chart.png'], 
         ticketType: 'Change', 
-        affectedUsers: 'Jessica Wu', 
+        affectedUsers: 18, 
         subject: 'Update User Profile Fields', 
         timestamp: '2026-05-01 16:20', 
         status: 'Resolved',
@@ -261,7 +262,7 @@ export const mockTickets = [
         severity: 'MEDIUM', 
         file: 'N/A', 
         ticketType: 'Service', 
-        affectedUsers: 'David Miller', 
+        affectedUsers: 25, 
         subject: 'Hardware Upgrade Request', 
         timestamp: '2026-05-02 09:00', 
         status: 'Pending',
@@ -282,7 +283,7 @@ export const mockTickets = [
         severity: 'MEDIUM', 
         file: [ 'upgrade_plan.xlsx', 'budget_approval.pdf' ], 
         ticketType: 'Change', 
-        affectedUsers: 'IT Support', 
+        affectedUsers: 18, 
         subject: 'API Key Rotation', 
         timestamp: '2026-05-03 11:55', 
         status: 'In Progress',
@@ -324,8 +325,10 @@ export const mockTickets = [
 
 
 const LeadsDashboard = () => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const location = useLocation();
     const dispatch = useAppDispatch();
+    const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
     const { data: ticket, isSuccess } = useAppSelector((state: any) => state.ticket);
 
     // Determine if we are on the "Home" dashboard view or a sub-page
@@ -408,17 +411,27 @@ const LeadsDashboard = () => {
 	
 	return (
 		<div id="dashboard">
-            <div className="hero-section1">
-                {/* Pass counts to your header so the sidebar numbers stay updated */}
+            <div className={`hero-section1 ${isMenuOpen ? "open" : ""}`}>
                 <LeadsHeader 
                     incident={incidentCount} 
                     service={serviceCount} 
                     change={changeCount}
                 />
-                <ToastContainer />
             </div>
 
             <main className='main'>
+                 {/* Mobile Toggle Button */}
+            <motion.button 
+                drag
+                dragConstraints={{ left: 0, right: 0, top: 0, bottom: 500 }} // Elastic snap-back
+                // OR use specific constraints based on screen size:
+                // dragConstraints={{ left: -300, right: 0, top: 0, bottom: 500 }}
+                className="mobile-menu-toggle" 
+                onClick={toggleMenu}
+                style={{ touchAction: "none" }} // Prevents page scroll while dragging
+            >
+                {isMenuOpen ? "✕" : "☰"}
+            </motion.button>
                 <TopBar />
                 
                 <div className="content-area">

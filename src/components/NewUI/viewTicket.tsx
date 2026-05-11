@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'; // Added for Portal
 import { useState } from 'react';
 import Details from './details';
 import WorkNotes from './workNotes';
+import { IoMdClose } from "react-icons/io";
 
 interface ViewTicketPortalProps {
   isOpen: boolean;
@@ -32,8 +33,12 @@ const ViewTicketPortal = ({ isOpen, onClose, ticket }: ViewTicketPortalProps) =>
         
         {/* HEADER */}
         <div className="top-header">
+          <div style={{display: 'flex', gap: '20px'}}>
             <span>{ticket.ticketId}</span>
             <span style={{ color: isCritical ? '#EB291B' : isMedium ? '#073CF8' : '#686C84' }}>{ticket?.severity || 'No Severity'}</span>
+          </div>
+            
+            <button className='close-modal' onClick={onClose}><IoMdClose /></button>
         </div>
         
         

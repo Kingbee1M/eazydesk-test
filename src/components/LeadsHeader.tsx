@@ -1,195 +1,151 @@
 import React, { useState, useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { FaRegUserCircle } from "react-icons/fa";
-import { FiUser } from "react-icons/fi";
+import { NavLink, useNavigate } from "react-router-dom";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { RiLogoutCircleRLine } from "react-icons/ri";
-import { useNavigate } from "react-router-dom";
-import Logo from "../assets/img/logo.svg";
-import NetworkConnetion from "./NetworkConnetion";
-import { customId, menu } from "./Options";
-import DataService from "../features/Auth/dataService";
-import axios from "axios";
-import { toast } from "react-toastify";
-import { logoutUserAction } from "../features/Auth/authService";
-import { logout, reset } from "../features/Auth/authSlice";
-import { useAppDispatch, useAppSelector } from "../store/useStore";
-import UserProfile from "../Pages/Leads/UserProfile";
-import LeadOptionsHeader from "./TicketHeaders/LeadOptionsHeader";
-import { useIsMobile } from "../hooks/resize";
-import dashboard from '../assets/img/dashboard.svg'
 import { CiGrid42 } from "react-icons/ci";
 import { PiTicketBold } from "react-icons/pi";
+import Logo from "../assets/img/logo.svg";
 
-
-
-// Create an instance of DataService
-const dataService = DataService();
 const LeadsHeader = ({ incident, service, change }: any) => {
-  
-  // ------NEW CODE-----
-  const [isTicketsOpen, setIsTicketsOpen] = useState(true);
-  const [activeSubScreen, setActiveSubScreen] = useState("Incident");
-  const Incident = incident;
-  const Service = service;
-  const Change = change;
+  const [toggleMenu, setToggleMenu] = useState(true);
   
   const screens = [
-    { title: 'Change', path: 'change', count: Change },
-    { title: 'Service', path: 'service', count: Service },
-    { title: 'Incident', path: 'incident', count: Incident },
+    { title: 'Change', path: 'change', count: change },
+    { title: 'Service', path: 'service', count: service },
+    { title: 'Incident', path: 'incident', count: incident },
   ];
-  
-  
 
-  
-  
-  // -----OLD CODE------
-  const isMobile = useIsMobile();
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const [dropdown, setDropdown] = useState(false);
-  const [toggleMenu, setToggleMenu] = useState(false);
-
-
-
-  const { isLoadinglogout, isErrorlogout, messagelogout, isSuccesslogout } =
-    useAppSelector((state: { auth: any }) => state.auth);
-
-  // @ts-ignore
-  const userInfo = JSON.parse(localStorage.getItem("service_desk"));
-  const userId = userInfo?.id;
-
-
-  useEffect(() => {
-    if (!isMobile) {
-      setToggleMenu(false);
-    } else if (isMobile) {
-      setDropdown(false);
-    }
-  }, [isMobile]);
-
-
-  const handleLogout = () => {
-    dispatch(logout());
-    toast.dismiss();
+  // Replicating .client-header nav a
+  const baseLinkStyle = {
+    color: 'var(--black)',
+    width: '100%',
+    padding: '.5rem .85rem',
+    borderRadius: '5px',
+    transition: 'var(--transition)',
+    display: 'flex',
+    gap: '10px',
+    alignItems: 'center',
+    textDecoration: 'none',
   };
 
-  useEffect(() => {
-    if (!userInfo || userInfo == null) {
-      navigate("/");
-      dispatch(reset());
-    }
-  }, [dispatch, navigate, userInfo]);
-
-  useEffect(() => {
-    if (isSuccesslogout) {
-      // localStorage.removeItem("service_desk");
-      toast.dismiss();
-      delete axios.defaults.headers.common["Authorization"];
-      dispatch(logoutUserAction());
-      dataService.clearData();
-    } else if (isErrorlogout) {
-      toast.error(messagelogout, { toastId: customId });
-      dispatch(logoutUserAction());
-      dataService.clearData();
-    }
-    dispatch(reset());
-  }, [dispatch, isErrorlogout, isSuccesslogout, messagelogout, navigate]);
-
-  //profile modal
-  const [lgShow, setLgShow] = useState(false);
-
-  const handleClick = () => {
-    setLgShow(true);
-  };
-
-  const [title, setTitle] = useState("eazyDesk | Dashboard");
-  document.title = title;
-  useEffect(() => {
-    // This will run when the page first loads and whenever the title changes
-    if (window.location.pathname === "/dashboard") {
-      setTitle("eazyDesk | Dashboard");
-    } else if (window.location.pathname === "/incident-desk") {
-      setTitle("eazyDesk | Incident-Request");
-    } else if (window.location.pathname === "/service-request") {
-      setTitle("eazyDesk | Service-Request");
-    } else if (window.location.pathname === "/change-request") {
-      setTitle("eazyDesk | Change-Request");
-    }
-  }, [title]);
+  // Replicating .client-header nav a.selected
+  const getNavLinkStyle = ({ isActive }: { isActive: boolean }) => ({
+    ...baseLinkStyle,
+    backgroundColor: isActive ? 'var(--accent-blue)' : 'transparent',
+    color: isActive ? 'var(--white)' : 'var(--black)',
+  });
 
   return (
-    <header className='client-header'>
-      <div className="title">
-        <img src={Logo} alt='logo' className='new-logo' />
-        <h1 style={{fontSize: 18,}}>EAZYDESK</h1>
+    <header className='client-header' style={{ 
+      gridArea: 'client-header',
+      position: 'relative',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '16px',
+      alignItems: 'start',
+      justifyContent: 'start',
+      width: '100%',
+      padding: 0,
+    }}>
+      {/* Title Section */}
+      <div className="title" style={{ 
+        display: 'flex', 
+        width: '100%', 
+        justifyContent: 'space-between', 
+        padding: '0 !important' 
+      }}>
+        <div className="logo_area_leads" style={{ display: 'flex', alignItems: 'center', gap: '10px', width: '100%', justifyContent: 'space-between' }}>
+          <img src={Logo} alt='logo' className='new-logo' style={{ width: '22px' }} />
+          <h1 style={{ fontSize: 18, color: 'black', margin: 0 }}>EAZYDESK</h1>
+        </div>
       </div>
-      
-      <nav className="navbar" style={{ flexDirection: 'column', gap: '5px' }}>
+
+      {/* Navbar - Replicating .client-header nav */}
+      <div className="navbar" style={{ 
+        width: '100%',
+        backgroundColor: 'var(--white)',
+        borderRadius: '25px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '5px',
+        backdropFilter: 'blur(5px)',
+        padding: '0px' // Added for internal spacing
+      }}>
+        
         {/* Dashboard Link */}
-        <NavLink 
-          to={'/leadsdashboard'}
-          end
-          className={({ isActive }) => (isActive ? "selected" : "")}
-        >
-          <CiGrid42 className="icons" /> Dashboard
+        <NavLink to='/leadsdashboard' end style={getNavLinkStyle}>
+          <CiGrid42 className="icons" style={{ fontSize: '12px', fontWeight: 700 }} /> 
+          Dashboard
         </NavLink>
 
-        {/* ALL TICKETS */}
-        <div className="nav-group-container">
-  {/* ALL TICKETS - Parent Link */}
-  <NavLink
-    to="all-tickets"
-    end
-    className={({ isActive }) => {
-      const isSubRoute = screens.some(screen => window.location.pathname.includes(screen.path));
-      return `parent-link ${isActive || isSubRoute ? "selected" : ""}`;
-    }}
-    onClick={() => {
-      // Clicking the link itself should open the menu and navigate
-      setToggleMenu(true);
-    }}
-  >
-    <PiTicketBold className="icons" />
-    <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
-      <span>ALL TICKETS</span>
-      
-      <div 
-        className={`arrow-container ${toggleMenu ? 'open' : ''}`}
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          setToggleMenu(!toggleMenu);
-        }}
-        style={{ padding: '5px', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
-      >
-        <MdKeyboardArrowDown className={`arrow ${toggleMenu ? 'open' : ''}`} />
+        {/* ALL TICKETS GROUP */}
+        <div className="nav-group-container" style={{ width: '100%' }}>
+          <NavLink
+            to="all-tickets"
+            style={getNavLinkStyle}
+            onClick={() => setToggleMenu(!toggleMenu)}
+          >
+            <PiTicketBold className="icons" style={{ fontSize: '12px', fontWeight: 700 }} />
+            <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
+              <span>ALL TICKETS</span>
+              <MdKeyboardArrowDown 
+                style={{ 
+                  transform: toggleMenu ? 'rotate(180deg)' : 'rotate(0deg)', 
+                  transition: '0.3s ease',
+                  fontSize: '18px'
+                }} 
+              />
+            </div>
+          </NavLink>
+
+          {/* Sub-Menu List - Replicating .sub-menu-list */}
+          {toggleMenu && (
+            <div className="sub-menu-list" style={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              width: '100%', 
+              gap: '2px',
+              marginTop: '5px'
+            }}>
+              {screens.map((screen) => (
+                <NavLink
+                  key={screen.title}
+                  to={screen.path}
+                  style={({ isActive }) => ({
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: '0.4rem 0.85rem',
+                    borderRadius: '5px',
+                    textDecoration: 'none',
+                    fontSize: '12px',
+                    transition: 'var(--transition)',
+                    backgroundColor: isActive ? 'var(--accent-blue)' : 'transparent',
+                    color: isActive ? 'white' : 'var(--black)',
+                  })}
+                >
+                  <span className="sub-title">{screen.title}</span>
+                  <span className="sub-count" style={{
+                    fontSize: '10px',
+                    backgroundColor: '#fff',
+                    width: '20px',
+                    height: '20px',
+                    borderRadius: '30px',
+                    color: '#646464',
+                    border: '1px solid #646464',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                  }}>
+                    {screen.count}
+                  </span>
+                </NavLink>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
-  </NavLink>
-
-  {/* The Sub-Menu List */}
-  {toggleMenu && (
-    <div className="sub-menu-list" style={{display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '5px' }}>
-      {screens.map((screen) => (
-        <NavLink
-          key={screen.title}
-          to={screen.path}
-          className={({ isActive }) => `sub-nav-item ${isActive ? "sub-selected" : ""}`}
-        >
-          <span className="sub-title" style={{ fontSize: '14px' }}>{screen.title}</span>
-          <span className="sub-count" style={{ fontSize: '12px', opacity: 0.8 }}>{screen.count}</span>
-        </NavLink>
-      ))}
-    </div>
-  )}
-</div>
-      </nav>
     </header>
   );
 };
 
 export default LeadsHeader;
-
-

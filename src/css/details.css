@@ -9,10 +9,16 @@
 .section-grid {
     width: 100%;
     display: grid;
+    justify-content: space-between;
     row-gap: 12px;
     column-gap: 10px;
-    grid-template-columns: repeat(2, 1fr); 
-    grid-template-rows: repeat(2, 60px);
+    grid-template-columns: repeat(2, 0.3fr);
+    grid-template-rows: repeat(3, 60px);
+    column-gap: 20px;
+}
+
+.wide-item.wrap{
+    grid-column: 1 / span 2;
 }
 
 .headings {
@@ -189,4 +195,10 @@
 .plan-section :is(ul, ol) :is(ul, ol) {
     margin-left: 20px;
     list-style-position: inside;
+}
+
+.date-time {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }

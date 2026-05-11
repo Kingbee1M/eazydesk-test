@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { HiDotsVertical } from "react-icons/hi";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 import pdf from '../../assets/img/pdf-icon.svg'
 import { BsFiletypeDoc } from "react-icons/bs";
 import { BsFiletypePng } from "react-icons/bs";
 import ViewTicketPortal from "./viewTicket";
+import { AiOutlineEye } from "react-icons/ai";
 
 
 interface TicketTableProps {
@@ -99,7 +99,7 @@ export default function TicketTable({ tickets, page }: TicketTableProps) {
                                 )}
                                 </td>
                                 {page === 'all' && <td style={cellStyle}>{ticket.ticketType}</td>}
-                                <td style={cellStyle}>{ticket.affectedUser || "User"}</td>
+                                <td style={cellStyle}>{ticket.affectedUsers || "User"}</td>
                                 <td style={cellStyle}>{ticket.subject}</td>
                                 <td style={cellStyle}>{ticket.timestamp || "2026-05-03"}</td>
                                 <td style={statuscellStyle}>
@@ -115,7 +115,7 @@ export default function TicketTable({ tickets, page }: TicketTableProps) {
                                 </td>
                                 <td style={cellStyle}>
                                     <button style={{ background: 'none', border: 'none', cursor: 'pointer' }} onClick={() => { setSelectedTicket(ticket); setIsViewOpen(true); }}>
-                                        <FaEye />
+                                        <AiOutlineEye />
                                     </button>
                                 </td>
                                 </tr>
@@ -143,14 +143,14 @@ export default function TicketTable({ tickets, page }: TicketTableProps) {
 
 const headerStyle: React.CSSProperties = {
     padding: '12px 5px',
-    fontSize: '10px',
-    fontWeight: 'bold',
+    fontSize: '14px',
+    fontWeight: '600',
     color: '#363636',
 };
 
 const cellStyle: React.CSSProperties = {
     padding: '12px 15px',
-    fontSize: '10px',
+    fontSize: '14px',
     color: '#333',
 };
 

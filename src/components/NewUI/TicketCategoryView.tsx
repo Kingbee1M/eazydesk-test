@@ -36,7 +36,7 @@ export default function TicketCategoryView({ type }: CategoryProps) {
         // Search logic (checks ID, User, and Subject)
         const matchesSearch = 
             ticket.ticketId.includes(searchQuery) ||
-            ticket.affectedUsers.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            ticket.affectedUsers.toString().toLowerCase().includes(searchQuery.toLowerCase()) ||
             ticket.subject.toLowerCase().includes(searchQuery.toLowerCase());
 
         return matchesStatus && matchesSearch;

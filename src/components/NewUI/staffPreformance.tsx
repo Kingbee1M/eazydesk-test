@@ -14,7 +14,6 @@ export interface StaffData {
     tickets: number;
 }
 
-
 export interface AnnualStaffPerformance {
     [year: string]: StaffData[];
 }
@@ -23,28 +22,52 @@ interface StaffPerformanceProps {
     data: AnnualStaffPerformance;
 }
 
-
 export default function StaffPerformance({ data }: StaffPerformanceProps) {
-    const years = Object.keys(data).sort(); 
+    const years = Object.keys(data).sort((a, b) => b.localeCompare(a));
     
     const currentYear = new Date().getFullYear().toString();
-
     const initialYear = data[currentYear] ? currentYear : (years[0] || "");
 
     const [selectedYear, setSelectedYear] = useState(initialYear);
 
     return (
         <section className="stylish-border" style={{ width: "100%", height: "400px", padding: "20px" }}>
-            <h2 style={{ fontSize: '1.2rem', marginBottom: '20px' }}>Team Workload</h2>
+            {/* Header with Title and Dropdown */}
+            <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center', 
+                marginBottom: '20px' 
+            }}>
+                <h2 style={{ fontSize: '18px', margin: 0 }}>Team Workload</h2>
+                
+                <select 
+                    value={selectedYear} 
+                    onChange={(e) => setSelectedYear(e.target.value)}
+                    style={{
+                        padding: '6px 12px',
+                        borderRadius: '8px',
+                        border: '1px solid #E0E0E0',
+                        backgroundColor: '#fff',
+                        fontSize: '14px',
+                        color: '#333',
+                        outline: 'none',
+                        cursor: 'pointer'
+                    }}
+                >
+                    {years.map(year => (
+                        <option key={year} value={year}>{year}</option>
+                    ))}
+                </select>
+            </div>
 
-            <div style={{ width: "100%", height: "250px" }}>
+            <div style={{ width: "100%", height: "280px" }}>
                 <ResponsiveContainer width="100%" height="100%">
                     <BarChart
                         layout="vertical"
                         data={data[selectedYear] || []}
                         margin={{ top: 5, right: 30, left: 0, bottom: 5 }}
                     >
-                        {/* 1. THE DOTTED GRID: In vertical layout, vertical lines look better for a ruler effect */}
                         <CartesianGrid 
                             strokeDasharray="3 3" 
                             horizontal={false} 
@@ -68,50 +91,16 @@ export default function StaffPerformance({ data }: StaffPerformanceProps) {
                             contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
                         />
 
-                        {/* 2. THE SHADOW BACKGROUND BAR */}
                         <Bar 
                             dataKey="tickets" 
                             fill="#2152FF" 
-                            radius={0} 
+                            radius={[0, 4, 4, 0]} // Added slight rounding to the right edge
                             barSize={20}
                             background={{ fill: '#D6DBED66', radius: 0 }} 
                         />
                     </BarChart>
                 </ResponsiveContainer>
             </div>
-
-            {/* PILL SELECTORS */}
-                <div style={{ 
-                    display: 'grid', 
-                    gridTemplateColumns: 'repeat(4, 1fr)', 
-                    gap: '10px', 
-                    marginTop: '20px', 
-                    width: '100%',
-                    maxWidth: '500px',
-                    marginInline: 'auto'
-                }}>
-                    {years.map((year) => (
-                        <button
-                            key={year}
-                            onClick={() => setSelectedYear(year)}
-                            style={{
-                                padding: '8px 0',
-                                borderRadius: '20px',
-                                border: 'none',
-                                cursor: 'pointer',
-                                fontSize: '12px',
-                                fontWeight: 600,
-                                transition: 'all 0.2s ease',
-                                backgroundColor: selectedYear === year ? '#2152FF' : '#F0F2F5',
-                                color: selectedYear === year ? '#fff' : '#666',
-                                textAlign: 'center',
-                                width: '100%'
-                            }}
-                        >
-                            {year}
-                        </button>
-                    ))}
-                </div>
         </section>
     );
 }

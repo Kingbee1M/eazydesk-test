@@ -35,7 +35,7 @@
   position: relative;
   display: flex;
   align-items: start;
-  justify-content: space-between;
+  justify-content: start;
   display: flex;
   flex-direction: column;
   gap: 16px
@@ -229,4 +229,11 @@
 }
 .arrow.open {
   transform: rotate(180deg);
+}
+
+@media only screen and (max-width: 800px) {
+  .client-header{
+    height: 100%;
+  }
+  
 }

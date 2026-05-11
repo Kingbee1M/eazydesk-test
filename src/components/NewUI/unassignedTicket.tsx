@@ -34,7 +34,7 @@ export default function UnassignedTicket({ tickets }: UnassignedTicketProps) {
         <section className="section-wrapper stylish-border">
 
             <div className="heading-holder">
-                <h2 className="heading2">Unassigned Ticket</h2>
+                <h2 className="heading2" style={{fontSize: '18px'}}>Unassigned Ticket</h2>
                 <span className="pending">{unassignedCount} Pending</span>
             </div>
             

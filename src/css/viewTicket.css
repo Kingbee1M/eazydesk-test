@@ -40,10 +40,11 @@
     grid-template-columns: repeat(2, 1fr); 
     border-bottom: 1px solid #EAECF0;
     margin-bottom: 10px;
-    padding: 0 24px !important;
+    padding: 0 0 !important;
 }
 
 .view-header>button {
+    width: 100%;
     padding-bottom: 16px;
     background: none;
     border-radius: 0;

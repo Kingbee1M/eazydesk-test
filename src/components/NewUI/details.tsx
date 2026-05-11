@@ -33,8 +33,11 @@ const Details = ({ ticketData }: DetailsProps) => {
 
                 <div className="wrap">
                     <h2 className="headings">RAISED</h2>
-                    <span className="data-result">{getTicketTime(ticketData.timestamp)}</span>
-                    <span className="data-result">{getTicketDate(ticketData.timestamp)}</span>
+                    <div className="date-time">
+                        <span className="data-result">{getTicketTime(ticketData.timestamp)}</span>
+                        <span className="data-result">{getTicketDate(ticketData.timestamp)}</span>
+                    </div>
+                    
                 </div>
 
                  <div className="wrap">
@@ -49,7 +52,7 @@ const Details = ({ ticketData }: DetailsProps) => {
                 )}
 
                
-                <div className="wrap" style={{ gridRow: "3", gridColumn: "1" }}>
+                <div className="wrap wide-item">
                     <h2 className="headings">DESCRIPTION</h2>
                     <div 
                         dangerouslySetInnerHTML={{ __html: ticketData.description }} 
@@ -100,14 +103,18 @@ const Details = ({ ticketData }: DetailsProps) => {
                 {(role === 'ADMIN' || ticketData.ticketType === 'Change') && (
                     <>
                     <hr className='horizontal-line' />
-
-                    <CustomMultiSelect
-                    multiple={false} 
-                    options={['user1@example.com', 'user2@example.com', 'user3@example.com']} 
-                    placeholder="assign the ticket to an it support"
-                    value={assignTicket ? [assignTicket] : []}
-                    onChange={(val: string[]) => setAssignTicket(val[0])} 
-                    />
+                    
+                    <div className="wrap" style={{width: '100%'}}>
+                        <h2 className="headings">ASSIGNED TO</h2>
+                        <CustomMultiSelect
+                        multiple={false} 
+                        options={['habeeb', 'nero', 'tobi', 'diamond', 'godwin']} 
+                        placeholder="assign the ticket to an it support"
+                        value={assignTicket ? [assignTicket] : []}
+                        onChange={(val: string[]) => setAssignTicket(val[0])} 
+                        /> 
+                    </div>
+                   
                     </>
                 )}
 

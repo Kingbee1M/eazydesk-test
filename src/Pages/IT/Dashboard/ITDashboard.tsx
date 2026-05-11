@@ -18,6 +18,7 @@ import MainDisplay from "src/components/NewUI/mainDIsplay";
 import TopBar from "src/components/NewUI/topbar";
 import { Outlet, useLocation } from "react-router-dom";
 import { mockTickets } from "src/Pages/Leads/LeadsDashboard";
+import { motion } from "framer-motion";
 
 
 export interface TicketProps {
@@ -49,6 +50,8 @@ interface StaffPerformanceProps {
 }
 
 const ITDashboard = () => {
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 	const location = useLocation();
 	const dispatch = useAppDispatch();
 	const { dashBoardInfodata, itassignisSuccess } = useAppSelector((state: any) => state.ticket);
@@ -146,17 +149,28 @@ const ITDashboard = () => {
 
 	return (
 		<div id="dashboard">
-            <div className="hero-section1">
-                {/* Pass counts to your header so the sidebar numbers stay updated */}
+            <div className={`hero-section1 ${isMenuOpen ? "open" : ""}`}>
                 <LeadsHeader 
                     incident={incidentCount} 
                     service={serviceCount} 
                     change={changeCount}
                 />
-                <ToastContainer />
             </div>
 
             <main className='main'>
+                 {/* Mobile Toggle Button */}
+
+				<motion.button 
+					drag
+					dragConstraints={{ left: 0, right: 0, top: 0, bottom: 500 }} // Elastic snap-back
+					// OR use specific constraints based on screen size:
+					// dragConstraints={{ left: -300, right: 0, top: 0, bottom: 500 }}
+					className="mobile-menu-toggle" 
+					onClick={toggleMenu}
+					style={{ touchAction: "none" }} // Prevents page scroll while dragging
+				>
+					{isMenuOpen ? "✕" : "☰"}
+				</motion.button>
                 <TopBar />
                 
                 <div className="content-area">

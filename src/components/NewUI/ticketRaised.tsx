@@ -24,7 +24,7 @@ export default function TicketRaised ({ tickets }: UnassignedTicketProps) {
     return (
         <section className="section-wrapper stylish-border">
         
-            <h2 className="heading2">Ticket Raised</h2>
+            <h2 className="heading2" style={{fontSize: '18px'}}>Ticket Raised</h2>
             
 
             <TableContainer component={Paper} elevation={0} className="table-container">
@@ -35,7 +35,7 @@ export default function TicketRaised ({ tickets }: UnassignedTicketProps) {
                             <TableCell style={{fontSize: 11}}><strong>SEVERITY</strong></TableCell>
                             <TableCell style={{fontSize: 11}}><strong>TICKET TYPE</strong></TableCell>
                             <TableCell style={{fontSize: 11}}><strong>SUBJECT</strong></TableCell>
-                            <TableCell style={{fontSize: 11}}><strong>status</strong></TableCell>
+                            <TableCell style={{fontSize: 11}}><strong>STATUS</strong></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

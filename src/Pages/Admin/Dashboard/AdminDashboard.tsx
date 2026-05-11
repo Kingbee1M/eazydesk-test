@@ -10,6 +10,7 @@ import TopBar from "src/components/NewUI/topbar";
 import LeadsHeader from "src/components/LeadsHeader";
 import { Outlet, useLocation } from "react-router-dom";
 import { mockTickets } from "src/Pages/Leads/LeadsDashboard";
+import { motion } from "framer-motion";
 
 
 export interface TicketProps {
@@ -41,6 +42,8 @@ interface StaffPerformanceProps {
 }
 
 const AdminDashboard = () => {
+      const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const [activeIndex, setActiveIndex] = useState<any>("Inprogress"); // Initially set the first item as active
   const location = useLocation();
   const dispatch = useAppDispatch();
@@ -134,40 +137,52 @@ const AdminDashboard = () => {
 
   return (
     <div id="dashboard">
-        <div className="hero-section1">
-            {/* Pass counts to your header so the sidebar numbers stay updated */}
-            <LeadsHeader 
-                incident={incidentCount} 
-                service={serviceCount} 
-                change={changeCount}
-            />
-            <ToastContainer />
-        </div>
-
-        <main className='main'>
-            <TopBar />
-            
-            <div className="content-area">
-                {isDashboardHome ? (
-                    /* Default view when logged in */
-                    <MainDisplay 
-                        totalTicket={124} 
-                        pendingAssign={12} 
-                        resolvedToday={45}
-                        Service={23}
-                        Change={7}
-                        Incident={33}
-                        tickets={myTickets}
-                        ticketChart={ticketsData}
-                        staffData={yearData}
-                    />
-                ) : (
-                    /* This renders AllTickets, IncidentView, etc. */
-                    <Outlet />
-                )}
+            <div className={`hero-section1 ${isMenuOpen ? "open" : ""}`}>
+                <LeadsHeader 
+                    incident={incidentCount} 
+                    service={serviceCount} 
+                    change={changeCount}
+                />
             </div>
-        </main>
-    </div>
+
+            <main className='main'>
+                 {/* Mobile Toggle Button */}
+            <motion.button 
+            drag
+            dragConstraints={{ left: 0, right: 0, top: 0, bottom: 500 }} // Elastic snap-back
+            // OR use specific constraints based on screen size:
+            // dragConstraints={{ left: -300, right: 0, top: 0, bottom: 500 }}
+            className="mobile-menu-toggle" 
+            onClick={toggleMenu}
+            style={{ touchAction: "none" }} // Prevents page scroll while dragging
+          >
+            {isMenuOpen ? "✕" : "☰"}
+          </motion.button>
+            {/* Mobile Overlay Backdrop */}
+            {isMenuOpen && <div className="menu-overlay" onClick={toggleMenu} />}
+                <TopBar />
+                
+                <div className="content-area">
+                    {isDashboardHome ? (
+                        /* Default view when logged in */
+                        <MainDisplay 
+                            totalTicket={124} 
+                            pendingAssign={12} 
+                            resolvedToday={45}
+                            Service={23}
+                            Change={7}
+                            Incident={33}
+                            tickets={myTickets}
+                            ticketChart={ticketsData}
+                            staffData={yearData}
+                        />
+                    ) : (
+                        /* This renders AllTickets, IncidentView, etc. */
+                        <Outlet />
+                    )}
+                </div>
+            </main>
+        </div>
   );
 };
 

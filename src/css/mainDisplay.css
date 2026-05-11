@@ -10,11 +10,9 @@
 
 .main-content-wrapper {
     width: 100%;
-    /* This ensures it grows to exactly the size of the children */
     height: auto; 
     display: grid;
-    /* Note: 60% + 30% leaves 10% for the 'space-between' gap */
-    grid-template-columns: 60% 30%; 
+    grid-template-columns: 68% 30%; 
     justify-content: space-between;
     padding: 0 !important;
     margin-top: 16px;
@@ -67,3 +65,30 @@
     font-family: 'Poppins', sans-serif;
 }
 
+@media only screen and (max-width: 800px) {
+    .content-holder {
+        padding: 16px; /* Reduced padding for smaller screens */
+    }
+
+    .main-content-wrapper {
+        /* Change from 2 columns to 1 full-width column */
+        grid-template-columns: 1fr; 
+        gap: 30px; /* Space between the old left-grid and right-grid */
+    }
+
+    .left-grid, .right-grid {
+        width: 100%;
+    }
+
+    .stats-grid {
+        /* Adjust stats to wrap if they get too squeezed, or stay in 3 cols */
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        height: auto; /* Allow it to grow if items wrap */
+        grid-template-rows: auto;
+        gap: 10px;
+    }
+
+    .stat-value {
+        font-size: 22px; /* Slightly smaller text for mobile */
+    }
+}
