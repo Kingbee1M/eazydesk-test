@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { FaEye } from "react-icons/fa";
 import pdf from '../../assets/img/pdf-icon.svg'
 import { BsFiletypeDoc } from "react-icons/bs";
 import { BsFiletypePng } from "react-icons/bs";
 import ViewTicketPortal from "./viewTicket";
-import { AiOutlineEye } from "react-icons/ai";
-
+import eye from '../../assets/img/view.svg'
 
 interface TicketTableProps {
     page?: 'all' 
@@ -19,7 +17,7 @@ export default function TicketTable({ tickets, page }: TicketTableProps) {
         <div className="table-container" style={{ width: '100%', overflowX: 'auto', marginTop: '20px' }}>
             <table className="ticket-table" style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
-                    <tr style={{ textAlign: 'left', borderBottom: '2px solid #f0f0f0' }}>
+                    <tr style={{ textAlign: 'left', borderBottom: '2px solid #f0f0f0', backgroundColor: '#FCFCFC' }}>
                         <th style={headerStyle}>TICKET ID</th>
                         <th style={headerStyle}>SEVERITY</th>
                         <th style={headerStyle}>FILE</th>
@@ -115,7 +113,7 @@ export default function TicketTable({ tickets, page }: TicketTableProps) {
                                 </td>
                                 <td style={cellStyle}>
                                     <button style={{ background: 'none', border: 'none', cursor: 'pointer' }} onClick={() => { setSelectedTicket(ticket); setIsViewOpen(true); }}>
-                                        <AiOutlineEye />
+                                        <img src={eye} alt="view" style={{width: '20px'}} />
                                     </button>
                                 </td>
                                 </tr>
@@ -161,5 +159,3 @@ const statuscellStyle: React.CSSProperties = {
     width: '90px',
 };
 
-const statusStyle: React.CSSProperties = {
-}

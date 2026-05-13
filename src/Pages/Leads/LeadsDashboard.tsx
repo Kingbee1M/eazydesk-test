@@ -397,12 +397,12 @@ const LeadsDashboard = () => {
   ],
   "2025": [
     { name: "John Doe", tickets: 180 },
-    { name: "Jane Smith", tickets: 310 }, // Big year for Jane
+    { name: "Jane Smith", tickets: 310 },
     { name: "Alex Mike", tickets: 220 },
     { name: "Sarah Connor", tickets: 195 },
   ],
   "2026": [
-    { name: "John Doe", tickets: 350 }, // Massive growth
+    { name: "John Doe", tickets: 350 },
     { name: "Jane Smith", tickets: 290 },
     { name: "Alex Mike", tickets: 315 },
     { name: "Sarah Connor", tickets: 380 },

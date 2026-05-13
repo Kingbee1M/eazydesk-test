@@ -7,6 +7,8 @@ import Logo from "../assets/img/logo.svg";
 import { CiSettings } from "react-icons/ci";
 import { MdPeopleOutline } from "react-icons/md";
 import { FaRegFileLines } from "react-icons/fa6";
+import ticket from '../assets/img/ticket-icon.svg'
+import dashboard from '../assets/img/dashboard-icon.svg'
 
 
 const LeadsHeader = ({ incident, service, change }: any) => {
@@ -89,7 +91,7 @@ const LeadsHeader = ({ incident, service, change }: any) => {
         
         {/* Dashboard Link */}
         <NavLink to={activeDashboard()} end style={getNavLinkStyle}>
-          <CiGrid42 className="icons" style={{ fontSize: '18px', fontWeight: 700 }} /> 
+          <img src={dashboard} alt="" style={{ width: '18px' }} /> 
           Dashboard
         </NavLink>
 
@@ -100,7 +102,7 @@ const LeadsHeader = ({ incident, service, change }: any) => {
             style={getNavLinkStyle}
             onClick={() => setToggleMenu(!toggleMenu)}
           >
-            <PiTicketBold className="icons" style={{ fontSize: '18px', fontWeight: 700 }} />
+            <img src={ticket} alt="" style={{ width: '18px' }} /> 
             <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
               <span>ALL TICKETS</span>
               <MdKeyboardArrowDown 
@@ -129,8 +131,9 @@ const LeadsHeader = ({ incident, service, change }: any) => {
                   style={({ isActive }) => ({
                     display: 'flex',
                     justifyContent: 'space-between',
+                    gap: '10px',
                     alignItems: 'center',
-                    padding: '0.4rem 0.85rem',
+                    padding: '0.4rem 15px 0.4rem 40px',
                     borderRadius: '5px',
                     textDecoration: 'none',
                     fontSize: '14px',
