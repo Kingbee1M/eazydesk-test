@@ -5,8 +5,9 @@ import Link from "next/link"
 import { useFormik, FormikErrors, FormikTouched } from "formik"
 import { z } from "zod"
 import { toFormikValidationSchema } from "zod-formik-adapter"
+// Import toast
+import { toast } from 'react-toastify'
 
-// 1. FIXED: Simplified Zod literal message structure
 const stringRequired = (msg: string, minLength: number = 1) => 
   z.preprocess(
     (val) => (val === undefined || val === null ? "" : val),
@@ -15,18 +16,13 @@ const stringRequired = (msg: string, minLength: number = 1) =>
 
 const contactSchema = z.object({
   firstName: stringRequired("First name is required", 2),
-    
   lastName: stringRequired("Last name is required", 2),
-    
   email: z.preprocess(
     (val) => (val === undefined || val === null ? "" : val),
     z.string().min(1, "Email is required").email("Invalid email address")
   ),
-    
   phone: stringRequired("Phone number is required", 10),
-    
-  message: stringRequired("Please enter a message", 10),
-    
+  message: stringRequired("Please enter a message of a least 10 characters", 10),
   privacyPolicy: z.boolean().refine((val) => val === true, {
     message: "You must accept the privacy policy",
   }),
@@ -63,8 +59,42 @@ export default function ContactUs() {
       privacyPolicy: false as unknown as true, 
     },
     validationSchema: toFormikValidationSchema(contactSchema),
-    onSubmit: (values) => {
-      console.log("Form Data:", values);
+    onSubmit: async (values, { setSubmitting, resetForm }) => {
+      const apiUrl = process.env.NEXT_PUBLIC_BASE_URL;
+
+      if (!apiUrl) {
+        console.error("API URL is not defined in environment variables.");
+        toast.error("Configuration error. Please try again later.");
+        setSubmitting(false);
+        return;
+      }
+
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(values),
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Submission successful:", data);
+        
+        // Trigger Success Toast
+        toast.success("Message sent successfully! We'll be in touch soon.");
+        resetForm();
+      } catch (error) {
+        console.error("Error sending message:", error);
+        // Trigger Error Toast
+        toast.error("Failed to send message. Please check your connection and try again.");
+      } finally {
+        setSubmitting(false);
+      }
     },
   });
 
@@ -103,7 +133,7 @@ export default function ContactUs() {
 
           <div className="inputDiv flex flex-col">
             <label htmlFor="message">Message</label>
-            <textarea {...formik.getFieldProps('message')} rows={5} id="message" />
+            <textarea {...formik.getFieldProps('message')} className="text-text" rows={5} id="message" />
             <ErrorMsg name="message" touched={formik.touched} errors={formik.errors} />
           </div>
 
@@ -114,7 +144,6 @@ export default function ContactUs() {
                 className="w-auto"
                 id="privacyPolicy"
                 name="privacyPolicy"
-                // 2. FIXED: Explicitly cast to boolean to satisfy React's 'checked' prop
                 checked={!!formik.values.privacyPolicy}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -128,10 +157,12 @@ export default function ContactUs() {
             type="submit"
             disabled={formik.isSubmitting}
             className={`px-6 py-2 rounded-lg text-white ${
-              !formik.isValid || !formik.dirty ? 'bg-gray-400 cursor-not-allowed' : 'bg-primary-green'
+              formik.isSubmitting || !formik.isValid || !formik.dirty 
+                ? 'bg-gray-400 cursor-not-allowed' 
+                : 'bg-primary-green'
             }`}
           >
-            Send Message
+            {formik.isSubmitting ? 'Sending...' : 'Send Message'}
           </button>
         </form>
       </div>

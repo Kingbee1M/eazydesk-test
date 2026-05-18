@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./UI/nav";
 import FooterSection from "./UI/footer";
 import { cn } from "@/lib/utils";
+import { ToastContainer } from 'react-toastify';
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 
@@ -36,6 +37,18 @@ export default function RootLayout({
       >
         <Navbar/>
         <main className="w-full max-w-360 mt-9 md:mt-12 flex-1 flex-col items-center justify-center grow">
+          <ToastContainer 
+          position="top-right"
+          autoClose={4000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
           {children}
         </main>
         
